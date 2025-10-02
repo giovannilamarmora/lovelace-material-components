@@ -1,5 +1,5 @@
 {
-  "name": "Google Home Component",
+  "name": "Material Home Component",
   "render_readme": true,
-  "filename": "google-components.js"
+  "filename": "material-components.js"
 }
