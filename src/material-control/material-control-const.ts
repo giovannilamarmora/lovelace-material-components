@@ -1,6 +1,6 @@
 import { LovelaceCardConfig } from "custom-card-helpers";
 
-export interface GoogleControlCardConfig extends LovelaceCardConfig {
+export interface MaterialControlCardConfig extends LovelaceCardConfig {
   name?: string;
   use_card_entity?: boolean;
   entity?: string;
@@ -14,8 +14,8 @@ export interface GoogleControlCardConfig extends LovelaceCardConfig {
   // ...altre proprietà
 }
 
-export const DEFAULT_CONFIG: GoogleControlCardConfig = {
-  type: "custom:google-control-card",
+export const DEFAULT_CONFIG: MaterialControlCardConfig = {
+  type: "custom:material-control-card",
   name: "Control Card",
   icon: "mdi:link",
   tap_action: {
@@ -26,7 +26,7 @@ export const DEFAULT_CONFIG: GoogleControlCardConfig = {
   },
 };
 
-export function googleControlTemplate(config: GoogleControlCardConfig) {
+export function materialControlTemplate(config: MaterialControlCardConfig) {
   const name = config.name;
   let icon = config.icon;
   // Se è una template string [[[ ... ]]], gestiscila correttamente

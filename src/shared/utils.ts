@@ -1,4 +1,4 @@
-import { ControlType } from "../google-button/google-button-const";
+import { ControlType } from "../material-button/material-button-const";
 import { localize } from "../localize/localize";
 
 export enum OnStates {

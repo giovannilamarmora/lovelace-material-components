@@ -2,17 +2,20 @@ import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 import { localize } from "../localize/localize";
-import { DEFAULT_CONFIG, GoogleLightCardConfig } from "./google-lights-const";
+import {
+  DEFAULT_CONFIG,
+  MaterialLightCardConfig,
+} from "./material-lights-const";
 
-@customElement("google-lights-card-editor")
-export class GoogleLightsCardEditor
+@customElement("material-lights-card-editor")
+export class MaterialLightsCardEditor
   extends LitElement
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleLightCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialLightCardConfig = DEFAULT_CONFIG;
 
-  public setConfig(config: GoogleLightCardConfig): void {
+  public setConfig(config: MaterialLightCardConfig): void {
     this._config = { ...config };
   }
 
@@ -56,10 +59,10 @@ export class GoogleLightsCardEditor
     return html`
       <div class="form">
         <span class="text-label"
-          >${localize("google_lights_card.on_text")}</span
+          >${localize("material_lights_card.on_text")}</span
         >
         <ha-textfield
-          label="${localize("google_lights_card.on_text")}"
+          label="${localize("material_lights_card.on_text")}"
           .value=${this._config.on_text || ""}
           configValue="on_text"
           @input=${this._valueChanged}
@@ -67,10 +70,10 @@ export class GoogleLightsCardEditor
         ></ha-textfield>
 
         <span class="text-label"
-          >${localize("google_lights_card.off_text")}</span
+          >${localize("material_lights_card.off_text")}</span
         >
         <ha-textfield
-          label="${localize("google_lights_card.off_text")}"
+          label="${localize("material_lights_card.off_text")}"
           .value=${this._config.off_text || ""}
           configValue="off_text"
           @input=${this._valueChanged}
@@ -113,6 +116,6 @@ export class GoogleLightsCardEditor
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-lights-card-editor": GoogleLightsCardEditor;
+    "material-lights-card-editor": MaterialLightsCardEditor;
   }
 }

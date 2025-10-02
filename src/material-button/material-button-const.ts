@@ -1,7 +1,7 @@
 import { ActionConfig, LovelaceCardConfig } from "custom-card-helpers";
 
-export const DEFAULT_BTN_CONFIG: GoogleButtonCardConfig = {
-  type: "custom:google-button-card",
+export const DEFAULT_CONFIG: MaterialButtonCardConfig = {
+  type: "custom:material-button-card",
 };
 
 export enum ControlType {
@@ -56,7 +56,7 @@ export function getValidDeviceClass(
   return undefined;
 }
 
-export interface GoogleButtonCardConfig extends LovelaceCardConfig {
+export interface MaterialButtonCardConfig extends LovelaceCardConfig {
   name?: string;
   entity?: string;
   attribute?: string;

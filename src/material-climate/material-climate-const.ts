@@ -1,6 +1,6 @@
 import { LovelaceCardConfig } from "custom-card-helpers";
 
-export interface GoogleClimateCardConfig extends LovelaceCardConfig {
+export interface MaterialClimateCardConfig extends LovelaceCardConfig {
   type: string;
   name?: string;
   entity: string;
@@ -12,8 +12,8 @@ export interface GoogleClimateCardConfig extends LovelaceCardConfig {
   fix_temperature?: "true" | "false" | "auto";
 }
 
-export const DEFAULT_CONFIG: GoogleClimateCardConfig = {
-  type: "custom:google-climate-card",
+export const DEFAULT_CONFIG: MaterialClimateCardConfig = {
+  type: "custom:material-climate-card",
   entity: "climate.thermo",
   increase_temp: 1,
   decrease_temp: 1,

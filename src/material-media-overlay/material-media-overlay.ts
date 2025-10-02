@@ -11,10 +11,10 @@ import {
   openNetflix,
   openSpotify,
   openYouTube,
-} from "./google-media-mapper";
+} from "./material-media-mapper";
 
-@customElement("google-media-overlay")
-export class GoogleMediaOverlay extends LitElement {
+@customElement("material-media-overlay")
+export class MaterialMediaOverlay extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
   @property() public entity!: string;
 
@@ -463,13 +463,6 @@ export class GoogleMediaOverlay extends LitElement {
     }, 200);
   }
 
-  // Esempio di utilizzo
-  //openGoogleHome(e: any) {
-  //  this._onClick(e);
-  //  const url = getGoogleHomeURL();
-  //  window.location.href = url;
-  //}
-
   openLinks(e: any, appName: string) {
     this._onClick(e);
     if (appName == "Google") openGoogleHome();
@@ -477,70 +470,6 @@ export class GoogleMediaOverlay extends LitElement {
     if (appName == "Spotify") openSpotify();
     if (appName == "Netflix") openNetflix();
   }
-
-  //openLinks(e: any, appName: string) {
-  //  if (appName == "YouTube") this.openYouTube(e);
-  //  if (appName == "Spotify") this.openSpotify(e);
-  //  if (appName == "Netflix") this.openNetflix(e);
-  //}
-  //
-  //openYouTube(e: any) {
-  //  this._onClick(e);
-  //  const url = getYouTubeURL();
-  //  window.location.href = url;
-  //}
-  //
-  //openSpotify(e: any) {
-  //  this._onClick(e);
-  //  const url = getSpotifyURL();
-  //  window.location.href = url;
-  //}
-  //
-  //openNetflix(e: any) {
-  //  this._onClick(e);
-  //  const url = getNetflixURL();
-  //  window.location.href = url;
-  //}
-  //
-  //private _renderAppIcon(appName: string, cover?: string) {
-  //  switch (appName) {
-  //    case "Spotify":
-  //      return html`<img
-  //        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/Spotify.webp"
-  //        width="24"
-  //        height="24"
-  //        style="border-radius: 50px; object-fit: cover;z-index: 1;"
-  //      />`;
-  //    case "YouTube":
-  //      return html`<img
-  //        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/YouTube.png"
-  //        width="24"
-  //        height="24"
-  //        style="border-radius: 50px; object-fit: cover;"
-  //      />`;
-  //    case "Netflix":
-  //      return html`<img
-  //        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/Netflix.webp"
-  //        width="24"
-  //        height="24"
-  //        style="border-radius: 50px; object-fit: cover;"
-  //      />`;
-  //    case "Prime Video":
-  //      return html`<img
-  //        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/Netflix.webp"
-  //        width="24"
-  //        height="24"
-  //        style="border-radius: 50px; object-fit: cover;"
-  //      />`;
-  //    default:
-  //      return html`<ha-icon
-  //        icon="m3r:play-circle"
-  //        style="${cover
-  //          ? "color: #e3e3e5;"
-  //          : "color: var(--md-sys-color-on-secondary-container)"}"
-  //      ></ha-icon>`;
-  //  }
-  //}
 
   protected render(): TemplateResult {
     const stateObj = this.hass.states[this.entity];
@@ -558,8 +487,8 @@ export class GoogleMediaOverlay extends LitElement {
     const mediaTitle =
       attributes.media_title ??
       (getOrDefault(this._isPlaying, stateObj.state == "playing")
-        ? localize("google_media_overlay.media_card.playing")
-        : localize("google_media_overlay.media_card.no_content"));
+        ? localize("material_media_overlay.media_card.playing")
+        : localize("material_media_overlay.media_card.no_content"));
     const mediaArtist = attributes.media_artist ?? "";
     const appName = attributes.app_name ?? "";
     const cover = attributes.entity_picture_local;
@@ -732,7 +661,7 @@ export class GoogleMediaOverlay extends LitElement {
         <div class="menu-card remote" @click=${this._onRemoteClick}>
           <ha-icon icon="m3o:google-tv-remote"></ha-icon>
           <span class="menu-text"
-            >${localize("google_media_overlay.remote")}</span
+            >${localize("material_media_overlay.remote")}</span
           >
         </div>
 
@@ -741,7 +670,7 @@ export class GoogleMediaOverlay extends LitElement {
             ? html`<div class="menu-card link" @click=${this._turnOnDevice}>
                 <ha-icon icon="m3r:cast"></ha-icon>
                 <span class="menu-text"
-                  >${localize("google_media_overlay.cast")}</span
+                  >${localize("material_media_overlay.cast")}</span
                 >
               </div>`
             : html`<div
@@ -751,7 +680,7 @@ export class GoogleMediaOverlay extends LitElement {
               >
                 <ha-icon icon="m3rf:cast"></ha-icon>
                 <span class="menu-text"
-                  >${localize("google_media_overlay.stop_cast")}</span
+                  >${localize("material_media_overlay.stop_cast")}</span
                 >
               </div>`
         }
@@ -766,7 +695,7 @@ export class GoogleMediaOverlay extends LitElement {
               >
                 <ha-icon icon="m3rf:open-in-new"></ha-icon>
                 <span class="menu-text"
-                  >${localize("google_media_overlay.open")} ${appName}</span
+                  >${localize("material_media_overlay.open")} ${appName}</span
                 >
               </div>`
             : html``
@@ -774,7 +703,7 @@ export class GoogleMediaOverlay extends LitElement {
         <div class="menu-card link" @click=${(e: Event) => this.openLinks(e, "Google")}>
           <ha-icon icon="m3of:home-app-logo"></ha-icon>
           <span class="menu-text"
-            >${localize("google_media_overlay.open_google")}</span
+            >${localize("material_media_overlay.open_google")}</span
           >
         </div>
       </div>

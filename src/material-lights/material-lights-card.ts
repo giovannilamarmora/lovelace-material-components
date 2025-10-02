@@ -3,23 +3,23 @@ import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant } from "custom-card-helpers";
 import jsyaml from "js-yaml";
 import { applyRippleEffect } from "../animations";
-import { GoogleLightCardConfig, googleTemplate } from "./google-lights-const";
+import { MaterialLightCardConfig, materialTemplate } from "./material-lights-const";
 
-@customElement("google-lights-card")
-export class GoogleLightsCard extends LitElement {
+@customElement("material-lights-card")
+export class MaterialLightsCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config?: GoogleLightCardConfig;
+  @state() private _config?: MaterialLightCardConfig;
   @state() private _card?: any;
 
-  public static getStubConfig(): Partial<GoogleLightCardConfig> {
+  public static getStubConfig(): Partial<MaterialLightCardConfig> {
     return {
-      type: "custom:google-lights-card",
+      type: "custom:material-lights-card",
       on_text: "Lights on",
       off_text: "Lights off",
     };
   }
 
-  public async setConfig(config: GoogleLightCardConfig): Promise<void> {
+  public async setConfig(config: MaterialLightCardConfig): Promise<void> {
     if (!config) throw new Error("Invalid configuration");
     this._config = config;
   }
@@ -40,7 +40,7 @@ export class GoogleLightsCard extends LitElement {
         this._card = card;
         this.requestUpdate();
       }
-      console.log("This LOG is for debug purpose, Google Lights");
+      console.log("This LOG is for debug purpose, Material Lights");
       console.log(this.hass);
     }
   }
@@ -50,11 +50,11 @@ export class GoogleLightsCard extends LitElement {
   }
 
   static async getConfigElement() {
-    return document.createElement("google-lights-card-editor");
+    return document.createElement("material-lights-card-editor");
   }
 
-  private mapTemplate(config: GoogleLightCardConfig) {
-    const text = googleTemplate(config);
+  private mapTemplate(config: MaterialLightCardConfig) {
+    const text = materialTemplate(config);
     return text;
   }
 

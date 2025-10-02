@@ -10,24 +10,24 @@ import { HomeAssistant } from "../ha-types";
 import { applyRippleEffect } from "../animations";
 import {
   ControlType,
-  DEFAULT_BTN_CONFIG,
+  DEFAULT_CONFIG,
   DeviceType,
   getValidDeviceClass,
-  GoogleButtonCardConfig,
-} from "./google-button-const";
+  MaterialButtonCardConfig,
+} from "./material-button-const";
 import { isDeviceOn, isNullOrEmpty, isOfflineState } from "../shared/utils";
-import { google_color } from "../shared/color";
+import { material_color } from "../shared/color";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
-import { GoogleMediaOverlay } from "../google-media-overlay/google-media-overlay";
-import { setColorCard } from "./google-button-mapper";
+import { setColorCard } from "./material-button-mapper";
+import { MaterialMediaOverlay } from "../material-media-overlay/material-media-overlay";
 
-@customElement("google-button-card")
-export class GoogleButtonCard extends LitElement {
+@customElement("material-button-card")
+export class MaterialButtonCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleButtonCardConfig = DEFAULT_BTN_CONFIG;
-  private color = google_color;
+  @state() private _config: MaterialButtonCardConfig = DEFAULT_CONFIG;
+  private color = material_color;
 
-  public setConfig(config: GoogleButtonCardConfig): void {
+  public setConfig(config: MaterialButtonCardConfig): void {
     if (!config) {
       throw new Error(localize("common.invalid_configuration"));
     }
@@ -49,13 +49,13 @@ export class GoogleButtonCard extends LitElement {
   public static getStubConfig(
     _hass: HomeAssistant,
     entities: string[]
-  ): Partial<GoogleButtonCardConfig> {
+  ): Partial<MaterialButtonCardConfig> {
     const switcher = entities
       .filter((entity) => entity.split(".")[0] === "switch")
       .sort();
     const randomSwitch = switcher[Math.floor(Math.random() * switcher.length)];
     return {
-      type: "custom:google-button-card",
+      type: "custom:material-button-card",
       entity: randomSwitch,
       icon: "mdi:switch",
       height: 97,
@@ -67,7 +67,7 @@ export class GoogleButtonCard extends LitElement {
   }
 
   static async getConfigElement() {
-    return document.createElement("google-button-card-editor");
+    return document.createElement("material-button-card-editor");
   }
 
   protected updated(): void {
@@ -274,8 +274,8 @@ export class GoogleButtonCard extends LitElement {
 
   _openMediaOverlay() {
     const overlay = document.createElement(
-      "google-media-overlay"
-    ) as GoogleMediaOverlay;
+      "material-media-overlay"
+    ) as MaterialMediaOverlay;
 
     overlay.hass = this.hass;
     overlay.entity = this._config.entity!;
@@ -407,7 +407,7 @@ export class GoogleButtonCard extends LitElement {
 
     return html`
       <ha-card
-        class="google-button ${isOn ? "on" : "off"}"
+        class="material-button ${isOn ? "on" : "off"}"
         @mousedown=${this._startPress}
         @touchstart=${this._startPress}
         @mouseup=${this._cancelPress}
@@ -579,7 +579,7 @@ export class GoogleButtonCard extends LitElement {
       --bsc-border-radius: var(--ha-card-border-radius);
     }
 
-    ha-card.google-button {
+    ha-card.material-button {
       cursor: pointer;
       display: flex;
       align-items: center;
@@ -699,6 +699,6 @@ export class GoogleButtonCard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-button-card": GoogleButtonCard;
+    "material-button-card": MaterialButtonCard;
   }
 }

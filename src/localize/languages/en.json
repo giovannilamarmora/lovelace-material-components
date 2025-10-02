@@ -25,7 +25,7 @@
     "active": "Active",
     "inactive": "Inactive"
   },
-  "google_dashboard_card": {
+  "material_dashboard_card": {
     "description": "Configure the navigation path when a card is tapped.",
     "cameras": "Cameras path",
     "cameras_name": "Cameras",
@@ -46,7 +46,7 @@
     "double": "Double Tap",
     "web": "Use Single Tap on Browser (Selected tap on mobile)"
   },
-  "google_climate_card": {
+  "material_climate_card": {
     "name": "Entity Name",
     "entity": "Entity",
     "theme": "Use Material Expressive",
@@ -61,7 +61,7 @@
     "true": "Actve",
     "auto": "Auto"
   },
-  "google_button_card": {
+  "material_button_card": {
     "name": "Entity Name",
     "control_type": "Control Type",
     "type": {
@@ -94,7 +94,7 @@
       "none": "None"
     }
   },
-  "google_control_card": {
+  "material_control_card": {
     "name": "Card Name",
     "entity_card": "Use card as entity",
     "entity": "Entity",
@@ -114,7 +114,7 @@
       "settings": "Open Settings"
     }
   },
-  "google_slider_card": {
+  "material_slider_card": {
     "name": "Card Name",
     "control_type": "Control Type",
     "type": {
@@ -126,11 +126,11 @@
     "percentage": "Display value as percentage",
     "bold_text": "Bold style for the text"
   },
-  "google_lights_card": {
+  "material_lights_card": {
     "on_text": "Text for Lights ON",
     "off_text": "Text for Lights OFF"
   },
-  "google_media_overlay": {
+  "material_media_overlay": {
     "media_card": {
       "no_content": "Nothing is playing",
       "playing": "Now playing"

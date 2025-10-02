@@ -2,18 +2,18 @@ import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 import { localize } from "../localize/localize";
-import { DEFAULT_CONFIG } from "./google-dashboard-const";
-import { GoogleButtonCardConfig } from "../google-button/google-button-const";
+import { DEFAULT_CONFIG } from "./material-dashboard-const";
+import { MaterialButtonCardConfig } from "../material-button/material-button-const";
 
-@customElement("google-dashboard-card-editor")
-export class GoogleDashboardCardEditor
+@customElement("material-dashboard-card-editor")
+export class MaterialDashboardCardEditor
   extends LitElement
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleButtonCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialButtonCardConfig = DEFAULT_CONFIG;
 
-  public setConfig(config: GoogleButtonCardConfig): void {
+  public setConfig(config: MaterialButtonCardConfig): void {
     this._config = { ...config };
   }
 
@@ -74,14 +74,14 @@ export class GoogleDashboardCardEditor
     return html`
       <div class="form">
         <span class="switch-label"
-          >${localize("google_dashboard_card.description")}</span
+          >${localize("material_dashboard_card.description")}</span
         >
 
         <span class="text-label"
-          >${localize("google_dashboard_card.cameras")}</span
+          >${localize("material_dashboard_card.cameras")}</span
         >
         <ha-textfield
-          label="${localize("google_dashboard_card.placeholder")}"
+          label="${localize("material_dashboard_card.placeholder")}"
           .value=${this._config.cameras || ""}
           configValue="cameras"
           @input=${this._valueChanged}
@@ -89,10 +89,10 @@ export class GoogleDashboardCardEditor
         ></ha-textfield>
 
         <span class="text-label"
-          >${localize("google_dashboard_card.lighting")}</span
+          >${localize("material_dashboard_card.lighting")}</span
         >
         <ha-textfield
-          label="${localize("google_dashboard_card.placeholder")}"
+          label="${localize("material_dashboard_card.placeholder")}"
           .value=${this._config.lighting || ""}
           configValue="lighting"
           @input=${this._valueChanged}
@@ -100,10 +100,10 @@ export class GoogleDashboardCardEditor
         ></ha-textfield>
 
         <span class="text-label"
-          >${localize("google_dashboard_card.wifi")}</span
+          >${localize("material_dashboard_card.wifi")}</span
         >
         <ha-textfield
-          label="${localize("google_dashboard_card.placeholder")}"
+          label="${localize("material_dashboard_card.placeholder")}"
           .value=${this._config.wifi || ""}
           configValue="wifi"
           @input=${this._valueChanged}
@@ -111,10 +111,10 @@ export class GoogleDashboardCardEditor
         ></ha-textfield>
 
         <span class="text-label"
-          >${localize("google_dashboard_card.climate")}</span
+          >${localize("material_dashboard_card.climate")}</span
         >
         <ha-textfield
-          label="${localize("google_dashboard_card.placeholder")}"
+          label="${localize("material_dashboard_card.placeholder")}"
           .value=${this._config.climate || ""}
           configValue="climate"
           @input=${this._valueChanged}
@@ -123,7 +123,7 @@ export class GoogleDashboardCardEditor
 
         <div class="switch-row">
           <span class="switch-label"
-            >${localize("google_dashboard_card.default")}</span
+            >${localize("material_dashboard_card.default")}</span
           >
           <ha-switch
             .checked=${this._config.default_action ?? true}
@@ -136,26 +136,26 @@ export class GoogleDashboardCardEditor
           ? html``
           : html`
               <ha-select
-                label="${localize("google_dashboard_card.tap_type")}"
+                label="${localize("material_dashboard_card.tap_type")}"
                 .value=${this._config.action_type || "tap_action"}
                 configValue="action_type"
                 @selected=${this._valueChanged}
                 @closed=${(ev: Event) => ev.stopPropagation()}
               >
                 <mwc-list-item value="tap_action">
-                  ${localize("google_dashboard_card.single")}
+                  ${localize("material_dashboard_card.single")}
                 </mwc-list-item>
                 <mwc-list-item value="hold_action">
-                  ${localize("google_dashboard_card.hold")}
+                  ${localize("material_dashboard_card.hold")}
                 </mwc-list-item>
                 <mwc-list-item value="double_tap_action">
-                  ${localize("google_dashboard_card.double")}
+                  ${localize("material_dashboard_card.double")}
                 </mwc-list-item>
               </ha-select>
 
               <div class="switch-row">
                 <span class="switch-label"
-                  >${localize("google_dashboard_card.web")}</span
+                  >${localize("material_dashboard_card.web")}</span
                 >
                 <ha-switch
                   .checked=${this._config.single_tap_web ?? false}
@@ -201,6 +201,6 @@ export class GoogleDashboardCardEditor
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-dashboard-card-editor": GoogleDashboardCardEditor;
+    "material-dashboard-card-editor": MaterialDashboardCardEditor;
   }
 }

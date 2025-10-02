@@ -3,24 +3,24 @@ import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant } from "custom-card-helpers";
 import jsyaml from "js-yaml";
 import {
-  googleDashboadTemplate,
-  GoogleDashboardCardConfig,
-} from "./google-dashboard-const";
+  materialDashboadTemplate,
+  MaterialDashboardCardConfig,
+} from "./material-dashboard-const";
 import { applyRippleEffect } from "../animations";
 
-@customElement("google-dashboard-card")
-export class GoogleDashboardCard extends LitElement {
+@customElement("material-dashboard-card")
+export class MaterialDashboardCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config?: GoogleDashboardCardConfig;
+  @state() private _config?: MaterialDashboardCardConfig;
   @state() private _card?: any;
 
-  public static getStubConfig(): Partial<GoogleDashboardCardConfig> {
+  public static getStubConfig(): Partial<MaterialDashboardCardConfig> {
     return {
-      type: "custom:google-dashboard-card",
+      type: "custom:material-dashboard-card",
     };
   }
 
-  public async setConfig(config: GoogleDashboardCardConfig): Promise<void> {
+  public async setConfig(config: MaterialDashboardCardConfig): Promise<void> {
     if (!config) throw new Error("Invalid configuration");
     this._config = config;
   }
@@ -41,7 +41,7 @@ export class GoogleDashboardCard extends LitElement {
         this._card = card;
         this.requestUpdate();
       }
-      console.log("This LOG is for debug purpose, Google Dashboard");
+      console.log("This LOG is for debug purpose, Material Dashboard");
       console.log(this.hass);
     }
   }
@@ -51,17 +51,17 @@ export class GoogleDashboardCard extends LitElement {
   }
 
   static async getConfigElement() {
-    return document.createElement("google-dashboard-card-editor");
+    return document.createElement("material-dashboard-card-editor");
   }
 
-  private mapTemplate(config: GoogleDashboardCardConfig) {
+  private mapTemplate(config: MaterialDashboardCardConfig) {
     const action = this.resolveAction({
       default_action: config.default_action,
       action_type: config.action_type,
       single_tap_web: config.single_tap_web,
     });
 
-    const text = googleDashboadTemplate(
+    const text = materialDashboadTemplate(
       config.cameras!,
       config.lighting!,
       config.wifi!,

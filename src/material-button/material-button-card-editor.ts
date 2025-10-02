@@ -10,22 +10,22 @@ import {
 import { localize } from "../localize/localize";
 import {
   ControlType,
-  DEFAULT_BTN_CONFIG,
-  GoogleButtonCardConfig,
-} from "./google-button-const";
+  DEFAULT_CONFIG,
+  MaterialButtonCardConfig,
+} from "./material-button-const";
 
-@customElement("google-button-card-editor")
-export class GoogleButtonCardEditor
+@customElement("material-button-card-editor")
+export class MaterialButtonCardEditor
   extends LitElement
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleButtonCardConfig = DEFAULT_BTN_CONFIG;
+  @state() private _config: MaterialButtonCardConfig = DEFAULT_CONFIG;
   @state() private _configLoaded: boolean = false;
 
-  public setConfig(config: GoogleButtonCardConfig): void {
+  public setConfig(config: MaterialButtonCardConfig): void {
     this._config = {
-      ...DEFAULT_BTN_CONFIG,
+      ...DEFAULT_CONFIG,
       ...config,
       tap_action: config.tap_action,
       hold_action: config.hold_action,
@@ -194,40 +194,40 @@ export class GoogleButtonCardEditor
     return html`
       <div class="form">
         <ha-select
-          label="${localize("google_button_card.control_type")}"
+          label="${localize("material_button_card.control_type")}"
           .value=${this._config.control_type ?? "generic"}
           configValue="control_type"
           @selected=${this._valueChanged}
           @closed=${(ev: Event) => ev.stopPropagation()}
         >
           <mwc-list-item value="generic">
-            ${localize("google_button_card.type.generic")}
+            ${localize("material_button_card.type.generic")}
           </mwc-list-item>
           <mwc-list-item value="thermometer">
-            ${localize("google_button_card.type.thermometer")}
+            ${localize("material_button_card.type.thermometer")}
           </mwc-list-item>
           <mwc-list-item value="automation">
-            ${localize("google_button_card.type.automation")}
+            ${localize("material_button_card.type.automation")}
           </mwc-list-item>
           <mwc-list-item value="scene">
-            ${localize("google_button_card.type.scene")}
+            ${localize("material_button_card.type.scene")}
           </mwc-list-item>
           <mwc-list-item value="media_player">
-            ${localize("google_button_card.type.media")}
+            ${localize("material_button_card.type.media")}
           </mwc-list-item>
           <mwc-list-item value="state">
-            ${localize("google_button_card.type.state")}
+            ${localize("material_button_card.type.state")}
           </mwc-list-item>
           <mwc-list-item value="action">
-            ${localize("google_button_card.type.action")}
+            ${localize("material_button_card.type.action")}
           </mwc-list-item>
           <mwc-list-item value="app_version">
-            ${localize("google_button_card.type.app_version")}
+            ${localize("material_button_card.type.app_version")}
           </mwc-list-item>
         </ha-select>
 
         <ha-textfield
-          label="${localize("google_button_card.name")}"
+          label="${localize("material_button_card.name")}"
           .value=${this._config.name || ""}
           configValue="name"
           @input=${this._valueChanged}
@@ -252,7 +252,7 @@ export class GoogleButtonCardEditor
           ? html``
           : html`<div class="switch-row">
               <span class="switch-label"
-                >${localize("google_button_card.dual_icon.default")}</span
+                >${localize("material_button_card.dual_icon.default")}</span
               >
               <ha-switch
                 .checked=${this._config.use_default_icon ?? true}
@@ -270,7 +270,7 @@ export class GoogleButtonCardEditor
               ? html``
               : html`<div class="switch-row">
                   <span class="switch-label"
-                    >${localize("google_button_card.dual_icon.options")}</span
+                    >${localize("material_button_card.dual_icon.options")}</span
                   >
                   <ha-switch
                     .checked=${this._config.dual_icon ?? false}
@@ -315,7 +315,7 @@ export class GoogleButtonCardEditor
           ? html``
           : html`<div class="switch-row">
               <span class="switch-label"
-                >${localize("google_button_card.dual_text.default")}</span
+                >${localize("material_button_card.dual_text.default")}</span
               >
               <ha-switch
                 .checked=${this._config.use_default_text ?? true}
@@ -328,14 +328,14 @@ export class GoogleButtonCardEditor
           : html`
               <div class="dual-icons">
                 <ha-textfield
-                  label="${localize("google_button_card.dual_text.text_on")}"
+                  label="${localize("material_button_card.dual_text.text_on")}"
                   .value=${this._config.text_on || ""}
                   configValue="text_on"
                   @input=${this._valueChanged}
                   placeholder="On"
                 ></ha-textfield>
                 <ha-textfield
-                  label="${localize("google_button_card.dual_text.text_off")}"
+                  label="${localize("material_button_card.dual_text.text_off")}"
                   .value=${this._config.text_off || ""}
                   configValue="text_off"
                   @input=${this._valueChanged}
@@ -347,7 +347,7 @@ export class GoogleButtonCardEditor
           ? html``
           : html` <div class="switch-row">
                 <span class="switch-label"
-                  >${localize("google_climate_card.theme")}</span
+                  >${localize("material_climate_card.theme")}</span
                 >
                 <ha-switch
                   .checked=${this._config.use_material_color ?? false}
@@ -357,7 +357,7 @@ export class GoogleButtonCardEditor
               </div>
               <!--<div class="switch-row">
                 <span class="switch-label"
-                  >${localize("google_climate_card.fix_temperature")}</span
+                  >${localize("material_climate_card.fix_temperature")}</span
                 >
                 <ha-switch
                   .checked=${this._config.fix_temperature ?? false}
@@ -366,27 +366,27 @@ export class GoogleButtonCardEditor
                 />
               </div>-->
               <ha-select
-                label="${localize("google_climate_card.fix_temperature")}"
+                label="${localize("material_climate_card.fix_temperature")}"
                 .value=${this._config.fix_temperature ?? false}
                 configValue="fix_temperature"
                 @selected=${this._valueChanged}
                 @closed=${(ev: Event) => ev.stopPropagation()}
               >
                 <mwc-list-item value="false">
-                  ${localize("google_climate_card.false")}
+                  ${localize("material_climate_card.false")}
                 </mwc-list-item>
                 <mwc-list-item value="true">
-                  ${localize("google_climate_card.true")}
+                  ${localize("material_climate_card.true")}
                 </mwc-list-item>
                 <mwc-list-item value="auto">
-                  ${localize("google_climate_card.auto")}
+                  ${localize("material_climate_card.auto")}
                 </mwc-list-item>
               </ha-select>`}
         ${this._config.control_type == ControlType.ACTION
           ? html``
           : html`<div class="switch-row">
               <span class="switch-label"
-                >${localize("google_button_card.toggle.title")}</span
+                >${localize("material_button_card.toggle.title")}</span
               >
               <ha-switch
                 .checked=${this._config.use_default_toggle ?? true}
@@ -397,25 +397,25 @@ export class GoogleButtonCardEditor
         ${this._config.use_default_toggle
           ? html``
           : html`<ha-select
-                label="${localize("google_button_card.toggle.press")}"
+                label="${localize("material_button_card.toggle.press")}"
                 .value=${this._getActionValue(this._config.tap_action)}
                 @selected=${this._onTapSelected}
                 @closed=${(ev: Event) => ev.stopPropagation()}
               >
                 <mwc-list-item value="toggle">
-                  ${localize("google_button_card.toggle.click")}
+                  ${localize("material_button_card.toggle.click")}
                 </mwc-list-item>
                 <mwc-list-item value="more-info">
-                  ${localize("google_button_card.toggle.info")}
+                  ${localize("material_button_card.toggle.info")}
                 </mwc-list-item>
                 <mwc-list-item value="navigate">
-                  ${localize("google_button_card.toggle.navigate")}
+                  ${localize("material_button_card.toggle.navigate")}
                 </mwc-list-item>
                 <mwc-list-item value="url">
-                  ${localize("google_button_card.toggle.url")}
+                  ${localize("material_button_card.toggle.url")}
                 </mwc-list-item>
                 <mwc-list-item value="none">
-                  ${localize("google_button_card.toggle.none")}
+                  ${localize("material_button_card.toggle.none")}
                 </mwc-list-item>
               </ha-select>
 
@@ -424,25 +424,25 @@ export class GoogleButtonCardEditor
               )}
 
               <ha-select
-                label="${localize("google_button_card.toggle.hold")}"
+                label="${localize("material_button_card.toggle.hold")}"
                 .value=${this._getActionValue(this._config.hold_action)}
                 @selected=${this._onHoldSelected}
                 @closed=${(ev: Event) => ev.stopPropagation()}
               >
                 <mwc-list-item value="toggle">
-                  ${localize("google_button_card.toggle.click")}
+                  ${localize("material_button_card.toggle.click")}
                 </mwc-list-item>
                 <mwc-list-item value="more-info">
-                  ${localize("google_button_card.toggle.info")}
+                  ${localize("material_button_card.toggle.info")}
                 </mwc-list-item>
                 <mwc-list-item value="navigate">
-                  ${localize("google_button_card.toggle.navigate")}
+                  ${localize("material_button_card.toggle.navigate")}
                 </mwc-list-item>
                 <mwc-list-item value="url">
-                  ${localize("google_button_card.toggle.url")}
+                  ${localize("material_button_card.toggle.url")}
                 </mwc-list-item>
                 <mwc-list-item value="none">
-                  ${localize("google_button_card.toggle.none")}
+                  ${localize("material_button_card.toggle.none")}
                 </mwc-list-item>
               </ha-select>
 
@@ -520,6 +520,6 @@ export class GoogleButtonCardEditor
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-button-card-editor": GoogleButtonCardEditor;
+    "material-button-card-editor": MaterialButtonCardEditor;
   }
 }

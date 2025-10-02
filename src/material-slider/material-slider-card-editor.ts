@@ -3,18 +3,18 @@ import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 import { DEFAULT_CONFIG } from "./const";
 import { localize } from "../localize/localize";
-import { ControlType } from "../google-button/google-button-const";
-import { GoogleSliderCardConfig } from "./types";
+import { ControlType } from "../material-button/material-button-const";
+import { MaterialSliderCardConfig } from "./types";
 
-@customElement("google-slider-card-editor")
-export class GoogleSliderCardEditor
+@customElement("material-slider-card-editor")
+export class MaterialSliderCardEditor
   extends LitElement
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleSliderCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialSliderCardConfig = DEFAULT_CONFIG;
 
-  public setConfig(config: GoogleSliderCardConfig): void {
+  public setConfig(config: MaterialSliderCardConfig): void {
     this._config = { ...config };
   }
 
@@ -82,22 +82,22 @@ export class GoogleSliderCardEditor
     return html`
       <div class="form">
         <ha-select
-          label="${localize("google_slider_card.control_type")}"
+          label="${localize("material_slider_card.control_type")}"
           .value=${this._config.control_type ?? "light"}
           configValue="control_type"
           @selected=${this._valueChanged}
           @closed=${(ev: Event) => ev.stopPropagation()}
         >
           <mwc-list-item value="light">
-            ${localize("google_slider_card.type.light")}
+            ${localize("material_slider_card.type.light")}
           </mwc-list-item>
           <mwc-list-item value="cover">
-            ${localize("google_slider_card.type.cover")}
+            ${localize("material_slider_card.type.cover")}
           </mwc-list-item>
         </ha-select>
 
         <ha-textfield
-          label="${localize("google_slider_card.name")}"
+          label="${localize("material_slider_card.name")}"
           .value=${this._config.name || ""}
           configValue="name"
           @input=${this._valueChanged}
@@ -105,7 +105,7 @@ export class GoogleSliderCardEditor
         ></ha-textfield>
 
         <ha-entity-picker
-          label="${localize("google_slider_card.entity")}"
+          label="${localize("material_slider_card.entity")}"
           .value=${this._config.entity || ""}
           .hass=${this.hass}
           .includeDomains=${this.setEntityFilter()}
@@ -116,7 +116,7 @@ export class GoogleSliderCardEditor
         ></ha-entity-picker>
 
         <ha-icon-picker
-          label="${localize("google_slider_card.icon")}"
+          label="${localize("material_slider_card.icon")}"
           .value=${this._config.icon || ""}
           configValue="icon"
           @value-changed=${this._valueChanged}
@@ -125,7 +125,7 @@ export class GoogleSliderCardEditor
 
         <div class="switch-row">
           <span class="switch-label"
-            >${localize("google_slider_card.percentage")}</span
+            >${localize("material_slider_card.percentage")}</span
           >
           <ha-switch
             .checked=${this._config.show_percentage ?? true}
@@ -136,7 +136,7 @@ export class GoogleSliderCardEditor
 
         <div class="switch-row">
           <span class="switch-label"
-            >${localize("google_slider_card.bold_text")}</span
+            >${localize("material_slider_card.bold_text")}</span
           >
           <ha-switch
             .checked=${this._config.bold_text ?? false}
@@ -180,6 +180,6 @@ export class GoogleSliderCardEditor
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-slider-card-editor": GoogleSliderCardEditor;
+    "material-slider-card-editor": MaterialSliderCardEditor;
   }
 }

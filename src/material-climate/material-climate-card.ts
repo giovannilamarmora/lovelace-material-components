@@ -4,26 +4,26 @@ import { localize } from "../localize/localize";
 import { HomeAssistant } from "../ha-types";
 import {
   DEFAULT_CONFIG,
-  GoogleClimateCardConfig,
-} from "./google-climate-const";
+  MaterialClimateCardConfig,
+} from "./material-climate-const";
 import { fireEvent } from "custom-card-helpers";
 import { applyRippleEffect } from "../animations";
-import { google_color } from "../shared/color";
+import { material_color } from "../shared/color";
 import { isDeviceOn, isNullOrEmpty, isOfflineState } from "../shared/utils";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import {
   adjustNewTempAuto,
   adjustTempAuto,
   setColorCard,
-} from "./google-climate-mapper";
+} from "./material-climate-mapper";
 
-@customElement("google-climate-card")
-export class GoogleClimateCard extends LitElement {
+@customElement("material-climate-card")
+export class MaterialClimateCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleClimateCardConfig = DEFAULT_CONFIG;
-  private google_color_scheme: any = google_color;
+  @state() private _config: MaterialClimateCardConfig = DEFAULT_CONFIG;
+  private material_color_scheme: any = material_color;
 
-  public setConfig(config: GoogleClimateCardConfig): void {
+  public setConfig(config: MaterialClimateCardConfig): void {
     if (!config || !config.entity) {
       throw new Error(localize("common.invalid_configuration"));
     }
@@ -32,7 +32,7 @@ export class GoogleClimateCard extends LitElement {
 
   public static getStubConfig(
     _hass: HomeAssistant
-  ): Partial<GoogleClimateCardConfig> {
+  ): Partial<MaterialClimateCardConfig> {
     const allEntities = Object.keys(_hass.states);
     const climates = allEntities
       .filter((entity) => entity.startsWith("climate."))
@@ -41,7 +41,7 @@ export class GoogleClimateCard extends LitElement {
     const randomClimate = climates[Math.floor(Math.random() * climates.length)];
 
     return {
-      type: "custom:google-climate-card",
+      type: "custom:material-climate-card",
       entity: randomClimate,
       increase_temp: 1,
       decrease_temp: 1,
@@ -55,7 +55,7 @@ export class GoogleClimateCard extends LitElement {
   }
 
   static async getConfigElement() {
-    return document.createElement("google-climate-card-editor");
+    return document.createElement("material-climate-card-editor");
   }
 
   public _onClick(event: MouseEvent) {
@@ -121,16 +121,16 @@ export class GoogleClimateCard extends LitElement {
       // Offline, tema light
       if (theme === "light") {
         nameColor = iconColor =
-          this.google_color_scheme.light.offline.climate.title;
+          this.material_color_scheme.light.offline.climate.title;
         containerColor =
-          this.google_color_scheme.light.offline.climate.background;
+          this.material_color_scheme.light.offline.climate.background;
         //containerColor = "#dfdfe1";
       } else {
         // Offline, tema dark
         nameColor = iconColor =
-          this.google_color_scheme.dark.offline.climate.title;
+          this.material_color_scheme.dark.offline.climate.title;
         containerColor =
-          this.google_color_scheme.dark.offline.climate.background;
+          this.material_color_scheme.dark.offline.climate.background;
       }
     } else if (isOn) {
       // Acceso, tema dark
@@ -138,34 +138,38 @@ export class GoogleClimateCard extends LitElement {
         if (use_material_color) {
           if (isConditioner) {
             nameColor =
-              this.google_color_scheme.dark.on.climate.material_cool.title;
+              this.material_color_scheme.dark.on.climate.material_cool.title;
             iconColor =
-              this.google_color_scheme.dark.on.climate.material_cool.icon;
+              this.material_color_scheme.dark.on.climate.material_cool.icon;
             adjustTemp =
-              this.google_color_scheme.dark.on.climate.material_cool.button;
+              this.material_color_scheme.dark.on.climate.material_cool.button;
             internalTemp =
-              this.google_color_scheme.dark.on.climate.material_cool.subtitle;
+              this.material_color_scheme.dark.on.climate.material_cool.subtitle;
             containerColor =
-              this.google_color_scheme.dark.on.climate.material_cool.background;
+              this.material_color_scheme.dark.on.climate.material_cool
+                .background;
           } else {
-            nameColor = this.google_color_scheme.dark.on.climate.material.title;
-            iconColor = this.google_color_scheme.dark.on.climate.material.icon;
+            nameColor =
+              this.material_color_scheme.dark.on.climate.material.title;
+            iconColor =
+              this.material_color_scheme.dark.on.climate.material.icon;
             adjustTemp =
-              this.google_color_scheme.dark.on.climate.material.button;
+              this.material_color_scheme.dark.on.climate.material.button;
             internalTemp =
-              this.google_color_scheme.dark.on.climate.material.subtitle;
+              this.material_color_scheme.dark.on.climate.material.subtitle;
             containerColor =
-              this.google_color_scheme.dark.on.climate.material.background;
+              this.material_color_scheme.dark.on.climate.material.background;
             //containerColor = "#5c4035";
           }
         } else {
           nameColor = iconColor =
-            this.google_color_scheme.dark.on.climate.default.title;
-          adjustTemp = this.google_color_scheme.dark.on.climate.default.button;
+            this.material_color_scheme.dark.on.climate.default.title;
+          adjustTemp =
+            this.material_color_scheme.dark.on.climate.default.button;
           internalTemp =
-            this.google_color_scheme.dark.on.climate.default.subtitle;
+            this.material_color_scheme.dark.on.climate.default.subtitle;
           containerColor =
-            this.google_color_scheme.dark.on.climate.default.background;
+            this.material_color_scheme.dark.on.climate.default.background;
           //containerColor = "#414246";
         }
       } else {
@@ -173,35 +177,38 @@ export class GoogleClimateCard extends LitElement {
         if (use_material_color) {
           if (isConditioner) {
             nameColor =
-              this.google_color_scheme.light.on.climate.material_cool.title;
+              this.material_color_scheme.light.on.climate.material_cool.title;
             iconColor =
-              this.google_color_scheme.light.on.climate.material_cool.icon;
+              this.material_color_scheme.light.on.climate.material_cool.icon;
             internalTemp =
-              this.google_color_scheme.light.on.climate.material_cool.subtitle;
+              this.material_color_scheme.light.on.climate.material_cool
+                .subtitle;
             adjustTemp =
-              this.google_color_scheme.light.on.climate.material_cool.button;
+              this.material_color_scheme.light.on.climate.material_cool.button;
             containerColor =
-              this.google_color_scheme.light.on.climate.material_cool
+              this.material_color_scheme.light.on.climate.material_cool
                 .background;
           } else {
             nameColor =
-              this.google_color_scheme.light.on.climate.material.title;
-            iconColor = this.google_color_scheme.light.on.climate.material.icon;
+              this.material_color_scheme.light.on.climate.material.title;
+            iconColor =
+              this.material_color_scheme.light.on.climate.material.icon;
             internalTemp =
-              this.google_color_scheme.light.on.climate.material.subtitle;
+              this.material_color_scheme.light.on.climate.material.subtitle;
             adjustTemp =
-              this.google_color_scheme.light.on.climate.material.button;
+              this.material_color_scheme.light.on.climate.material.button;
             containerColor =
-              this.google_color_scheme.light.on.climate.material.background;
+              this.material_color_scheme.light.on.climate.material.background;
           }
         } else {
           nameColor =
             iconColor =
             internalTemp =
-              this.google_color_scheme.light.on.climate.default.title;
-          adjustTemp = this.google_color_scheme.light.on.climate.default.button;
+              this.material_color_scheme.light.on.climate.default.title;
+          adjustTemp =
+            this.material_color_scheme.light.on.climate.default.button;
           containerColor =
-            this.google_color_scheme.light.on.climate.default.background;
+            this.material_color_scheme.light.on.climate.default.background;
         }
       }
     } else {
@@ -210,19 +217,20 @@ export class GoogleClimateCard extends LitElement {
         nameColor =
           iconColor =
           internalTemp =
-            this.google_color_scheme.dark.off.climate.default.title;
-        adjustTemp = this.google_color_scheme.dark.off.climate.default.button;
+            this.material_color_scheme.dark.off.climate.default.title;
+        adjustTemp = this.material_color_scheme.dark.off.climate.default.button;
         containerColor =
-          this.google_color_scheme.dark.off.climate.default.background;
+          this.material_color_scheme.dark.off.climate.default.background;
       } else {
         // Spento, tema light
         nameColor =
           iconColor =
           internalTemp =
-            this.google_color_scheme.light.off.climate.default.title;
-        adjustTemp = this.google_color_scheme.light.off.climate.default.button;
+            this.material_color_scheme.light.off.climate.default.title;
+        adjustTemp =
+          this.material_color_scheme.light.off.climate.default.button;
         containerColor =
-          this.google_color_scheme.light.off.climate.default.background;
+          this.material_color_scheme.light.off.climate.default.background;
       }
     }
 
@@ -579,6 +587,6 @@ export class GoogleClimateCard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-climate-card": GoogleClimateCard;
+    "material-climate-card": MaterialClimateCard;
   }
 }

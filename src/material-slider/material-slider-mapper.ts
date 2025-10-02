@@ -1,8 +1,8 @@
-import { ControlType } from "../google-button/google-button-const";
-import { GoogleSliderCardConfig } from "./types";
+import { ControlType } from "../material-button/material-button-const";
+import { MaterialSliderCardConfig } from "./types";
 
 export function setSliderColor(
-  _config: GoogleSliderCardConfig,
+  _config: MaterialSliderCardConfig,
   isOffline: boolean,
   theme: string,
   isOn: boolean,

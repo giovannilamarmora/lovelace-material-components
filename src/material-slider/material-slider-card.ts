@@ -1,16 +1,16 @@
 import { SlideGesture } from "@nicufarmache/slide-gesture";
 import { HassEntity } from "home-assistant-js-websocket";
 import { HomeAssistant } from "../ha-types";
-import type { GoogleSliderCardConfig, MousePos } from "./types";
+import type { MaterialSliderCardConfig, MousePos } from "./types";
 import { DEFAULT_CONFIG, TAP_THRESHOLD } from "./const";
 import { localize } from "../localize/localize";
 import { state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { LitElement, html, CSSResult, TemplateResult, css } from "lit";
 import { applyRippleEffect } from "../animations";
-import { google_color } from "../shared/color";
-import { setSliderColor } from "./google-slider-mapper";
-import { ControlType } from "../google-button/google-button-const";
+import { material_color } from "../shared/color";
+import { setSliderColor } from "./material-slider-mapper";
+import { ControlType } from "../material-button/material-button-const";
 import {
   isDeviceOn,
   isOfflineState,
@@ -19,9 +19,9 @@ import {
 } from "../shared/utils";
 import { getIcon } from "../shared/mapper";
 
-export class GoogleSliderCard extends LitElement {
+export class MaterialSliderCard extends LitElement {
   // @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleSliderCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialSliderCardConfig = DEFAULT_CONFIG;
   @state() private _entity?: string;
   @state() private _state?: HassEntity;
   @state() private _status?: string;
@@ -42,11 +42,11 @@ export class GoogleSliderCard extends LitElement {
   private isTap: boolean = false;
   private _lastTheme?: string;
   private _lastEntityState?: string;
-  private color: any = google_color;
+  private color: any = material_color;
 
   public static getStubConfig(
     _hass: HomeAssistant
-  ): Partial<GoogleSliderCardConfig> {
+  ): Partial<MaterialSliderCardConfig> {
     const allEntities = Object.keys(_hass.states);
     const lights = allEntities
       .filter((entity) => entity.startsWith("light."))
@@ -55,7 +55,7 @@ export class GoogleSliderCard extends LitElement {
     const randomLight = lights[Math.floor(Math.random() * lights.length)];
 
     return {
-      type: "custom:google-slider-card",
+      type: "custom:material-slider-card",
       entity: randomLight,
       icon: "m3of:lightbulb",
       show_percentage: true,
@@ -68,12 +68,12 @@ export class GoogleSliderCard extends LitElement {
   }
 
   static async getConfigElement() {
-    return document.createElement("google-slider-card-editor");
+    return document.createElement("material-slider-card-editor");
   }
 
   // life cycle
 
-  public setConfig(config: Partial<GoogleSliderCardConfig>): void {
+  public setConfig(config: Partial<MaterialSliderCardConfig>): void {
     if (!config) {
       throw new Error(localize("common.invalid_configuration"));
     }
@@ -92,7 +92,7 @@ export class GoogleSliderCard extends LitElement {
       );
     }
 
-    const finalConfig: GoogleSliderCardConfig = {
+    const finalConfig: MaterialSliderCardConfig = {
       ...DEFAULT_CONFIG,
       ...config,
     };
@@ -887,6 +887,6 @@ export class GoogleSliderCard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-slider-card": GoogleSliderCard;
+    "material-slider-card": MaterialSliderCard;
   }
 }

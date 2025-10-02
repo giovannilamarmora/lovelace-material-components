@@ -1,17 +1,17 @@
 import { LovelaceCardConfig } from "custom-card-helpers";
 
-export interface GoogleLightCardConfig extends LovelaceCardConfig {
+export interface MaterialLightCardConfig extends LovelaceCardConfig {
   on_text?: string;
   off_text?: string;
 }
 
-export const DEFAULT_CONFIG: GoogleLightCardConfig = {
-  type: "custom:google-control-card",
+export const DEFAULT_CONFIG: MaterialLightCardConfig = {
+  type: "custom:material-control-card",
   on_text: "Lights on",
   off_text: "Lights off",
 };
 
-export function googleTemplate(config: GoogleLightCardConfig) {
+export function materialTemplate(config: MaterialLightCardConfig) {
   return `type: custom:mod-card
 style: |
   ha-card {

@@ -1,11 +1,11 @@
-import { getPropertyColor } from "../google-climate/google-climate-mapper";
-import { _setStyleProperty, google_color } from "../shared/color";
+import { getPropertyColor } from "../material-climate/material-climate-mapper";
+import { _setStyleProperty, material_color } from "../shared/color";
 import { isNullOrEmpty } from "../shared/utils";
-import { ControlType, GoogleButtonCardConfig } from "./google-button-const";
+import { ControlType, MaterialButtonCardConfig } from "./material-button-const";
 
 export function setColorCard(
   style: any,
-  config: GoogleButtonCardConfig,
+  config: MaterialButtonCardConfig,
   isOffline: boolean,
   isOn: boolean,
   theme: string,
@@ -18,7 +18,7 @@ export function setColorCard(
     isOn
       ? "climate"
       : "button";
-  const googleColor: any = google_color;
+  const materialColor: any = material_color;
   const stateColor = config.use_material_color
     ? getPropertyColor(state)
     : "default";
@@ -26,8 +26,8 @@ export function setColorCard(
   let color: any;
 
   if (isOffline || (isOn && !config.use_material_color) || !isOn)
-    color = googleColor[theme][offlineOnOffState][domain];
-  else color = googleColor[theme][offlineOnOffState][domain][stateColor];
+    color = materialColor[theme][offlineOnOffState][domain];
+  else color = materialColor[theme][offlineOnOffState][domain][stateColor];
 
   if (!isNullOrEmpty(color)) {
     _setStyleProperty("--bsc-name-color", color.title, style);

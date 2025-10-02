@@ -4,28 +4,28 @@ import { localize } from "../localize/localize";
 import { HomeAssistant } from "../ha-types";
 import {
   DEFAULT_CONFIG,
-  GoogleControlCardConfig,
-  googleControlTemplate,
-} from "./google-control-const";
+  MaterialControlCardConfig,
+  materialControlTemplate,
+} from "./material-control-const";
 import jsyaml from "js-yaml";
 import { getName } from "../shared/mapper";
 
-@customElement("google-control-card")
-export class GoogleControlCard extends LitElement {
+@customElement("material-control-card")
+export class MaterialControlCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleControlCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialControlCardConfig = DEFAULT_CONFIG;
   @state() private _card?: any;
 
-  public async setConfig(config: GoogleControlCardConfig): Promise<void> {
+  public async setConfig(config: MaterialControlCardConfig): Promise<void> {
     if (!config) {
       throw new Error(localize("common.invalid_configuration"));
     }
     this._config = config;
   }
 
-  public static getStubConfig(): Partial<GoogleControlCardConfig> {
+  public static getStubConfig(): Partial<MaterialControlCardConfig> {
     return {
-      type: "custom:google-control-card",
+      type: "custom:material-control-card",
       name: "Control Card",
       icon: "mdi:link",
       tap_action: {
@@ -61,7 +61,7 @@ export class GoogleControlCard extends LitElement {
   }
 
   static async getConfigElement() {
-    return document.createElement("google-control-card-editor");
+    return document.createElement("material-control-card-editor");
   }
 
   //private mapAction(actions: any) {
@@ -104,7 +104,7 @@ export class GoogleControlCard extends LitElement {
     const newConfig = { ...this._config, name };
     newConfig.tap_action = this.mapAction(newConfig.tap_action);
     newConfig.hold_action = this.mapAction(newConfig.hold_action);
-    const text = googleControlTemplate(newConfig);
+    const text = materialControlTemplate(newConfig);
 
     return text;
   }
@@ -146,6 +146,6 @@ export class GoogleControlCard extends LitElement {
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-control-card": GoogleControlCard;
+    "material-control-card": MaterialControlCard;
   }
 }

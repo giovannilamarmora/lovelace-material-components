@@ -3,7 +3,7 @@ import {
   LovelaceCard,
   LovelaceCardConfig,
 } from "custom-card-helpers";
-import { ControlType } from "../google-button/google-button-const";
+import { ControlType } from "../material-button/material-button-const";
 
 declare global {
   interface HTMLElementTagNameMap {
@@ -15,7 +15,7 @@ export interface MousePos {
   x: number;
   y: number;
 }
-export interface GoogleSliderCardConfig extends LovelaceCardConfig {
+export interface MaterialSliderCardConfig extends LovelaceCardConfig {
   type: string;
   control_type: ControlType;
   name?: string;

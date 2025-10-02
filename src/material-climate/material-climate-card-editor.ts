@@ -4,18 +4,18 @@ import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 import { localize } from "../localize/localize";
 import {
   DEFAULT_CONFIG,
-  GoogleClimateCardConfig,
-} from "./google-climate-const";
+  MaterialClimateCardConfig,
+} from "./material-climate-const";
 
-@customElement("google-climate-card-editor")
-export class GoogleClimateCardEditor
+@customElement("material-climate-card-editor")
+export class MaterialClimateCardEditor
   extends LitElement
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: GoogleClimateCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialClimateCardConfig = DEFAULT_CONFIG;
 
-  public setConfig(config: GoogleClimateCardConfig): void {
+  public setConfig(config: MaterialClimateCardConfig): void {
     this._config = { ...config };
   }
 
@@ -76,7 +76,7 @@ export class GoogleClimateCardEditor
     return html`
       <div class="form">
         <ha-textfield
-          label="${localize("google_climate_card.name")}"
+          label="${localize("material_climate_card.name")}"
           .value=${this._config.name || ""}
           configValue="name"
           @input=${this._valueChanged}
@@ -84,7 +84,7 @@ export class GoogleClimateCardEditor
         ></ha-textfield>
 
         <ha-entity-picker
-          label="${localize("google_climate_card.entity")}"
+          label="${localize("material_climate_card.entity")}"
           .value=${this._config.entity || ""}
           .hass=${this.hass}
           .includeDomains=${["climate"]}
@@ -96,7 +96,7 @@ export class GoogleClimateCardEditor
 
         <div class="switch-row">
           <span class="switch-label"
-            >${localize("google_climate_card.theme")}</span
+            >${localize("material_climate_card.theme")}</span
           >
           <ha-switch
             .checked=${this._config.use_material_color ?? true}
@@ -107,7 +107,7 @@ export class GoogleClimateCardEditor
 
         <div class="switch-row">
           <span class="switch-label"
-            >${localize("google_climate_card.dual_icon.default")}</span
+            >${localize("material_climate_card.dual_icon.default")}</span
           >
           <ha-switch
             .checked=${this._config.use_default_icon ?? true}
@@ -129,7 +129,7 @@ export class GoogleClimateCardEditor
             `}
 
         <ha-textfield
-          label="${localize("google_climate_card.increase_temp")}"
+          label="${localize("material_climate_card.increase_temp")}"
           .value=${this._config.increase_temp || 1}
           configValue="increase_temp"
           @input=${this._valueChanged}
@@ -137,7 +137,7 @@ export class GoogleClimateCardEditor
         ></ha-textfield>
 
         <ha-textfield
-          label="${localize("google_climate_card.decrease_temp")}"
+          label="${localize("material_climate_card.decrease_temp")}"
           .value=${this._config.decrease_temp || 1}
           configValue="decrease_temp"
           @input=${this._valueChanged}
@@ -146,7 +146,7 @@ export class GoogleClimateCardEditor
 
         <!--<div class="switch-row">
           <span class="switch-label"
-            >${localize("google_climate_card.fix_temperature")}</span
+            >${localize("material_climate_card.fix_temperature")}</span
           >
           <ha-switch
             .checked=${this._config.fix_temperature ?? false}
@@ -156,20 +156,20 @@ export class GoogleClimateCardEditor
         </div>-->
 
         <ha-select
-          label="${localize("google_climate_card.fix_temperature")}"
+          label="${localize("material_climate_card.fix_temperature")}"
           .value=${this._config.fix_temperature ?? "false"}
           configValue="fix_temperature"
           @selected=${this._valueChanged}
           @closed=${(ev: Event) => ev.stopPropagation()}
         >
           <mwc-list-item value="false">
-            ${localize("google_climate_card.false")}
+            ${localize("material_climate_card.false")}
           </mwc-list-item>
           <mwc-list-item value="true">
-            ${localize("google_climate_card.true")}
+            ${localize("material_climate_card.true")}
           </mwc-list-item>
           <mwc-list-item value="auto">
-            ${localize("google_climate_card.auto")}
+            ${localize("material_climate_card.auto")}
           </mwc-list-item>
         </ha-select>
       </div>
@@ -208,6 +208,6 @@ export class GoogleClimateCardEditor
 
 declare global {
   interface HTMLElementTagNameMap {
-    "google-climate-card-editor": GoogleClimateCardEditor;
+    "material-climate-card-editor": MaterialClimateCardEditor;
   }
 }

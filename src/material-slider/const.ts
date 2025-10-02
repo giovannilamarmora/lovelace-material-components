@@ -1,5 +1,5 @@
-import { ControlType } from "../google-button/google-button-const";
-import { GoogleSliderCardConfig } from "./types";
+import { ControlType } from "../material-button/material-button-const";
+import { MaterialSliderCardConfig } from "./types";
 
 export const CARD_VERSION = "1.9.6";
 export const DEFAULT_ATTRIBUTE = "brightness";
@@ -9,8 +9,8 @@ export const MIN_SLIDE_TIME = 0;
 export const TAP_THRESHOLD = 5;
 export const MIN = 0;
 export const MAX = 100;
-export const DEFAULT_CONFIG: GoogleSliderCardConfig = {
-  type: "custom:google-slider-card",
+export const DEFAULT_CONFIG: MaterialSliderCardConfig = {
+  type: "custom:material-slider-card",
   control_type: ControlType.LIGHT,
   tap_action: {
     action: "toggle",

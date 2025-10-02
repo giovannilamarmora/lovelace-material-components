@@ -3,9 +3,9 @@ import {
   DeviceType,
   DomainType,
   getValidDeviceClass,
-} from "../google-button/google-button-const";
-import { adjustTempAuto } from "../google-climate/google-climate-mapper";
-import { CARD_VERSION } from "../google-slider/const";
+} from "../material-button/material-button-const";
+import { adjustTempAuto } from "../material-climate/material-climate-mapper";
+import { CARD_VERSION } from "../material-slider/const";
 import { localize } from "../localize/localize";
 import { GoogleDevice } from "./google_model";
 import {

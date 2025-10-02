@@ -1,4 +1,4 @@
-import { _setStyleProperty, google_color } from "../shared/color";
+import { _setStyleProperty, material_color } from "../shared/color";
 import { isNullOrEmpty, OnStates } from "../shared/utils";
 
 export function adjustTempAuto(
@@ -36,7 +36,7 @@ export function adjustNewTempAuto(
  * connectivity, and theme settings.
  *
  * The function determines whether the device is **offline**, **on**, or **off**,
- * then applies the corresponding color configuration from `google_color`.
+ * then applies the corresponding color configuration from `material_color`.
  * If `material_color` is enabled, a state-specific expressive material color is used.
  *
  * @param style - The style object where the CSS variables will be applied (e.g., `element.style`).
@@ -69,19 +69,19 @@ export function setColorCard(
   isOn: boolean,
   theme: string,
   state: string,
-  material_color: boolean
+  is_material_color: boolean
 ) {
   const offlineOnOffState = isOffline ? "offline" : isOn ? "on" : "off";
   const domain = "climate";
-  const googleColor: any = google_color;
-  const stateColor = material_color ? getPropertyColor(state) : "default";
+  const materialColor: any = material_color;
+  const stateColor = is_material_color ? getPropertyColor(state) : "default";
 
   let color: any;
 
-  if (isOffline) color = googleColor[theme][offlineOnOffState][domain];
+  if (isOffline) color = materialColor[theme][offlineOnOffState][domain];
   else if (isOn)
-    color = googleColor[theme][offlineOnOffState][domain][stateColor];
-  else color = googleColor[theme][offlineOnOffState][domain]["default"];
+    color = materialColor[theme][offlineOnOffState][domain][stateColor];
+  else color = materialColor[theme][offlineOnOffState][domain]["default"];
 
   if (!isNullOrEmpty(color)) {
     _setStyleProperty("--bsc-name-color", color.title, style);

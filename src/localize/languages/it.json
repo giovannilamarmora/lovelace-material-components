@@ -25,7 +25,7 @@
     "active": "Attivo",
     "inactive": "Inattivo"
   },
-  "google_dashboard_card": {
+  "material_dashboard_card": {
     "description": "Configura il percorso di navigazione quando una card viene cliccata.",
     "cameras": "Percorso delle telecamere",
     "cameras_name": "Telecamere",
@@ -46,7 +46,7 @@
     "double": "Doppio Tap",
     "web": "Usa Tap Singolo sul Browser (Su mobile il tap selezionato)"
   },
-  "google_climate_card": {
+  "material_climate_card": {
     "name": "Nome Entità",
     "entity": "Entità",
     "theme": "Usa Material Expressive",
@@ -61,7 +61,7 @@
     "true": "Attivo",
     "auto": "Automatico"
   },
-  "google_button_card": {
+  "material_button_card": {
     "name": "Nome Entità",
     "control_type": "Tipo di controllo",
     "type": {
@@ -94,7 +94,7 @@
       "none": "Nessuna azione"
     }
   },
-  "google_control_card": {
+  "material_control_card": {
     "name": "Nome della Scheda",
     "entity_card": "Usa la scheda come entità",
     "entity": "Entità",
@@ -114,7 +114,7 @@
       "settings": "Apri Impostazioni"
     }
   },
-  "google_slider_card": {
+  "material_slider_card": {
     "name": "Nome della Card",
     "control_type": "Tipo di controllo",
     "type": {
@@ -126,11 +126,11 @@
     "percentage": "Mostra la percentuale di valore",
     "bold_text": "Testo con stile in grassetto"
   },
-  "google_lights_card": {
+  "material_lights_card": {
     "on_text": "Testo per Luci Accese",
     "off_text": "Testo per Luci Spente"
   },
-  "google_media_overlay": {
+  "material_media_overlay": {
     "media_card": {
       "no_content": "Nessun contenuto in riproduzione",
       "playing": "Ora in riproduzione"

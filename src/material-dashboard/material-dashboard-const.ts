@@ -1,7 +1,7 @@
 import { LovelaceCardConfig } from "custom-card-helpers";
 import { localize } from "../localize/localize";
 
-export interface GoogleDashboardCardConfig extends LovelaceCardConfig {
+export interface MaterialDashboardCardConfig extends LovelaceCardConfig {
   cameras?: string;
   lighting?: string;
   wifi?: string;
@@ -11,8 +11,8 @@ export interface GoogleDashboardCardConfig extends LovelaceCardConfig {
   single_tap_web?: boolean;
 }
 
-export const DEFAULT_CONFIG: GoogleDashboardCardConfig = {
-  type: "custom:google-dashboard-card",
+export const DEFAULT_CONFIG: MaterialDashboardCardConfig = {
+  type: "custom:material-dashboard-card",
 };
 
 const otherAction = (
@@ -28,7 +28,7 @@ const otherAction = (
   }
 };
 
-export function googleDashboadTemplate(
+export function materialDashboadTemplate(
   camera_path: string,
   lighting_path: string,
   wifi_path: string,
@@ -48,7 +48,7 @@ parameters:
 cards:
   - type: custom:button-card
     icon: m3r:videocam
-    name: ${localize("google_dashboard_card.cameras_name")}
+    name: ${localize("material_dashboard_card.cameras_name")}
     triggers_update: all
     label: |
       [[[
@@ -57,7 +57,7 @@ cards:
           hass.entities[e] &&
           !hass.entities[e].hidden
         ).length;
-        return devices > 1 ? devices + " " + "${localize("google_dashboard_card.devices")}" : devices + " " + "${localize("google_dashboard_card.device")}";
+        return devices > 1 ? devices + " " + "${localize("material_dashboard_card.devices")}" : devices + " " + "${localize("material_dashboard_card.device")}";
       ]]]
     show_name: true
     show_label: true
@@ -144,7 +144,7 @@ cards:
                 ]]]
   - type: custom:button-card
     icon: m3r:light-group
-    name: ${localize("google_dashboard_card.lighting_name")}
+    name: ${localize("material_dashboard_card.lighting_name")}
     triggers_update: all
     label: |
       [[[
@@ -160,7 +160,7 @@ cards:
           (entity) => hass.states[entity].state === "on"
         ).length;
         const totalLights = lightEntities.length;
-        return lightsOn + "/" + totalLights + " ${localize("google_dashboard_card.lighting_label")}";
+        return lightsOn + "/" + totalLights + " ${localize("material_dashboard_card.lighting_label")}";
       ]]]
     show_name: true
     show_label: true
@@ -252,7 +252,7 @@ cards:
                 ]]]
   - type: custom:button-card
     icon: m3of:wifi
-    name: ${localize("google_dashboard_card.wifi_name")}
+    name: ${localize("material_dashboard_card.wifi_name")}
     triggers_update: all
     label: |
       [[[
@@ -263,7 +263,7 @@ cards:
             hass.entities[entity] &&
             !hass.entities[entity].hidden
         ).length;
-        return devices > 1 ? (devices + " " + "${localize("google_dashboard_card.devices")}") : (devices + " " + "${localize("google_dashboard_card.device")}");
+        return devices > 1 ? (devices + " " + "${localize("material_dashboard_card.devices")}") : (devices + " " + "${localize("material_dashboard_card.device")}");
       ]]]
     show_name: true
     show_label: true
@@ -366,7 +366,7 @@ cards:
   - type: custom:button-card
     entity: light.luce_giovanni
     icon: m3of:thermostat
-    name: ${localize("google_dashboard_card.climate_name")}
+    name: ${localize("material_dashboard_card.climate_name")}
     triggers_update: all
     label: |
       [[[
@@ -377,7 +377,7 @@ cards:
               hass.entities[entity] &&
               !hass.entities[entity].hidden
           ).length;
-          return climateEntities > 1 ? climateEntities + " " + "${localize("google_dashboard_card.devices")}" : climateEntities + " " + "${localize("google_dashboard_card.device")}";
+          return climateEntities > 1 ? climateEntities + " " + "${localize("material_dashboard_card.devices")}" : climateEntities + " " + "${localize("material_dashboard_card.device")}";
       ]]]
     show_name: true
     show_label: true

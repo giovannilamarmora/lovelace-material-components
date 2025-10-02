@@ -1,18 +1,18 @@
-import { CARD_VERSION } from "./google-slider/const";
-import { GoogleButtonCard } from "./google-button/google-button-card";
-import { GoogleDashboardCard } from "./google-dashboard/google-dashboard-card";
-import { GoogleDashboardCardEditor } from "./google-dashboard/google-dashboard-card-editor";
-import { GoogleSliderCard } from "./google-slider/google-slider-card";
+import { CARD_VERSION } from "./material-slider/const";
+import { MaterialButtonCard } from "./material-button/material-button-card";
+import { GoogleDashboardCard } from "./material-dashboard/material-dashboard-card";
+import { GoogleDashboardCardEditor } from "./material-dashboard/material-dashboard-card-editor";
+import { GoogleSliderCard } from "./material-slider/material-slider-card";
 import { localize } from "./localize/localize";
-import { GoogleClimateCard } from "./google-climate/google-climate-card";
-import { GoogleClimateCardEditor } from "./google-climate/google-climate-card-editor";
-import { GoogleControlCard } from "./google-control/google-control-card";
-import { GoogleControlCardEditor } from "./google-control/google-control-card-editor";
-import { GoogleButtonCardEditor } from "./google-button/google-button-card-editor";
-import { GoogleSliderCardEditor } from "./google-slider/google-slider-card-editor";
-import { GoogleLightsCard } from "./google-lights-card/google-lights-card";
-import { GoogleLightsCardEditor } from "./google-lights-card/google-lights-card-editor";
-import { GoogleMediaOverlay } from "./google-media-overlay/google-media-overlay";
+import { MaterialClimateCard } from "./material-climate/material-climate-card";
+import { MaterialClimateCardEditor } from "./material-climate/material-climate-card-editor";
+import { MaterialControlCard } from "./material-control/material-control-card";
+import { MaterialControlCardEditor } from "./material-control/material-control-card-editor";
+import { MaterialButtonCardEditor } from "./material-button/material-button-card-editor";
+import { GoogleSliderCardEditor } from "./material-slider/material-slider-card-editor";
+import { GoogleLightsCard } from "./material-lights/material-lights-card";
+import { GoogleLightsCardEditor } from "./material-lights/material-lights-card-editor";
+import { MaterialMediaOverlay } from "./material-media-overlay/material-media-overlay";
 
 /* eslint no-console: 0 */
 console.info(
@@ -30,11 +30,11 @@ if (!customElements.get("google-slider-card-editor")) {
 
 /** Google Button */
 if (!customElements.get("google-button-card")) {
-  customElements.define("google-button-card", GoogleButtonCard);
+  customElements.define("google-button-card", MaterialButtonCard);
 }
 
 if (!customElements.get("google-button-card-editor")) {
-  customElements.define("google-button-card-editor", GoogleButtonCardEditor);
+  customElements.define("google-button-card-editor", MaterialButtonCardEditor);
 }
 
 /** Google Dashboard */
@@ -51,20 +51,23 @@ if (!customElements.get("google-dashboard-card-editor")) {
 
 /** Google Climate */
 if (!customElements.get("google-climate-card")) {
-  customElements.define("google-climate-card", GoogleClimateCard);
+  customElements.define("google-climate-card", MaterialClimateCard);
 }
 
 if (!customElements.get("google-climate-card-editor")) {
-  customElements.define("google-climate-card-editor", GoogleClimateCardEditor);
+  customElements.define(
+    "google-climate-card-editor",
+    MaterialClimateCardEditor
+  );
 }
 
 /** Google Control */
 if (!customElements.get("google-control-card")) {
-  customElements.define("google-control-card", GoogleControlCard);
+  customElements.define("google-control-card", MaterialControlCard);
 }
 
 if (!customElements.get("google-control-card-editor")) {
-  customElements.define("google-control-cardeditor", GoogleControlCardEditor);
+  customElements.define("google-control-cardeditor", MaterialControlCardEditor);
 }
 
 /** Google Lights */
@@ -77,7 +80,7 @@ if (!customElements.get("google-lights-card-editor")) {
 }
 
 if (!customElements.get("google-media-overlay")) {
-  customElements.define("google-media-overlay", GoogleMediaOverlay);
+  customElements.define("google-media-overlay", MaterialMediaOverlay);
 }
 
 (window as any).customCards = (window as any).customCards ?? [];
