@@ -1,14 +1,14 @@
 [![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-google-components&owner=giovannilamarmora&category=Plugin)
 
-# 🏠 Google Home Dashboard Component for Home Assistant
+# 🏠 Material Home Component for Home Assistant
 
-![Dashboard](https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/img/control.png)
+![Dashboard](https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/control.png)
 
-![Button](https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/img/button.png)
+![Button](https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/button.png)
 
-![Slider](https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/img/slider.png)
+![Slider](https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/slider.png)
 
-![Climate](https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/img/climate.png)
+![Climate](https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/climate.png)
 
 A custom card suite that brings the **Google Home app experience** into Home Assistant, using **Material You** design principles.
 
@@ -29,22 +29,20 @@ A custom card suite that brings the **Google Home app experience** into Home Ass
 
 ### 🔧 Method 1 – Manual Installation
 
-1. Download [`google-components.js`](https://github.com/giovannilamarmora/lovelace-google-components/blob/master/dist/google-components.js)
+1. Download [`material-components.js`](https://github.com/giovannilamarmora/lovelace-material-components/blob/master/dist/material-components.js)
 
 2. Move it to your `config/www/` folder:
 
    ```
-   config/www/google-components.js
+   config/www/material-components.js
    ```
 
 3. In Home Assistant, go to:
-
    - `Settings` → `Dashboards` → `Manage Resources`
 
 4. Click **Add Resource**:
-
    - **Type:** JavaScript module
-   - **URL:** `/local/google-components.js`
+   - **URL:** `/local/material-components.js`
 
 5. Save and restart Home Assistant.
 
@@ -53,15 +51,13 @@ A custom card suite that brings the **Google Home app experience** into Home Ass
 ### ☁️ Method 2 – CDN Installation - Recommended
 
 1. In Home Assistant, go to:
-
    - `Settings` → `Dashboards` → `Manage Resources`
 
 2. Click **Add Resource**:
-
    - **Type:** JavaScript module
    - **URL:**
      ```
-     https://cdn.jsdelivr.net/gh/giovannilamarmora/lovelace-google-components@master/dist/google-components.js?v=20250626
+     https://cdn.jsdelivr.net/gh/giovannilamarmora/lovelace-material-components@master/dist/material-components.js?v=20250626
      ```
 
 3. Save and restart Home Assistant.

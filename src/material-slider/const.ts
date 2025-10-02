@@ -1,7 +1,7 @@
 import { ControlType } from "../material-button/material-button-const";
 import { MaterialSliderCardConfig } from "./types";
 
-export const CARD_VERSION = "1.9.6";
+export const CARD_VERSION = "2.0.0";
 export const DEFAULT_ATTRIBUTE = "brightness";
 export const SETTLE_TIME = 3000;
 export const HOLD_TIME = 600;
