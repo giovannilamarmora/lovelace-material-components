@@ -35,7 +35,7 @@ export default [
   {
     input: "src/index.ts",
     output: {
-      file: "dist/google-components.js",
+      file: "dist/material-components.js",
       format: "es",
     },
     plugins: [...plugins],
