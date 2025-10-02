@@ -1,0 +1,144 @@
+{
+  "common": {
+    "version": "Version",
+    "invalid_configuration": "Invalid configuration",
+    "show_warning": "Show Warning",
+    "no_entity_set": "Entity not set",
+    "no_entity": "Entity not available",
+    "indoor": "Indoor",
+    "on": "On",
+    "off": "Off",
+    "offline": "Offline",
+    "auto": "Auto",
+    "heat": "Heat",
+    "cool": "Cool",
+    "dry": "Dry",
+    "fan": "Fan",
+    "playing": "Playing",
+    "idle": "Cast",
+    "presence": "Motion",
+    "off_presence": "No motion",
+    "today_at": "Today at",
+    "yesterday_at": "Yesterday at",
+    "open": "Open",
+    "closed": "Closed",
+    "active": "Active",
+    "inactive": "Inactive"
+  },
+  "google_dashboard_card": {
+    "description": "Configure the navigation path when a card is tapped.",
+    "cameras": "Cameras path",
+    "cameras_name": "Cameras",
+    "lighting": "Lighting path",
+    "lighting_name": "Lighting",
+    "lighting_label": "Lights",
+    "wifi": "Wi-Fi path",
+    "wifi_name": "Wi-Fi",
+    "climate": "Climate path",
+    "climate_name": "Climate",
+    "device": "Device",
+    "devices": "Devices",
+    "placeholder": "./path-or-url",
+    "default": "Use default configuration on Tap (Single Tap)",
+    "tap_type": "Select the type of Tap (Single Tap, Hold Press, Double Tap)",
+    "single": "Single Tap",
+    "hold": "Hold Press",
+    "double": "Double Tap",
+    "web": "Use Single Tap on Browser (Selected tap on mobile)"
+  },
+  "google_climate_card": {
+    "name": "Entity Name",
+    "entity": "Entity",
+    "theme": "Use Material Expressive",
+    "increase_temp": "Increase Temperature (e.g. 0.5)",
+    "decrease_temp": "Decrease Temperature (e.g. 0.5)",
+    "dual_icon": {
+      "default": "Use Default Icon",
+      "options": "Use Dual Icon (On and Off states)."
+    },
+    "fix_temperature": "Enable if temperature is not correct",
+    "false": "Not Active",
+    "true": "Actve",
+    "auto": "Auto"
+  },
+  "google_button_card": {
+    "name": "Entity Name",
+    "control_type": "Control Type",
+    "type": {
+      "generic": "Generic (Switch, Button...)",
+      "thermometer": "Thermometer",
+      "automation": "Autonomation",
+      "scene": "Scene",
+      "media": "Multimedia (Google, Alexa...)",
+      "state": "State",
+      "action": "Action",
+      "app_version": "Google Components Version"
+    },
+    "dual_icon": {
+      "default": "Use default icon",
+      "options": "Use dual icon (Element On and Element Off)."
+    },
+    "dual_text": {
+      "default": "Use Default Text",
+      "text_on": "Text On",
+      "text_off": "Text Off"
+    },
+    "toggle": {
+      "title": "Enable automatic actions",
+      "press": "Action on click",
+      "hold": "Action on long press",
+      "click": "Single click (On/Off)",
+      "info": "Show information",
+      "navigate": "Navigate",
+      "url": "URL",
+      "none": "None"
+    }
+  },
+  "google_control_card": {
+    "name": "Card Name",
+    "entity_card": "Use card as entity",
+    "entity": "Entity",
+    "dual_icon": {
+      "default": "Use Default Icon",
+      "options": "Use Dual Icon (On and Off states)."
+    },
+    "actions": {
+      "press": "Action on click",
+      "hold": "Action on long press",
+      "more_info": "More Info",
+      "toggle": "Toggle",
+      "navigate": "Navigate",
+      "url": "URL",
+      "none": "None",
+      "google_home": "Open Google Home",
+      "settings": "Open Settings"
+    }
+  },
+  "google_slider_card": {
+    "name": "Card Name",
+    "control_type": "Control Type",
+    "type": {
+      "light": "Light",
+      "cover": "Cover"
+    },
+    "entity": "Entity to control",
+    "icon": "Custom icon (if left empty, changes automatically based on On/Off state)",
+    "percentage": "Display value as percentage",
+    "bold_text": "Bold style for the text"
+  },
+  "google_lights_card": {
+    "on_text": "Text for Lights ON",
+    "off_text": "Text for Lights OFF"
+  },
+  "google_media_overlay": {
+    "media_card": {
+      "no_content": "Nothing is playing",
+      "playing": "Now playing"
+    },
+    "remote": "Open Remote",
+    "cast": "Cast screen",
+    "stop_cast": "Stop casting",
+    "open": "Open ",
+    "open_google": "Open Google Home"
+  }
+}

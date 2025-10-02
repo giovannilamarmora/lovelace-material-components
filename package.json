@@ -1,0 +1,52 @@
+{
+  "name": "google-components",
+  "version": "1.9.6",
+  "description": "Lovelace Google Components for Home Assistant",
+  "keywords": [
+    "home-assistant",
+    "homeassistant",
+    "hass",
+    "automation",
+    "lovelace",
+    "custom-cards"
+  ],
+  "module": "google-components.js",
+  "type": "module",
+  "repository": "git@github.com:giovannilamarmora/Home-Assistant-Google-Home-Component.git",
+  "author": "Giovanni Lamarmora",
+  "license": "MIT",
+  "dependencies": {
+    "@material/material-color-utilities": "^0.3.0",
+    "@material/web": "^2.3.0",
+    "@nicufarmache/slide-gesture": "^1.2.4",
+    "custom-card-helpers": "^1.9.0",
+    "home-assistant-js-websocket": "^9.5.0",
+    "lit": "^3.3.0"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.23.0",
+    "@rollup/plugin-babel": "^6.0.3",
+    "@rollup/plugin-commonjs": "^25.0.8",
+    "@rollup/plugin-json": "^6.0.0",
+    "@rollup/plugin-node-resolve": "^15.2.1",
+    "@rollup/plugin-terser": "^0.4.3",
+    "@rollup/plugin-typescript": "^11.1.4",
+    "@typescript-eslint/eslint-plugin": "^6.7.3",
+    "@typescript-eslint/parser": "^6.7.3",
+    "eslint": "^8.50.0",
+    "eslint-config-airbnb-base": "^15.0.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-import": "^2.28.1",
+    "eslint-plugin-prettier": "^5.0.0",
+    "prettier": "^3.0.3",
+    "rollup": "^3.29.4",
+    "rollup-plugin-serve": "^2.0.2",
+    "typescript": "^5.2.2"
+  },
+  "scripts": {
+    "start": "rollup -c --watch",
+    "build": "npm run lint && npm run rollup",
+    "lint": "eslint src/*.ts",
+    "rollup": "rollup -c"
+  }
+}

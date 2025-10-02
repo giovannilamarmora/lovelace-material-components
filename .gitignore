@@ -1,12 +1,3 @@
-# Angular specific
-/dist/
-/out-tsc/
-/tmp/
-/coverage/
-/e2e/test-output/
-/.angular/
-.angular/
-
 # Node modules and dependency files
 /node_modules/
 /package-lock.json

@@ -1,0 +1,144 @@
+{
+  "common": {
+    "version": "Versione",
+    "invalid_configuration": "Configurazione non valida",
+    "show_warning": "Mostra avviso",
+    "no_entity_set": "Entità non impostata",
+    "no_entity": "Entità non disponibile",
+    "indoor": "Interno",
+    "on": "Acceso",
+    "off": "Spento",
+    "offline": "Offline",
+    "auto": "Auto",
+    "heat": "Riscalda",
+    "dry": "Deumidificatore",
+    "cool": "Raffresca",
+    "fan": "Ventilazione",
+    "playing": "Riproduzione",
+    "idle": "Cast",
+    "presence": "Movimento",
+    "off_presence": "Nessun movimento",
+    "today_at": "Oggi alle",
+    "yesterday_at": "Ieri alle",
+    "open": "Aperto",
+    "closed": "Chiuso",
+    "active": "Attivo",
+    "inactive": "Inattivo"
+  },
+  "google_dashboard_card": {
+    "description": "Configura il percorso di navigazione quando una card viene cliccata.",
+    "cameras": "Percorso delle telecamere",
+    "cameras_name": "Telecamere",
+    "lighting": "Percorso delle luci",
+    "lighting_name": "Illuminazione",
+    "lighting_label": "Luci",
+    "wifi": "Percorso Wi-Fi",
+    "wifi_name": "Wi-Fi",
+    "climate": "Percorso del clima",
+    "climate_name": "Climatizzazione",
+    "device": "Dispositivo",
+    "devices": "Dispositivi",
+    "placeholder": "./percorso-o-url",
+    "default": "Usa configurazione di default al Tap(Tap Singolo)",
+    "tap_type": "Seleziona il tipo di Tap (Tap Singolo, Hold Press, Double Tap)",
+    "single": "Tap Singolo",
+    "hold": "Tap a pressione",
+    "double": "Doppio Tap",
+    "web": "Usa Tap Singolo sul Browser (Su mobile il tap selezionato)"
+  },
+  "google_climate_card": {
+    "name": "Nome Entità",
+    "entity": "Entità",
+    "theme": "Usa Material Expressive",
+    "increase_temp": "Aumento Temperatura (e.g. 0.5)",
+    "decrease_temp": "Diminuzione Temperatura (e.g. 0.5)",
+    "dual_icon": {
+      "default": "Usa Icona di default",
+      "options": "Usa doppia icona (Elemento acceso e spento)."
+    },
+    "fix_temperature": "Abilita se la temperatura non è corretta",
+    "false": "Non attivo",
+    "true": "Attivo",
+    "auto": "Automatico"
+  },
+  "google_button_card": {
+    "name": "Nome Entità",
+    "control_type": "Tipo di controllo",
+    "type": {
+      "generic": "Generico (Interruttore, Pulsante...)",
+      "thermometer": "Climatizzazione",
+      "automation": "Autonomazioni",
+      "scene": "Scene",
+      "media": "Multimedia (Google, Alexa...)",
+      "state": "Stato",
+      "action": "Azioni",
+      "app_version": "Versione Google Components"
+    },
+    "dual_icon": {
+      "default": "Usa Icona di default",
+      "options": "Usa doppia icona (Elemento acceso e spento)."
+    },
+    "dual_text": {
+      "default": "Usa Testo di Default",
+      "text_on": "Testo On",
+      "text_off": "Testo Off"
+    },
+    "toggle": {
+      "title": "Attiva azioni automatiche",
+      "press": "Azione al clic",
+      "hold": "Azione alla pressione prolungata",
+      "click": "Clic singolo (Accensione/Spegnimento)",
+      "info": "Visualizza informazioni",
+      "navigate": "Naviga",
+      "url": "URL",
+      "none": "Nessuna azione"
+    }
+  },
+  "google_control_card": {
+    "name": "Nome della Scheda",
+    "entity_card": "Usa la scheda come entità",
+    "entity": "Entità",
+    "dual_icon": {
+      "default": "Usa l'icona predefinita",
+      "options": "Usa icona doppia (stati Attivo e Disattivo)."
+    },
+    "actions": {
+      "hold": "Azione alla pressione prolungata",
+      "press": "Azione al clic",
+      "more_info": "Più informazioni",
+      "toggle": "Attiva/Disattiva",
+      "navigate": "Naviga",
+      "url": "URL",
+      "none": "Nessuna azione",
+      "google_home": "Apri Google Home",
+      "settings": "Apri Impostazioni"
+    }
+  },
+  "google_slider_card": {
+    "name": "Nome della Card",
+    "control_type": "Tipo di controllo",
+    "type": {
+      "light": "Luci",
+      "cover": "Tapparelle"
+    },
+    "entity": "Entità da controllare",
+    "icon": "Icona personalizzata (se vuota, cambia automaticamente in base allo stato On/Off)",
+    "percentage": "Mostra la percentuale di valore",
+    "bold_text": "Testo con stile in grassetto"
+  },
+  "google_lights_card": {
+    "on_text": "Testo per Luci Accese",
+    "off_text": "Testo per Luci Spente"
+  },
+  "google_media_overlay": {
+    "media_card": {
+      "no_content": "Nessun contenuto in riproduzione",
+      "playing": "Ora in riproduzione"
+    },
+    "remote": "Apri il telecomando",
+    "cast": "Trasmetti schermo",
+    "stop_cast": "Interrompi trasmissione",
+    "open": "Apri",
+    "open_google": "Apri Google Home"
+  }
+}
