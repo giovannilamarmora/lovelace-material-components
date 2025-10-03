@@ -72,7 +72,7 @@
       "media": "Multimedia (Google, Alexa...)",
       "state": "State",
       "action": "Action",
-      "app_version": "Google Components Version"
+      "app_version": "Material Components Version"
     },
     "dual_icon": {
       "default": "Use default icon",

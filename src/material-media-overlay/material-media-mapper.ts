@@ -82,28 +82,28 @@ export function _renderAppIcon(appName: string, cover?: string) {
   switch (appName) {
     case "Spotify":
       return html`<img
-        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/Spotify.webp"
+        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/logo/Spotify.webp"
         width="24"
         height="24"
         style="border-radius: 50px; object-fit: cover;z-index: 1;"
       />`;
     case "YouTube":
       return html`<img
-        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/YouTube.png"
+        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/logo/YouTube.png"
         width="24"
         height="24"
         style="border-radius: 50px; object-fit: cover;"
       />`;
     case "Netflix":
       return html`<img
-        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/Netflix.webp"
+        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/logo/Netflix.webp"
         width="24"
         height="24"
         style="border-radius: 50px; object-fit: cover;"
       />`;
     case "Prime Video":
       return html`<img
-        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-google-components/refs/heads/master/src/shared/assets/logo/Prime.png"
+        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/logo/Prime.png"
         width="24"
         height="24"
         style="border-radius: 50px; object-fit: cover;"
