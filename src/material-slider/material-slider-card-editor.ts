@@ -1,10 +1,9 @@
 import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
-import { DEFAULT_CONFIG } from "./const";
+import { DEFAULT_CONFIG, MaterialSliderCardConfig } from "./material-slider-const";
 import { localize } from "../localize/localize";
-import { ControlType } from "../material-button/material-button-const";
-import { MaterialSliderCardConfig } from "./types";
+import { ControlType } from "../shared/types";
 
 @customElement("material-slider-card-editor")
 export class MaterialSliderCardEditor

@@ -1,7 +1,8 @@
 import { getPropertyColor } from "../material-climate/material-climate-mapper";
 import { _setStyleProperty, material_color } from "../shared/color";
+import { ControlType } from "../shared/types";
 import { isNullOrEmpty } from "../shared/utils";
-import { ControlType, MaterialButtonCardConfig } from "./material-button-const";
+import { MaterialButtonCardConfig } from "./material-button-const";
 
 export function setColorCard(
   style: any,

@@ -1,5 +1,6 @@
 import { _setStyleProperty, material_color } from "../shared/color";
-import { isNullOrEmpty, OnStates } from "../shared/utils";
+import { OnStates } from "../shared/states";
+import { isNullOrEmpty } from "../shared/utils";
 
 export function adjustTempAuto(
   fix_temperature: "true" | "false" | "auto",

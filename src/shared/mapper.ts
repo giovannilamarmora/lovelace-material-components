@@ -1,22 +1,24 @@
+import { adjustTempAuto } from "../material-climate/material-climate-mapper";
+import { localize } from "../localize/localize";
+import { GoogleDevice } from "./google_model";
+import {
+  CARD_VERSION,
+  formatSmartDate,
+  getOrDefault,
+  isNullOrEmpty,
+} from "./utils";
 import {
   ControlType,
   DeviceType,
   DomainType,
   getValidDeviceClass,
-} from "../material-button/material-button-const";
-import { adjustTempAuto } from "../material-climate/material-climate-mapper";
-import { CARD_VERSION } from "../material-slider/const";
-import { localize } from "../localize/localize";
-import { GoogleDevice } from "./google_model";
+} from "./types";
 import {
-  formatSmartDate,
-  getOrDefault,
   isDeviceOn,
   isDeviceOnline,
-  isNullOrEmpty,
   isOfflineState,
   OnlineStates,
-} from "./utils";
+} from "./states";
 
 export function getIcon(stateObj: any, config: any, hass: any): string {
   const domain = stateObj.entity_id.split(".")[0];

@@ -1,0 +1,144 @@
+{
+  "common": {
+    "version": "Version",
+    "invalid_configuration": "Configuration invalide",
+    "show_warning": "Afficher l’avertissement",
+    "no_entity_set": "Aucune entité définie",
+    "no_entity": "Entité non disponible",
+    "indoor": "Intérieur",
+    "on": "Allumé",
+    "off": "Éteint",
+    "offline": "Hors ligne",
+    "auto": "Auto",
+    "heat": "Chauffage",
+    "dry": "Déshumidificateur",
+    "cool": "Climatisation",
+    "fan": "Ventilation",
+    "playing": "Lecture",
+    "idle": "Cast",
+    "presence": "Mouvement",
+    "off_presence": "Aucun mouvement",
+    "today_at": "Aujourd’hui à",
+    "yesterday_at": "Hier à",
+    "open": "Ouvert",
+    "closed": "Fermé",
+    "active": "Actif",
+    "inactive": "Inactif"
+  },
+  "material_dashboard_card": {
+    "description": "Configurer le chemin de navigation lorsqu’une carte est cliquée.",
+    "cameras": "Chemin des caméras",
+    "cameras_name": "Caméras",
+    "lighting": "Chemin des lumières",
+    "lighting_name": "Éclairage",
+    "lighting_label": "Lumières",
+    "wifi": "Chemin Wi-Fi",
+    "wifi_name": "Wi-Fi",
+    "climate": "Chemin du climat",
+    "climate_name": "Climatisation",
+    "device": "Appareil",
+    "devices": "Appareils",
+    "placeholder": "./chemin-ou-url",
+    "default": "Utiliser la configuration par défaut au Tap (Tap simple)",
+    "tap_type": "Sélectionner le type de Tap (Tap simple, Appui long, Double Tap)",
+    "single": "Tap simple",
+    "hold": "Appui long",
+    "double": "Double Tap",
+    "web": "Utiliser Tap simple dans le navigateur (sur mobile, le Tap sélectionné)"
+  },
+  "material_climate_card": {
+    "name": "Nom de l’entité",
+    "entity": "Entité",
+    "theme": "Utiliser Material Expressive",
+    "increase_temp": "Augmenter la température (ex. 0.5)",
+    "decrease_temp": "Diminuer la température (ex. 0.5)",
+    "dual_icon": {
+      "default": "Utiliser l’icône par défaut",
+      "options": "Utiliser une double icône (État activé et désactivé)."
+    },
+    "fix_temperature": "Activer si la température n’est pas correcte",
+    "false": "Inactif",
+    "true": "Actif",
+    "auto": "Automatique"
+  },
+  "material_button_card": {
+    "name": "Nom de l’entité",
+    "control_type": "Type de contrôle",
+    "type": {
+      "generic": "Générique (Interrupteur, Bouton...)",
+      "thermometer": "Climatisation",
+      "automation": "Automatisations",
+      "scene": "Scènes",
+      "media": "Multimédia (Google, Alexa...)",
+      "state": "État",
+      "action": "Actions",
+      "app_version": "Version Google Components"
+    },
+    "dual_icon": {
+      "default": "Utiliser l’icône par défaut",
+      "options": "Utiliser une double icône (État activé et désactivé)."
+    },
+    "dual_text": {
+      "default": "Utiliser le texte par défaut",
+      "text_on": "Texte ON",
+      "text_off": "Texte OFF"
+    },
+    "toggle": {
+      "title": "Activer les actions automatiques",
+      "press": "Action au clic",
+      "hold": "Action à l’appui long",
+      "click": "Clic simple (Allumer/Éteindre)",
+      "info": "Afficher les informations",
+      "navigate": "Naviguer",
+      "url": "URL",
+      "none": "Aucune action"
+    }
+  },
+  "material_control_card": {
+    "name": "Nom de la carte",
+    "entity_card": "Utiliser la carte comme entité",
+    "entity": "Entité",
+    "dual_icon": {
+      "default": "Utiliser l’icône par défaut",
+      "options": "Utiliser une double icône (États actif et inactif)."
+    },
+    "actions": {
+      "hold": "Action à l’appui long",
+      "press": "Action au clic",
+      "more_info": "Plus d’informations",
+      "toggle": "Activer/Désactiver",
+      "navigate": "Naviguer",
+      "url": "URL",
+      "none": "Aucune action",
+      "google_home": "Ouvrir Google Home",
+      "settings": "Ouvrir Paramètres"
+    }
+  },
+  "material_slider_card": {
+    "name": "Nom de la carte",
+    "control_type": "Type de contrôle",
+    "type": {
+      "light": "Lumières",
+      "cover": "Volets roulants"
+    },
+    "entity": "Entité à contrôler",
+    "icon": "Icône personnalisée (si vide, change automatiquement selon l’état On/Off)",
+    "percentage": "Afficher la valeur en pourcentage",
+    "bold_text": "Texte en gras"
+  },
+  "material_lights_card": {
+    "on_text": "Texte pour lumières allumées",
+    "off_text": "Texte pour lumières éteintes"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "Aucun contenu en lecture",
+      "playing": "En lecture"
+    },
+    "remote": "Ouvrir la télécommande",
+    "cast": "Caster l’écran",
+    "stop_cast": "Arrêter la diffusion",
+    "open": "Ouvrir",
+    "open_google": "Ouvrir Google Home"
+  }
+}

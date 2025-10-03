@@ -1,5 +1,5 @@
-import { ControlType } from "../material-button/material-button-const";
-import { MaterialSliderCardConfig } from "./types";
+import { ControlType } from "../shared/types";
+import { MaterialSliderCardConfig } from "./material-slider-const";
 
 export function setSliderColor(
   _config: MaterialSliderCardConfig,

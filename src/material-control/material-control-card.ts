@@ -5,10 +5,10 @@ import { HomeAssistant } from "../ha-types";
 import {
   DEFAULT_CONFIG,
   MaterialControlCardConfig,
-  materialControlTemplate,
 } from "./material-control-const";
 import jsyaml from "js-yaml";
 import { getName } from "../shared/mapper";
+import { materialControlTemplate } from "./material-control-template";
 
 @customElement("material-control-card")
 export class MaterialControlCard extends LitElement {
@@ -63,25 +63,6 @@ export class MaterialControlCard extends LitElement {
   static async getConfigElement() {
     return document.createElement("material-control-card-editor");
   }
-
-  //private mapAction(actions: any) {
-  //  if (actions == undefined) return actions;
-  //
-  //  // Crea una copia dell'oggetto
-  //  const newActions = { ...actions };
-  //
-  //  if (newActions.action === "navigate") {
-  //    newActions.navigation_path = this.evalTripleBrackets(
-  //      newActions.navigation_path
-  //    );
-  //  }
-  //
-  //  if (newActions.action === "url") {
-  //    newActions.url_path = this.evalTripleBrackets(newActions.url_path);
-  //  }
-  //
-  //  return newActions;
-  //}
 
   private mapAction(actions: any): any {
     if (!actions || typeof actions !== "object") return actions;

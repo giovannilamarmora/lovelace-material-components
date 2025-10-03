@@ -9,17 +9,16 @@ import {
 import { HomeAssistant } from "../ha-types";
 import { applyRippleEffect } from "../animations";
 import {
-  ControlType,
   DEFAULT_CONFIG,
-  DeviceType,
-  getValidDeviceClass,
   MaterialButtonCardConfig,
 } from "./material-button-const";
-import { isDeviceOn, isNullOrEmpty, isOfflineState } from "../shared/utils";
+import { isNullOrEmpty } from "../shared/utils";
 import { material_color } from "../shared/color";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import { setColorCard } from "./material-button-mapper";
 import { MaterialMediaOverlay } from "../material-media-overlay/material-media-overlay";
+import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
+import { isDeviceOn, isOfflineState } from "../shared/states";
 
 @customElement("material-button-card")
 export class MaterialButtonCard extends LitElement {
@@ -332,35 +331,19 @@ export class MaterialButtonCard extends LitElement {
     let device_class: DeviceType = DeviceType.NONE;
     let stateDisplay: string;
     const default_text = this._config.use_default_text ?? true;
-    //let isConditioner: boolean = false;
     if (
       this._config.control_type != ControlType.APP_VERSION &&
       this._config.control_type != ControlType.ACTION
     ) {
       isOn = isDeviceOn(stateObj.state);
 
-      //const domain = this._config.entity!.split(".")[0];
       name = getName(this._config, this.hass);
 
       icon = getIcon(stateObj, this._config, this.hass);
 
       isOffline = isOfflineState(stateObj.state, this._config.control_type!);
       device_class = getValidDeviceClass(stateObj.attributes)!;
-
-      //isConditioner = isAirConditioning(stateObj.attributes.hvac_modes);
     }
-
-    //let icon = "";
-    //if (this._config.icon && this._config.icon.trim() !== "") {
-    //  icon = this._config.icon;
-    //} else if (
-    //  stateObj.attributes.icon &&
-    //  stateObj.attributes.icon.trim() !== ""
-    //) {
-    //  icon = stateObj.attributes.icon;
-    //} else {
-    //  icon = `mdi:${domain}`;
-    //}
 
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
 
@@ -396,14 +379,6 @@ export class MaterialButtonCard extends LitElement {
 
     const state = stateObj && stateObj.state ? stateObj.state : "unavaiable";
     setColorCard(this.style, this._config, isOffline, isOn, theme, state);
-
-    //this.setColorCard(
-    //  this._config.control_type,
-    //  theme,
-    //  isOffline,
-    //  isOn,
-    //  isConditioner
-    //);
 
     return html`
       <ha-card
@@ -463,114 +438,6 @@ export class MaterialButtonCard extends LitElement {
             : html``}
       </ha-card>
     `;
-  }
-
-  private setColorCard(
-    control_type: any,
-    theme: string,
-    isOffline: boolean,
-    isOn: boolean,
-    isConditioner: boolean
-  ) {
-    let nameColor = "";
-    let iconColor = "";
-    let percentageColor = "";
-    let containerColor = "";
-    if (isOffline) {
-      // Offline, tema light
-      if (theme === "light") {
-        nameColor = this.color.light.offline.button.title;
-        iconColor = this.color.light.offline.button.icon;
-        percentageColor = this.color.light.offline.button.percentage;
-        containerColor = this.color.light.offline.button.background;
-      } else {
-        // Offline, tema dark
-        nameColor = this.color.dark.offline.button.title;
-        iconColor = this.color.dark.offline.button.icon;
-        percentageColor = this.color.dark.offline.button.percentage;
-        containerColor = this.color.dark.offline.button.background;
-      }
-    } else if (isOn) {
-      // Acceso, tema dark
-      if (theme === "dark") {
-        if (control_type === "thermometer" && this._config.use_material_color) {
-          if (isConditioner) {
-            nameColor = this.color.dark.on.climate.material_cool.title;
-            iconColor = this.color.dark.on.climate.material_cool.icon;
-            percentageColor = this.color.dark.on.climate.material_cool.subtitle;
-            containerColor =
-              this.color.dark.on.climate.material_cool.background;
-          } else {
-            nameColor = this.color.dark.on.climate.material.title;
-            iconColor = this.color.dark.on.climate.material.icon;
-            percentageColor = this.color.dark.on.climate.material.subtitle;
-            containerColor = this.color.dark.on.climate.material.background;
-          }
-        } else {
-          nameColor = this.color.dark.on.button.title;
-          iconColor = this.color.dark.on.button.icon;
-          percentageColor = this.color.dark.on.button.percentage;
-          containerColor = this.color.dark.on.button.background;
-        }
-      } else {
-        // Acceso, tema light
-        if (control_type === "thermometer" && this._config.use_material_color) {
-          if (isConditioner) {
-            nameColor = this.color.light.on.climate.material_cool.title;
-            iconColor = this.color.light.on.climate.material_cool.icon;
-            percentageColor =
-              this.color.light.on.climate.material_cool.subtitle;
-            containerColor =
-              this.color.light.on.climate.material_cool.background;
-          } else {
-            nameColor = this.color.light.on.climate.material.title;
-            iconColor = this.color.light.on.climate.material.icon;
-            percentageColor = this.color.light.on.climate.material.subtitle;
-            containerColor = this.color.light.on.climate.material.background;
-          }
-        } else {
-          nameColor = this.color.light.on.button.title;
-          iconColor = this.color.light.on.button.icon;
-          percentageColor = this.color.light.on.button.percentage;
-          containerColor = this.color.light.on.button.background;
-        }
-      }
-    } else {
-      // Spento, tema dark
-      if (theme === "dark") {
-        nameColor = this.color.dark.off.button.title;
-        iconColor = this.color.dark.off.button.icon;
-        percentageColor = this.color.dark.off.button.percentage;
-        containerColor = this.color.dark.off.button.background;
-      } else {
-        // Spento, tema light
-        nameColor = this.color.light.off.button.title;
-        iconColor = this.color.light.off.button.icon;
-        percentageColor = this.color.light.off.button.percentage;
-        containerColor = this.color.light.off.button.background;
-      }
-    }
-
-    this._setStyleProperty("--bsc-name-color", nameColor);
-    this._setStyleProperty("--bsc-icon-color", iconColor);
-    this._setStyleProperty("--bsc-percentage-color", percentageColor);
-    this._setStyleProperty("--bsc-background", containerColor);
-    this._setStyleProperty(
-      "--bsc-height",
-      this._config.height || 97,
-      (h) => `${h}px`
-    );
-    this._setStyleProperty("--bsc-border-radius", this._config.border_radius);
-  }
-
-  _setStyleProperty(
-    name: string,
-    value: any,
-    transform = (value: any): string => value
-  ): void {
-    if (value !== undefined && value !== null && value !== "") {
-      this.style.setProperty(name, transform(value));
-    }
   }
 
   static styles = css`

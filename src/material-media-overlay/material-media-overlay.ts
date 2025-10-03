@@ -12,6 +12,7 @@ import {
   openSpotify,
   openYouTube,
 } from "./material-media-mapper";
+import { _setStyleProperty } from "../shared/color";
 
 @customElement("material-media-overlay")
 export class MaterialMediaOverlay extends LitElement {
@@ -325,18 +326,6 @@ export class MaterialMediaOverlay extends LitElement {
         this._volume = volume;
 
         this._callService("volume_set", { volume_level: volume });
-
-        // Forza l'update immediato della UI
-        //const slider = sliderContainer.querySelector<HTMLDivElement>("#slider");
-        //const volumeText =
-        //  sliderContainer.querySelector<HTMLSpanElement>("#volumeText");
-
-        //if (slider) {
-        //  slider.style.width = `${volume * 100}%`;
-        //}
-        //if (volumeText) {
-        //  volumeText.textContent = `${Math.round(volume * 100)}%`;
-        //}
       };
 
       const moveHandler = (ev: MouseEvent | TouchEvent) => {
@@ -368,8 +357,6 @@ export class MaterialMediaOverlay extends LitElement {
   }
 
   public _onClick(event: MouseEvent) {
-    // Feedback tattile (se supportato)
-    //navigator.vibrate?.(50);
     applyRippleEffect(event.currentTarget as HTMLElement, event);
   }
 
@@ -501,9 +488,10 @@ export class MaterialMediaOverlay extends LitElement {
     const isOff = this._isOff;
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
 
-    this._setStyleProperty(
+    _setStyleProperty(
       "--volume-brightness",
-      theme == "dark" ? "brightness(0.7)" : "brightness(1.05)"
+      theme == "dark" ? "brightness(0.7)" : "brightness(1.05)",
+      this.style
     );
 
     return html`
@@ -708,16 +696,6 @@ export class MaterialMediaOverlay extends LitElement {
         </div>
       </div>
     `;
-  }
-
-  _setStyleProperty(
-    name: string,
-    value: any,
-    transform = (value: any): string => value
-  ): void {
-    if (value !== undefined && value !== null && value !== "") {
-      this.style.setProperty(name, transform(value));
-    }
   }
 
   static styles = css`

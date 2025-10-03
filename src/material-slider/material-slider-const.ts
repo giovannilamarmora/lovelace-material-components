@@ -3,7 +3,32 @@ import {
   LovelaceCard,
   LovelaceCardConfig,
 } from "custom-card-helpers";
-import { ControlType } from "../material-button/material-button-const";
+import { ControlType } from "../shared/types";
+
+export const DEFAULT_ATTRIBUTE = "brightness";
+export const SETTLE_TIME = 3000;
+export const HOLD_TIME = 600;
+export const MIN_SLIDE_TIME = 0;
+export const TAP_THRESHOLD = 5;
+export const MIN = 0;
+export const MAX = 100;
+
+export const DEFAULT_CONFIG: MaterialSliderCardConfig = {
+  type: "custom:material-slider-card",
+  control_type: ControlType.LIGHT,
+  tap_action: {
+    action: "toggle",
+    haptic: "light",
+  },
+  hold_action: {
+    action: "more-info",
+  },
+  hold_time: HOLD_TIME,
+  settle_time: SETTLE_TIME,
+  min_slide_time: MIN_SLIDE_TIME,
+  min: MIN,
+  max: MAX,
+};
 
 declare global {
   interface HTMLElementTagNameMap {

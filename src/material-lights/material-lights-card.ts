@@ -3,7 +3,8 @@ import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant } from "custom-card-helpers";
 import jsyaml from "js-yaml";
 import { applyRippleEffect } from "../animations";
-import { MaterialLightCardConfig, materialTemplate } from "./material-lights-const";
+import { MaterialLightCardConfig } from "./material-lights-const";
+import { materialTemplate } from "./material-lights-template";
 
 @customElement("material-lights-card")
 export class MaterialLightsCard extends LitElement {

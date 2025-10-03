@@ -2,11 +2,9 @@ import { LitElement, html, TemplateResult, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant } from "custom-card-helpers";
 import jsyaml from "js-yaml";
-import {
-  materialDashboadTemplate,
-  MaterialDashboardCardConfig,
-} from "./material-dashboard-const";
+import { MaterialDashboardCardConfig } from "./material-dashboard-const";
 import { applyRippleEffect } from "../animations";
+import { materialDashboadTemplate } from "./material-dashboard-template";
 
 @customElement("material-dashboard-card")
 export class MaterialDashboardCard extends LitElement {

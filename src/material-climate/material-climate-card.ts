@@ -9,13 +9,14 @@ import {
 import { fireEvent } from "custom-card-helpers";
 import { applyRippleEffect } from "../animations";
 import { material_color } from "../shared/color";
-import { isDeviceOn, isNullOrEmpty, isOfflineState } from "../shared/utils";
+import { isNullOrEmpty } from "../shared/utils";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import {
   adjustNewTempAuto,
   adjustTempAuto,
   setColorCard,
 } from "./material-climate-mapper";
+import { isDeviceOn, isOfflineState } from "../shared/states";
 
 @customElement("material-climate-card")
 export class MaterialClimateCard extends LitElement {
@@ -105,152 +106,6 @@ export class MaterialClimateCard extends LitElement {
     }, 500); // 500ms è solitamente sufficiente
   }
 
-  private setColorCard(
-    use_material_color: boolean,
-    theme: string,
-    isOffline: boolean,
-    isOn: boolean,
-    isConditioner: boolean
-  ) {
-    let nameColor = "";
-    let iconColor = "";
-    let adjustTemp = "";
-    let internalTemp = "";
-    let containerColor = "";
-    if (isOffline) {
-      // Offline, tema light
-      if (theme === "light") {
-        nameColor = iconColor =
-          this.material_color_scheme.light.offline.climate.title;
-        containerColor =
-          this.material_color_scheme.light.offline.climate.background;
-        //containerColor = "#dfdfe1";
-      } else {
-        // Offline, tema dark
-        nameColor = iconColor =
-          this.material_color_scheme.dark.offline.climate.title;
-        containerColor =
-          this.material_color_scheme.dark.offline.climate.background;
-      }
-    } else if (isOn) {
-      // Acceso, tema dark
-      if (theme === "dark") {
-        if (use_material_color) {
-          if (isConditioner) {
-            nameColor =
-              this.material_color_scheme.dark.on.climate.material_cool.title;
-            iconColor =
-              this.material_color_scheme.dark.on.climate.material_cool.icon;
-            adjustTemp =
-              this.material_color_scheme.dark.on.climate.material_cool.button;
-            internalTemp =
-              this.material_color_scheme.dark.on.climate.material_cool.subtitle;
-            containerColor =
-              this.material_color_scheme.dark.on.climate.material_cool
-                .background;
-          } else {
-            nameColor =
-              this.material_color_scheme.dark.on.climate.material.title;
-            iconColor =
-              this.material_color_scheme.dark.on.climate.material.icon;
-            adjustTemp =
-              this.material_color_scheme.dark.on.climate.material.button;
-            internalTemp =
-              this.material_color_scheme.dark.on.climate.material.subtitle;
-            containerColor =
-              this.material_color_scheme.dark.on.climate.material.background;
-            //containerColor = "#5c4035";
-          }
-        } else {
-          nameColor = iconColor =
-            this.material_color_scheme.dark.on.climate.default.title;
-          adjustTemp =
-            this.material_color_scheme.dark.on.climate.default.button;
-          internalTemp =
-            this.material_color_scheme.dark.on.climate.default.subtitle;
-          containerColor =
-            this.material_color_scheme.dark.on.climate.default.background;
-          //containerColor = "#414246";
-        }
-      } else {
-        // Acceso, tema light
-        if (use_material_color) {
-          if (isConditioner) {
-            nameColor =
-              this.material_color_scheme.light.on.climate.material_cool.title;
-            iconColor =
-              this.material_color_scheme.light.on.climate.material_cool.icon;
-            internalTemp =
-              this.material_color_scheme.light.on.climate.material_cool
-                .subtitle;
-            adjustTemp =
-              this.material_color_scheme.light.on.climate.material_cool.button;
-            containerColor =
-              this.material_color_scheme.light.on.climate.material_cool
-                .background;
-          } else {
-            nameColor =
-              this.material_color_scheme.light.on.climate.material.title;
-            iconColor =
-              this.material_color_scheme.light.on.climate.material.icon;
-            internalTemp =
-              this.material_color_scheme.light.on.climate.material.subtitle;
-            adjustTemp =
-              this.material_color_scheme.light.on.climate.material.button;
-            containerColor =
-              this.material_color_scheme.light.on.climate.material.background;
-          }
-        } else {
-          nameColor =
-            iconColor =
-            internalTemp =
-              this.material_color_scheme.light.on.climate.default.title;
-          adjustTemp =
-            this.material_color_scheme.light.on.climate.default.button;
-          containerColor =
-            this.material_color_scheme.light.on.climate.default.background;
-        }
-      }
-    } else {
-      // Spento, tema dark (Updated on 21/07/2025)
-      if (theme === "dark") {
-        nameColor =
-          iconColor =
-          internalTemp =
-            this.material_color_scheme.dark.off.climate.default.title;
-        adjustTemp = this.material_color_scheme.dark.off.climate.default.button;
-        containerColor =
-          this.material_color_scheme.dark.off.climate.default.background;
-      } else {
-        // Spento, tema light
-        nameColor =
-          iconColor =
-          internalTemp =
-            this.material_color_scheme.light.off.climate.default.title;
-        adjustTemp =
-          this.material_color_scheme.light.off.climate.default.button;
-        containerColor =
-          this.material_color_scheme.light.off.climate.default.background;
-      }
-    }
-
-    this._setStyleProperty("--bsc-name-color", nameColor);
-    this._setStyleProperty("--bsc-icon-color", iconColor);
-    this._setStyleProperty("--bsc-adjustTemp-color", adjustTemp);
-    this._setStyleProperty("--bsc-internalTemp-color", internalTemp);
-    this._setStyleProperty("--bsc-background", containerColor);
-  }
-
-  _setStyleProperty(
-    name: string,
-    value: any,
-    transform = (value: any): string => value
-  ): void {
-    if (value !== undefined && value !== null && value !== "") {
-      this.style.setProperty(name, transform(value));
-    }
-  }
-
   protected render(): TemplateResult {
     if (!this._config || !this.hass) return html``;
 
@@ -286,14 +141,6 @@ export class MaterialClimateCard extends LitElement {
       stateObj.state,
       this._config.use_material_color
     );
-
-    //this.setColorCard(
-    //  this._config.use_material_color,
-    //  theme,
-    //  isOffline,
-    //  isOn,
-    //  isConditioner
-    //);
 
     const config = {
       control_type: "thermometer",

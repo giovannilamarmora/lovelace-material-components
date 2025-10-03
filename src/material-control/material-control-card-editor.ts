@@ -12,7 +12,7 @@ import {
   DEFAULT_CONFIG,
   MaterialControlCardConfig,
 } from "./material-control-const";
-//import { Action } from "../shared/utils";
+import { toggleConfigs } from "./material-control-const";
 
 @customElement("material-control-card-editor")
 export class MaterialControlCardEditor
@@ -79,15 +79,7 @@ export class MaterialControlCardEditor
       if (!this._configLoaded) return;
 
       if (key === "action" && this._config.tap_action.action != value) {
-        const defaultConfigs: Record<string, any> = {
-          toggle: { action: "toggle" },
-          "more-info": { action: "more-info" },
-          navigate: { action: "navigate", navigation_path: "/" },
-          url: { action: "url", url_path: "" },
-          none: { action: "none" },
-          "google-home": { action: "google-home" },
-          settings: { action: "settings" },
-        };
+        const defaultConfigs: Record<string, any> = toggleConfigs;
         const action = defaultConfigs[value];
         this._config.tap_action = action;
       } else {
@@ -112,15 +104,7 @@ export class MaterialControlCardEditor
       if (!this._configLoaded) return;
 
       if (key === "action" && this._config.hold_action.action != value) {
-        const defaultConfigs: Record<string, any> = {
-          toggle: { action: "toggle" },
-          "more-info": { action: "more-info" },
-          navigate: { action: "navigate", navigation_path: "/" },
-          url: { action: "url", url_path: "" },
-          none: { action: "none" },
-          "google-home": { action: "google-home" },
-          settings: { action: "settings" },
-        };
+        const defaultConfigs: Record<string, any> = toggleConfigs;
         const action = defaultConfigs[value];
         this._config.hold_action = action;
       } else {

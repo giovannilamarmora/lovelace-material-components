@@ -1,8 +1,12 @@
 import { SlideGesture } from "@nicufarmache/slide-gesture";
 import { HassEntity } from "home-assistant-js-websocket";
 import { HomeAssistant } from "../ha-types";
-import type { MaterialSliderCardConfig, MousePos } from "./types";
-import { DEFAULT_CONFIG, TAP_THRESHOLD } from "./const";
+import {
+  DEFAULT_CONFIG,
+  MaterialSliderCardConfig,
+  MousePos,
+  TAP_THRESHOLD,
+} from "./material-slider-const";
 import { localize } from "../localize/localize";
 import { state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
@@ -10,14 +14,14 @@ import { LitElement, html, CSSResult, TemplateResult, css } from "lit";
 import { applyRippleEffect } from "../animations";
 import { material_color } from "../shared/color";
 import { setSliderColor } from "./material-slider-mapper";
-import { ControlType } from "../material-button/material-button-const";
 import {
   isDeviceOn,
   isOfflineState,
   OffStates,
   OnStates,
-} from "../shared/utils";
+} from "../shared/states";
 import { getIcon } from "../shared/mapper";
+import { ControlType, DomainType } from "../shared/types";
 
 export class MaterialSliderCard extends LitElement {
   // @property({ attribute: false }) public hass!: HomeAssistant;
@@ -84,8 +88,9 @@ export class MaterialSliderCard extends LitElement {
 
     const domain = config.entity.split(".")[0];
     if (
-      (config.control_type === ControlType.LIGHT && domain !== "light") ||
-      (config.control_type === ControlType.COVER && domain !== "cover")
+      (config.control_type === ControlType.LIGHT &&
+        domain !== DomainType.LIGHT) ||
+      (config.control_type === ControlType.COVER && domain !== DomainType.COVER)
     ) {
       throw new Error(
         `Entity must match the selected control type (${config.control_type})`
@@ -346,6 +351,9 @@ export class MaterialSliderCard extends LitElement {
           percentage && (percentage.innerText = localize("common.off"));
         if (this._status == OffStates.CLOSED)
           percentage && (percentage.innerText = localize("common.closed"));
+        // TODO: Finire Fix
+        if (this._status == OffStates.CLOSING)
+          percentage && (percentage.innerText = localize("common.closed"));
       } else percentage && (percentage.innerText = localize("common.offline"));
     }
     this.style.setProperty("--bsc-entity-color", color);
@@ -541,121 +549,7 @@ export class MaterialSliderCard extends LitElement {
       this.style
     );
 
-    // Stili dinamici basati su stato entità e tema
-    //let nameColor = "";
-    //let iconColor = "";
-    //let percentageColor = "";
-    //let sliderColor = "";
-    //let containerColor = "";
-    //const nameMargin = "-20px";
-    //const iconMargin = "-10px";
-    //const percentageMargin = "-20px";
-    //
-    //if (isOffline) {
-    //  // Offline, tema light
-    //  if (theme === "light") {
-    //    nameColor = this.color.light.offline.light.title;
-    //    iconColor = this.color.light.offline.light.icon;
-    //    percentageColor = this.color.light.offline.light.percentage;
-    //    sliderColor = this.color.light.offline.light.slider;
-    //    containerColor = this.color.light.offline.light.background;
-    //    // Offline, tema dark
-    //  } else {
-    //    nameColor = this.color.dark.offline.light.title;
-    //    iconColor = this.color.dark.offline.light.icon;
-    //    percentageColor = this.color.dark.offline.light.percentage;
-    //    sliderColor = this.color.dark.offline.light.slider;
-    //    containerColor = this.color.dark.offline.light.background;
-    //  }
-    //} else if (isOn) {
-    //  // Acceso, tema dark
-    //  if (theme === "dark") {
-    //    nameColor = this.color.dark.on.light.title;
-    //    iconColor = this.color.dark.on.light.icon;
-    //    percentageColor = this.color.dark.on.light.percentage;
-    //    sliderColor = this.color.dark.on.light.slider;
-    //    containerColor = this.color.dark.on.light.background;
-    //    // Acceso, tema light
-    //  } else {
-    //    nameColor = this.color.light.on.light.title;
-    //    iconColor = this.color.light.on.light.icon;
-    //    percentageColor = this.color.light.on.light.percentage;
-    //    sliderColor = this.color.light.on.light.slider;
-    //    containerColor = this.color.light.on.light.background;
-    //  }
-    //} else {
-    //  // Spento, tema dark
-    //  if (theme === "dark") {
-    //    nameColor = this.color.dark.off.light.title;
-    //    iconColor = this.color.dark.off.light.icon;
-    //    percentageColor = this.color.dark.off.light.percentage;
-    //    sliderColor = this.color.dark.off.light.slider;
-    //    containerColor = this.color.dark.off.light.background;
-    //  } else {
-    //    nameColor = this.color.light.off.light.title;
-    //    iconColor = this.color.light.off.light.icon;
-    //    percentageColor = this.color.light.off.light.percentage;
-    //    sliderColor = this.color.light.off.light.slider;
-    //    containerColor = this.color.light.off.light.background;
-    //  }
-    //}
-    //
-    //this._setStyleProperty("--bsc-name-color", nameColor);
-    //this._setStyleProperty("--bsc-icon-color", iconColor);
-    //this._setStyleProperty("--bsc-percentage-color", percentageColor);
-    //this._setStyleProperty("--bsc-slider-color", sliderColor);
-    //this._setStyleProperty("--bsc-background", containerColor);
-    //this._setStyleProperty("--bsc-name-margin", nameMargin);
-    //this._setStyleProperty("--bsc-icon-margin", iconMargin);
-    //this._setStyleProperty("--bsc-percentage-margin", percentageMargin);
-    //
-    //// Altri stili
-    //this._setStyleProperty("--bsc-primary-text-color", this._config.text_color);
-    //this._setStyleProperty("--bsc-border-color", this._config.border_color);
-    //this._setStyleProperty("--bsc-border-radius", this._config.border_radius);
-    //this._setStyleProperty("--bsc-border-style", this._config.border_style);
-    //this._setStyleProperty("--bsc-border-width", this._config.border_width);
-    //this._setStyleProperty(
-    //  "--bsc-height",
-    //  this._config.height,
-    //  (h) => `${h}px`
-    //);
-
     const iconName = getIcon(state, this._config, this.hass);
-
-    //let iconName =
-    //  this._config.control_type == ControlType.LIGHT
-    //    ? this._config.icon == undefined ||
-    //      this._config.icon === "m3of:lightbulb" ||
-    //      this._config.icon === "m3r:lightbulb"
-    //      ? isOn
-    //        ? "m3of:lightbulb"
-    //        : "m3r:lightbulb"
-    //      : this._config.icon
-    //    : this._config.icon == undefined
-    //      ? isOn
-    //        ? "m3rf:blinds"
-    //        : "m3rf:blinds-closed"
-    //      : this._config.icon;
-    //
-    //// 🟢 Supporto template stile [[[ ... ]]]
-    //if (
-    //  typeof this._config.icon === "string" &&
-    //  this._config.icon.trim().startsWith("[[[") &&
-    //  this._config.icon.trim().endsWith("]]]")
-    //) {
-    //  try {
-    //    const code = this._config.icon.trim().slice(3, -3); // rimuove [[[ e ]]]
-    //    const fn = new Function("entity", "state", "hass", code);
-    //    const result = fn(state, state?.state, this.hass);
-    //    if (result && typeof result === "string") {
-    //      iconName = result;
-    //    }
-    //  } catch (e) {
-    //    console.warn("Error evaluating icon template:", e);
-    //    iconName = "mdi:alert-circle-outline";
-    //  }
-    //}
 
     return html`
       <ha-card
@@ -699,16 +593,6 @@ export class MaterialSliderCard extends LitElement {
           : ""}
       </ha-card>
     `;
-  }
-
-  _setStyleProperty(
-    name: string,
-    value: any,
-    transform = (value: any): string => value
-  ): void {
-    if (value !== undefined && value !== null && value !== "") {
-      this.style.setProperty(name, transform(value));
-    }
   }
 
   private _showWarning(warning: string): TemplateResult {

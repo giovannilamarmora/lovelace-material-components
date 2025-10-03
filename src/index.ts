@@ -1,4 +1,3 @@
-import { CARD_VERSION } from "./material-slider/const";
 import { MaterialButtonCard } from "./material-button/material-button-card";
 import { MaterialDashboardCard } from "./material-dashboard/material-dashboard-card";
 import { MaterialDashboardCardEditor } from "./material-dashboard/material-dashboard-card-editor";
@@ -13,10 +12,11 @@ import { MaterialSliderCardEditor } from "./material-slider/material-slider-card
 import { MaterialLightsCard } from "./material-lights/material-lights-card";
 import { MaterialLightsCardEditor } from "./material-lights/material-lights-card-editor";
 import { MaterialMediaOverlay } from "./material-media-overlay/material-media-overlay";
+import { CARD_VERSION } from "./shared/utils";
 
 /* eslint no-console: 0 */
 console.info(
-  `%c Material Component %c ${localize("common.version")} ${CARD_VERSION}`,
+  `%c Material Home Components %c ${localize("common.version")} ${CARD_VERSION}`,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );

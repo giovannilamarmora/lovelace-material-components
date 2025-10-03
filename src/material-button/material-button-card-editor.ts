@@ -9,10 +9,10 @@ import {
 } from "custom-card-helpers";
 import { localize } from "../localize/localize";
 import {
-  ControlType,
   DEFAULT_CONFIG,
   MaterialButtonCardConfig,
 } from "./material-button-const";
+import { ControlType } from "../shared/types";
 
 @customElement("material-button-card-editor")
 export class MaterialButtonCardEditor
@@ -59,29 +59,6 @@ export class MaterialButtonCardEditor
       new CustomEvent("config-changed", { detail: { config: newConfig } })
     );
   }
-
-  //private _valueChanged = (ev: Event): void => {
-  //  const target = ev.target as any;
-  //  const configValue = target.getAttribute("configValue");
-  //
-  //  const value =
-  //    ev instanceof CustomEvent && ev.detail?.value !== undefined
-  //      ? ev.detail.value
-  //      : (target.checked ?? target.value);
-  //
-  //  if (!configValue || this._config[configValue] === value) return;
-  //
-  //  this._config = {
-  //    ...this._config,
-  //    [configValue]: value,
-  //  };
-  //
-  //  this.dispatchEvent(
-  //    new CustomEvent("config-changed", {
-  //      detail: { config: this._config },
-  //    })
-  //  );
-  //};
 
   private _entityChanged(ev: CustomEvent): void {
     const value = ev.detail.value;

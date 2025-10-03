@@ -1,0 +1,144 @@
+{
+  "common": {
+    "version": "Version",
+    "invalid_configuration": "Ungültige Konfiguration",
+    "show_warning": "Warnung anzeigen",
+    "no_entity_set": "Keine Entität gesetzt",
+    "no_entity": "Entität nicht verfügbar",
+    "indoor": "Innen",
+    "on": "Ein",
+    "off": "Aus",
+    "offline": "Offline",
+    "auto": "Automatisch",
+    "heat": "Heizen",
+    "dry": "Entfeuchter",
+    "cool": "Kühlen",
+    "fan": "Ventilation",
+    "playing": "Wiedergabe",
+    "idle": "Cast",
+    "presence": "Bewegung",
+    "off_presence": "Keine Bewegung",
+    "today_at": "Heute um",
+    "yesterday_at": "Gestern um",
+    "open": "Offen",
+    "closed": "Geschlossen",
+    "active": "Aktiv",
+    "inactive": "Inaktiv"
+  },
+  "material_dashboard_card": {
+    "description": "Konfiguriere den Navigationspfad, wenn eine Karte angeklickt wird.",
+    "cameras": "Kamerapfad",
+    "cameras_name": "Kameras",
+    "lighting": "Lichtpfad",
+    "lighting_name": "Beleuchtung",
+    "lighting_label": "Lichter",
+    "wifi": "Wi-Fi-Pfad",
+    "wifi_name": "Wi-Fi",
+    "climate": "Klima-Pfad",
+    "climate_name": "Klimatisierung",
+    "device": "Gerät",
+    "devices": "Geräte",
+    "placeholder": "./pfad-oder-url",
+    "default": "Standardkonfiguration bei Tap verwenden (Einzeltap)",
+    "tap_type": "Wählen Sie die Tap-Art (Einzeltap, Lang drücken, Doppeltap)",
+    "single": "Einzeltap",
+    "hold": "Lang drücken",
+    "double": "Doppeltap",
+    "web": "Einzeltap im Browser verwenden (auf Mobilgeräten, ausgewählter Tap)"
+  },
+  "material_climate_card": {
+    "name": "Entitätsname",
+    "entity": "Entität",
+    "theme": "Material Expressive verwenden",
+    "increase_temp": "Temperatur erhöhen (z.B. 0.5)",
+    "decrease_temp": "Temperatur senken (z.B. 0.5)",
+    "dual_icon": {
+      "default": "Standard-Symbol verwenden",
+      "options": "Doppelsymbol verwenden (Ein-/Aus-Zustand)."
+    },
+    "fix_temperature": "Aktivieren, wenn die Temperatur nicht korrekt ist",
+    "false": "Inaktiv",
+    "true": "Aktiv",
+    "auto": "Automatisch"
+  },
+  "material_button_card": {
+    "name": "Entitätsname",
+    "control_type": "Steuerungstyp",
+    "type": {
+      "generic": "Generisch (Schalter, Knopf...)",
+      "thermometer": "Klimatisierung",
+      "automation": "Automatisierungen",
+      "scene": "Szenen",
+      "media": "Medien (Google, Alexa...)",
+      "state": "Status",
+      "action": "Aktionen",
+      "app_version": "Google Components Version"
+    },
+    "dual_icon": {
+      "default": "Standard-Symbol verwenden",
+      "options": "Doppelsymbol verwenden (Ein-/Aus-Zustand)."
+    },
+    "dual_text": {
+      "default": "Standardtext verwenden",
+      "text_on": "Text Ein",
+      "text_off": "Text Aus"
+    },
+    "toggle": {
+      "title": "Automatische Aktionen aktivieren",
+      "press": "Aktion bei Klick",
+      "hold": "Aktion bei langem Drücken",
+      "click": "Einzeltap (Ein-/Aus)",
+      "info": "Informationen anzeigen",
+      "navigate": "Navigieren",
+      "url": "URL",
+      "none": "Keine Aktion"
+    }
+  },
+  "material_control_card": {
+    "name": "Kartenname",
+    "entity_card": "Karte als Entität verwenden",
+    "entity": "Entität",
+    "dual_icon": {
+      "default": "Standard-Symbol verwenden",
+      "options": "Doppelsymbol verwenden (Aktiv/Inaktiv)."
+    },
+    "actions": {
+      "hold": "Aktion bei langem Drücken",
+      "press": "Aktion bei Klick",
+      "more_info": "Mehr Informationen",
+      "toggle": "Ein-/Aus",
+      "navigate": "Navigieren",
+      "url": "URL",
+      "none": "Keine Aktion",
+      "google_home": "Google Home öffnen",
+      "settings": "Einstellungen öffnen"
+    }
+  },
+  "material_slider_card": {
+    "name": "Kartenname",
+    "control_type": "Steuerungstyp",
+    "type": {
+      "light": "Lichter",
+      "cover": "Rollos"
+    },
+    "entity": "Zu steuernde Entität",
+    "icon": "Benutzerdefiniertes Symbol (wenn leer, ändert sich automatisch je nach On/Off-Zustand)",
+    "percentage": "Wert in Prozent anzeigen",
+    "bold_text": "Text fett formatieren"
+  },
+  "material_lights_card": {
+    "on_text": "Text für eingeschaltete Lichter",
+    "off_text": "Text für ausgeschaltete Lichter"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "Keine Wiedergabeinhalte",
+      "playing": "Jetzt wiedergegeben"
+    },
+    "remote": "Fernbedienung öffnen",
+    "cast": "Bildschirm übertragen",
+    "stop_cast": "Übertragung stoppen",
+    "open": "Öffnen",
+    "open_google": "Google Home öffnen"
+  }
+}
