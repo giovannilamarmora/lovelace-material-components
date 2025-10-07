@@ -19,6 +19,7 @@ import { setColorCard } from "./material-button-mapper";
 import { MaterialMediaOverlay } from "../material-media-overlay/material-media-overlay";
 import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
 import { isDeviceOn, isOfflineState } from "../shared/states";
+import { _openDialog } from "../dialog/dialog-manager";
 
 @customElement("material-button-card")
 export class MaterialButtonCard extends LitElement {
@@ -167,6 +168,15 @@ export class MaterialButtonCard extends LitElement {
           entity_id: entityId,
         });
       } else {
+        // TODO Check Device
+        const stateObj = this.hass.states[this._config.entity!];
+        const device_class = getValidDeviceClass(stateObj.attributes);
+
+        if (device_class == DeviceType.DOOR) {
+          _openDialog(this, "door-sensor-dialog", this.hass, this._config);
+          return;
+        }
+
         if (
           domain === "media_player" ||
           controlType == ControlType.MEDIA_PLAYER

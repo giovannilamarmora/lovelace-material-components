@@ -177,6 +177,10 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
           case DeviceType.HUMIDITY:
             if (deviceOnline) return "m3rf:humidity-percentage";
             else return "m3r:humidity-percentage";
+          case DeviceType.TAMPER:
+            if (deviceOnline || idDeviceTurnOn)
+              return "m3rf:tamper-detection-on";
+            else return "m3r:tamper-detection-on";
         }
       }
       if (domain == DomainType.SWITCH) {

@@ -29,6 +29,7 @@ export enum DeviceType {
   TEMPERATURE = "temperature",
   HUMIDITY = "humidity",
   TIMESTAMP = "timestamp",
+  TAMPER = "tamper",
   NONE = "none",
 }
 

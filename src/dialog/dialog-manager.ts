@@ -1,5 +1,6 @@
 import "./template-dialog"; // registra il custom element
 import "./presence-sensor/presence-sensor-dialog"; // registra il custom element
+import "./door-sensor/door-sensor-dialog";
 
 export function _openDeviceDialog(element: any, hass: any, _config: any) {
   const dialog = document.createElement("template-dialog") as any;
@@ -38,7 +39,7 @@ export function _openDialog(
 ) {
   const dialog = document.createElement(element) as any;
 
-  dialog.entityId = _config.entity!;
+  dialog.config = _config;
   dialog.hass = hass;
   dialog.open = true;
 
