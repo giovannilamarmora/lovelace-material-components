@@ -17,6 +17,7 @@ export enum DomainType {
   SWITCH = "switch",
   LIGHT = "light",
   COVER = "cover",
+  BUTTON = "button",
 }
 
 export enum DeviceType {

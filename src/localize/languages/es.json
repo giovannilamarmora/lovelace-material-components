@@ -22,6 +22,8 @@
     "yesterday_at": "Ayer a las",
     "open": "Abierto",
     "closed": "Cerrado",
+    "opening": "Apertura",
+    "closing": "Cierre",
     "active": "Activo",
     "inactive": "Inactivo"
   },

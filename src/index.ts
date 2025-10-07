@@ -13,6 +13,7 @@ import { MaterialLightsCard } from "./material-lights/material-lights-card";
 import { MaterialLightsCardEditor } from "./material-lights/material-lights-card-editor";
 import { MaterialMediaOverlay } from "./material-media-overlay/material-media-overlay";
 import { CARD_VERSION } from "./shared/utils";
+import { MaterialUsersCard } from "./material-users/material-users-card";
 
 /* eslint no-console: 0 */
 console.info(
@@ -88,8 +89,14 @@ if (!customElements.get("material-lights-card-editor")) {
   customElements.define("material-lights-cardeditor", MaterialLightsCardEditor);
 }
 
+/** Material Media */
 if (!customElements.get("material-media-overlay")) {
   customElements.define("material-media-overlay", MaterialMediaOverlay);
+}
+
+/** Material Users */
+if (!customElements.get("material-users-card")) {
+  customElements.define("material-users-card", MaterialUsersCard);
 }
 
 (window as any).customCards = (window as any).customCards ?? [];
@@ -139,4 +146,12 @@ if (!customElements.get("material-media-overlay")) {
   preview: true,
   description:
     "A control card inspired by Google's design, offering a sleek interface to interact with lights in Home Assistant.",
+});
+
+(window as any).customCards.push({
+  type: "material-users-card",
+  name: "Material Users",
+  preview: true,
+  description:
+    "A card to view and manage users in your Home, providing a clear interface to see active users and control permissions.",
 });

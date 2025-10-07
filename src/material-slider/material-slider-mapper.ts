@@ -1,5 +1,57 @@
-import { ControlType } from "../shared/types";
+import { material_color } from "../shared/color";
+import { ControlType, DomainType } from "../shared/types";
+import { isNullOrEmpty } from "../shared/utils";
 import { MaterialSliderCardConfig } from "./material-slider-const";
+
+export function setSliderColorCard(
+  style: any,
+  config: MaterialSliderCardConfig,
+  isOffline: boolean,
+  isOn: boolean,
+  theme: string
+) {
+  const offlineOnOffState = isOffline ? "offline" : isOn ? "on" : "off";
+  const domain =
+    config.control_type == ControlType.LIGHT
+      ? DomainType.LIGHT
+      : DomainType.BUTTON;
+  const materialColor: any = material_color;
+  //const stateColor = config.use_material_color
+  //  ? getPropertyColor(state)
+  //  : "default";
+
+  const color: any = materialColor[theme][offlineOnOffState][domain];
+
+  const nameMargin = "-20px";
+  const iconMargin = "-10px";
+  const percentageMargin = "-20px";
+
+  if (!isNullOrEmpty(color)) {
+    _setStyleProperty("--bsc-name-color", color.title, style);
+    _setStyleProperty("--bsc-icon-color", color.icon, style);
+    _setStyleProperty("--bsc-percentage-color", color.percentage, style);
+
+    if (config.control_type == ControlType.LIGHT || !isOn) {
+      _setStyleProperty("--bsc-slider-color", color.slider, style);
+      _setStyleProperty("--bsc-background", color.background, style);
+    } else {
+      _setStyleProperty("--bsc-slider-color", color.background, style);
+      _setStyleProperty("--bsc-background", color.back_slider_color, style);
+    }
+
+    _setStyleProperty("--bsc-name-margin", nameMargin, style);
+    _setStyleProperty("--bsc-icon-margin", iconMargin, style);
+    _setStyleProperty("--bsc-percentage-margin", percentageMargin, style);
+
+    // Altri stili
+    _setStyleProperty("--bsc-primary-text-color", config.text_color, style);
+    _setStyleProperty("--bsc-border-color", config.border_color, style);
+    _setStyleProperty("--bsc-border-radius", config.border_radius, style);
+    _setStyleProperty("--bsc-border-style", config.border_style, style);
+    _setStyleProperty("--bsc-border-width", config.border_width, style);
+    _setStyleProperty("--bsc-height", config.height, style, (h) => `${h}px`);
+  }
+}
 
 export function setSliderColor(
   _config: MaterialSliderCardConfig,

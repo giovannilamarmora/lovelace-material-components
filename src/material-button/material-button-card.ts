@@ -85,11 +85,52 @@ export class MaterialButtonCard extends LitElement {
       }
     });
   }
-
-  public _onClick(event: MouseEvent) {
+  private _onClick(event: MouseEvent) {
     applyRippleEffect(event.currentTarget as HTMLElement, event);
+    //this.dialog();
+    //this._openDeviceDialog();
     this._toggle();
+    //_openDeviceDialog(this, this.hass, this._config);
+    //_openDialog(this, "presence-sensor-dialog", this.hass, this._config);
   }
+
+  //private _openDeviceDialog() {
+  //  const dialog = document.createElement("template-dialog") as any;
+  //
+  //  // Imposta entityId invece di copia di entity
+  //  dialog.entityId = this._config.entity!;
+  //  dialog.hass = this.hass;
+  //  dialog.open = true;
+  //
+  //  // Funzione che aggiorna hass reattivamente
+  //  const updateHass = () => {
+  //    if (!dialog) return;
+  //    dialog.hass = this.hass;
+  //    dialog.requestUpdate();
+  //  };
+  //
+  //  // Observer sul componente padre (il button card)
+  //  const observer = new MutationObserver(updateHass);
+  //  observer.observe(this, {
+  //    attributes: true,
+  //    childList: false,
+  //    subtree: false,
+  //  });
+  //
+  //  // Pulizia quando il dialog si chiude
+  //  dialog.addEventListener("close-dialog", () => {
+  //    observer.disconnect();
+  //    dialog.remove();
+  //  });
+  //
+  //  // Style per overlay
+  //  dialog.style.position = "fixed";
+  //  dialog.style.inset = "0";
+  //  dialog.style.zIndex = "9999";
+  //
+  //  document.body.appendChild(dialog);
+  //}
+
   private _toggle() {
     if (navigator.vibrate) {
       navigator.vibrate(50);

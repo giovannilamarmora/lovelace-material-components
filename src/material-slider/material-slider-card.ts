@@ -13,7 +13,7 @@ import { ifDefined } from "lit/directives/if-defined.js";
 import { LitElement, html, CSSResult, TemplateResult, css } from "lit";
 import { applyRippleEffect } from "../animations";
 import { material_color } from "../shared/color";
-import { setSliderColor } from "./material-slider-mapper";
+import { setSliderColorCard } from "./material-slider-mapper";
 import {
   isDeviceOn,
   isOfflineState,
@@ -307,14 +307,17 @@ export class MaterialSliderCard extends LitElement {
       this._config.control_type == ControlType.COVER &&
       this._state &&
       this._state.attributes.current_position
-    )
-      percentage &&
-        (percentage.innerText =
-          localize("common.open") +
-          " • " +
-          Math.round(this.currentValue) +
-          "%");
-    else percentage && (percentage.innerText = localize("common.on"));
+    ) {
+      if (this._state.state == OnStates.OPENING) {
+        percentage && (percentage.innerText = localize("common.opening"));
+      } else
+        percentage &&
+          (percentage.innerText =
+            localize("common.open") +
+            " • " +
+            Math.round(this.currentValue) +
+            "%");
+    } else percentage && (percentage.innerText = localize("common.on"));
   }
 
   _updateColors(): void {
@@ -351,9 +354,8 @@ export class MaterialSliderCard extends LitElement {
           percentage && (percentage.innerText = localize("common.off"));
         if (this._status == OffStates.CLOSED)
           percentage && (percentage.innerText = localize("common.closed"));
-        // TODO: Finire Fix
         if (this._status == OffStates.CLOSING)
-          percentage && (percentage.innerText = localize("common.closed"));
+          percentage && (percentage.innerText = localize("common.closing"));
       } else percentage && (percentage.innerText = localize("common.offline"));
     }
     this.style.setProperty("--bsc-entity-color", color);
@@ -533,21 +535,21 @@ export class MaterialSliderCard extends LitElement {
     const boldText = (this._config.bold_text && true) ?? false;
 
     const state = this._hass?.states?.[this._entity];
-    // const isOffline = state?.state != "on" && state?.state != "off";
     const isOffline = isOfflineState(state!.state);
     const theme = this._hass?.themes?.darkMode ? "dark" : "light";
 
-    //const isOn = state?.state === "on";
     const isOn = isDeviceOn(state!.state);
 
-    setSliderColor(
-      this._config,
-      isOffline,
-      theme,
-      isOn,
-      this.color,
-      this.style
-    );
+    //setSliderColor(
+    //  this._config,
+    //  isOffline,
+    //  theme,
+    //  isOn,
+    //  this.color,
+    //  this.style
+    //);
+
+    setSliderColorCard(this.style, this._config, isOffline, isOn, theme);
 
     const iconName = getIcon(state, this._config, this.hass);
 

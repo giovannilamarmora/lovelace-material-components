@@ -37,6 +37,7 @@ export default [
     output: {
       file: "dist/material-components.js",
       format: "es",
+      //inlineDynamicImports: true,
     },
     plugins: [...plugins],
   },
