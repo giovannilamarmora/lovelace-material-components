@@ -1,6 +1,6 @@
 # 🏠 Material Home Component for Home Assistant
 
-[![Instagram](https://img.shields.io/badge/Instagram-%40gio_lamarmora-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gio_lamarmora/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/WebSite%20-Visit-blue?style=for-the-badge&logo=Google-Chrome&logoColor=white)](https://www.miosito.com)
+[![Instagram](https://img.shields.io/badge/Instagram-%40gio_lamarmora-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gio_lamarmora/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/WebSite%20-Visit-blue?style=for-the-badge&logo=Google-Chrome&logoColor=white)](https://giovannilamarmora.github.io/)
 
 <!--
 [![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-google-components&owner=giovannilamarmora&category=Plugin)
