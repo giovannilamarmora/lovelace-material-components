@@ -25,7 +25,9 @@
     "opening": "Apertura",
     "closing": "Chiusura",
     "active": "Attivo",
-    "inactive": "Inattivo"
+    "inactive": "Inattivo",
+    "info_device": "Informazioni Dispositivo",
+    "related": "Integrazione Correlata"
   },
   "material_dashboard_card": {
     "description": "Configura il percorso di navigazione quando una card viene cliccata.",

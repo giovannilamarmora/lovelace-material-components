@@ -172,9 +172,11 @@ export class MaterialButtonCard extends LitElement {
         const stateObj = this.hass.states[this._config.entity!];
         const device_class = getValidDeviceClass(stateObj.attributes);
 
-        if (device_class == DeviceType.DOOR) {
-          _openDialog(this, "door-sensor-dialog", this.hass, this._config);
-          return;
+        switch (device_class) {
+          case DeviceType.DOOR:
+          case DeviceType.TEMPERATURE:
+          case DeviceType.MOTION:
+            return _openDialog(this, "sensor-dialog", this.hass, this._config);
         }
 
         if (

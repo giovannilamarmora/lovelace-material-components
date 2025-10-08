@@ -25,7 +25,9 @@
     "opening": "Ouverture",
     "closing": "Fermeture",
     "active": "Actif",
-    "inactive": "Inactif"
+    "inactive": "Inactif",
+    "info_device": "Informations sur l'appareil",
+    "related": "Intégration Connexe"
   },
   "material_dashboard_card": {
     "description": "Configurer le chemin de navigation lorsqu’une carte est cliquée.",

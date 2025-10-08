@@ -25,7 +25,9 @@
     "opening": "Öffnung",
     "closing": "Schluss",
     "active": "Aktiv",
-    "inactive": "Inaktiv"
+    "inactive": "Inaktiv",
+    "info_device": "Geräteinformationen",
+    "related": "Zugehörige Integration"
   },
   "material_dashboard_card": {
     "description": "Konfiguriere den Navigationspfad, wenn eine Karte angeklickt wird.",

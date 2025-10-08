@@ -25,7 +25,9 @@
     "opening": "Opening",
     "closing": "Closing",
     "active": "Active",
-    "inactive": "Inactive"
+    "inactive": "Inactive",
+    "info_device": "Device Information",
+    "related": "Related Integration"
   },
   "material_dashboard_card": {
     "description": "Configure the navigation path when a card is tapped.",

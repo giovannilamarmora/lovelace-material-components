@@ -61,6 +61,7 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
   }
 
   // Se use_default_icon è true, prosegui con la logica predefinita
+  const deviceOnline = !isOfflineState(state, controlType);
 
   switch (controlType) {
     case ControlType.LIGHT: {
@@ -138,7 +139,6 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
       break;
     case ControlType.GENERIC:
     case ControlType.STATE: {
-      const deviceOnline = !isOfflineState(state, controlType);
       if (domain == DomainType.BINARY_SENSOR || domain == DomainType.SENSOR) {
         const device_class = getValidDeviceClass(stateObj.attributes);
         switch (device_class) {
@@ -181,11 +181,20 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
             if (deviceOnline || idDeviceTurnOn)
               return "m3rf:tamper-detection-on";
             else return "m3r:tamper-detection-on";
+          case DeviceType.ILLUMINANCE:
+            if (deviceOnline || idDeviceTurnOn) return "m3rf:light-mode";
+            else return "m3r:light-mode";
         }
       }
-      if (domain == DomainType.SWITCH) {
-        if (idDeviceTurnOn) return "m3rf:switch";
-        else return "m3r:switch";
+
+      switch (domain) {
+        case DomainType.SWITCH:
+          if (idDeviceTurnOn) return "m3rf:switch";
+          else return "m3r:switch";
+        case DomainType.NUMBER:
+          if (deviceOnline || idDeviceTurnOn)
+            return "m3rf:settings-input-component";
+          else return "m3r:settings-input-component";
       }
     }
   }
@@ -255,7 +264,10 @@ export function mapStateDisplay(
       device_class == DeviceType.BATTERY ||
       device_class == DeviceType.HUMIDITY
     )
-      return stateObj.state + (stateObj.attributes.unit_of_measurement ?? "%");
+      return (
+        Number.parseInt(stateObj.state) +
+        (stateObj.attributes.unit_of_measurement ?? "%")
+      );
     if (device_class == DeviceType.TEMPERATURE)
       return (
         stateObj.state + " " + (stateObj.attributes.unit_of_measurement ?? "°")

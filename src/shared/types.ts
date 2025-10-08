@@ -18,6 +18,7 @@ export enum DomainType {
   LIGHT = "light",
   COVER = "cover",
   BUTTON = "button",
+  NUMBER = "number",
 }
 
 export enum DeviceType {
@@ -30,6 +31,7 @@ export enum DeviceType {
   HUMIDITY = "humidity",
   TIMESTAMP = "timestamp",
   TAMPER = "tamper",
+  ILLUMINANCE = "illuminance",
   NONE = "none",
 }
 
