@@ -47,6 +47,7 @@ export class MaterialSliderCard extends LitElement {
   private _lastTheme?: string;
   private _lastEntityState?: string;
   private color: any = material_color;
+  private clickOffset: number = 0; // ← AGGIUNGI QUESTA
 
   public static getStubConfig(
     _hass: HomeAssistant
@@ -124,8 +125,11 @@ export class MaterialSliderCard extends LitElement {
     this._state = hass.states[this._entity];
     this._status = this._state?.state;
 
+    // FIX: Normalizza i valori in percentuale 0-100
     if (this._config.control_type === ControlType.LIGHT) {
-      this.currentValue = this._state?.attributes?.brightness ?? 0;
+      //this.currentValue = this._state?.attributes?.brightness ?? 0;
+      const brightness = this._state?.attributes?.brightness ?? 0;
+      this.currentValue = Math.round((100 * brightness) / 255); // ← Converte 0-255 → 0-100
     } else if (this._config.control_type === ControlType.COVER) {
       this.currentValue = this._state?.attributes?.current_position ?? 0;
     }
@@ -144,7 +148,7 @@ export class MaterialSliderCard extends LitElement {
     ) {
       this._lastTheme = currentTheme;
       this._lastEntityState = currentEntityState;
-      this.requestUpdate(); // forza il re-render se cambia qualcosa
+      this.requestUpdate();
     }
   }
 
@@ -183,7 +187,7 @@ export class MaterialSliderCard extends LitElement {
       this.isHold = false;
       this.holdTimer = window.setTimeout(this._setHold, this._config.hold_time);
       this.trackingStartTime = Date.now();
-      this._resetTrack();
+      // RIMUOVI _resetTrack() da qui!
     }
 
     if (["pointerdown", "pointermove", "pointerup"].includes(evt.type)) {
@@ -225,14 +229,95 @@ export class MaterialSliderCard extends LitElement {
     }
   };
 
+  //_handlePointer = (evt, extra): void => {
+  //  this.mousePos = { x: evt.pageX, y: evt.pageY };
+  //  const minSlideTime = this._config.min_slide_time;
+  //
+  //  if (evt.type === "pointerdown") {
+  //    this._press();
+  //    this.isTap = true;
+  //    this.isHold = false;
+  //    this.holdTimer = window.setTimeout(this._setHold, this._config.hold_time);
+  //    this.trackingStartTime = Date.now();
+  //    this._resetTrack();
+  //  }
+  //
+  //  if (["pointerdown", "pointermove", "pointerup"].includes(evt.type)) {
+  //    this._updateValue();
+  //  }
+  //
+  //  if (evt.type === "pointermove") {
+  //    if (
+  //      this.isTap &&
+  //      Math.abs(extra.relativeX) < TAP_THRESHOLD &&
+  //      Math.abs(extra.relativeY) < TAP_THRESHOLD
+  //    )
+  //      return;
+  //    this.isTap = false;
+  //    clearTimeout(this.holdTimer);
+  //    this._stopUpdates();
+  //  }
+  //
+  //  if (evt.type === "pointercancel") {
+  //    clearTimeout(this.holdTimer);
+  //    this._unpress();
+  //    this._startUpdates();
+  //  }
+  //
+  //  if (evt.type === "pointerup") {
+  //    clearTimeout(this.holdTimer);
+  //    this._unpress();
+  //    this._startUpdates();
+  //
+  //    if (this.isTap) {
+  //      this._handleTap();
+  //      return;
+  //    }
+  //
+  //    if (Date.now() - this.trackingStartTime > minSlideTime) {
+  //      this._setValue();
+  //      this._startUpdates(true);
+  //    }
+  //  }
+  //};
+
+  //_updateValue(): void {
+  //  const width = this.containerWidth;
+  //  const dx = this.mousePos.x - this.mouseStartPos.x;
+  //
+  //  const percentage = Math.round((100 * dx) / width);
+  //
+  //  this.currentValue = this.oldValue + percentage;
+  //  this._checklimits();
+  //  this._updateSlider();
+  //}
+
   _updateValue(): void {
-    const width = this.containerWidth;
-    const dx = this.mousePos.x - this.mouseStartPos.x;
+    const container = this.shadowRoot?.getElementById("container");
+    if (!container) return;
 
-    const percentage = Math.round((100 * dx) / width);
+    // SEMPRE ricalcola containerWidth per sicurezza
+    const width = container.clientWidth;
+    if (!width || width === 0) return; // Skip se non ancora pronto
 
-    this.currentValue = this.oldValue + percentage;
-    this._checklimits();
+    this.containerWidth = width; // Aggiorna la cache
+
+    // Posizione assoluta del mouse rispetto alla card
+    const rect = container.getBoundingClientRect();
+    const mouseXInContainer = this.mousePos.x - rect.left;
+
+    // Clamp la posizione dentro i bordi della card
+    const clampedX = Math.max(0, Math.min(mouseXInContainer, width));
+
+    // Calcola la percentuale
+    const percentage = (clampedX / width) * 100;
+
+    // Calcola il valore finale tra min e max
+    const min = this._config.min ?? 0;
+    const max = this._config.max ?? 100;
+
+    this.currentValue = Math.round(min + (percentage / 100) * (max - min));
+
     this._updateSlider();
   }
 
@@ -284,16 +369,29 @@ export class MaterialSliderCard extends LitElement {
     this.removeAttribute("half-pressed");
   }
 
+  //_checklimits(): void {
+  //  const min = this._config.min ?? 0;
+  //  const max = this._config.max ?? 100;
+  //  if (this.currentValue < min) {
+  //    this.currentValue = min;
+  //    this._resetTrack();
+  //  }
+  //  if (this.currentValue > max) {
+  //    this.currentValue = max;
+  //    this._resetTrack();
+  //  }
+  //}
+
   _checklimits(): void {
     const min = this._config.min ?? 0;
     const max = this._config.max ?? 100;
+
+    // Clamp senza reset
     if (this.currentValue < min) {
       this.currentValue = min;
-      this._resetTrack();
     }
     if (this.currentValue > max) {
       this.currentValue = max;
-      this._resetTrack();
     }
   }
 
