@@ -363,7 +363,7 @@ export class MaterialButtonCardEditor
           ? html``
           : html`<div class="switch-row">
               <span class="switch-label"
-                >${localize("material_button_card.toggle.title")}</span
+                >${localize("actions.automatic_action")}</span
               >
               <ha-switch
                 .checked=${this._config.use_default_toggle ?? true}
@@ -373,26 +373,27 @@ export class MaterialButtonCardEditor
             </div>`}
         ${this._config.use_default_toggle
           ? html``
-          : html`<ha-select
-                label="${localize("material_button_card.toggle.press")}"
+          : html`<div class="warning">${localize("actions.warning")}</div>
+              <ha-select
+                label="${localize("actions.tap_action_title")}"
                 .value=${this._getActionValue(this._config.tap_action)}
                 @selected=${this._onTapSelected}
                 @closed=${(ev: Event) => ev.stopPropagation()}
               >
                 <mwc-list-item value="toggle">
-                  ${localize("material_button_card.toggle.click")}
+                  ${localize("actions.toggle")}
                 </mwc-list-item>
                 <mwc-list-item value="more-info">
-                  ${localize("material_button_card.toggle.info")}
+                  ${localize("actions.more_info")}
                 </mwc-list-item>
                 <mwc-list-item value="navigate">
-                  ${localize("material_button_card.toggle.navigate")}
+                  ${localize("actions.navigate")}
                 </mwc-list-item>
                 <mwc-list-item value="url">
-                  ${localize("material_button_card.toggle.url")}
+                  ${localize("actions.url")}
                 </mwc-list-item>
                 <mwc-list-item value="none">
-                  ${localize("material_button_card.toggle.none")}
+                  ${localize("actions.none")}
                 </mwc-list-item>
               </ha-select>
 
@@ -401,25 +402,25 @@ export class MaterialButtonCardEditor
               )}
 
               <ha-select
-                label="${localize("material_button_card.toggle.hold")}"
+                label="${localize("actions.hold_action_title")}"
                 .value=${this._getActionValue(this._config.hold_action)}
                 @selected=${this._onHoldSelected}
                 @closed=${(ev: Event) => ev.stopPropagation()}
               >
                 <mwc-list-item value="toggle">
-                  ${localize("material_button_card.toggle.click")}
+                  ${localize("actions.toggle")}
                 </mwc-list-item>
                 <mwc-list-item value="more-info">
-                  ${localize("material_button_card.toggle.info")}
+                  ${localize("actions.more_info")}
                 </mwc-list-item>
                 <mwc-list-item value="navigate">
-                  ${localize("material_button_card.toggle.navigate")}
+                  ${localize("actions.navigate")}
                 </mwc-list-item>
                 <mwc-list-item value="url">
-                  ${localize("material_button_card.toggle.url")}
+                  ${localize("actions.url")}
                 </mwc-list-item>
                 <mwc-list-item value="none">
-                  ${localize("material_button_card.toggle.none")}
+                  ${localize("actions.none")}
                 </mwc-list-item>
               </ha-select>
 
@@ -491,6 +492,12 @@ export class MaterialButtonCardEditor
     .switch-label {
       font-size: 16px;
       font-weight: 500;
+    }
+
+    .warning {
+      margin-top: 16px;
+      color: var(--error-color, #d32f2f);
+      font-size: 0.9rem;
     }
   `;
 }

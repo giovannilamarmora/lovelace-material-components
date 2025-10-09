@@ -29,6 +29,24 @@
     "info_device": "Información del Dispositivo",
     "related": "Integración Relacionada"
   },
+  "actions": {
+    "automatic_action": "Activar acciones automáticas",
+    "tap_action_title": "Acción al clic",
+    "hold_action_title": "Acción al mantener presionado",
+    "double_tap_action_title": "Acción al doble clic",
+    "toggle": "Clic único (Encender/Apagar)",
+    "more_info": "Mostrar info de entidad",
+    "navigate": "Navegar a una página",
+    "call_service": "Ejecutar servicio",
+    "fire_dom": "Disparar evento DOM",
+    "assist": "Activar asistente de voz",
+    "url": "Abrir enlace o web",
+    "none": "Sin acción",
+    "google_home": "Abrir Google Home",
+    "settings": "Abrir configuración",
+    "select_option": "Seleccionar opción",
+    "warning": "⚠️ Las acciones avanzadas (JS, [[[]]], servicios de llamada complejos) deben configurarse mediante YAML."
+  },
   "material_dashboard_card": {
     "description": "Configura la ruta de navegación cuando se hace clic en una tarjeta.",
     "cameras": "Ruta de cámaras",
@@ -86,16 +104,6 @@
       "default": "Usar texto por defecto",
       "text_on": "Texto ON",
       "text_off": "Texto OFF"
-    },
-    "toggle": {
-      "title": "Activar acciones automáticas",
-      "press": "Acción al clic",
-      "hold": "Acción al mantener pulsado",
-      "click": "Clic simple (Encender/Apagar)",
-      "info": "Mostrar información",
-      "navigate": "Navegar",
-      "url": "URL",
-      "none": "Ninguna acción"
     }
   },
   "material_control_card": {
@@ -105,17 +113,6 @@
     "dual_icon": {
       "default": "Usar icono por defecto",
       "options": "Usar doble icono (Activo e Inactivo)."
-    },
-    "actions": {
-      "hold": "Acción al mantener pulsado",
-      "press": "Acción al clic",
-      "more_info": "Más información",
-      "toggle": "Activar/Desactivar",
-      "navigate": "Navegar",
-      "url": "URL",
-      "none": "Ninguna acción",
-      "google_home": "Abrir Google Home",
-      "settings": "Abrir Configuración"
     }
   },
   "material_slider_card": {

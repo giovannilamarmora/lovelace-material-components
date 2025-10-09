@@ -150,25 +150,25 @@ export class MaterialControlCardEditor
           @closed=${(ev: Event) => ev.stopPropagation()}
         >
           <mwc-list-item value="more-info">
-            ${localize("material_control_card.actions.more_info")}
+            ${localize("actions.more_info")}
           </mwc-list-item>
           <mwc-list-item value="toggle">
-            ${localize("material_control_card.actions.toggle")}
+            ${localize("actions.toggle")}
           </mwc-list-item>
           <mwc-list-item value="navigate">
-            ${localize("material_control_card.actions.navigate")}
+            ${localize("actions.navigate")}
           </mwc-list-item>
           <mwc-list-item value="url">
-            ${localize("material_control_card.actions.url")}
+            ${localize("actions.url")}
           </mwc-list-item>
           <mwc-list-item value="none">
-            ${localize("material_control_card.actions.none")}
+            ${localize("actions.none")}
           </mwc-list-item>
           <mwc-list-item value="google-home">
-            ${localize("material_control_card.actions.google_home")}
+            ${localize("actions.google_home")}
           </mwc-list-item>
           <mwc-list-item value="settings">
-            ${localize("material_control_card.actions.settings")}
+            ${localize("actions.settings")}
           </mwc-list-item>
         </ha-select>
 
@@ -289,7 +289,7 @@ export class MaterialControlCardEditor
           : ""}
 
         <div>
-          <h3>${localize("material_control_card.actions.press")}</h3>
+          <h3>${localize("actions.tap_action_title")}</h3>
           ${renderActionEditor(
             this._config.tap_action,
             this._tapActionChanged()
@@ -297,7 +297,7 @@ export class MaterialControlCardEditor
         </div>
 
         <div>
-          <h3>${localize("material_control_card.actions.hold")}</h3>
+          <h3>${localize("actions.hold_action_title")}</h3>
           ${renderActionEditor(
             this._config.hold_action,
             this._holdActionChanged()

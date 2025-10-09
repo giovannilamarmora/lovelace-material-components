@@ -187,11 +187,14 @@ export class MaterialSliderCard extends LitElement {
       this.isHold = false;
       this.holdTimer = window.setTimeout(this._setHold, this._config.hold_time);
       this.trackingStartTime = Date.now();
-      // RIMUOVI _resetTrack() da qui!
     }
 
+    // ✅ NON aggiornare il valore se è un hold in corso
     if (["pointerdown", "pointermove", "pointerup"].includes(evt.type)) {
-      this._updateValue();
+      if (!this.isHold) {
+        // ← AGGIUNGI QUESTO CHECK
+        this._updateValue();
+      }
     }
 
     if (evt.type === "pointermove") {
@@ -222,7 +225,8 @@ export class MaterialSliderCard extends LitElement {
         return;
       }
 
-      if (Date.now() - this.trackingStartTime > minSlideTime) {
+      // ✅ NON salvare il valore se era un hold
+      if (!this.isHold && Date.now() - this.trackingStartTime > minSlideTime) {
         this._setValue();
         this._startUpdates(true);
       }

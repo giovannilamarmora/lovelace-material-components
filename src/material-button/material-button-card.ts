@@ -1,11 +1,7 @@
 import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { localize } from "../localize/localize";
-import {
-  ActionConfig,
-  fireEvent,
-  handleActionConfig,
-} from "custom-card-helpers";
+import { fireEvent, handleActionConfig } from "custom-card-helpers";
 import { HomeAssistant } from "../ha-types";
 import { applyRippleEffect } from "../animations";
 import {
@@ -20,6 +16,7 @@ import { MaterialMediaOverlay } from "../material-media-overlay/material-media-o
 import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
 import { isDeviceOn, isOfflineState } from "../shared/states";
 import { _openDialog } from "../dialog/dialog-manager";
+import { evaluateAction } from "../shared/actions";
 
 @customElement("material-button-card")
 export class MaterialButtonCard extends LitElement {
@@ -88,49 +85,8 @@ export class MaterialButtonCard extends LitElement {
   }
   private _onClick(event: MouseEvent) {
     applyRippleEffect(event.currentTarget as HTMLElement, event);
-    //this.dialog();
-    //this._openDeviceDialog();
     this._toggle();
-    //_openDeviceDialog(this, this.hass, this._config);
-    //_openDialog(this, "presence-sensor-dialog", this.hass, this._config);
   }
-
-  //private _openDeviceDialog() {
-  //  const dialog = document.createElement("template-dialog") as any;
-  //
-  //  // Imposta entityId invece di copia di entity
-  //  dialog.entityId = this._config.entity!;
-  //  dialog.hass = this.hass;
-  //  dialog.open = true;
-  //
-  //  // Funzione che aggiorna hass reattivamente
-  //  const updateHass = () => {
-  //    if (!dialog) return;
-  //    dialog.hass = this.hass;
-  //    dialog.requestUpdate();
-  //  };
-  //
-  //  // Observer sul componente padre (il button card)
-  //  const observer = new MutationObserver(updateHass);
-  //  observer.observe(this, {
-  //    attributes: true,
-  //    childList: false,
-  //    subtree: false,
-  //  });
-  //
-  //  // Pulizia quando il dialog si chiude
-  //  dialog.addEventListener("close-dialog", () => {
-  //    observer.disconnect();
-  //    dialog.remove();
-  //  });
-  //
-  //  // Style per overlay
-  //  dialog.style.position = "fixed";
-  //  dialog.style.inset = "0";
-  //  dialog.style.zIndex = "9999";
-  //
-  //  document.body.appendChild(dialog);
-  //}
 
   private _toggle() {
     if (navigator.vibrate) {
@@ -196,11 +152,17 @@ export class MaterialButtonCard extends LitElement {
       typeof this._config.tap_action === "object"
     ) {
       // Use the new ActionConfig system
+      const evaluatedTap = evaluateAction(
+        this._config.tap_action,
+        this.hass.states[entityId!],
+        this.hass.states[entityId!]?.state,
+        this.hass
+      );
       handleActionConfig(
         this,
         this.hass as any,
         isNullOrEmpty(entityId) ? {} : { entity: entityId },
-        this._config.tap_action as ActionConfig
+        evaluatedTap
       );
       return;
     }
@@ -313,11 +275,17 @@ export class MaterialButtonCard extends LitElement {
         typeof this._config.hold_action === "object"
       ) {
         // Use the new ActionConfig system
+        const evaluatedTap = evaluateAction(
+          this._config.hold_action,
+          this.hass.states[entityId],
+          this.hass.states[entityId]?.state,
+          this.hass
+        );
         handleActionConfig(
           this,
           this.hass as any,
-          { entity: entityId },
-          this._config.hold_action as ActionConfig
+          isNullOrEmpty(entityId) ? {} : { entity: entityId },
+          evaluatedTap
         );
         return;
       }

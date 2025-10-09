@@ -29,6 +29,24 @@
     "info_device": "Informazioni Dispositivo",
     "related": "Integrazione Correlata"
   },
+  "actions": {
+    "automatic_action": "Attiva azioni automatiche",
+    "tap_action_title": "Azione al clic",
+    "hold_action_title": "Azione alla pressione prolungata",
+    "double_tap_action_title": "Azione al doppio clic",
+    "toggle": "Clic singolo (Accensione/Spegnimento)",
+    "more_info": "Mostra info entità",
+    "navigate": "Naviga verso una pagina",
+    "call_service": "Esegui un servizio",
+    "fire_dom": "Genera evento DOM",
+    "assist": "Attiva assistente vocale",
+    "url": "Apri link o sito web",
+    "none": "Nessuna azione",
+    "google_home": "Apri Google Home",
+    "settings": "Apri Impostazioni",
+    "select_option": "Seleziona opzione",
+    "warning": "⚠️ Azioni avanzate (JS, [[[]]], call-service complessi) devono essere configurate tramite YAML."
+  },
   "material_dashboard_card": {
     "description": "Configura il percorso di navigazione quando una card viene cliccata.",
     "cameras": "Percorso delle telecamere",
@@ -86,16 +104,6 @@
       "default": "Usa Testo di Default",
       "text_on": "Testo On",
       "text_off": "Testo Off"
-    },
-    "toggle": {
-      "title": "Attiva azioni automatiche",
-      "press": "Azione al clic",
-      "hold": "Azione alla pressione prolungata",
-      "click": "Clic singolo (Accensione/Spegnimento)",
-      "info": "Visualizza informazioni",
-      "navigate": "Naviga",
-      "url": "URL",
-      "none": "Nessuna azione"
     }
   },
   "material_control_card": {
@@ -105,17 +113,6 @@
     "dual_icon": {
       "default": "Usa l'icona predefinita",
       "options": "Usa icona doppia (stati Attivo e Disattivo)."
-    },
-    "actions": {
-      "hold": "Azione alla pressione prolungata",
-      "press": "Azione al clic",
-      "more_info": "Più informazioni",
-      "toggle": "Attiva/Disattiva",
-      "navigate": "Naviga",
-      "url": "URL",
-      "none": "Nessuna azione",
-      "google_home": "Apri Google Home",
-      "settings": "Apri Impostazioni"
     }
   },
   "material_slider_card": {

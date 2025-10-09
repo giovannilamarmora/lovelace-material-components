@@ -28,6 +28,7 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
   const useDefault = config.use_default_icon ?? true;
   const idDeviceTurnOn = isDeviceOn(state);
 
+  //TODO: Modifica con mapJSFunction
   // 🟢 Supporto template stile [[[ ... ]]]
   if (
     typeof config.icon === "string" &&

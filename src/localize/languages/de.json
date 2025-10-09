@@ -29,6 +29,24 @@
     "info_device": "Geräteinformationen",
     "related": "Zugehörige Integration"
   },
+  "actions": {
+    "automatic_action": "Automatische Aktionen aktivieren",
+    "tap_action_title": "Aktion beim Klicken",
+    "hold_action_title": "Aktion beim Halten",
+    "double_tap_action_title": "Aktion beim Doppelklick",
+    "toggle": "Einfacher Klick (An/Aus)",
+    "more_info": "Entitätsinfo anzeigen",
+    "navigate": "Zu Seite navigieren",
+    "call_service": "Dienst ausführen",
+    "fire_dom": "DOM-Ereignis auslösen",
+    "assist": "Sprachassistent aktivieren",
+    "url": "Link oder Webseite öffnen",
+    "none": "Keine Aktion",
+    "google_home": "Google Home öffnen",
+    "settings": "Einstellungen öffnen",
+    "select_option": "Option auswählen",
+    "warning": "⚠️ Erweiterte Aktionen (JS, [[[]]], komplexe Call-Services) müssen über YAML konfiguriert werden."
+  },
   "material_dashboard_card": {
     "description": "Konfiguriere den Navigationspfad, wenn eine Karte angeklickt wird.",
     "cameras": "Kamerapfad",
@@ -86,16 +104,6 @@
       "default": "Standardtext verwenden",
       "text_on": "Text Ein",
       "text_off": "Text Aus"
-    },
-    "toggle": {
-      "title": "Automatische Aktionen aktivieren",
-      "press": "Aktion bei Klick",
-      "hold": "Aktion bei langem Drücken",
-      "click": "Einzeltap (Ein-/Aus)",
-      "info": "Informationen anzeigen",
-      "navigate": "Navigieren",
-      "url": "URL",
-      "none": "Keine Aktion"
     }
   },
   "material_control_card": {
@@ -105,17 +113,6 @@
     "dual_icon": {
       "default": "Standard-Symbol verwenden",
       "options": "Doppelsymbol verwenden (Aktiv/Inaktiv)."
-    },
-    "actions": {
-      "hold": "Aktion bei langem Drücken",
-      "press": "Aktion bei Klick",
-      "more_info": "Mehr Informationen",
-      "toggle": "Ein-/Aus",
-      "navigate": "Navigieren",
-      "url": "URL",
-      "none": "Keine Aktion",
-      "google_home": "Google Home öffnen",
-      "settings": "Einstellungen öffnen"
     }
   },
   "material_slider_card": {

@@ -1,6 +1,6 @@
 import { localize } from "../localize/localize";
 
-export const CARD_VERSION = "2.0.0-ALPHA";
+export const CARD_VERSION = "2.0.0-BETA";
 
 export function getOrDefault<T>(value: T | undefined | null, defValue: T): T {
   return value !== undefined && value !== null ? value : defValue;

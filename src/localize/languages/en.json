@@ -29,6 +29,24 @@
     "info_device": "Device Information",
     "related": "Related Integration"
   },
+  "actions": {
+    "automatic_action": "Enable automatic actions",
+    "tap_action_title": "Action on tap",
+    "hold_action_title": "Action on hold",
+    "double_tap_action_title": "Action on double tap",
+    "toggle": "Single click (On/Off)",
+    "more_info": "Show entity info",
+    "navigate": "Navigate to a page",
+    "call_service": "Run a service",
+    "fire_dom": "Fire DOM event",
+    "assist": "Activate voice assistant",
+    "url": "Open link or website",
+    "none": "No action",
+    "google_home": "Open Google Home",
+    "settings": "Open Settings",
+    "select_option": "Select option",
+    "warning": "⚠️ Advanced actions (JS, [[[]]], complex call-services) must be configured via YAML."
+  },
   "material_dashboard_card": {
     "description": "Configure the navigation path when a card is tapped.",
     "cameras": "Cameras path",
@@ -86,16 +104,6 @@
       "default": "Use Default Text",
       "text_on": "Text On",
       "text_off": "Text Off"
-    },
-    "toggle": {
-      "title": "Enable automatic actions",
-      "press": "Action on click",
-      "hold": "Action on long press",
-      "click": "Single click (On/Off)",
-      "info": "Show information",
-      "navigate": "Navigate",
-      "url": "URL",
-      "none": "None"
     }
   },
   "material_control_card": {
@@ -105,17 +113,6 @@
     "dual_icon": {
       "default": "Use Default Icon",
       "options": "Use Dual Icon (On and Off states)."
-    },
-    "actions": {
-      "press": "Action on click",
-      "hold": "Action on long press",
-      "more_info": "More Info",
-      "toggle": "Toggle",
-      "navigate": "Navigate",
-      "url": "URL",
-      "none": "None",
-      "google_home": "Open Google Home",
-      "settings": "Open Settings"
     }
   },
   "material_slider_card": {

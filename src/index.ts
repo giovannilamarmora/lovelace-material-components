@@ -14,6 +14,8 @@ import { MaterialLightsCardEditor } from "./material-lights/material-lights-card
 import { MaterialMediaOverlay } from "./material-media-overlay/material-media-overlay";
 import { CARD_VERSION } from "./shared/utils";
 import { MaterialUsersCard } from "./material-users/material-users-card";
+import { MaterialMenuCard } from "./material-menu/material-menu-card";
+import { MaterialMenuCardEditor } from "./material-menu/material-menu-card-editor";
 
 /* eslint no-console: 0 */
 console.info(
@@ -99,6 +101,15 @@ if (!customElements.get("material-users-card")) {
   customElements.define("material-users-card", MaterialUsersCard);
 }
 
+/** Material Menu */
+if (!customElements.get("material-menu-card-editor")) {
+  customElements.define("material-menu-card-editor", MaterialMenuCardEditor);
+}
+
+if (!customElements.get("material-menu-card")) {
+  customElements.define("material-menu-card", MaterialMenuCard);
+}
+
 (window as any).customCards = (window as any).customCards ?? [];
 (window as any).customCards.push({
   type: "material-slider-card",
@@ -150,8 +161,16 @@ if (!customElements.get("material-users-card")) {
 
 (window as any).customCards.push({
   type: "material-users-card",
-  name: "Material Users",
+  name: "Material Users (Beta)",
   preview: true,
   description:
     "A card to view and manage users in your Home, providing a clear interface to see active users and control permissions.",
+});
+
+(window as any).customCards.push({
+  type: "material-menu-card",
+  name: "Material Menu (Beta)",
+  preview: true,
+  description:
+    "The menu to manage your home's settings, allowing you to view and adjust key options clearly and easily.",
 });
