@@ -13,29 +13,31 @@ export function setColorCard(
   state: string
 ) {
   const offlineOnOffState = isOffline ? "offline" : isOn ? "on" : "off";
-  const domain =
+  const colorDomain =
     config.control_type == ControlType.THERMOMETER &&
     config.use_material_color &&
     isOn
       ? "climate"
       : "button";
+
+  const domain = config.entity?.split(".")[0];
   const materialColor: any = material_color;
   const stateColor = config.use_material_color
-    ? getPropertyColor(state)
+    ? getPropertyColor(state, domain)
     : "default";
 
   let color: any;
 
   if (isOffline || (isOn && !config.use_material_color) || !isOn)
-    color = materialColor[theme][offlineOnOffState][domain];
-  else color = materialColor[theme][offlineOnOffState][domain][stateColor];
+    color = materialColor[theme][offlineOnOffState][colorDomain];
+  else color = materialColor[theme][offlineOnOffState][colorDomain][stateColor];
 
   if (!isNullOrEmpty(color)) {
     _setStyleProperty("--bsc-name-color", color.title, style);
     _setStyleProperty("--bsc-icon-color", color.icon, style);
     _setStyleProperty(
       "--bsc-percentage-color",
-      domain == "climate" ? color.title : color.percentage,
+      colorDomain == "climate" ? color.title : color.percentage,
       style
     );
     _setStyleProperty("--bsc-background", color.background, style);

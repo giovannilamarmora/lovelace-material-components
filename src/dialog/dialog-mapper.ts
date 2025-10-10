@@ -25,6 +25,11 @@ export function mapStateTitle(stateObj: any, entity: any) {
 export function mapStateValue(stateObj: any) {
   const device_class = getValidDeviceClass(stateObj.attributes);
   const isDeviceTurnOn = isDeviceOn(stateObj.state);
+
+  if (isOfflineState(stateObj.state)) {
+    return localize("common.offline");
+  }
+
   switch (device_class) {
     case DeviceType.BATTERY:
     case DeviceType.HUMIDITY:

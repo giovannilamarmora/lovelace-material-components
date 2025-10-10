@@ -15,6 +15,7 @@
     "cool": "Raffresca",
     "fan": "Ventilazione",
     "playing": "Riproduzione",
+    "paused": "Pausa",
     "idle": "Cast",
     "presence": "Movimento",
     "off_presence": "Nessun movimento",
@@ -88,7 +89,7 @@
     "control_type": "Tipo di controllo",
     "type": {
       "generic": "Generico (Interruttore, Pulsante...)",
-      "thermometer": "Climatizzazione",
+      "thermometer": "Climatizzazione, Ventilazione...",
       "automation": "Autonomazioni",
       "scene": "Scene",
       "media": "Multimedia (Google, Alexa...)",

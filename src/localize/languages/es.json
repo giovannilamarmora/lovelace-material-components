@@ -15,6 +15,7 @@
     "cool": "Refrigeración",
     "fan": "Ventilación",
     "playing": "Reproduciendo",
+    "paused": "Pause",
     "idle": "Cast",
     "presence": "Movimiento",
     "off_presence": "Sin movimiento",
@@ -88,7 +89,7 @@
     "control_type": "Tipo de control",
     "type": {
       "generic": "Genérico (Interruptor, Botón...)",
-      "thermometer": "Climatización",
+      "thermometer": "Climatización, Ventilación...",
       "automation": "Automatizaciones",
       "scene": "Escenas",
       "media": "Multimedia (Google, Alexa...)",

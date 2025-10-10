@@ -131,6 +131,7 @@ export class MaterialButtonCard extends LitElement {
         switch (device_class) {
           case DeviceType.DOOR:
           case DeviceType.TEMPERATURE:
+          case DeviceType.HUMIDITY:
           case DeviceType.MOTION:
             return _openDialog(this, "sensor-dialog", this.hass, this._config);
         }

@@ -1,5 +1,6 @@
 import { _setStyleProperty, material_color } from "../shared/color";
 import { OnStates } from "../shared/states";
+import { DomainType } from "../shared/types";
 import { isNullOrEmpty } from "../shared/utils";
 
 export function adjustTempAuto(
@@ -105,7 +106,10 @@ export function setColorCard(
  * - `"material_dry"` → For cooling, fan, dry, or eco modes.
  * - `"material"` (default) → If the state does not match any known case.
  */
-export function getPropertyColor(state: string) {
+export function getPropertyColor(
+  state: string,
+  domain: string = DomainType.CLIMATE
+) {
   switch (state) {
     case OnStates.AUTO:
     case OnStates.HEAT:
@@ -121,6 +125,6 @@ export function getPropertyColor(state: string) {
     case OnStates.ECO:
       return "material_eco";
     default:
-      return "material";
+      return domain && domain == DomainType.FAN ? "material_fan" : "material";
   }
 }

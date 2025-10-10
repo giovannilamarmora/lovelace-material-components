@@ -10,6 +10,7 @@ import {
   openGoogleHome,
   openNetflix,
   openSpotify,
+  openTwitch,
   openYouTube,
 } from "./material-media-mapper";
 import { _setStyleProperty } from "../shared/color";
@@ -456,6 +457,7 @@ export class MaterialMediaOverlay extends LitElement {
     if (appName == "YouTube") openYouTube();
     if (appName == "Spotify") openSpotify();
     if (appName == "Netflix") openNetflix();
+    if (appName == "Twitch") openTwitch();
   }
 
   protected render(): TemplateResult {

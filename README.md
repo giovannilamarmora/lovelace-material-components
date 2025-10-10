@@ -145,6 +145,29 @@ A suite of custom cards that implements the **Material You** design principles f
 
 </div>
 
+### 🏃‍♂️ Material Dialog Page (Sensor View)
+
+> 🆕 Introduced in version 2.0.0
+
+<div align="center">
+
+<table style="border-radius: 28px; overflow: hidden; border-collapse: separate; border-spacing: 0; max-width: 1000px">
+<tr>
+<td width="50%" align="center" style="padding: 24px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+<strong style="color: white; font-size: 18px;">☀️ Light Mode</strong><br/><br/>
+<img src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/Material%20Home%20Component/Material%20Dialog/Material%20Dialog%20Light.jpg" alt="Control Light" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.2);"/>
+</td>
+<td width="50%" align="center" style="padding: 24px; background: linear-gradient(135deg, #2b5876 0%, #4e4376 100%);">
+<strong style="color: white; font-size: 18px;">🌙 Dark Mode</strong><br/><br/>
+<img src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/Material%20Home%20Component/Material%20Dialog/Material%20Dialog%20Dark.jpg" alt="Control Dark" style="border-radius: 20px; box-shadow: 0 8px 32px rgba(0,0,0,0.4);"/>
+</td>
+</tr>
+</table>
+
+</div>
+
+### And more components...
+
 ---
 
 ## ✨ Key Features
@@ -182,14 +205,40 @@ A suite of custom cards that implements the **Material You** design principles f
 
 ## 📦 Installation
 
-<!--
-### ☁️ Method 1: HACS (Recommended)
+### 📓 Method 1 – HACS Installation
 
-The easiest and fastest way to get started. No download required!
+There are two ways to install the component via HACS:
+either by clicking the button below or by manually adding the repository.
+
+#### 🚀 Option 1 – One-Click Installation (Recommended)
+
+If you already have HACS installed, you can add the repository directly by clicking this button:
+
+> ## ⚠️ Coming Soon
+
+<!--
 
 [![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-google-components&owner=giovannilamarmora&category=Plugin)
+--->
 
------>
+Then, simply install the plugin from the HACS interface.
+
+#### 🔧 Option 2 – Manual Installation via HACS
+
+1. Open HACS in your Home Assistant interface.
+2. Go to Settings → Custom repositories.
+3. Click Add repository and enter the following URL:
+
+```
+https://github.com/giovannilamarmora/lovelace-material-components
+```
+
+4. Select Plugin as the category.
+5. Click Add to confirm.
+6. Go to HACS → Frontend, search for Google Home Component, then click Install.
+7. Restart Home Assistant to complete the setup.
+
+---
 
 ### ☁️ Method 2: CDN
 
@@ -242,6 +291,29 @@ For those who prefer to host files locally.
 
 ---
 
+## Migration from Google Components
+
+If you were using the old Google Components, you can migrate your dashboards easily.  
+Check the migration guide here:
+
+> ## ⚠️ Coming Soon
+
+<!--
+🔗 [Migration Guide](https://github.com/giovannilamarmora/lovelace-material-cards#migration-from-old-google-component-to-material-cards)
+-->
+
+---
+
+### Features
+
+- Material-style button cards, dialogs, and media overlays.
+- Support for temperature, humidity, motion, and door sensors.
+- Responsive UI for both desktop and mobile.
+- Enhanced customization and theme support.
+- Easy migration from the old Google Components repository.
+
+---
+
 ## 📚 Full Documentation
 
 <div align="center">
@@ -257,6 +329,13 @@ Everything you need to configure, customize, and get the most out of<br/>Materia
 <a href="https://giovannilamarmora.gitbook.io/google-home-on-home-assistant" style="text-decoration: none;">
 <div style="background: white; color: #4285F4; padding: 16px 48px; border-radius: 100px; font-weight: bold; font-size: 18px; display: inline-block; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s;">
 Read the Documentation →
+</div>
+</a>
+<br>
+<br>
+<a href="https://community.home-assistant.io/t/introducing-the-google-components/916428" style="text-decoration: none;">
+<div style="background: white; color: #4285F4; padding: 16px 48px; border-radius: 100px; font-weight: bold; font-size: 18px; display: inline-block; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s;">
+Official Community and Discussion →
 </div>
 </a>
 <div style="margin-top: 32px; color: white; font-size: 14px;">
@@ -304,6 +383,11 @@ Read the Documentation →
 <td style="padding: 20px; font-weight: bold; color: #1a73e8;">card-mod <em>(For Lights Control)</em></td>
 <td style="padding: 20px;">Allows you to apply CSS styles to various elements of the Home Assistant frontend.</td>
 <td style="padding: 20px;"><a href="https://github.com/thomasloven/lovelace-card-mod" style="color: #1a73e8; text-decoration: none; font-weight: bold;">GitHub →</a></td>
+</tr>
+<tr style="background: white;">
+<td style="padding: 20px; font-weight: bold; color: #1a73e8;">auto-entities <em>(For Users Card)</em></td>
+<td style="padding: 20px;">Allows you to add all the user present into the house.</td>
+<td style="padding: 20px;"><a href="https://github.com/thomasloven/lovelace-auto-entities" style="color: #1a73e8; text-decoration: none; font-weight: bold;">GitHub →</a></td>
 </tr>
 <tr style="background: #f8f9fa;">
 <td style="padding: 20px; font-weight: bold; color: #1a73e8;">Material Symbol Icons</td>

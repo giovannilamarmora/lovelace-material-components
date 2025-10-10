@@ -64,6 +64,21 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
   // Se use_default_icon è true, prosegui con la logica predefinita
   const deviceOnline = !isOfflineState(state, controlType);
 
+  /**
+   * I'll try first to check the domain type, if not match will go to control type
+   */
+  switch (domain) {
+    case DomainType.SWITCH:
+      if (idDeviceTurnOn) return "m3rf:switch";
+      else return "m3r:switch";
+    case DomainType.NUMBER:
+      if (deviceOnline || idDeviceTurnOn)
+        return "m3rf:settings-input-component";
+      else return "m3r:settings-input-component";
+    case DomainType.FAN:
+      return deviceOnline && idDeviceTurnOn ? "m3of:mode-fan" : "m3o:mode-fan";
+  }
+
   switch (controlType) {
     case ControlType.LIGHT: {
       return config.icon == undefined ||
@@ -187,16 +202,6 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
             else return "m3r:light-mode";
         }
       }
-
-      switch (domain) {
-        case DomainType.SWITCH:
-          if (idDeviceTurnOn) return "m3rf:switch";
-          else return "m3r:switch";
-        case DomainType.NUMBER:
-          if (deviceOnline || idDeviceTurnOn)
-            return "m3rf:settings-input-component";
-          else return "m3r:settings-input-component";
-      }
     }
   }
 
@@ -227,11 +232,21 @@ export function mapStateDisplay(
   }
 
   let text = "";
+  const isOn = isDeviceOn(stateObj.state);
+
+  switch (domain) {
+    case DomainType.FAN: {
+      text =
+        stateObj.attributes.percentage && isOn
+          ? " • " + stateObj.attributes.percentage + "%"
+          : "";
+      return getStateDisplay(stateObj.state, text, is_presence_sensor);
+    }
+  }
   if (control_type === ControlType.THERMOMETER && !isOffline) {
-    const isOn = isDeviceOn(stateObj.state);
     const isOffAndHasTemperature =
       !isOn && !isNullOrEmpty(stateObj.attributes.temperature);
-    if (isOn || isOffAndHasTemperature || !is_climate_card)
+    if (isOn || isOffAndHasTemperature || !is_climate_card) {
       text = stateObj.attributes.current_temperature
         ? " • " +
           adjustTempAuto(
@@ -240,7 +255,7 @@ export function mapStateDisplay(
           ) +
           "°"
         : "";
-    else
+    } else
       return (
         localize("common.indoor") +
         " • " +
@@ -319,7 +334,7 @@ export function getStateDisplay(
     [OnlineStates.FAN_ONLY]: localize("common.fan"),
     [OnlineStates.HEAT_COOL]: localize("common.auto"),
     [OnlineStates.IDLE]: localize("common.idle"),
-    [OnlineStates.PAUSED]: localize("common.idle"),
+    [OnlineStates.PAUSED]: localize("common.paused"),
     [OnlineStates.PLAYING]: localize("common.playing"),
   };
 

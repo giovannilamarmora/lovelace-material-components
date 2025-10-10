@@ -15,6 +15,7 @@
     "dry": "Dry",
     "fan": "Fan",
     "playing": "Playing",
+    "paused": "Pause",
     "idle": "Cast",
     "presence": "Motion",
     "off_presence": "No motion",
@@ -88,7 +89,7 @@
     "control_type": "Control Type",
     "type": {
       "generic": "Generic (Switch, Button...)",
-      "thermometer": "Thermometer",
+      "thermometer": "Thermometer, Ventilation...",
       "automation": "Autonomation",
       "scene": "Scene",
       "media": "Multimedia (Google, Alexa...)",

@@ -72,3 +72,18 @@ export function getPrimeVideoURL(): string {
     return "https://www.primevideo.com/";
   }
 }
+
+export function getTwitchURL(): string {
+  const ua = navigator.userAgent || "";
+
+  if (/Android/i.test(ua)) {
+    // URL scheme per aprire l'app Twitch su Android
+    return "app://com.twitch.tv";
+  } else if (/iPhone|iPad|iPod/i.test(ua)) {
+    // URL scheme per Twitch su iOS
+    return "twitch://";
+  } else {
+    // Fallback per desktop / browser
+    return "https://www.twitch.tv/";
+  }
+}
