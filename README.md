@@ -296,11 +296,7 @@ For those who prefer to host files locally.
 If you were using the old Google Components, you can migrate your dashboards easily.  
 Check the migration guide here:
 
-> ## ⚠️ Coming Soon
-
-<!--
-🔗 [Migration Guide](https://github.com/giovannilamarmora/lovelace-material-cards#migration-from-old-google-component-to-material-cards)
--->
+🔗 [Migration Guide](https://giovannilamarmora.gitbook.io/google-home-on-home-assistant/additional/migration-to-material-component)
 
 ---
 
