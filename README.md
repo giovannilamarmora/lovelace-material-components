@@ -1,10 +1,8 @@
 # 🏠 Material Home Component for Home Assistant
 
-[![Instagram](https://img.shields.io/badge/Instagram-%40gio_lamarmora-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gio_lamarmora/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/WebSite%20-Visit-blue?style=for-the-badge&logo=Google-Chrome&logoColor=white)](https://giovannilamarmora.github.io/)
+[![Instagram](https://img.shields.io/badge/Instagram-%40gio_lamarmora-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gio_lamarmora/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/WebSite%20-Visit-blue?style=for-the-badge&logo=Google-Chrome&logoColor=white)](https://giovannilamarmora.github.io/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/Home%20Assistant%20Forum-View-blue?style=for-the-badge&logo=Home-Assistant&logoColor=white)](https://community.home-assistant.io/t/introducing-the-google-components/916428)&nbsp;&nbsp;[![BuyMeACoffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-Support-orange?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://revolut.me/glamarmora)&nbsp;&nbsp;[![Sponsor](https://img.shields.io/badge/GitHub_Sponsors-Become_a_Sponsor-pink?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/giovannilamarmora)
 
-<!--
-[![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-google-components&owner=giovannilamarmora&category=Plugin)
--->
+[![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-material-components&owner=giovannilamarmora&category=Plugin)
 
 **Bring the Google Home app experience directly into Home Assistant**
 
@@ -214,12 +212,7 @@ either by clicking the button below or by manually adding the repository.
 
 If you already have HACS installed, you can add the repository directly by clicking this button:
 
-> ## ⚠️ Coming Soon
-
-<!--
-
-[![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-google-components&owner=giovannilamarmora&category=Plugin)
---->
+[![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-material-components&owner=giovannilamarmora&category=Plugin)
 
 Then, simply install the plugin from the HACS interface.
 
@@ -296,7 +289,7 @@ For those who prefer to host files locally.
 If you were using the old Google Components, you can migrate your dashboards easily.  
 Check the migration guide here:
 
-🔗 [Migration Guide](https://giovannilamarmora.gitbook.io/google-home-on-home-assistant/additional/migration-to-material-component)
+🔗 [Migration Guide](https://giovannilamarmora.gitbook.io/material-home-component/additional/migration-to-material-component)
 
 ---
 
@@ -322,7 +315,7 @@ Check the migration guide here:
 <p style="color: rgba(255,255,255,0.9); font-size: 16px; margin-bottom: 32px; line-height: 1.6;">
 Everything you need to configure, customize, and get the most out of<br/>Material Home Component
 </p>
-<a href="https://giovannilamarmora.gitbook.io/google-home-on-home-assistant" style="text-decoration: none;">
+<a href="https://giovannilamarmora.gitbook.io/material-home-component" style="text-decoration: none;">
 <div style="background: white; color: #4285F4; padding: 16px 48px; border-radius: 100px; font-weight: bold; font-size: 18px; display: inline-block; box-shadow: 0 4px 16px rgba(0,0,0,0.2); transition: transform 0.2s;">
 Read the Documentation →
 </div>
@@ -444,7 +437,7 @@ If this project was helpful to you, consider supporting it!
 <td align="center" style="padding: 48px 40px; background: linear-gradient(135deg, #FFEB3B 0%, #FFC107 100%);">
 <div style="font-size: 64px; margin-bottom: 16px;">☕</div>
 <h3 style="color: #F57F17; margin: 0 0 24px 0; font-size: 24px;">Buy Me a Coffee</h3>
-<a href="https://www.buymeacoffee.com/tuousername" style="text-decoration: none;">
+<a href="https://revolut.me/glamarmora" style="text-decoration: none;">
 <div style="background: #F57F17; color: white; padding: 14px 40px; border-radius: 100px; font-weight: bold; font-size: 16px; display: inline-block; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
 ☕ Buy Me a Coffee
 </div>
