@@ -794,7 +794,7 @@ export class MaterialMediaOverlay extends LitElement {
       flex-direction: column;
       justify-content: space-between;
       max-width: 500px;
-      width: -webkit-fill-available;
+      width: 100%;
     }
 
     .video-card-bg {
@@ -935,7 +935,7 @@ export class MaterialMediaOverlay extends LitElement {
       align-items: center;
       gap: 16px;
       max-width: 500px;
-      width: -webkit-fill-available;
+      width: 100%;
       position: relative;
       overflow: hidden; /* importante per contenere l'overlay */
       z-index: 1;
@@ -1001,7 +1001,7 @@ export class MaterialMediaOverlay extends LitElement {
       cursor: pointer;
       transition: all 0.2s ease;
       max-width: 500px;
-      width: -webkit-fill-available;
+      width: 100%;
     }
 
     .menu-card.remote {

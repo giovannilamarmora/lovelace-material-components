@@ -120,7 +120,7 @@ cards:
           card:
             - background: |
                 [[[
-                  return hass.themes.darkMode ? '#302f32' : '#E8F0FE';
+                  return hass.themes.darkMode ? '#1A2238' : '#E8F0FE';
                 ]]]
           icon:
             - color: |
