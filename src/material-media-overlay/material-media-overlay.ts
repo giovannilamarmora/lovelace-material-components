@@ -1049,5 +1049,12 @@ export class MaterialMediaOverlay extends LitElement {
       cursor: not-allowed !important;
       opacity: 0.6 !important;
     }
+
+    @supports (width: -webkit-fill-available) {
+      .menu-card,
+      .video-card {
+        width: -webkit-fill-available;
+      }
+    }
   `;
 }
