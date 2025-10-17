@@ -1052,6 +1052,7 @@ export class MaterialMediaOverlay extends LitElement {
 
     @supports (width: -webkit-fill-available) {
       .menu-card,
+      .volume-card,
       .video-card {
         width: -webkit-fill-available;
       }
