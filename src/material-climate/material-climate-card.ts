@@ -133,12 +133,21 @@ export class MaterialClimateCard extends LitElement {
     const isOffAndHasTemperature =
       !isOn && !isNullOrEmpty(stateObj.attributes.temperature);
 
+    /**
+     * Determines the device’s effective state.
+     * Uses `preset_mode` (e.g. "eco", "away") if available and not "none",
+     * otherwise falls back to the regular `state` value.
+     */
+    const presetMode = stateObj.attributes?.preset_mode;
+    const state =
+      presetMode && presetMode == "eco" ? presetMode : stateObj.state;
+
     setColorCard(
       this.style,
       isOffline,
       isOn,
       theme,
-      stateObj.state,
+      state,
       this._config.use_material_color
     );
 

@@ -399,7 +399,20 @@ export class MaterialButtonCard extends LitElement {
       (this._config.use_default_text ||
         isNullOrEmpty(this._config.use_default_text));
 
-    const state = stateObj && stateObj.state ? stateObj.state : "unavaiable";
+    let state: string;
+    if (this._config.control_type == ControlType.THERMOMETER) {
+      /**
+       * Determines the device’s effective state.
+       * Uses `preset_mode` only if it's `"eco"`;
+       * otherwise falls back to the regular `state` or `"unavailable"` if missing.
+       */
+      const presetMode = stateObj?.attributes?.preset_mode;
+      state =
+        presetMode === "eco" ? "eco" : (stateObj?.state ?? "unavailable");
+    } else {
+      state = stateObj && stateObj.state ? stateObj.state : "unavaiable";
+    }
+
     setColorCard(this.style, this._config, isOffline, isOn, theme, state);
 
     return html`
