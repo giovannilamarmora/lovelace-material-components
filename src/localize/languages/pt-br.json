@@ -1,0 +1,146 @@
+{
+  "common": {
+    "version": "Versão",
+    "invalid_configuration": "Configuração inválida",
+    "show_warning": "Mostrar Aviso",
+    "no_entity_set": "Entidade não definida",
+    "no_entity": "Entidade não disponível",
+    "indoor": "Interno",
+    "on": "Ligado",
+    "off": "Desligado",
+    "offline": "Offline",
+    "auto": "Automático",
+    "heat": "Aquecer",
+    "cool": "Refrigerar",
+    "dry": "Secar",
+    "fan": "Ventilação",
+    "playing": "Reproduzindo",
+    "paused": "Pausado",
+    "idle": "Transmitir",
+    "presence": "Movimento",
+    "off_presence": "Sem movimento",
+    "today_at": "Hoje às",
+    "yesterday_at": "Ontem às",
+    "open": "Aberto",
+    "closed": "Fechado",
+    "opening": "Abrindo",
+    "closing": "Fechando",
+    "active": "Ativo",
+    "inactive": "Inativo",
+    "info_device": "Informações do Dispositivo",
+    "related": "Integração Relacionada"
+  },
+  "actions": {
+    "automatic_action": "Habilitar ações automáticas",
+    "tap_action_title": "Ação ao tocar",
+    "hold_action_title": "Ação ao manter pressionado",
+    "double_tap_action_title": "Ação ao tocar duas vezes",
+    "toggle": "Clique simples (Ligar/Desligar)",
+    "more_info": "Mostrar informações da entidade",
+    "navigate": "Navegar para uma página",
+    "call_service": "Executar um serviço",
+    "fire_dom": "Disparar evento DOM",
+    "assist": "Ativar assistente de voz",
+    "url": "Abrir link ou site",
+    "none": "Nenhuma ação",
+    "google_home": "Abrir Google Home",
+    "settings": "Abrir Configurações",
+    "select_option": "Selecionar opção",
+    "warning": "⚠️ Ações avançadas (JS, [[[]]], call-services complexos) devem ser configuradas via YAML."
+  },
+  "material_dashboard_card": {
+    "description": "Configure o caminho de navegação quando um cartão é tocado.",
+    "cameras": "Caminho das Câmeras",
+    "cameras_name": "Câmeras",
+    "lighting": "Caminho da Iluminação",
+    "lighting_name": "Iluminação",
+    "lighting_label": "Luzes",
+    "wifi": "Caminho do Wi-Fi",
+    "wifi_name": "Wi-Fi",
+    "climate": "Caminho da Climatização",
+    "climate_name": "Climatização",
+    "device": "Dispositivo",
+    "devices": "Dispositivos",
+    "placeholder": "./caminho-ou-url",
+    "default": "Usar configuração padrão ao Tocar (Toque Simples)",
+    "tap_type": "Selecione o tipo de Toque (Toque Simples, Manter Pressionado, Toque Duplo)",
+    "single": "Toque Simples",
+    "hold": "Manter Pressionado",
+    "double": "Toque Duplo",
+    "web": "Usar Toque Simples no Navegador (Toque selecionado no celular)"
+  },
+  "material_climate_card": {
+    "name": "Nome da Entidade",
+    "entity": "Entidade",
+    "theme": "Usar Material Expressive",
+    "increase_temp": "Aumentar Temperatura (ex: 0.5)",
+    "decrease_temp": "Diminuir Temperatura (ex: 0.5)",
+    "dual_icon": {
+      "default": "Usar Ícone Padrão",
+      "options": "Usar Ícone Duplo (estados Ligado e Desligado)."
+    },
+    "fix_temperature": "Habilitar se a temperatura não estiver correta",
+    "false": "Inativo",
+    "true": "Ativo",
+    "auto": "Automático"
+  },
+  "material_button_card": {
+    "name": "Nome da Entidade",
+    "control_type": "Tipo de Controle",
+    "type": {
+      "generic": "Genérico (Interruptor, Botão...)",
+      "thermometer": "Termômetro, Ventilação...",
+      "automation": "Automação",
+      "scene": "Cena",
+      "media": "Multimídia (Google, Alexa...)",
+      "state": "Estado",
+      "action": "Ação",
+      "app_version": "Versão dos Componentes Material"
+    },
+    "dual_icon": {
+      "default": "Usar ícone padrão",
+      "options": "Usar ícone duplo (Elemento Ligado e Elemento Desligado)."
+    },
+    "dual_text": {
+      "default": "Usar Texto Padrão",
+      "text_on": "Texto Ligado",
+      "text_off": "Texto Desligado"
+    }
+  },
+  "material_control_card": {
+    "name": "Nome do Cartão",
+    "entity_card": "Usar cartão como entidade",
+    "entity": "Entidade",
+    "dual_icon": {
+      "default": "Usar Ícone Padrão",
+      "options": "Usar Ícone Duplo (estados Ligado e Desligado)."
+    }
+  },
+  "material_slider_card": {
+    "name": "Nome do Cartão",
+    "control_type": "Tipo de Controle",
+    "type": {
+      "light": "Luz",
+      "cover": "Persiana"
+    },
+    "entity": "Entidade a controlar",
+    "icon": "Ícone personalizado (se deixado em branco, muda automaticamente com base no estado Ligado/Desligado)",
+    "percentage": "Exibir valor como porcentagem",
+    "bold_text": "Estilo negrito para o texto"
+  },
+  "material_lights_card": {
+    "on_text": "Texto para Luzes LIGADAS",
+    "off_text": "Texto para Luzes DESLIGADAS"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "Nada está sendo reproduzido",
+      "playing": "Reproduzindo agora"
+    },
+    "remote": "Abrir Controle Remoto",
+    "cast": "Transmitir tela",
+    "stop_cast": "Parar transmissão",
+    "open": "Abrir ",
+    "open_google": "Abrir Google Home"
+  }
+}
