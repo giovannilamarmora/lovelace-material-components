@@ -25,7 +25,7 @@ export function mapStateTitle(stateObj: any, entity: any) {
 export function mapStateValue(stateObj: any) {
   const device_class = getValidDeviceClass(stateObj.attributes);
   const isDeviceTurnOn = isDeviceOn(stateObj.state);
-  
+
   if (isOfflineState(stateObj.state)) {
     return localize("common.offline");
   }
@@ -84,4 +84,10 @@ export function _handleMaxWidth(_this: any) {
 
   if (!dialog.classList.contains("large")) dialog.classList.add("large");
   else dialog.classList.remove("large");
+}
+
+export function _excludeSensor(stateObj: any) {
+  const domain = stateObj.entity_id.split(".")[0];
+  if (domain == "number" || domain == "update") return true;
+  return false;
 }

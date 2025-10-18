@@ -3,6 +3,7 @@ import { customElement, property } from "lit/decorators.js";
 import { localize } from "../../localize/localize";
 import { getIcon } from "../../shared/mapper";
 import {
+  _excludeSensor,
   _handleMaxWidth,
   isDeviceStateOn,
   mapStateTitle,
@@ -169,8 +170,7 @@ export class SensorDialog extends LitElement {
           <div class="menu-section">
             ${relatedStates.map((stateObj) => {
               /* If is a Precence Sensor, we do not put number device */
-              const domain = stateObj.entity_id.split(".")[0];
-              if (domain == "number") return;
+              if (_excludeSensor(stateObj)) return;
               const icon =
                 getIcon(stateObj, this.config, this.hass) ?? "m3r:info";
               console.log(icon);

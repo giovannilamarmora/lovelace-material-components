@@ -6,7 +6,7 @@ import { localize } from "../localize/localize";
  * Used for displaying version information or debugging purposes.
  * Example usage: displayed when `control_type: app_version` is set.
  */
-export const CARD_VERSION = "2.0.6";
+export const CARD_VERSION = "2.0.7";
 
 /**
  * Returns the provided value if it is not `undefined` or `null`,
