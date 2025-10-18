@@ -1,6 +1,6 @@
 import { localize } from "../localize/localize";
 import { getStateDisplay } from "../shared/mapper";
-import { isDeviceOn, isOfflineState } from "../shared/states";
+import { isDeviceOn, isDeviceOnline, isOfflineState } from "../shared/states";
 import { DeviceType, getValidDeviceClass } from "../shared/types";
 
 /**
@@ -25,7 +25,7 @@ export function mapStateTitle(stateObj: any, entity: any) {
 export function mapStateValue(stateObj: any) {
   const device_class = getValidDeviceClass(stateObj.attributes);
   const isDeviceTurnOn = isDeviceOn(stateObj.state);
-
+  
   if (isOfflineState(stateObj.state)) {
     return localize("common.offline");
   }
@@ -51,11 +51,19 @@ export function mapStateValue(stateObj: any) {
         stateObj.state + " " + (stateObj.attributes.unit_of_measurement ?? "°")
       );
     default:
-      return getStateDisplay(
-        stateObj.state,
-        "",
-        device_class == DeviceType.MOTION
-      );
+      if (isDeviceOnline(stateObj.state))
+        return getStateDisplay(
+          stateObj.state,
+          "",
+          device_class == DeviceType.MOTION
+        );
+      else {
+        const state = stateObj.state;
+        if (typeof state === "string" && /^[a-zA-Z]/.test(state)) {
+          return state.charAt(0).toUpperCase() + state.slice(1);
+        }
+        return state;
+      }
   }
 }
 
