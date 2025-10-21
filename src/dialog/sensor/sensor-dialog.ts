@@ -173,7 +173,7 @@ export class SensorDialog extends LitElement {
               if (_excludeSensor(stateObj)) return;
               const icon =
                 getIcon(stateObj, this.config, this.hass) ?? "m3r:info";
-              console.log(icon);
+
               const entity_id = stateObj.entity_id;
               const entity = this.hass.entities[stateObj.entity_id];
               return html`

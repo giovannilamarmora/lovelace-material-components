@@ -63,6 +63,8 @@ export enum DomainType {
  */
 export enum DeviceType {
   MOTION = "motion",
+  OCCUPANCY = "occupancy",
+  PRESENCE = "presence",
   DOOR = "door",
   CONNECTIVITY = "connectivity",
   MEASUREMENT = "measurement",

@@ -38,7 +38,7 @@ export class MaterialUsersCard extends LitElement {
         this._card = card;
         this.requestUpdate();
       }
-      console.log("This LOG is for debug purpose, Material Dashboard");
+      console.log("This LOG is for debug purpose, Material User");
       console.log(this.hass);
     }
   }

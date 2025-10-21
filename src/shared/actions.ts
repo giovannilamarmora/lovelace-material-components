@@ -56,7 +56,6 @@
  * ```
  */
 export function serializeAction(action: any, defaultAction = "none"): string {
-  console.log(action);
   if (!action) return `action: ${defaultAction}`;
 
   // 🟦 Special case: Open Google Home app or web version

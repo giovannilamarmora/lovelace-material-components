@@ -135,7 +135,6 @@ export class MaterialControlCardEditor
       onChange: (key: string, value: any) => void
     ) => {
       const currentAction = action?.action ?? "more-info";
-      //console.log("CurrentAction", currentAction);
 
       return html`
         <ha-select

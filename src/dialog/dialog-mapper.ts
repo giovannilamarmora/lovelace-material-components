@@ -1,6 +1,11 @@
 import { localize } from "../localize/localize";
 import { getStateDisplay } from "../shared/mapper";
-import { isDeviceOn, isDeviceOnline, isOfflineState } from "../shared/states";
+import {
+  isDeviceOn,
+  isDeviceOnline,
+  isMotionDevice,
+  isOfflineState,
+} from "../shared/states";
 import { DeviceType, getValidDeviceClass } from "../shared/types";
 
 /**
@@ -55,7 +60,7 @@ export function mapStateValue(stateObj: any) {
         return getStateDisplay(
           stateObj.state,
           "",
-          device_class == DeviceType.MOTION
+          isMotionDevice(device_class)
         );
       else {
         const state = stateObj.state;

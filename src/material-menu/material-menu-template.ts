@@ -54,7 +54,6 @@ styles:
 }
 
 function serializeAction(action: any, defaultAction = "none"): string {
-  console.log(action);
   if (!action) return `action: ${defaultAction}`;
 
   if (action.action === "google-home")

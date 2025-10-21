@@ -36,7 +36,7 @@ export class MaterialMenuCard extends LitElement {
         this._card = card;
         this.requestUpdate();
       }
-      console.log("This LOG is for debug purpose, Material Dashboard");
+      console.log("This LOG is for debug purpose, Material Menu");
       console.log(this.hass);
     }
   }
@@ -51,7 +51,6 @@ export class MaterialMenuCard extends LitElement {
 
   private mapTemplate() {
     const text = materialMenuTemplate(this._config);
-    console.log(text);
     return text;
   }
 

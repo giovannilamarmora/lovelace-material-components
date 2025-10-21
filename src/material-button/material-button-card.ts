@@ -14,7 +14,7 @@ import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import { setColorCard } from "./material-button-mapper";
 import { MaterialMediaOverlay } from "../material-media-overlay/material-media-overlay";
 import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
-import { isDeviceOn, isOfflineState } from "../shared/states";
+import { isDeviceOn, isMotionDevice, isOfflineState } from "../shared/states";
 import { _openDialog } from "../dialog/dialog-manager";
 import { evaluateAction } from "../shared/actions";
 
@@ -133,6 +133,8 @@ export class MaterialButtonCard extends LitElement {
           case DeviceType.TEMPERATURE:
           case DeviceType.HUMIDITY:
           case DeviceType.MOTION:
+          case DeviceType.PRESENCE:
+          case DeviceType.OCCUPANCY:
             return _openDialog(this, "sensor-dialog", this.hass, this._config);
         }
 
@@ -377,7 +379,7 @@ export class MaterialButtonCard extends LitElement {
               this._config.control_type!,
               isOffline,
               this._config.fix_temperature,
-              device_class == DeviceType.MOTION
+              isMotionDevice(device_class)
             )
           : "";
     } else {
@@ -407,8 +409,7 @@ export class MaterialButtonCard extends LitElement {
        * otherwise falls back to the regular `state` or `"unavailable"` if missing.
        */
       const presetMode = stateObj?.attributes?.preset_mode;
-      state =
-        presetMode === "eco" ? "eco" : (stateObj?.state ?? "unavailable");
+      state = presetMode === "eco" ? "eco" : (stateObj?.state ?? "unavailable");
     } else {
       state = stateObj && stateObj.state ? stateObj.state : "unavaiable";
     }

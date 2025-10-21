@@ -22,7 +22,7 @@ import {
 
 export function getIcon(stateObj: any, config: any, hass: any): string {
   const domain = stateObj.entity_id.split(".")[0];
-  const state = stateObj.state;
+  let state = stateObj.state;
   const controlType: string = config.control_type ?? "generic";
 
   const useDefault = config.use_default_icon ?? true;
@@ -97,6 +97,8 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
         : config.icon;
     }
     case ControlType.THERMOMETER: {
+      const presetMode = stateObj.attributes?.preset_mode;
+      state = presetMode && presetMode == "eco" ? presetMode : stateObj.state;
       switch (state) {
         case "auto":
         case "heat_cool":
@@ -161,6 +163,10 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
           case DeviceType.CONNECTIVITY:
             if (idDeviceTurnOn) return "m3of:nest-wifi-router";
             else return "m3o:nest-wifi-router";
+          case DeviceType.PRESENCE:
+          case DeviceType.OCCUPANCY:
+            if (idDeviceTurnOn) return "m3rf:sensor-occupied";
+            else return "m3r:sensor-occupied";
           case DeviceType.MOTION:
             if (idDeviceTurnOn) return "m3rf:sensors-krx";
             else return "m3r:sensors-krx";
@@ -244,11 +250,15 @@ export function mapStateDisplay(
     }
   }
   if (control_type === ControlType.THERMOMETER && !isOffline) {
+    const presetMode = stateObj.attributes?.preset_mode;
+    const preset =
+      presetMode && presetMode == "eco" ? localize("common.eco") + " • " : "";
     const isOffAndHasTemperature =
       !isOn && !isNullOrEmpty(stateObj.attributes.temperature);
     if (isOn || isOffAndHasTemperature || !is_climate_card) {
       text = stateObj.attributes.current_temperature
         ? " • " +
+          preset +
           adjustTempAuto(
             fix_temperature,
             stateObj.attributes.current_temperature
@@ -327,6 +337,7 @@ export function getStateDisplay(
       ? localize("common.off_presence")
       : localize("common.off"),
     [OnlineStates.AUTO]: localize("common.auto"),
+    [OnlineStates.ECO]: localize("common.eco"),
     [OnlineStates.HEAT]: localize("common.heat"),
     [OnlineStates.COOL]: localize("common.cool"),
     [OnlineStates.DRY]: localize("common.dry"),
