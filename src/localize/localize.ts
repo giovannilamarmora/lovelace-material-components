@@ -3,6 +3,7 @@ import * as it from "./languages/it.json";
 import * as fr from "./languages/fr.json";
 import * as es from "./languages/es.json";
 import * as de from "./languages/de.json";
+import * as pt-br from "./languages/pt-br.json"; // Brazilian portuguese
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const languages: any = {
@@ -11,6 +12,7 @@ const languages: any = {
   fr: fr,
   es: es,
   de: de,
+  pt-br: pt-br, // Brazilian portuguese
 };
 
 export function localize(string: string, search = "", replace = ""): string {
