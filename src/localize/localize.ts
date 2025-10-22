@@ -12,13 +12,12 @@ const languages: any = {
   fr: fr,
   es: es,
   de: de,
-  pt_BR: pt_BR,
+  'pt-BR': pt_BR,
 };
 
 export function localize(string: string, search = "", replace = ""): string {
   const lang = (localStorage.getItem("selectedLanguage") || "en")
-    .replace(/['"]+/g, "")
-    .replace("-", "_");
+    .replace(/['"]+/g, "");
 
   let translated: string;
 
