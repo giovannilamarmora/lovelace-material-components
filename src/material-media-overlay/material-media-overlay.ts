@@ -7,6 +7,7 @@ import { navigate } from "custom-card-helpers";
 import { getOrDefault } from "../shared/utils";
 import {
   _renderAppIcon,
+  isOpenLinkCompatible,
   openGoogleHome,
   openNetflix,
   openSpotify,
@@ -675,10 +676,7 @@ export class MaterialMediaOverlay extends LitElement {
               </div>`
         }
         ${
-          appName == "YouTube" ||
-          appName == "Spotify" ||
-          appName == "Netflix" ||
-          appName == "Prime Video"
+          isOpenLinkCompatible(appName)
             ? html`<div
                 class="menu-card link"
                 @click=${(e: Event) => this.openLinks(e, appName)}

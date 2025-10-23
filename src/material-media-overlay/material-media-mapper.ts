@@ -8,6 +8,16 @@ import {
   getYouTubeURL,
 } from "../shared/url.utils";
 
+export function isOpenLinkCompatible(appName: string) {
+  return (
+    appName == "YouTube" ||
+    appName == "Spotify" ||
+    appName == "Netflix" ||
+    appName == "Prime Video" ||
+    appName == "Twitch"
+  );
+}
+
 /**
  * openPage
  *
@@ -166,7 +176,7 @@ export function _renderAppIcon(appName: string, cover?: string) {
       />`;
     case "Twitch":
       return html`<img
-        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/logo/Twitch.img"
+        src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/logo/Twitch.jpg"
         width="24"
         height="24"
         style="border-radius: 50px; object-fit: cover;"
