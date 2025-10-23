@@ -2,8 +2,11 @@ import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 import { localize } from "../localize/localize";
-import { DEFAULT_CONFIG } from "./material-dashboard-const";
-import { MaterialButtonCardConfig } from "../material-button/material-button-const";
+import {
+  DEFAULT_CONFIG,
+  MaterialDashboardCardConfig,
+} from "./material-dashboard-const";
+import { _navigationChanged } from "../shared/ha-editor";
 
 @customElement("material-dashboard-card-editor")
 export class MaterialDashboardCardEditor
@@ -11,9 +14,9 @@ export class MaterialDashboardCardEditor
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: MaterialButtonCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialDashboardCardConfig = DEFAULT_CONFIG;
 
-  public setConfig(config: MaterialButtonCardConfig): void {
+  public setConfig(config: MaterialDashboardCardConfig): void {
     this._config = { ...config };
   }
 
@@ -40,20 +43,6 @@ export class MaterialDashboardCardEditor
     );
   };
 
-  private _entityChanged(ev: CustomEvent): void {
-    const value = ev.detail.value;
-    if (this._config?.entity === value) return;
-    this._config = {
-      ...this._config,
-      entity: value,
-    };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  }
-
   async firstUpdated() {
     const helpers = await (window as any).loadCardHelpers();
     const card = await helpers.createCardElement({
@@ -68,7 +57,6 @@ export class MaterialDashboardCardEditor
       return html``;
     }
 
-    this._config.use_default_icon = this._config.use_default_icon ?? true;
     this._config.default_action = this._config.default_action ?? true;
 
     return html`
@@ -80,46 +68,50 @@ export class MaterialDashboardCardEditor
         <span class="text-label"
           >${localize("material_dashboard_card.cameras")}</span
         >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
           .value=${this._config.cameras || ""}
+          .label=${localize("material_dashboard_card.cameras")}
           configValue="cameras"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./cameras"
-        ></ha-textfield>
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
 
         <span class="text-label"
           >${localize("material_dashboard_card.lighting")}</span
         >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
           .value=${this._config.lighting || ""}
+          .label=${localize("material_dashboard_card.lighting")}
           configValue="lighting"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./lighting"
-        ></ha-textfield>
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
 
         <span class="text-label"
           >${localize("material_dashboard_card.wifi")}</span
         >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
           .value=${this._config.wifi || ""}
+          .label=${localize("material_dashboard_card.wifi")}
           configValue="wifi"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./wifi"
-        ></ha-textfield>
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
 
         <span class="text-label"
           >${localize("material_dashboard_card.climate")}</span
         >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
           .value=${this._config.climate || ""}
+          .label=${localize("material_dashboard_card.climate")}
           configValue="climate"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./climate"
-        ></ha-textfield>
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
 
         <div class="switch-row">
           <span class="switch-label"
