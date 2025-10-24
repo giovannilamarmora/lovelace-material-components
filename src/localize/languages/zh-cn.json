@@ -1,0 +1,147 @@
+{
+  "common": {
+    "version": "版本",
+    "invalid_configuration": "无效配置",
+    "show_warning": "显示警告",
+    "no_entity_set": "未设置实体",
+    "no_entity": "实体不可用",
+    "indoor": "室内",
+    "on": "已打开",
+    "off": "已关闭",
+    "offline": "已离线",
+    "auto": "自动",
+    "eco": "节能",
+    "heat": "制暖",
+    "cool": "制冷",
+    "dry": "干燥",
+    "fan": "吹风",
+    "playing": "正在播放",
+    "paused": "暂停",
+    "idle": "投放",
+    "presence": "检测到活动",
+    "off_presence": "没有动作触发",
+    "today_at": "今天在",
+    "yesterday_at": "昨天在",
+    "open": "已开启",
+    "closed": "已关闭",
+    "opening": "正在开启",
+    "closing": "正在关闭",
+    "active": "已激活",
+    "inactive": "未激活",
+    "info_device": "设备信息",
+    "related": "相关集成"
+  },
+  "actions": {
+    "automatic_action": "启用自动操作",
+    "tap_action_title": "点击操作",
+    "hold_action_title": "长按操作",
+    "double_tap_action_title": "双击操作",
+    "toggle": "单击（开/关）",
+    "more_info": "显示实体信息",
+    "navigate": "导航至页面",
+    "call_service": "运行一个服务",
+    "fire_dom": "发射 DOM 活动",
+    "assist": "激活语音助理",
+    "url": "打开网络链接",
+    "none": "无任何操作",
+    "google_home": "打开 Google Home",
+    "settings": "打开设置",
+    "select_option": "选择选项",
+    "warning": "⚠️ 进阶操作（JS、[[[]]], 复杂的服务调用）必须通过 YAML 来配置。"
+  },
+  "material_dashboard_card": {
+    "description": "配置卡片点击时的导航路径。",
+    "cameras": "摄像头路径",
+    "cameras_name": "摄像头",
+    "lighting": "灯光路径",
+    "lighting_name": "灯光",
+    "lighting_label": "灯光",
+    "wifi": "Wi-Fi 路径",
+    "wifi_name": "Wi-Fi",
+    "climate": "温度控制路径",
+    "climate_name": "温度控制",
+    "device": "设备",
+    "devices": "设备",
+    "placeholder": "./URL 链接",
+    "default": "为点击操作使用默认配置（单击）",
+    "tap_type": "选择点击类型（单击、长按、双击）",
+    "single": "单击",
+    "hold": "长按",
+    "double": "双击",
+    "web": "在浏览器中使用单击操作（在移动版本中选择点击）"
+  },
+  "material_climate_card": {
+    "name": "实体名称",
+    "entity": "实体",
+    "theme": "使用 Material Expressive",
+    "increase_temp": "调高温度步进（如 0.5）",
+    "decrease_temp": "调低温度步进（如 0.5）",
+    "dual_icon": {
+      "default": "使用默认图标",
+      "options": "使用双图标（打开和关闭状态）。"
+    },
+    "fix_temperature": "温度显示错误时可启用",
+    "false": "未激活",
+    "true": "已激活",
+    "auto": "自动"
+  },
+  "material_button_card": {
+    "name": "实体名称",
+    "control_type": "控制器类型",
+    "type": {
+      "generic": "通用（开关、按钮…）",
+      "thermometer": "恒温器、换气扇…",
+      "automation": "自动化",
+      "scene": "场景",
+      "media": "多媒体（Google、Alexa…）",
+      "state": "状态",
+      "action": "操作",
+      "app_version": "Material 组件版本"
+    },
+    "dual_icon": {
+      "default": "使用默认图标",
+      "options": "使用双图标（元素打开和元素关闭）。"
+    },
+    "dual_text": {
+      "default": "使用默认文本",
+      "text_on": "打开文本",
+      "text_off": "关闭文本"
+    }
+  },
+  "material_control_card": {
+    "name": "卡片名称",
+    "entity_card": "将实体作为卡片",
+    "entity": "实体",
+    "dual_icon": {
+      "default": "使用默认图标",
+      "options": "使用双图标（打开和关闭状态）。"
+    }
+  },
+  "material_slider_card": {
+    "name": "卡片名称",
+    "control_type": "控制器类型",
+    "type": {
+      "light": "灯光",
+      "cover": "卷帘"
+    },
+    "entity": "要控制的实体",
+    "icon": "自定义图标（如果留空，则根据开/关状态自动更改）",
+    "percentage": "将数值显示为百分比",
+    "bold_text": "使用加粗的文本风格"
+  },
+  "material_lights_card": {
+    "on_text": "灯光开启时的显示文本",
+    "off_text": "灯光关闭时的显示文本"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "没有东西在播放",
+      "playing": "正在播放"
+    },
+    "remote": "打开遥控器",
+    "cast": "屏幕投放",
+    "stop_cast": "停止投放",
+    "open": "打开 ",
+    "open_google": "打开 Google Home"
+  }
+}
