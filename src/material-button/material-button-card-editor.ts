@@ -13,6 +13,7 @@ import {
   MaterialButtonCardConfig,
 } from "./material-button-const";
 import { ControlType } from "../shared/types";
+import { _entityChanged } from "../shared/ha-editor";
 
 @customElement("material-button-card-editor")
 export class MaterialButtonCardEditor
@@ -60,19 +61,6 @@ export class MaterialButtonCardEditor
     );
   }
 
-  private _entityChanged(ev: CustomEvent): void {
-    const value = ev.detail.value;
-    if (this._config?.entity === value) return;
-    this._config = {
-      ...this._config,
-      entity: value,
-    };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  }
   // Ritorna "toggle" se assente; se è stringa la usa, se è oggetto usa .action
   private _getActionValue(a?: any): string {
     if (!a) return "toggle";
@@ -221,7 +209,7 @@ export class MaterialButtonCardEditor
               .includeDomains=${this.setEntityFilter()}
               allow-custom-entity
               configValue="entity"
-              @value-changed=${this._entityChanged}
+              @value-changed=${(ev: CustomEvent) => _entityChanged(ev, this)}
               required
             ></ha-entity-picker>`}
         ${this._config.control_type == ControlType.APP_VERSION ||
@@ -440,27 +428,30 @@ export class MaterialButtonCardEditor
     return html`
       ${currentAction === "navigate"
         ? html`
-            <ha-textfield
+            <ha-selector
               style="display: block; margin-top: 10px;"
-              label="Percorso di navigazione"
+              .hass=${this.hass}
+              .selector=${{ navigation: {} }}
               .value=${(action as NavigateActionConfig)?.navigation_path || ""}
-              @input=${(e: Event) =>
-                onChange(
-                  "navigation_path",
-                  (e.target as HTMLInputElement).value
-                )}
-            ></ha-textfield>
+              .label=${localize("actions.navigate")}
+              .configValue=${"navigation_path"}
+              @value-changed=${(e: CustomEvent) =>
+                onChange("navigation_path", e.detail.value)}
+            ></ha-selector>
           `
         : ""}
       ${currentAction === "url"
         ? html`
-            <ha-textfield
+            <ha-selector
               style="display: block; margin-top: 10px;"
-              label="URL"
+              .hass=${this.hass}
+              .selector=${{ text: {} }}
               .value=${(action as UrlActionConfig)?.url_path || ""}
-              @input=${(e: Event) =>
-                onChange("url_path", (e.target as HTMLInputElement).value)}
-            ></ha-textfield>
+              .label=${localize("actions.url")}
+              .configValue=${"url_path"}
+              @value-changed=${(e: CustomEvent) =>
+                onChange("url_path", e.detail.value)}
+            ></ha-selector>
           `
         : ""}
     `;

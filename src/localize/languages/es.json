@@ -62,13 +62,7 @@
     "climate_name": "Climatización",
     "device": "Dispositivo",
     "devices": "Dispositivos",
-    "placeholder": "./ruta-o-url",
-    "default": "Usar configuración por defecto en Tap (Tap simple)",
-    "tap_type": "Selecciona el tipo de Tap (Tap simple, Mantener, Doble Tap)",
-    "single": "Tap simple",
-    "hold": "Mantener pulsado",
-    "double": "Doble Tap",
-    "web": "Usar Tap simple en el navegador (en móvil, el tap seleccionado)"
+    "placeholder": "./ruta-o-url"
   },
   "material_climate_card": {
     "name": "Nombre de la entidad",

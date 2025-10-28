@@ -6,6 +6,7 @@ import {
   DEFAULT_CONFIG,
   MaterialLightCardConfig,
 } from "./material-lights-const";
+import { _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-lights-card-editor")
 export class MaterialLightsCardEditor
@@ -18,29 +19,6 @@ export class MaterialLightsCardEditor
   public setConfig(config: MaterialLightCardConfig): void {
     this._config = { ...config };
   }
-
-  private _valueChanged = (ev: Event): void => {
-    const target = ev.target as any;
-    const configValue = target.getAttribute("configValue");
-
-    const value =
-      ev instanceof CustomEvent && ev.detail?.value !== undefined
-        ? ev.detail.value
-        : (target.checked ?? target.value);
-
-    if (!configValue || this._config[configValue] === value) return;
-
-    this._config = {
-      ...this._config,
-      [configValue]: value,
-    };
-
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  };
 
   async firstUpdated() {
     const helpers = await (window as any).loadCardHelpers();
@@ -65,7 +43,7 @@ export class MaterialLightsCardEditor
           label="${localize("material_lights_card.on_text")}"
           .value=${this._config.on_text || ""}
           configValue="on_text"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Lights On"
         ></ha-textfield>
 
@@ -76,7 +54,7 @@ export class MaterialLightsCardEditor
           label="${localize("material_lights_card.off_text")}"
           .value=${this._config.off_text || ""}
           configValue="off_text"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Lights Off"
         ></ha-textfield>
       </div>

@@ -17,9 +17,9 @@ export function materialDashboadTemplate(
   camera_path: string,
   lighting_path: string,
   wifi_path: string,
-  climate_path: string,
-  action: "tap_action" | "hold_action" | "double_tap_action"
+  climate_path: string
 ) {
+  const action = "tap_action";
   return `type: custom:swipe-card
 card_width: max-content
 parameters:

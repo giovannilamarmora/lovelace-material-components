@@ -13,6 +13,7 @@ import {
   MaterialControlCardConfig,
 } from "./material-control-const";
 import { toggleConfigs } from "./material-control-const";
+import { _entityChanged, _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-control-card-editor")
 export class MaterialControlCardEditor
@@ -26,43 +27,6 @@ export class MaterialControlCardEditor
   public setConfig(config: MaterialControlCardConfig): void {
     this._config = { ...config };
     this._configLoaded = true;
-  }
-
-  private _valueChanged = (ev: Event): void => {
-    const target = ev.target as any;
-    const configValue = target.getAttribute("configValue");
-
-    const value =
-      ev instanceof CustomEvent && ev.detail?.value !== undefined
-        ? ev.detail.value
-        : (target.checked ?? target.value);
-
-    if (!configValue || this._config[configValue] === value) return;
-
-    this._config = {
-      ...this._config,
-      [configValue]: value,
-    };
-
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  };
-
-  private _entityChanged(ev: CustomEvent): void {
-    const value = ev.detail.value;
-    if (this._config?.entity === value) return;
-    this._config = {
-      ...this._config,
-      entity: value,
-    };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
   }
 
   async firstUpdated() {
@@ -131,6 +95,7 @@ export class MaterialControlCardEditor
     this._config.use_card_entity = this._config.use_card_entity ?? false;
 
     const renderActionEditor = (
+      actionType: string,
       action: ActionConfig | undefined,
       onChange: (key: string, value: any) => void
     ) => {
@@ -139,7 +104,7 @@ export class MaterialControlCardEditor
       return html`
         <ha-select
           style="display: block;"
-          label="Azione"
+          label="${localize("actions." + actionType + "_title")}"
           .value=${currentAction}
           @selected=${(e: CustomEvent) => {
             const target = e.target as HTMLInputElement;
@@ -173,28 +138,31 @@ export class MaterialControlCardEditor
 
         ${currentAction === "navigate"
           ? html`
-              <ha-textfield
+              <ha-selector
                 style="display: block; margin-top: 10px;"
-                label="Percorso di navigazione"
+                .hass=${this.hass}
+                .selector=${{ navigation: {} }}
                 .value=${(action as NavigateActionConfig)?.navigation_path ||
                 ""}
-                @input=${(e: Event) =>
-                  onChange(
-                    "navigation_path",
-                    (e.target as HTMLInputElement).value
-                  )}
-              ></ha-textfield>
+                .label=${localize("actions.navigate")}
+                .configValue=${"navigation_path"}
+                @value-changed=${(e: CustomEvent) =>
+                  onChange("navigation_path", e.detail.value)}
+              ></ha-selector>
             `
           : ""}
         ${currentAction === "url"
           ? html`
-              <ha-textfield
+              <ha-selector
                 style="display: block; margin-top: 10px;"
-                label="URL"
-                .value=${(action as UrlActionConfig)?.url_path}
-                @input=${(e: Event) =>
-                  onChange("url_path", (e.target as HTMLInputElement).value)}
-              ></ha-textfield>
+                .hass=${this.hass}
+                .selector=${{ text: {} }}
+                .value=${(action as UrlActionConfig)?.url_path || ""}
+                .label=${localize("actions.url")}
+                .configValue=${"url_path"}
+                @value-changed=${(e: CustomEvent) =>
+                  onChange("url_path", e.detail.value)}
+              ></ha-selector>
             `
           : ""}
         <!-- Aggiungi altri campi dinamici se servono per call-service ecc. -->
@@ -207,7 +175,7 @@ export class MaterialControlCardEditor
           label="${localize("material_control_card.name")}"
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
         ></ha-textfield>
 
@@ -218,7 +186,7 @@ export class MaterialControlCardEditor
           <ha-switch
             .checked=${this._config.use_card_entity}
             configValue="use_card_entity"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
 
@@ -230,7 +198,7 @@ export class MaterialControlCardEditor
                 .hass=${this.hass}
                 allow-custom-entity
                 configValue="entity"
-                @value-changed=${this._entityChanged}
+                @value-changed=${(ev: CustomEvent) => _entityChanged(ev, this)}
                 required
               ></ha-entity-picker>
             `
@@ -243,7 +211,7 @@ export class MaterialControlCardEditor
           <ha-switch
             .checked=${this._config.use_default_icon}
             configValue="use_default_icon"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
 
@@ -256,7 +224,7 @@ export class MaterialControlCardEditor
                 <ha-switch
                   .checked=${this._config.dual_icon ?? false}
                   configValue="dual_icon"
-                  @change=${this._valueChanged}
+                  @change=${(ev: Event) => _valueChanged(ev, this)}
                 />
               </div>
               ${this._config.dual_icon
@@ -266,13 +234,13 @@ export class MaterialControlCardEditor
                         label="Icon ON"
                         .value=${this._config.icon_on || ""}
                         configValue="icon_on"
-                        @value-changed=${this._valueChanged}
+                        @value-changed=${(ev: Event) => _valueChanged(ev, this)}
                       ></ha-icon-picker>
                       <ha-icon-picker
                         label="Icon OFF"
                         .value=${this._config.icon_off || ""}
                         configValue="icon_off"
-                        @value-changed=${this._valueChanged}
+                        @value-changed=${(ev: Event) => _valueChanged(ev, this)}
                       ></ha-icon-picker>
                     </div>
                   `
@@ -281,23 +249,30 @@ export class MaterialControlCardEditor
                       label="Icon"
                       .value=${this._config.icon || ""}
                       configValue="icon"
-                      @value-changed=${this._valueChanged}
+                      @value-changed=${(ev: Event) => _valueChanged(ev, this)}
                     ></ha-icon-picker>
                   `}
             `
           : ""}
 
+        <div class="warning">${localize("actions.warning")}</div>
         <div>
-          <h3>${localize("actions.tap_action_title")}</h3>
+          <h4 style="margin-bottom: 10px;">
+            ${localize("actions.tap_action_title")}
+          </h4>
           ${renderActionEditor(
+            "tap_action",
             this._config.tap_action,
             this._tapActionChanged()
           )}
         </div>
 
         <div>
-          <h3>${localize("actions.hold_action_title")}</h3>
+          <h4 style="margin-bottom: 10px;">
+            ${localize("actions.hold_action_title")}
+          </h4>
           ${renderActionEditor(
+            "hold_action",
             this._config.hold_action,
             this._holdActionChanged()
           )}
@@ -337,6 +312,12 @@ export class MaterialControlCardEditor
     .action-editor ha-textarea {
       width: 100%;
       font-family: monospace;
+    }
+
+    .warning {
+      margin-top: 16px;
+      color: var(--error-color, #d32f2f);
+      font-size: 0.9rem;
     }
   `;
 }

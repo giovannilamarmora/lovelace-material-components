@@ -62,13 +62,7 @@
     "climate_name": "Klimatisierung",
     "device": "Gerät",
     "devices": "Geräte",
-    "placeholder": "./pfad-oder-url",
-    "default": "Standardkonfiguration bei Tap verwenden (Einzeltap)",
-    "tap_type": "Wählen Sie die Tap-Art (Einzeltap, Lang drücken, Doppeltap)",
-    "single": "Einzeltap",
-    "hold": "Lang drücken",
-    "double": "Doppeltap",
-    "web": "Einzeltap im Browser verwenden (auf Mobilgeräten, ausgewählter Tap)"
+    "placeholder": "./pfad-oder-url"
   },
   "material_climate_card": {
     "name": "Entitätsname",

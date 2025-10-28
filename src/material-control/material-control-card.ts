@@ -32,7 +32,7 @@ export class MaterialControlCard extends LitElement {
         action: "more-info",
       },
       hold_action: {
-        action: "more-info",
+        action: "none",
       },
     };
   }
@@ -64,44 +64,12 @@ export class MaterialControlCard extends LitElement {
     return document.createElement("material-control-card-editor");
   }
 
-  private mapAction(actions: any): any {
-    if (!actions || typeof actions !== "object") return actions;
-
-    const mapped = { ...actions };
-
-    for (const key of ["navigation_path", "url_path"]) {
-      if (key in mapped && typeof mapped[key] === "string") {
-        mapped[key] = this.evalTripleBrackets(mapped[key]);
-      }
-    }
-
-    return mapped;
-  }
-
   private mapTemplate() {
     const name = getName(this._config, this.hass);
-
-    // Cloniamo l’oggetto per renderlo modificabile
     const newConfig = { ...this._config, name };
-    newConfig.tap_action = this.mapAction(newConfig.tap_action);
-    newConfig.hold_action = this.mapAction(newConfig.hold_action);
+
     const text = materialControlTemplate(newConfig);
-
     return text;
-  }
-
-  private evalTripleBrackets(input: string): any {
-    const tripleBracketRegex = /^\s*\[\[\[\s*([\s\S]*?)\s*\]\]\]\s*$/;
-    const match = input.match(tripleBracketRegex);
-    if (match) {
-      try {
-        const fn = new Function(match[1]);
-        return fn();
-      } catch (err) {
-        console.error("Eval error:", err);
-      }
-    }
-    return input;
   }
 
   protected render(): TemplateResult {

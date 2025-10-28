@@ -62,13 +62,7 @@
     "climate_name": "Climate",
     "device": "Device",
     "devices": "Devices",
-    "placeholder": "./path-or-url",
-    "default": "Use default configuration on Tap (Single Tap)",
-    "tap_type": "Select the type of Tap (Single Tap, Hold Press, Double Tap)",
-    "single": "Single Tap",
-    "hold": "Hold Press",
-    "double": "Double Tap",
-    "web": "Use Single Tap on Browser (Selected tap on mobile)"
+    "placeholder": "./path-or-url"
   },
   "material_climate_card": {
     "name": "Entity Name",
@@ -82,7 +76,7 @@
     },
     "fix_temperature": "Enable if temperature is not correct",
     "false": "Not Active",
-    "true": "Actve",
+    "true": "Active",
     "auto": "Auto"
   },
   "material_button_card": {
