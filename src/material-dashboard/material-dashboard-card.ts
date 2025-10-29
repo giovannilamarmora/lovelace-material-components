@@ -53,12 +53,13 @@ export class MaterialDashboardCard extends LitElement {
   }
 
   private mapTemplate(config: MaterialDashboardCardConfig) {
-    const text = materialDashboadTemplate(
-      config.cameras!,
-      config.lighting!,
-      config.wifi!,
-      config.climate!
-    );
+    //const text = materialDashboadTemplate(
+    //  config.cameras!,
+    //  config.lighting!,
+    //  config.wifi!,
+    //  config.climate!
+    //);
+    const text = materialDashboadTemplate(config);
     return text;
   }
 

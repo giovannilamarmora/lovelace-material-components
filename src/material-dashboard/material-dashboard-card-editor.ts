@@ -6,7 +6,7 @@ import {
   DEFAULT_CONFIG,
   MaterialDashboardCardConfig,
 } from "./material-dashboard-const";
-import { _navigationChanged } from "../shared/ha-editor";
+import { _navigationChanged, _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-dashboard-card-editor")
 export class MaterialDashboardCardEditor
@@ -40,9 +40,20 @@ export class MaterialDashboardCardEditor
           >${localize("material_dashboard_card.description")}</span
         >
 
-        <span class="text-label"
-          >${localize("material_dashboard_card.cameras")}</span
-        >
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.cameras")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_cameras ?? false}
+              configValue="hide_cameras"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
         <ha-selector
           .hass=${this.hass}
           .selector=${{ navigation: {} }}
@@ -52,9 +63,20 @@ export class MaterialDashboardCardEditor
           @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
         ></ha-selector>
 
-        <span class="text-label"
-          >${localize("material_dashboard_card.lighting")}</span
-        >
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.lighting")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_lighting ?? false}
+              configValue="hide_lighting"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
         <ha-selector
           .hass=${this.hass}
           .selector=${{ navigation: {} }}
@@ -64,9 +86,20 @@ export class MaterialDashboardCardEditor
           @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
         ></ha-selector>
 
-        <span class="text-label"
-          >${localize("material_dashboard_card.wifi")}</span
-        >
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.wifi")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_wifi ?? false}
+              configValue="hide_wifi"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
         <ha-selector
           .hass=${this.hass}
           .selector=${{ navigation: {} }}
@@ -76,9 +109,20 @@ export class MaterialDashboardCardEditor
           @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
         ></ha-selector>
 
-        <span class="text-label"
-          >${localize("material_dashboard_card.climate")}</span
-        >
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.climate")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_climate ?? false}
+              configValue="hide_climate"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
         <ha-selector
           .hass=${this.hass}
           .selector=${{ navigation: {} }}
@@ -99,9 +143,11 @@ export class MaterialDashboardCardEditor
       padding: 16px;
     }
 
-    .switch-label {
-      font-size: 16px;
-      font-weight: 500;
+    .switch-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
 
     .text-label {
@@ -109,14 +155,14 @@ export class MaterialDashboardCardEditor
       font-weight: 500;
     }
 
-    .switch-row {
+    .switch-control {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 8px;
     }
 
     .switch-label {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
     }
   `;
