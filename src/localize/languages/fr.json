@@ -29,7 +29,8 @@
     "active": "Actif",
     "inactive": "Inactif",
     "info_device": "Informations sur l'appareil",
-    "related": "Intégration Connexe"
+    "related": "Intégration Connexe",
+    "hidden": "Masquer"
   },
   "actions": {
     "automatic_action": "Activer actions automatiques",
@@ -62,13 +63,7 @@
     "climate_name": "Climatisation",
     "device": "Appareil",
     "devices": "Appareils",
-    "placeholder": "./chemin-ou-url",
-    "default": "Utiliser la configuration par défaut au Tap (Tap simple)",
-    "tap_type": "Sélectionner le type de Tap (Tap simple, Appui long, Double Tap)",
-    "single": "Tap simple",
-    "hold": "Appui long",
-    "double": "Double Tap",
-    "web": "Utiliser Tap simple dans le navigateur (sur mobile, le Tap sélectionné)"
+    "placeholder": "./chemin-ou-url"
   },
   "material_climate_card": {
     "name": "Nom de l’entité",
@@ -131,7 +126,9 @@
   },
   "material_lights_card": {
     "on_text": "Texte pour lumières allumées",
-    "off_text": "Texte pour lumières éteintes"
+    "off_text": "Texte pour lumières éteintes",
+    "control_area": "Contrôler une zone spécifique",
+    "area_id": "Zone à contrôler"
   },
   "material_media_overlay": {
     "media_card": {

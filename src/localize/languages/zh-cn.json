@@ -29,7 +29,8 @@
     "active": "已激活",
     "inactive": "未激活",
     "info_device": "设备信息",
-    "related": "相关集成"
+    "related": "相关集成",
+    "hidden": "隐藏"
   },
   "actions": {
     "automatic_action": "启用自动操作",
@@ -131,7 +132,9 @@
   },
   "material_lights_card": {
     "on_text": "灯光开启时的显示文本",
-    "off_text": "灯光关闭时的显示文本"
+    "off_text": "灯光关闭时的显示文本",
+    "control_area": "控制特定区域",
+    "area_id": "要控制的区域"
   },
   "material_media_overlay": {
     "media_card": {

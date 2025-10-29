@@ -29,7 +29,8 @@
     "active": "Activo",
     "inactive": "Inactivo",
     "info_device": "Información del Dispositivo",
-    "related": "Integración Relacionada"
+    "related": "Integración Relacionada",
+    "hidden": "Ocultar"
   },
   "actions": {
     "automatic_action": "Activar acciones automáticas",
@@ -62,13 +63,7 @@
     "climate_name": "Climatización",
     "device": "Dispositivo",
     "devices": "Dispositivos",
-    "placeholder": "./ruta-o-url",
-    "default": "Usar configuración por defecto en Tap (Tap simple)",
-    "tap_type": "Selecciona el tipo de Tap (Tap simple, Mantener, Doble Tap)",
-    "single": "Tap simple",
-    "hold": "Mantener pulsado",
-    "double": "Doble Tap",
-    "web": "Usar Tap simple en el navegador (en móvil, el tap seleccionado)"
+    "placeholder": "./ruta-o-url"
   },
   "material_climate_card": {
     "name": "Nombre de la entidad",
@@ -131,7 +126,9 @@
   },
   "material_lights_card": {
     "on_text": "Texto para luces encendidas",
-    "off_text": "Texto para luces apagadas"
+    "off_text": "Texto para luces apagadas",
+    "control_area": "Controlar un Área específica",
+    "area_id": "Área a controlar"
   },
   "material_media_overlay": {
     "media_card": {

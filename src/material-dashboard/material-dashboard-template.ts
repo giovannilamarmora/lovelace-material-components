@@ -1,4 +1,5 @@
 import { localize } from "../localize/localize";
+import { MaterialDashboardCardConfig } from "./material-dashboard-const";
 
 const otherAction = (
   action: "tap_action" | "hold_action" | "double_tap_action"
@@ -12,26 +13,77 @@ const otherAction = (
       return "tap_action";
   }
 };
+/*
+#- type: custom:button-card
+#  show_icon: false
+#  show_name: false
+#  show_label: false
+#  tap_action:
+#    action: none
+#  hold_action:
+#    action: none
+#  styles:
+#    card:
+#      - width: 0px
+#      - height: 130px
+#      - min-width: 0px
+#      - min-height: 130px
+#      - padding: 0px
+#      - margin: 0px
+#      - box-shadow: none
+#      - background: transparent
+#      - pointer-events: none
+#      - border: none
+#      - margin-right: 13px
+slidesOffsetBefore: 13
+*/
 
-export function materialDashboadTemplate(
-  camera_path: string,
-  lighting_path: string,
-  wifi_path: string,
-  climate_path: string,
-  action: "tap_action" | "hold_action" | "double_tap_action"
-) {
+export function materialDashboadTemplate(config: MaterialDashboardCardConfig) {
+  const camera_path: string | undefined = config.cameras;
+  const lighting_path: string | undefined = config.lighting;
+  const wifi_path: string | undefined = config.wifi;
+  const climate_path: string | undefined = config.climate;
+  const action = "tap_action";
   return `type: custom:swipe-card
 card_width: max-content
 parameters:
   grabCursor: true
   centeredSlides: false
   slidesPerView: auto
-  spaceBetween: 8
   preventClicksPropagation: true
   preventClicks: true
   threshold: 30
+  slidesOffsetAfter: 13
 cards:
   - type: custom:button-card
+    show_icon: false
+    show_name: false
+    show_label: false
+    tap_action:
+      action: none
+    hold_action:
+      action: none
+    styles:
+      card:
+        - width: 13px
+        - height: 130px
+        - min-width: 13px
+        - min-height: 130px
+        - padding: 0px
+        - margin: 0px
+        - box-shadow: none
+        - background: transparent
+        - pointer-events: none
+        - border: none
+  ${config.hide_cameras ? "" : showCameras(action, camera_path)}
+  ${config.hide_lighting ? "" : showLighting(action, lighting_path)}
+  ${config.hide_wifi ? "" : showWifi(action, wifi_path)}
+  ${config.hide_climate ? "" : showClimate(action, climate_path)}
+`;
+}
+
+function showCameras(action: any, camera_path: string | undefined) {
+  return `- type: custom:button-card
     icon: m3r:videocam
     name: ${localize("material_dashboard_card.cameras_name")}
     triggers_update: all
@@ -72,16 +124,12 @@ cards:
               return lights.length === 0 ? "none" : "block";
             ]]]
         - margin-bottom: 1px
-        - margin-left: 13px
+        - margin-right: 8px
         - height: 130px
         - width: 130px
         - border-radius: 30px
         - box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.05),
             0px 0.5px 1.5px rgba(0, 0, 0, 0.07);
-        #- background: |
-        #    [[[
-        #      return hass.themes.darkMode ? '#1F1F1F' : '#F8F9FA';
-        #    ]]]
       name:
         - font-size: 1rem
         - font-weight: bold
@@ -127,13 +175,16 @@ cards:
                 [[[
                   return hass.themes.darkMode ? '#8AB4F8' : '#1A73E8';
                 ]]]
-  - type: custom:button-card
+`;
+}
+
+function showLighting(action: any, lighting_path: string | undefined) {
+  return `- type: custom:button-card
     icon: m3r:light-group
     name: ${localize("material_dashboard_card.lighting_name")}
     triggers_update: all
     label: |
       [[[
-        // Conta automaticamente le luci accese
         const lightEntities = Object.keys(hass.states).filter(
         (entity) =>
           entity.startsWith("light.") &&
@@ -175,21 +226,13 @@ cards:
                 !hass.entities[e].hidden);
               return lights.length === 0 ? "none" : "block";
             ]]]
-        - margin-left: |
-            [[[
-              const camera = Object.keys(hass.states).filter(e => e.startsWith("camera.") && hass.states[e].state !== "unavailable");
-              return camera.length === 0 ? "5px" : "0px";
-            ]]]
         - margin-bottom: 1px
+        - margin-right: 8px
         - height: 130px
         - width: 130px
         - border-radius: 30px
         - box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.05),
             0px 0.5px 1.5px rgba(0, 0, 0, 0.07);
-        #- background: |
-        #    [[[
-        #      return hass.themes.darkMode ? '#1F1F1F' : '#F8F9FA';
-        #    ]]]
       name:
         - font-size: 1rem
         - font-weight: bold
@@ -235,7 +278,11 @@ cards:
                 [[[
                   return hass.themes.darkMode ? '#FBBC04' : '#745b00';
                 ]]]
-  - type: custom:button-card
+`;
+}
+
+function showWifi(action: any, wifi_path: string | undefined) {
+  return `- type: custom:button-card
     icon: m3of:wifi
     name: ${localize("material_dashboard_card.wifi_name")}
     triggers_update: all
@@ -280,29 +327,13 @@ cards:
               );
               return deviceEntities.length === 0 ? "none" : "block";
             ]]]
-        - margin-left: |
-            [[[
-              const cameras = Object.keys(hass.states).filter(e => e.startsWith("camera.") && hass.states[e].state !== "unavailable");
-              const lights = Object.keys(hass.states).filter(e => 
-                e.startsWith("light.") && hass.states[e].state !== "unavailable");
-              return lights.length === 0 ? "-8px" : "0px";
-
-              if (lights.length === 0 && cameras.length === 0) 
-                return "5px";
-              else if (lights.length != 0 || cameras.length != 0) 
-                return "-8px";
-              else return "0px";
-            ]]]
         - margin-bottom: 1px
+        - margin-right: 8px
         - height: 130px
         - width: 130px
         - border-radius: 30px
         - box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.05),
             0px 0.5px 1.5px rgba(0, 0, 0, 0.07);
-        #- background: |
-        #    [[[
-        #      return hass.themes.darkMode ? '#1F1F1F' : '#F8F9FA';
-        #    ]]]
       name:
         - font-size: 1rem
         - font-weight: bold
@@ -348,8 +379,11 @@ cards:
                 [[[
                   return hass.themes.darkMode ? '#81C995' : '#137333';
                 ]]]
-  - type: custom:button-card
-    entity: light.luce_giovanni
+`;
+}
+
+function showClimate(action: any, climate_path: string | undefined) {
+  return `- type: custom:button-card
     icon: m3of:thermostat
     name: ${localize("material_dashboard_card.climate_name")}
     triggers_update: all
@@ -394,33 +428,13 @@ cards:
               );
               return climateEntities.length === 0 ? "none" : "block";
             ]]]
-        - margin-left: |
-            [[[
-              const cameras = Object.keys(hass.states).filter((e) =>
-                e.startsWith("camera.") &&
-                hass.entities[e] &&
-                !hass.entities[e].hidden
-              ).length;
-              const lights = Object.keys(hass.states).filter(e => 
-                e.startsWith("light.") && hass.states[e].state !== "unavailable");
-              const deviceEntities = Object.keys(hass.states).filter(entity => 
-                entity.startsWith('device_tracker.') && hass.states[entity].state === 'home');
-              if (deviceEntities.length === 0 && lights.length === 0 && cameras.length === 0) 
-                return "5px";
-              else if (deviceEntities.length === 0 && lights.length != 0) 
-                return "-8px";
-              else return "0px";
-            ]]]
         - margin-bottom: 1px
+        - margin-right: 8px
         - height: 130px
         - width: 130px
         - border-radius: 30px
         - box-shadow: 0px 0.5px 1px rgba(0, 0, 0, 0.05),
             0px 0.5px 1.5px rgba(0, 0, 0, 0.07);
-        #- background: |
-        #    [[[
-        #      return hass.themes.darkMode ? '#1F1F1F' : '#F8F9FA';
-        #    ]]]
       name:
         - font-size: 1rem
         - font-weight: bold

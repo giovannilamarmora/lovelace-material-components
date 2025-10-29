@@ -4,9 +4,12 @@ import {
   ActionConfig,
   HomeAssistant,
   LovelaceCardEditor,
+  NavigateActionConfig,
+  UrlActionConfig,
 } from "custom-card-helpers";
 import { DEFAULT_CONFIG, MaterialMenuCardConfig } from "./material-menu-const";
 import { localize } from "../localize/localize";
+import { _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-menu-card-editor")
 export class MaterialMenuCardEditor
@@ -20,19 +23,6 @@ export class MaterialMenuCardEditor
   public setConfig(config: MaterialMenuCardConfig): void {
     this._config = { ...DEFAULT_CONFIG, ...config };
     this._configLoaded = true;
-  }
-
-  private _valueChanged(ev: CustomEvent) {
-    const target = ev.target as any;
-    const configValue = target?.getAttribute("configValue");
-    const value =
-      ev.detail?.value !== undefined
-        ? ev.detail.value
-        : (target.checked ?? target.value);
-
-    if (!configValue || this._config[configValue] === value) return;
-    this._config = { ...this._config, [configValue]: value };
-    this._fireConfigChanged();
   }
 
   private _fireConfigChanged() {
@@ -52,36 +42,36 @@ export class MaterialMenuCardEditor
           label="Name"
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
         ></ha-textfield>
 
         <ha-textfield
           label="Label"
           .value=${this._config.label || ""}
           configValue="label"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
         ></ha-textfield>
 
         <ha-icon-picker
           label="Icon"
           .value=${this._config.icon || ""}
           configValue="icon"
-          @value-changed=${this._valueChanged}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
         ></ha-icon-picker>
 
         <div class="warning">${localize("actions.warning")}</div>
 
-        <h3 style="margin: 15px 0px 0px 0px;">
+        <h4 style="margin: 15px 0px -5px 0px;">
           ${localize("actions.tap_action_title")}
-        </h3>
+        </h4>
         ${this._renderActionSection("tap_action", this._config.tap_action)}
-        <h3 style="margin: 15px 0px 0px 0px;">
+        <h4 style="margin: 15px 0px -5px 0px;">
           ${localize("actions.hold_action_title")}
-        </h3>
+        </h4>
         ${this._renderActionSection("hold_action", this._config.hold_action)}
-        <h3 style="margin: 15px 0px 0px 0px;">
+        <h4 style="margin: 15px 0px -5px 0px;">
           ${localize("actions.double_tap_action_title")}
-        </h3>
+        </h4>
         ${this._renderActionSection(
           "double_tap_action",
           this._config.double_tap_action
@@ -139,10 +129,10 @@ export class MaterialMenuCardEditor
           ${localize("actions.navigate")}
         </mwc-list-item>
         <mwc-list-item value="url"> ${localize("actions.url")} </mwc-list-item>
-        <mwc-list-item value="call-service">
+        <!--<mwc-list-item value="call-service">
           ${localize("actions.call_service")}
         </mwc-list-item>
-        <!--<mwc-list-item value="assist">
+        <mwc-list-item value="assist">
           ${localize("actions.assist")}
         </mwc-list-item>
         <mwc-list-item value="fire-dom-event">
@@ -165,41 +155,34 @@ export class MaterialMenuCardEditor
     action: ActionConfig | undefined,
     onChange: (key: string, value: any) => void
   ) {
-    const act = action as Record<string, any>;
+    //const act = action as Record<string, any>;
 
     switch (actionType) {
       case "navigate":
         return html`
-          <ha-textfield
-            label="Navigation path"
-            .value=${act.navigation_path || "./"}
-            @input=${(e: Event) =>
-              onChange("navigation_path", (e.target as HTMLInputElement).value)}
-          ></ha-textfield>
+          <ha-selector
+            style="display: block; margin-top: 10px;"
+            .hass=${this.hass}
+            .selector=${{ navigation: {} }}
+            .value=${(action as NavigateActionConfig)?.navigation_path || ""}
+            .label=${localize("actions.navigate")}
+            .configValue=${"navigation_path"}
+            @value-changed=${(e: CustomEvent) =>
+              onChange("navigation_path", e.detail.value)}
+          ></ha-selector>
         `;
       case "url":
         return html`
-          <ha-textfield
-            label="URL"
-            .value=${act.url_path || ""}
-            @input=${(e: Event) =>
-              onChange("url_path", (e.target as HTMLInputElement).value)}
-          ></ha-textfield>
-        `;
-      case "call-service":
-        return html`
-          <ha-textfield
-            label="Service (es. light.toggle)"
-            .value=${act.service || ""}
-            @input=${(e: Event) =>
-              onChange("service", (e.target as HTMLInputElement).value)}
-          ></ha-textfield>
-          <ha-textarea
-            label="Service data (YAML)"
-            .value=${act.service_data || ""}
-            @input=${(e: Event) =>
-              onChange("service_data", (e.target as HTMLInputElement).value)}
-          ></ha-textarea>
+          <ha-selector
+            style="display: block; margin-top: 10px;"
+            .hass=${this.hass}
+            .selector=${{ text: {} }}
+            .value=${(action as UrlActionConfig)?.url_path || ""}
+            .label=${localize("actions.url")}
+            .configValue=${"url_path"}
+            @value-changed=${(e: CustomEvent) =>
+              onChange("url_path", e.detail.value)}
+          ></ha-selector>
         `;
       default:
         return html``;

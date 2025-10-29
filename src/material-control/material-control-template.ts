@@ -1,5 +1,5 @@
-import jsyaml from "js-yaml";
 import { MaterialControlCardConfig } from "./material-control-const";
+import { serializeAction } from "../shared/actions";
 
 export function materialControlTemplate(config: MaterialControlCardConfig) {
   const name = config.name;
@@ -26,8 +26,10 @@ export function materialControlTemplate(config: MaterialControlCardConfig) {
 name: ${name}
 icon: ${icon}
 ${entity}
-${tap_action(config.tap_action)}
-${hold_action(config.hold_action)}
+tap_action:
+  ${serializeAction(config.tap_action)}
+hold_action:
+  ${serializeAction(config.hold_action)}
 styles:
   grid:
     - grid-template-columns: 2fr 1fr 1fr
@@ -73,146 +75,4 @@ styles:
             : "var(--md-sys-color-on-surface-variant,'#43484e')";
         ]]]
 `;
-}
-
-/* -------------------
- * TAP ACTION
- * ------------------- */
-function tap_action(tap_action: any) {
-  if (!tap_action)
-    return `tap_action:
-  action: none`;
-
-  if (tap_action.action === "google-home")
-    return `tap_action:
-  action: url
-  url_path: |
-    [[[ 
-      const ua = navigator.userAgent || "";
-      if (ua.includes("Android")) {
-        return "app://com.google.android.apps.chromecast.app";
-      } else if (ua.includes("iPhone") || ua.includes("iPad")) {
-        return "googlehome://";
-      } else {
-        return "https://home.google.com/";
-      }
-    ]]]`;
-
-  if (tap_action.action === "settings")
-    return `tap_action:
-      action: navigate
-      navigation_path: |
-        [[[ 
-          const isAdmin = hass.user?.is_admin;
-          return isAdmin ? "/config/dashboard" : "/profile";
-        ]]]`;
-
-  if (tap_action.action === "navigate")
-    return `tap_action:
-      action: navigate
-      navigation_path: ${tap_action.navigation_path}`;
-
-  if (tap_action.action === "call-service") {
-    const yamlData =
-      tap_action.service_data && typeof tap_action.service_data === "object"
-        ? "\n" +
-          jsyaml
-            .dump(tap_action.service_data)
-            .split("\n")
-            .map((l) => (l ? "        " + l : l))
-            .join("\n")
-        : " {}";
-
-    return `tap_action:
-      action: call-service
-      service: ${tap_action.service}
-      service_data:${yamlData}`;
-  }
-
-  if (tap_action.action === "more-info")
-    return `tap_action:
-      action: more-info`;
-
-  if (tap_action.action === "toggle")
-    return `tap_action:
-      action: toggle`;
-
-  if (tap_action.action === "url")
-    return `tap_action:
-      action: url
-      url_path: ${tap_action.url_path}`;
-
-  return `tap_action:
-  action: none`;
-}
-
-/* -------------------
- * HOLD ACTION
- * ------------------- */
-function hold_action(hold_action: any) {
-  if (!hold_action)
-    return `hold_action:
-  action: none`;
-
-  if (hold_action.action === "google-home")
-    return `hold_action:
-  action: url
-  url_path: |
-    [[[ 
-      const ua = navigator.userAgent || "";
-      if (ua.includes("Android")) {
-        return "app://com.google.android.apps.chromecast.app";
-      } else if (ua.includes("iPhone") || ua.includes("iPad")) {
-        return "googlehome://";
-      } else {
-        return "https://home.google.com/";
-      }
-    ]]]`;
-
-  if (hold_action.action === "settings")
-    return `hold_action:
-      action: navigate
-      navigation_path: |
-        [[[ 
-          const isAdmin = hass.user?.is_admin;
-          return isAdmin ? "/config/dashboard" : "/profile";
-        ]]]`;
-
-  if (hold_action.action === "navigate")
-    return `hold_action:
-      action: navigate
-      navigation_path: ${hold_action.navigation_path}`;
-
-  if (hold_action.action === "call-service") {
-    const yamlData =
-      hold_action.service_data && typeof hold_action.service_data === "object"
-        ? "\n" +
-          jsyaml
-            .dump(hold_action.service_data)
-            .split("\n")
-            .map((l) => (l ? "        " + l : l))
-            .join("\n")
-        : " {}";
-
-    return `hold_action:
-      action: call-service
-      service: ${hold_action.service}
-      service_data:${yamlData}`;
-  }
-
-  if (hold_action.action === "more-info")
-    return `hold_action:
-      action: more-info`;
-
-  if (hold_action.action === "toggle")
-    return `hold_action:
-      action: toggle`;
-
-  if (hold_action.action === "url")
-    return `hold_action:
-      action: url
-      url_path: ${hold_action.url_path}`;
-
-  return `hold_action:
-  action: none`;
 }

@@ -29,7 +29,8 @@
     "active": "Ativo",
     "inactive": "Inativo",
     "info_device": "Informações do Dispositivo",
-    "related": "Integração Relacionada"
+    "related": "Integração Relacionada",
+    "hidden": "Ocultar"
   },
   "actions": {
     "automatic_action": "Habilitar ações automáticas",
@@ -62,13 +63,7 @@
     "climate_name": "Climatização",
     "device": "Dispositivo",
     "devices": "Dispositivos",
-    "placeholder": "./caminho-ou-url",
-    "default": "Usar configuração padrão ao Tocar (Toque Simples)",
-    "tap_type": "Selecione o tipo de Toque (Toque Simples, Manter Pressionado, Toque Duplo)",
-    "single": "Toque Simples",
-    "hold": "Manter Pressionado",
-    "double": "Toque Duplo",
-    "web": "Usar Toque Simples no Navegador (Toque selecionado no celular)"
+    "placeholder": "./caminho-ou-url"
   },
   "material_climate_card": {
     "name": "Nome da Entidade",
@@ -131,7 +126,9 @@
   },
   "material_lights_card": {
     "on_text": "Texto para Luzes LIGADAS",
-    "off_text": "Texto para Luzes DESLIGADAS"
+    "off_text": "Texto para Luzes DESLIGADAS",
+    "control_area": "Controlar uma Área específica",
+    "area_id": "Área a controlar"
   },
   "material_media_overlay": {
     "media_card": {

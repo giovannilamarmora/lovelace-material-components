@@ -161,7 +161,7 @@ if (!customElements.get("material-menu-card")) {
 
 (window as any).customCards.push({
   type: "material-users-card",
-  name: "Material Users (Beta)",
+  name: "Material Users",
   preview: true,
   description:
     "A card to view and manage users in your Home, providing a clear interface to see active users and control permissions.",
@@ -169,7 +169,7 @@ if (!customElements.get("material-menu-card")) {
 
 (window as any).customCards.push({
   type: "material-menu-card",
-  name: "Material Menu (Beta)",
+  name: "Material Menu",
   preview: true,
   description:
     "The menu to manage your home's settings, allowing you to view and adjust key options clearly and easily.",

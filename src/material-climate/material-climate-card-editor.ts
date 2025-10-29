@@ -6,6 +6,7 @@ import {
   DEFAULT_CONFIG,
   MaterialClimateCardConfig,
 } from "./material-climate-const";
+import { _entityChanged, _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-climate-card-editor")
 export class MaterialClimateCardEditor
@@ -17,43 +18,6 @@ export class MaterialClimateCardEditor
 
   public setConfig(config: MaterialClimateCardConfig): void {
     this._config = { ...config };
-  }
-
-  private _valueChanged = (ev: Event): void => {
-    const target = ev.target as any;
-    const configValue = target.getAttribute("configValue");
-
-    const value =
-      ev instanceof CustomEvent && ev.detail?.value !== undefined
-        ? ev.detail.value
-        : (target.checked ?? target.value);
-
-    if (!configValue || this._config[configValue] === value) return;
-
-    this._config = {
-      ...this._config,
-      [configValue]: value,
-    };
-
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  };
-
-  private _entityChanged(ev: CustomEvent): void {
-    const value = ev.detail.value;
-    if (this._config?.entity === value) return;
-    this._config = {
-      ...this._config,
-      entity: value,
-    };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
   }
 
   async firstUpdated() {
@@ -79,7 +43,7 @@ export class MaterialClimateCardEditor
           label="${localize("material_climate_card.name")}"
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
         ></ha-textfield>
 
@@ -90,7 +54,7 @@ export class MaterialClimateCardEditor
           .includeDomains=${["climate"]}
           allow-custom-entity
           configValue="entity"
-          @value-changed=${this._entityChanged}
+          @value-changed=${(ev: CustomEvent) => _entityChanged(ev, this)}
           required
         ></ha-entity-picker>
 
@@ -101,7 +65,7 @@ export class MaterialClimateCardEditor
           <ha-switch
             .checked=${this._config.use_material_color ?? true}
             configValue="use_material_color"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
 
@@ -112,7 +76,7 @@ export class MaterialClimateCardEditor
           <ha-switch
             .checked=${this._config.use_default_icon ?? true}
             configValue="use_default_icon"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
 
@@ -123,7 +87,7 @@ export class MaterialClimateCardEditor
                 label="Icon"
                 .value=${this._config.icon || ""}
                 configValue="icon"
-                @value-changed=${this._valueChanged}
+                @value-changed=${(ev: Event) => _valueChanged(ev, this)}
                 placeholder="mdi:lightbulb"
               />
             `}
@@ -132,7 +96,7 @@ export class MaterialClimateCardEditor
           label="${localize("material_climate_card.increase_temp")}"
           .value=${this._config.increase_temp || 1}
           configValue="increase_temp"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. 0.5"
         ></ha-textfield>
 
@@ -140,7 +104,7 @@ export class MaterialClimateCardEditor
           label="${localize("material_climate_card.decrease_temp")}"
           .value=${this._config.decrease_temp || 1}
           configValue="decrease_temp"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. 0.5"
         ></ha-textfield>
 
@@ -151,7 +115,7 @@ export class MaterialClimateCardEditor
           <ha-switch
             .checked=${this._config.fix_temperature ?? false}
             configValue="fix_temperature"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>-->
 
@@ -159,7 +123,7 @@ export class MaterialClimateCardEditor
           label="${localize("material_climate_card.fix_temperature")}"
           .value=${this._config.fix_temperature ?? "false"}
           configValue="fix_temperature"
-          @selected=${this._valueChanged}
+          @selected=${(ev: Event) => _valueChanged(ev, this)}
           @closed=${(ev: Event) => ev.stopPropagation()}
         >
           <mwc-list-item value="false">

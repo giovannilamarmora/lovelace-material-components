@@ -1,9 +1,13 @@
 import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
-import { DEFAULT_CONFIG, MaterialSliderCardConfig } from "./material-slider-const";
+import {
+  DEFAULT_CONFIG,
+  MaterialSliderCardConfig,
+} from "./material-slider-const";
 import { localize } from "../localize/localize";
 import { ControlType } from "../shared/types";
+import { _entityChanged, _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-slider-card-editor")
 export class MaterialSliderCardEditor
@@ -15,42 +19,6 @@ export class MaterialSliderCardEditor
 
   public setConfig(config: MaterialSliderCardConfig): void {
     this._config = { ...config };
-  }
-
-  private _valueChanged(ev: Event): void {
-    const target = ev.target as any;
-    const configValue = target.getAttribute("configValue");
-    const value =
-      ev instanceof CustomEvent && ev.detail?.value !== undefined
-        ? ev.detail.value
-        : (target.checked ?? target.value);
-
-    if (!configValue || this._config[configValue] === value) return;
-
-    this._config = {
-      ...this._config,
-      [configValue]: value,
-    };
-
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  }
-
-  private _entityChanged(ev: CustomEvent): void {
-    const value = ev.detail.value;
-    if (this._config?.entity === value) return;
-    this._config = {
-      ...this._config,
-      entity: value,
-    };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
   }
 
   async firstUpdated() {
@@ -84,7 +52,7 @@ export class MaterialSliderCardEditor
           label="${localize("material_slider_card.control_type")}"
           .value=${this._config.control_type ?? "light"}
           configValue="control_type"
-          @selected=${this._valueChanged}
+          @selected=${(ev: Event) => _valueChanged(ev, this)}
           @closed=${(ev: Event) => ev.stopPropagation()}
         >
           <mwc-list-item value="light">
@@ -99,7 +67,7 @@ export class MaterialSliderCardEditor
           label="${localize("material_slider_card.name")}"
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${this._valueChanged}
+          @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
         ></ha-textfield>
 
@@ -110,7 +78,7 @@ export class MaterialSliderCardEditor
           .includeDomains=${this.setEntityFilter()}
           allow-custom-entity
           configValue="entity"
-          @value-changed=${this._entityChanged}
+          @value-changed=${(ev: CustomEvent) => _entityChanged(ev, this)}
           required
         ></ha-entity-picker>
 
@@ -118,7 +86,7 @@ export class MaterialSliderCardEditor
           label="${localize("material_slider_card.icon")}"
           .value=${this._config.icon || ""}
           configValue="icon"
-          @value-changed=${this._valueChanged}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="mdi:lightbulb"
         ></ha-icon-picker>
 
@@ -129,7 +97,7 @@ export class MaterialSliderCardEditor
           <ha-switch
             .checked=${this._config.show_percentage ?? true}
             configValue="show_percentage"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
 
@@ -140,7 +108,7 @@ export class MaterialSliderCardEditor
           <ha-switch
             .checked=${this._config.bold_text ?? false}
             configValue="bold_text"
-            @change=${this._valueChanged}
+            @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
       </div>

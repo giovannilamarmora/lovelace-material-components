@@ -237,17 +237,12 @@ export class MaterialButtonCard extends LitElement {
     // Feedback tattile (se supportato)
     navigator.vibrate?.(50);
 
-    // Se la configurazione o Home Assistant non sono disponibili, esci
     if (!this._config || !this.hass) return;
 
     const entityId = this._config.entity;
     const controlType = this._config.control_type ?? "generic";
     const useDefaultToggle = this._config.use_default_toggle ?? true;
 
-    // Se non è definito un entityId, esci
-    if (!entityId) return;
-
-    const domain = entityId.split(".")[0];
     const toggleDomains = [
       "light",
       "switch",
@@ -258,41 +253,54 @@ export class MaterialButtonCard extends LitElement {
       "script",
     ];
 
-    const toggleEntity = toggleDomains.includes(domain);
+    const domain = entityId?.split(".")[0];
+    const toggleEntity = domain ? toggleDomains.includes(domain) : false;
+
     const isMediaPlayer = controlType === ControlType.MEDIA_PLAYER;
 
     if (useDefaultToggle) {
       // Se il dominio supporta il toggle o non è un media_player, mostra le info
       if (toggleEntity || !isMediaPlayer) {
-        fireEvent(this, "hass-more-info", { entityId });
-      } else {
-        // Altrimenti esegui toggle
+        if (entityId) fireEvent(this, "hass-more-info", { entityId });
+      } else if (entityId) {
         this.hass.callService("homeassistant", "toggle", {
           entity_id: entityId,
         });
       }
-    } else {
-      // Check if hold_action is defined and is an ActionConfig object
-      if (
-        this._config.hold_action &&
-        typeof this._config.hold_action === "object"
-      ) {
-        // Use the new ActionConfig system
-        const evaluatedTap = evaluateAction(
-          this._config.hold_action,
-          this.hass.states[entityId],
-          this.hass.states[entityId]?.state,
-          this.hass
-        );
-        handleActionConfig(
-          this,
-          this.hass as any,
-          isNullOrEmpty(entityId) ? {} : { entity: entityId },
-          evaluatedTap
-        );
-        return;
-      }
+      return;
     }
+
+    // Esegui hold_action se definita
+    const holdAction = this._config.hold_action;
+    if (!holdAction) return;
+
+    if (typeof holdAction === "string") {
+      // Se è solo una stringa, trasformala in oggetto action
+      handleActionConfig(
+        this,
+        this.hass as any,
+        entityId ? { entity: entityId } : {},
+        {
+          action: holdAction,
+        }
+      );
+      return;
+    }
+
+    // Oggetto ActionConfig completo
+    const evaluatedHold = evaluateAction(
+      holdAction,
+      entityId ? this.hass.states[entityId] : undefined,
+      entityId ? this.hass.states[entityId]?.state : undefined,
+      this.hass
+    );
+
+    handleActionConfig(
+      this,
+      this.hass as any,
+      entityId ? { entity: entityId } : {},
+      evaluatedHold
+    );
   }
 
   _openMediaOverlay() {

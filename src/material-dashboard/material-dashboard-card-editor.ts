@@ -2,8 +2,11 @@ import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant, LovelaceCardEditor } from "custom-card-helpers";
 import { localize } from "../localize/localize";
-import { DEFAULT_CONFIG } from "./material-dashboard-const";
-import { MaterialButtonCardConfig } from "../material-button/material-button-const";
+import {
+  DEFAULT_CONFIG,
+  MaterialDashboardCardConfig,
+} from "./material-dashboard-const";
+import { _navigationChanged, _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-dashboard-card-editor")
 export class MaterialDashboardCardEditor
@@ -11,47 +14,10 @@ export class MaterialDashboardCardEditor
   implements LovelaceCardEditor
 {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config: MaterialButtonCardConfig = DEFAULT_CONFIG;
+  @state() private _config: MaterialDashboardCardConfig = DEFAULT_CONFIG;
 
-  public setConfig(config: MaterialButtonCardConfig): void {
+  public setConfig(config: MaterialDashboardCardConfig): void {
     this._config = { ...config };
-  }
-
-  private _valueChanged = (ev: Event): void => {
-    const target = ev.target as any;
-    const configValue = target.getAttribute("configValue");
-
-    const value =
-      ev instanceof CustomEvent && ev.detail?.value !== undefined
-        ? ev.detail.value
-        : (target.checked ?? target.value);
-
-    if (!configValue || this._config[configValue] === value) return;
-
-    this._config = {
-      ...this._config,
-      [configValue]: value,
-    };
-
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
-  };
-
-  private _entityChanged(ev: CustomEvent): void {
-    const value = ev.detail.value;
-    if (this._config?.entity === value) return;
-    this._config = {
-      ...this._config,
-      entity: value,
-    };
-    this.dispatchEvent(
-      new CustomEvent("config-changed", {
-        detail: { config: this._config },
-      })
-    );
   }
 
   async firstUpdated() {
@@ -68,102 +34,103 @@ export class MaterialDashboardCardEditor
       return html``;
     }
 
-    this._config.use_default_icon = this._config.use_default_icon ?? true;
-    this._config.default_action = this._config.default_action ?? true;
-
     return html`
       <div class="form">
         <span class="switch-label"
           >${localize("material_dashboard_card.description")}</span
         >
 
-        <span class="text-label"
-          >${localize("material_dashboard_card.cameras")}</span
-        >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
-          .value=${this._config.cameras || ""}
-          configValue="cameras"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./cameras"
-        ></ha-textfield>
-
-        <span class="text-label"
-          >${localize("material_dashboard_card.lighting")}</span
-        >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
-          .value=${this._config.lighting || ""}
-          configValue="lighting"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./lighting"
-        ></ha-textfield>
-
-        <span class="text-label"
-          >${localize("material_dashboard_card.wifi")}</span
-        >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
-          .value=${this._config.wifi || ""}
-          configValue="wifi"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./wifi"
-        ></ha-textfield>
-
-        <span class="text-label"
-          >${localize("material_dashboard_card.climate")}</span
-        >
-        <ha-textfield
-          label="${localize("material_dashboard_card.placeholder")}"
-          .value=${this._config.climate || ""}
-          configValue="climate"
-          @input=${this._valueChanged}
-          placeholder="e.g. ./climate"
-        ></ha-textfield>
-
         <div class="switch-row">
-          <span class="switch-label"
-            >${localize("material_dashboard_card.default")}</span
-          >
-          <ha-switch
-            .checked=${this._config.default_action ?? true}
-            configValue="default_action"
-            @change=${this._valueChanged}
-          />
+          <span class="text-label">
+            ${localize("material_dashboard_card.cameras")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_cameras ?? false}
+              configValue="hide_cameras"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
         </div>
 
-        ${this._config.default_action
-          ? html``
-          : html`
-              <ha-select
-                label="${localize("material_dashboard_card.tap_type")}"
-                .value=${this._config.action_type || "tap_action"}
-                configValue="action_type"
-                @selected=${this._valueChanged}
-                @closed=${(ev: Event) => ev.stopPropagation()}
-              >
-                <mwc-list-item value="tap_action">
-                  ${localize("material_dashboard_card.single")}
-                </mwc-list-item>
-                <mwc-list-item value="hold_action">
-                  ${localize("material_dashboard_card.hold")}
-                </mwc-list-item>
-                <mwc-list-item value="double_tap_action">
-                  ${localize("material_dashboard_card.double")}
-                </mwc-list-item>
-              </ha-select>
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
+          .value=${this._config.cameras || ""}
+          .label=${localize("material_dashboard_card.cameras")}
+          configValue="cameras"
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
 
-              <div class="switch-row">
-                <span class="switch-label"
-                  >${localize("material_dashboard_card.web")}</span
-                >
-                <ha-switch
-                  .checked=${this._config.single_tap_web ?? false}
-                  configValue="single_tap_web"
-                  @change=${this._valueChanged}
-                />
-              </div>
-            `}
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.lighting")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_lighting ?? false}
+              configValue="hide_lighting"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
+          .value=${this._config.lighting || ""}
+          .label=${localize("material_dashboard_card.lighting")}
+          configValue="lighting"
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
+
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.wifi")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_wifi ?? false}
+              configValue="hide_wifi"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
+          .value=${this._config.wifi || ""}
+          .label=${localize("material_dashboard_card.wifi")}
+          configValue="wifi"
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
+
+        <div class="switch-row">
+          <span class="text-label">
+            ${localize("material_dashboard_card.climate")}
+          </span>
+          <div class="switch-control">
+            <span class="switch-label">${localize("common.hidden")}</span>
+            <ha-switch
+              .checked=${this._config.hide_climate ?? false}
+              configValue="hide_climate"
+              @change=${(ev: Event) => _valueChanged(ev, this)}
+            ></ha-switch>
+          </div>
+        </div>
+
+        <ha-selector
+          .hass=${this.hass}
+          .selector=${{ navigation: {} }}
+          .value=${this._config.climate || ""}
+          .label=${localize("material_dashboard_card.climate")}
+          configValue="climate"
+          @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
+        ></ha-selector>
       </div>
     `;
   }
@@ -176,9 +143,11 @@ export class MaterialDashboardCardEditor
       padding: 16px;
     }
 
-    .switch-label {
-      font-size: 16px;
-      font-weight: 500;
+    .switch-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
     }
 
     .text-label {
@@ -186,14 +155,14 @@ export class MaterialDashboardCardEditor
       font-weight: 500;
     }
 
-    .switch-row {
+    .switch-control {
       display: flex;
-      justify-content: space-between;
       align-items: center;
+      gap: 8px;
     }
 
     .switch-label {
-      font-size: 16px;
+      font-size: 14px;
       font-weight: 500;
     }
   `;

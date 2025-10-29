@@ -53,42 +53,14 @@ export class MaterialDashboardCard extends LitElement {
   }
 
   private mapTemplate(config: MaterialDashboardCardConfig) {
-    const action = this.resolveAction({
-      default_action: config.default_action,
-      action_type: config.action_type,
-      single_tap_web: config.single_tap_web,
-    });
-
-    const text = materialDashboadTemplate(
-      config.cameras!,
-      config.lighting!,
-      config.wifi!,
-      config.climate!,
-      action
-    );
+    //const text = materialDashboadTemplate(
+    //  config.cameras!,
+    //  config.lighting!,
+    //  config.wifi!,
+    //  config.climate!
+    //);
+    const text = materialDashboadTemplate(config);
     return text;
-  }
-
-  resolveAction({
-    default_action,
-    action_type,
-    single_tap_web,
-  }: {
-    default_action?: boolean;
-    action_type?: "tap_action" | "hold_action" | "double_tap_action";
-    single_tap_web?: boolean;
-  }): "tap_action" | "hold_action" | "double_tap_action" | any {
-    const ua = navigator.userAgent || "";
-    const isWeb =
-      !ua.includes("Android") &&
-      !ua.includes("iPhone") &&
-      !ua.includes("iPad") &&
-      !ua.includes("HomeAssistant");
-
-    if (default_action) return "tap_action";
-    if (isWeb && single_tap_web) return "tap_action";
-    if (!action_type) return "tap_action";
-    return action_type;
   }
 
   private _handleClick(event: MouseEvent): void {

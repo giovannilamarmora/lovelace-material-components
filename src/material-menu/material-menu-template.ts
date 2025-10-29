@@ -1,3 +1,4 @@
+import { serializeAction } from "../shared/actions";
 import { MaterialMenuCardConfig } from "./material-menu-const";
 
 export function materialMenuTemplate(config: MaterialMenuCardConfig) {
@@ -53,43 +54,43 @@ styles:
 `;
 }
 
-function serializeAction(action: any, defaultAction = "none"): string {
-  if (!action) return `action: ${defaultAction}`;
-
-  if (action.action === "google-home")
-    return `action: url
-  url_path: |
-    [[[ 
-      const ua = navigator.userAgent || "";
-      if (ua.includes("Android")) {
-        return "app://com.google.android.apps.chromecast.app";
-      } else if (ua.includes("iPhone") || ua.includes("iPad")) {
-        return "googlehome://";
-      } else {
-        return "https://home.google.com/";
-      }
-    ]]]`;
-
-  if (action.action === "settings")
-    return `action: navigate
-  navigation_path: |
-    [[[ 
-      const isAdmin = hass.user?.is_admin;
-      return isAdmin ? "/config/dashboard" : "/profile";
-    ]]]`;
-  //console.log(action);
-  //console.log(jsyaml.dump(action));
-  //return jsyaml.dump(action);
-  // Se è un oggetto normale, genera YAML con indentazione corretta
-  const yamlLines = [`action: ${action.action || defaultAction}`];
-  for (const key of Object.keys(action)) {
-    if (key === "action") continue;
-    const value = action[key];
-    if (typeof value === "string" && !value.includes("[[["))
-      yamlLines.push(`  ${key}: ${value}`);
-    else if (typeof value === "string" && value.includes("[[["))
-      yamlLines.push(`  ${key}: |\n    ${value.replace(/\n/g, "\n    ")}`);
-    else yamlLines.push(`  ${key}: ${JSON.stringify(value)}`);
-  }
-  return yamlLines.join("\n");
-}
+//function serializeActionOld(action: any, defaultAction = "none"): string {
+//  if (!action) return `action: ${defaultAction}`;
+//
+//  if (action.action === "google-home")
+//    return `action: url
+//  url_path: |
+//    [[[
+//      const ua = navigator.userAgent || "";
+//      if (ua.includes("Android")) {
+//        return "app://com.google.android.apps.chromecast.app";
+//      } else if (ua.includes("iPhone") || ua.includes("iPad")) {
+//        return "googlehome://";
+//      } else {
+//        return "https://home.google.com/";
+//      }
+//    ]]]`;
+//
+//  if (action.action === "settings")
+//    return `action: navigate
+//  navigation_path: |
+//    [[[
+//      const isAdmin = hass.user?.is_admin;
+//      return isAdmin ? "/config/dashboard" : "/profile";
+//    ]]]`;
+//  //console.log(action);
+//  //console.log(jsyaml.dump(action));
+//  //return jsyaml.dump(action);
+//  // Se è un oggetto normale, genera YAML con indentazione corretta
+//  const yamlLines = [`action: ${action.action || defaultAction}`];
+//  for (const key of Object.keys(action)) {
+//    if (key === "action") continue;
+//    const value = action[key];
+//    if (typeof value === "string" && !value.includes("[[["))
+//      yamlLines.push(`  ${key}: ${value}`);
+//    else if (typeof value === "string" && value.includes("[[["))
+//      yamlLines.push(`  ${key}: |\n    ${value.replace(/\n/g, "\n    ")}`);
+//    else yamlLines.push(`  ${key}: ${JSON.stringify(value)}`);
+//  }
+//  return yamlLines.join("\n");
+//}
