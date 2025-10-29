@@ -29,7 +29,8 @@
     "active": "Active",
     "inactive": "Inactive",
     "info_device": "Device Information",
-    "related": "Related Integration"
+    "related": "Related Integration",
+    "hidden": "Hide"
   },
   "actions": {
     "automatic_action": "Enable automatic actions",
