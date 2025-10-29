@@ -125,7 +125,9 @@
   },
   "material_lights_card": {
     "on_text": "Texto para luces encendidas",
-    "off_text": "Texto para luces apagadas"
+    "off_text": "Texto para luces apagadas",
+    "control_area": "Controlar un Área específica",
+    "area_id": "Área a controlar"
   },
   "material_media_overlay": {
     "media_card": {

@@ -57,8 +57,48 @@ export class MaterialLightsCardEditor
           @input=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Lights Off"
         ></ha-textfield>
+
+        <div class="switch-row">
+          <span class="switch-label"
+            >${localize("material_lights_card.control_area")}</span
+          >
+          <ha-switch
+            .checked=${this._config.control_area ?? false}
+            configValue="control_area"
+            @change=${(ev: Event) => {
+              _valueChanged(ev, this);
+              this.resetForm();
+            }}
+          />
+        </div>
+
+        ${this._config.control_area
+          ? html`
+              <ha-selector
+                style="display: block; margin-top: 10px;"
+                .hass=${this.hass}
+                .selector=${{ area: {} }}
+                .value=${this._config.area_id}
+                .label=${localize("material_lights_card.area_id")}
+                configValue="area_id"
+                @value-changed=${(ev: Event) => _valueChanged(ev, this)}
+              ></ha-selector>
+            `
+          : ""}
       </div>
     `;
+  }
+
+  private resetForm() {
+    if (!this._config.control_area && "area_id" in this._config) {
+      delete this._config.area_id;
+
+      this.dispatchEvent(
+        new CustomEvent("config-changed", {
+          detail: { config: this._config },
+        })
+      );
+    }
   }
 
   static styles = css`

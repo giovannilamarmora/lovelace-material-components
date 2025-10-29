@@ -125,7 +125,9 @@
   },
   "material_lights_card": {
     "on_text": "Text für eingeschaltete Lichter",
-    "off_text": "Text für ausgeschaltete Lichter"
+    "off_text": "Text für ausgeschaltete Lichter",
+    "control_area": "Einen bestimmten Bereich steuern",
+    "area_id": "Zu steuernder Bereich"
   },
   "material_media_overlay": {
     "media_card": {

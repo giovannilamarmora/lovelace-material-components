@@ -61,24 +61,20 @@ export function _entityChanged(ev: CustomEvent, _this: any): void {
  * Dispatches a "config-changed" event with the updated configuration.
  */
 export function _valueChanged(ev: Event, _this: any): void {
-  const target = ev.target as any;
+  const target = ev.target as HTMLElement & {
+    getAttribute(name: string): string | null;
+  };
   const configValue = target.getAttribute("configValue");
-
   const value =
-    ev instanceof CustomEvent && ev.detail?.value !== undefined
-      ? ev.detail.value
-      : (target.checked ?? target.value);
+    (ev as CustomEvent).detail?.value ??
+    (target as any).value ??
+    (target as any).checked;
 
   if (!configValue || _this._config[configValue] === value) return;
 
-  _this._config = {
-    ..._this._config,
-    [configValue]: value,
-  };
+  _this._config = { ..._this._config, [configValue]: value };
 
   _this.dispatchEvent(
-    new CustomEvent("config-changed", {
-      detail: { config: _this._config },
-    })
+    new CustomEvent("config-changed", { detail: { config: _this._config } })
   );
 }

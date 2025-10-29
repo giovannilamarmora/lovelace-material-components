@@ -129,10 +129,10 @@ export class MaterialMenuCardEditor
           ${localize("actions.navigate")}
         </mwc-list-item>
         <mwc-list-item value="url"> ${localize("actions.url")} </mwc-list-item>
-        <mwc-list-item value="call-service">
+        <!--<mwc-list-item value="call-service">
           ${localize("actions.call_service")}
         </mwc-list-item>
-        <!--<mwc-list-item value="assist">
+        <mwc-list-item value="assist">
           ${localize("actions.assist")}
         </mwc-list-item>
         <mwc-list-item value="fire-dom-event">
@@ -155,7 +155,7 @@ export class MaterialMenuCardEditor
     action: ActionConfig | undefined,
     onChange: (key: string, value: any) => void
   ) {
-    const act = action as Record<string, any>;
+    //const act = action as Record<string, any>;
 
     switch (actionType) {
       case "navigate":
@@ -183,21 +183,6 @@ export class MaterialMenuCardEditor
             @value-changed=${(e: CustomEvent) =>
               onChange("url_path", e.detail.value)}
           ></ha-selector>
-        `;
-      case "call-service":
-        return html`
-          <ha-textfield
-            label="Service (es. light.toggle)"
-            .value=${act.service || ""}
-            @input=${(e: Event) =>
-              onChange("service", (e.target as HTMLInputElement).value)}
-          ></ha-textfield>
-          <ha-textarea
-            label="Service data (YAML)"
-            .value=${act.service_data || ""}
-            @input=${(e: Event) =>
-              onChange("service_data", (e.target as HTMLInputElement).value)}
-          ></ha-textarea>
         `;
       default:
         return html``;

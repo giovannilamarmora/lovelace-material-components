@@ -125,7 +125,9 @@
   },
   "material_lights_card": {
     "on_text": "Text for Lights ON",
-    "off_text": "Text for Lights OFF"
+    "off_text": "Text for Lights OFF",
+    "control_area": "Control a specific Area",
+    "area_id": "Area to control"
   },
   "material_media_overlay": {
     "media_card": {

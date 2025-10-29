@@ -125,7 +125,9 @@
   },
   "material_lights_card": {
     "on_text": "Texte pour lumières allumées",
-    "off_text": "Texte pour lumières éteintes"
+    "off_text": "Texte pour lumières éteintes",
+    "control_area": "Contrôler une zone spécifique",
+    "area_id": "Zone à contrôler"
   },
   "material_media_overlay": {
     "media_card": {
