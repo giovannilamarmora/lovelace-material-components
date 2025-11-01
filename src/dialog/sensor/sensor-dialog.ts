@@ -67,6 +67,7 @@ export class SensorDialog extends LitElement {
         .open=${this.open}
         scrimClickAction=""
         escapeKeyAction="close"
+        hideActions
         @click=${this._handleDialogClick}
       >
         <div class="header" @click=${() => _handleMaxWidth(this)}>

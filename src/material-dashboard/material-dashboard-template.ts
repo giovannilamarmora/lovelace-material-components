@@ -53,7 +53,7 @@ parameters:
   preventClicksPropagation: true
   preventClicks: true
   threshold: 30
-  slidesOffsetAfter: 13
+  slidesOffsetAfter: 7
 cards:
   - type: custom:button-card
     show_icon: false
