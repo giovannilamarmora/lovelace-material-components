@@ -310,7 +310,7 @@ export class SensorDialog extends LitElement {
     .content {
       /*padding: 40px 16px 0px 16px;*/
       padding: 40px 0px 0px 0px;
-      margin-bottom: -30px;
+      /*margin-bottom: -30px;*/
     }
 
     ha-button-menu {
