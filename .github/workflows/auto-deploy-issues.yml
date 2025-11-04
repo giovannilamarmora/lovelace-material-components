@@ -122,8 +122,8 @@ jobs:
                 const newLabels = [
                   ...new Set(
                     currentLabels
-                      .filter(l => l !== '📦 To be deployed')
-                      .concat(['🚀 deployed'])
+                      .filter(l => l !== '📦 To be deployed' && l !== '⏳ in progress')
+                      .concat(['🚀 deployed', '✅ done'])
                   )
                 ];
 
