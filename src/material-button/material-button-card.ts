@@ -1,7 +1,7 @@
 import { html, css, LitElement, TemplateResult } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { localize } from "../localize/localize";
-import { fireEvent, handleActionConfig } from "custom-card-helpers";
+import { fireEvent } from "custom-card-helpers";
 import { HomeAssistant } from "../ha-types";
 import { applyRippleEffect } from "../animations";
 import {
@@ -16,7 +16,7 @@ import { MaterialMediaOverlay } from "../material-media-overlay/material-media-o
 import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
 import { isDeviceOn, isMotionDevice, isOfflineState } from "../shared/states";
 import { _openDialog } from "../dialog/dialog-manager";
-import { evaluateAction } from "../shared/actions";
+import { evaluateAction, handleAction } from "../shared/actions";
 
 @customElement("material-button-card")
 export class MaterialButtonCard extends LitElement {
@@ -161,7 +161,7 @@ export class MaterialButtonCard extends LitElement {
         this.hass.states[entityId!]?.state,
         this.hass
       );
-      handleActionConfig(
+      handleAction(
         this,
         this.hass as any,
         isNullOrEmpty(entityId) ? {} : { entity: entityId },
@@ -177,6 +177,105 @@ export class MaterialButtonCard extends LitElement {
 
     return fireEvent(this, "hass-more-info", { entityId });
   }
+
+  //private _toggle() {
+  //  if (!this._config || !this.hass) return;
+  //
+  //  if (navigator.vibrate) navigator.vibrate(50);
+  //
+  //  const entityId = this._config.entity;
+  //  const domain = entityId?.split(".")[0] ?? "";
+  //  const controlType = this._config.control_type ?? ControlType.GENERIC;
+  //  const isDefaultToggle = this._config.use_default_toggle ?? true;
+  //
+  //  const toggleDomains = [
+  //    "light",
+  //    "switch",
+  //    "fan",
+  //    "climate",
+  //    "input_boolean",
+  //    "cover",
+  //    "script",
+  //  ];
+  //  const stateObj = entityId ? this.hass.states[entityId] : undefined;
+  //
+  //  // Funzione per aprire dialog sensori
+  //  const openSensorDialog = () => {
+  //    _openDialog(this, "sensor-dialog", this.hass, this._config);
+  //  };
+  //
+  //  // Funzione per aprire overlay media
+  //  const openMediaOverlay = () => {
+  //    this._openMediaOverlay();
+  //  };
+  //
+  //  // Funzione per fallback "more-info"
+  //  const openMoreInfo = () => {
+  //    fireEvent(this, "hass-more-info", { entityId });
+  //  };
+  //
+  //  // 1️⃣ Gestione default toggle
+  //  if (isDefaultToggle) {
+  //    const isToggleable =
+  //      toggleDomains.includes(domain) &&
+  //      controlType !== ControlType.THERMOMETER &&
+  //      controlType !== ControlType.MEDIA_PLAYER;
+  //
+  //    if (isToggleable || controlType === ControlType.AUTOMATION) {
+  //      return this.hass.callService("homeassistant", "toggle", {
+  //        entity_id: entityId,
+  //      });
+  //    }
+  //
+  //    // Device class specific
+  //    const deviceClass = stateObj
+  //      ? getValidDeviceClass(stateObj.attributes)
+  //      : undefined;
+  //    if (
+  //      [
+  //        "door",
+  //        "temperature",
+  //        "humidity",
+  //        "motion",
+  //        "presence",
+  //        "occupancy",
+  //      ].includes(deviceClass)
+  //    ) {
+  //      return openSensorDialog();
+  //    }
+  //
+  //    if (
+  //      domain === "media_player" ||
+  //      controlType === ControlType.MEDIA_PLAYER
+  //    ) {
+  //      return openMediaOverlay();
+  //    }
+  //
+  //    return openMoreInfo();
+  //  }
+  //
+  //  // 2️⃣ Gestione tap_action personalizzata
+  //  const tap = this._config.tap_action;
+  //  if (tap && typeof tap === "object") {
+  //    const evaluatedTap = evaluateAction(
+  //      tap,
+  //      stateObj,
+  //      stateObj?.state,
+  //      this.hass
+  //    );
+  //    return handleAction(
+  //      this,
+  //      this.hass as any,
+  //      entityId ? { entity: entityId } : {},
+  //      evaluatedTap
+  //    );
+  //  }
+  //
+  //  // 3️⃣ Fallback generico per media player o more-info
+  //  if (domain === "media_player" || controlType === ControlType.MEDIA_PLAYER)
+  //    return openMediaOverlay();
+  //  return openMoreInfo();
+  //}
 
   private _pressTimer?: number;
   private _startX?: number;
@@ -276,7 +375,7 @@ export class MaterialButtonCard extends LitElement {
 
     if (typeof holdAction === "string") {
       // Se è solo una stringa, trasformala in oggetto action
-      handleActionConfig(
+      handleAction(
         this,
         this.hass as any,
         entityId ? { entity: entityId } : {},
@@ -295,7 +394,7 @@ export class MaterialButtonCard extends LitElement {
       this.hass
     );
 
-    handleActionConfig(
+    handleAction(
       this,
       this.hass as any,
       entityId ? { entity: entityId } : {},

@@ -1,3 +1,6 @@
+import { handleActionConfig } from "custom-card-helpers";
+import { isNullOrEmpty } from "./utils";
+
 /**
  * Serializes an action object into a **YAML-formatted string** compatible with Home Assistant's Lovelace configuration.
  *
@@ -154,4 +157,46 @@ export function mapJSFunction(
   }
 
   return value;
+}
+
+export function handleAction(
+  element: HTMLElement,
+  hass: any,
+  config: any,
+  actionConfig: any
+) {
+  if (!actionConfig || !hass) return;
+
+  const actionType = actionConfig.action;
+
+  switch (actionType) {
+    case "perform-action": {
+      // ✅ Supporta entrambi
+      const performAction = actionConfig.perform_action || "";
+      const [domain, service] = performAction
+        ? performAction.split(".")
+        : actionConfig.service?.split(".") || [];
+
+      if (!domain || !service) {
+        return;
+      }
+
+      const data = {
+        ...actionConfig.data,
+        ...(actionConfig.target || {}),
+      };
+
+      hass.callService(domain, service, data);
+      break;
+    }
+
+    default:
+      handleActionConfig(
+        element,
+        hass as any,
+        isNullOrEmpty(config.entity) ? {} : { entity: config.entity },
+        actionConfig
+      );
+      break;
+  }
 }
