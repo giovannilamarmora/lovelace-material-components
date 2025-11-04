@@ -1,0 +1,160 @@
+name: 🚀 Auto Deploy Issues on Tag or Release
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  update-issues:
+    name: 📝 Update & Close Issues
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: 📂 Checkout repository
+        uses: actions/checkout@v4
+
+      - name: ⚡ Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: 📦 Install dependencies
+        run: npm install @actions/github @actions/core
+
+      - name: 🏷️ Get tag/release description
+        id: description
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          TAG_NAME: ${{ github.ref_name }}
+          EVENT_NAME: ${{ github.event_name }}
+        run: |
+          node <<'EOF'
+          const github = require('@actions/github');
+          const { execSync } = require('child_process');
+          const fs = require('fs');
+          const token = process.env.GITHUB_TOKEN;
+          const client = github.getOctokit(token);
+          const { GITHUB_REPOSITORY, TAG_NAME, EVENT_NAME } = process.env;
+          const [owner, repo] = GITHUB_REPOSITORY.split('/');
+
+          (async () => {
+            let description = '';
+            console.log(`📦 Event: ${EVENT_NAME}, Tag: ${TAG_NAME}`);
+
+            if (EVENT_NAME === 'release' && github.context.payload.release) {
+              description = github.context.payload.release.body || '';
+              console.log(`✅ Release description found.`);
+            } else {
+              try {
+                const { data: release } = await client.rest.repos.getReleaseByTag({ owner, repo, tag: TAG_NAME });
+                description = release.body || '';
+                console.log(`✅ Release description found by tag.`);
+              } catch {
+                console.log(`⚠️ No release found for tag ${TAG_NAME}. Using local tag description.`);
+                try {
+                  description = execSync(`git tag -l "${TAG_NAME}" -n9999`).toString();
+                } catch (err) {
+                  console.error("❌ Unable to retrieve tag description:", err.message);
+                }
+              }
+            }
+
+            console.log(`📄 Final description:\n${description}`);
+            fs.appendFileSync(process.env.GITHUB_OUTPUT, `description<<EOF\n${description}\nEOF\n`);
+          })().catch(err => {
+            console.error("💥 General error:", err);
+            process.exit(1);
+          });
+          EOF
+
+      - name: ✅ Update & Close Issues
+        env:
+          GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
+          GITHUB_REPOSITORY: ${{ github.repository }}
+          TAG_NAME: ${{ github.ref_name }}
+          TAG_DESCRIPTION: ${{ steps.description.outputs.description }}
+        run: |
+          node <<'EOF'
+          const github = require('@actions/github');
+          const token = process.env.GITHUB_TOKEN;
+          const { TAG_NAME, TAG_DESCRIPTION, GITHUB_REPOSITORY } = process.env;
+          const [owner, repo] = GITHUB_REPOSITORY.split('/');
+          const client = github.getOctokit(token);
+
+          console.log(`📝 Tag: ${TAG_NAME}`);
+          console.log(`📄 Description:\n${TAG_DESCRIPTION}\n`);
+
+          // Search for issue references (#12, fixes #12, resolve #12 etc.)
+          const regex = /#\d+|issue\s*\d+|fix(?:es|ed)?\s*#?\d+|resolve(?:s|d)?\s*#?\d+/gi;
+          const matches = TAG_DESCRIPTION ? TAG_DESCRIPTION.match(regex) : null;
+
+          if (!matches) {
+            console.log("ℹ️ No issues found in tag/release description.");
+            process.exit(0);
+          }
+
+          const issueNumbers = [...new Set(matches.map(m => m.replace(/[^0-9]/g, '')))].filter(Boolean);
+
+          if (issueNumbers.length === 0) {
+            console.log("⚠️ No valid issue numbers found.");
+            process.exit(0);
+          }
+
+          // Formatta la data di deploy
+          const deployDate = new Date();
+          const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+          const formattedDate = `${deployDate.getDate()} ${months[deployDate.getMonth()]} ${deployDate.getFullYear()}`;
+
+          console.log(`🎯 Found ${issueNumbers.length} issue(s) to update: ${issueNumbers.map(n => '#' + n).join(', ')}`);
+
+          (async () => {
+            for (const issueNumber of issueNumbers) {
+              console.log(`\n🔄 Updating issue #${issueNumber}...`);
+              try {
+                const { data: issue } = await client.rest.issues.get({
+                  owner,
+                  repo,
+                  issue_number: issueNumber
+                });
+
+                const currentLabels = issue.labels.map(l => l.name);
+                const newLabels = [
+                  ...new Set(
+                    currentLabels
+                      .filter(l => l !== '📦 To be deployed')
+                      .concat(['🚀 deployed'])
+                  )
+                ];
+
+                await client.rest.issues.update({
+                  owner,
+                  repo,
+                  issue_number: issueNumber,
+                  labels: newLabels,
+                  state: 'closed'
+                });
+
+                // Commento dettagliato con data formattata e link release
+                await client.rest.issues.createComment({
+                  owner,
+                  repo,
+                  issue_number: issueNumber,
+                  body:
+                    `✅ Automatically closed after deploying tag **${TAG_NAME}**.\n\n` +
+                    `🗓 Deployment date: ${formattedDate}\n` +
+                    (github.context.payload.release?.html_url
+                      ? `📦 Related release: [${TAG_NAME}](${github.context.payload.release.html_url})\n`
+                      : '')
+                });
+
+                console.log(`✅ Issue #${issueNumber} updated and closed.`);
+              } catch (err) {
+                console.error(`❌ Error updating issue #${issueNumber}:`, err.message);
+              }
+            }
+          })().catch(err => {
+            console.error("💥 General error:", err);
+            process.exit(1);
+          });
+          EOF
