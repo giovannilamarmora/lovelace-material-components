@@ -347,6 +347,7 @@ export function getStateDisplay(
     [OnlineStates.IDLE]: localize("common.idle"),
     [OnlineStates.PAUSED]: localize("common.paused"),
     [OnlineStates.PLAYING]: localize("common.playing"),
+    [OnlineStates.IDLE_2]: localize("common.on"),
   };
 
   const finalState = stateMap[state] || state;

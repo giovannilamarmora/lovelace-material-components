@@ -78,6 +78,21 @@ export enum DeviceType {
 }
 
 /**
+ * Enum representing supported label classes (as defined by the user).
+ */
+export enum LabelType {
+  ASCIUGATRICE = "asciugatrice",
+  DRYER = "dryer",
+}
+
+/**
+ * Enum representing supported brand label classes (as defined by the user).
+ */
+export enum BrandLabelType {
+  CANDY = "candy",
+}
+
+/**
  * Type guard that checks if a given string corresponds
  * to a valid DeviceType enum value.
  *

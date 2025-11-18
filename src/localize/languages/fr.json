@@ -140,5 +140,25 @@
     "stop_cast": "Arrêter la diffusion",
     "open": "Ouvrir",
     "open_google": "Ouvrir Google Home"
+  },
+  "dryer": {
+    "remote": "Télécommande",
+    "cotton": "Coton",
+    "whites": "Blancs",
+    "jeans": "Jeans",
+    "colored": "Sombres & Colorés",
+    "synthetics": "Synthétiques",
+    "shirts": "Chemises",
+    "wool": "Laine",
+    "daily": "Quotidien 59 Min",
+    "everyday": "Chaque Jour 45 Min",
+    "eco": "Économie 30 Min",
+    "refresh": "Rafraîchir",
+    "relax": "Relax",
+    "sport": "Sport",
+    "small": "Petite Charge",
+    "water_tank_full": "Réservoir d'Eau Plein",
+    "need_clean_filter": "Filtre Sale",
+    "door_open": "Porte Ouverte"
   }
 }

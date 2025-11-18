@@ -1,6 +1,8 @@
 # 🏠 Material Home Component for Home Assistant
 
-[![Instagram](https://img.shields.io/badge/Instagram-%40gio_lamarmora-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gio_lamarmora/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/WebSite%20-Visit-blue?style=for-the-badge&logo=Google-Chrome&logoColor=white)](https://giovannilamarmora.github.io/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/Home%20Assistant%20Forum-View-blue?style=for-the-badge&logo=Home-Assistant&logoColor=white)](https://community.home-assistant.io/t/introducing-the-google-components/916428)&nbsp;&nbsp;[![BuyMeACoffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-Support-orange?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://revolut.me/glamarmora)&nbsp;&nbsp;[![Sponsor](https://img.shields.io/badge/GitHub_Sponsors-Become_a_Sponsor-pink?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/giovannilamarmora)
+<a href="https://www.buymeacoffee.com/giovannilamarmora"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=giovannilamarmora&button_colour=FFDD00&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
+
+[![Instagram](https://img.shields.io/badge/Instagram-%40gio_lamarmora-E4405F?style=for-the-badge&logo=instagram&logoColor=white)](https://www.instagram.com/gio_lamarmora/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/WebSite%20-Visit-blue?style=for-the-badge&logo=Google-Chrome&logoColor=white)](https://giovannilamarmora.github.io/)&nbsp;&nbsp;[![WebSite](https://img.shields.io/badge/Home%20Assistant%20Forum-View-blue?style=for-the-badge&logo=Home-Assistant&logoColor=white)](https://community.home-assistant.io/t/introducing-the-google-components/916428)&nbsp;&nbsp;[![BuyMeACoffee](https://img.shields.io/badge/☕_Buy_me_a_coffee-Support-orange?style=for-the-badge&logo=buymeacoffee&logoColor=white)](https://www.buymeacoffee.com/giovannilamarmora)&nbsp;&nbsp;[![Sponsor](https://img.shields.io/badge/GitHub_Sponsors-Become_a_Sponsor-pink?style=for-the-badge&logo=githubsponsors&logoColor=white)](https://github.com/sponsors/giovannilamarmora)
 
 [![My Home Assistant](https://my.home-assistant.io/badges/hacs_repository.svg)](https://my.home-assistant.io/redirect/hacs_repository/?repository=lovelace-material-components&owner=giovannilamarmora&category=Plugin)
 
@@ -437,11 +439,7 @@ If this project was helpful to you, consider supporting it!
 <td align="center" style="padding: 48px 40px; background: linear-gradient(135deg, #FFEB3B 0%, #FFC107 100%);">
 <div style="font-size: 64px; margin-bottom: 16px;">☕</div>
 <h3 style="color: #F57F17; margin: 0 0 24px 0; font-size: 24px;">Buy Me a Coffee</h3>
-<a href="https://revolut.me/glamarmora" style="text-decoration: none;">
-<div style="background: #F57F17; color: white; padding: 14px 40px; border-radius: 100px; font-weight: bold; font-size: 16px; display: inline-block; margin-bottom: 16px; box-shadow: 0 4px 12px rgba(0,0,0,0.2);">
-☕ Buy Me a Coffee
-</div>
-</a>
+<a href="https://www.buymeacoffee.com/giovannilamarmora"><img src="https://img.buymeacoffee.com/button-api/?text=Buy me a coffee&emoji=☕&slug=giovannilamarmora&button_colour=F57F17&font_colour=000000&font_family=Poppins&outline_colour=000000&coffee_colour=ffffff" /></a>
 <br/>
 <p style="margin-top: 24px; color: #424242; font-size: 14px; line-height: 1.6;">
 <strong>Your support helps keep the project alive!</strong><br/>

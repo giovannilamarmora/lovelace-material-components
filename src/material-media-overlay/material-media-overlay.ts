@@ -475,13 +475,15 @@ export class MaterialMediaOverlay extends LitElement {
       (isPlaying || isPaused) && attributes.media_title;
     const volume = Math.round(this._volume * 100);
     const mediaTitle =
-      attributes.media_title ??
-      (getOrDefault(this._isPlaying, stateObj.state == "playing")
-        ? localize("material_media_overlay.media_card.playing")
-        : localize("material_media_overlay.media_card.no_content"));
+      attributes.media_title && attributes.media_title !== ""
+        ? attributes.media_title
+        : getOrDefault(this._isPlaying, stateObj.state == "playing")
+          ? localize("material_media_overlay.media_card.playing")
+          : localize("material_media_overlay.media_card.no_content");
+
     const mediaArtist = attributes.media_artist ?? "";
     const appName = attributes.app_name ?? "";
-    const cover = attributes.entity_picture_local;
+    const cover = attributes.entity_picture ?? attributes.entity_picture_local;
     const videoCardStyle = cover
       ? `background-image: url(${cover}); 
      background-size: cover; 
@@ -704,7 +706,6 @@ export class MaterialMediaOverlay extends LitElement {
     }
 
     .overlay {
-      font-family: "Google Sans", "Roboto", "Inter", sans-serif;
       position: fixed;
       inset: 0;
       /*background: var(--card-background-color, #121212);*/

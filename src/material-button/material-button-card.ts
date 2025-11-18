@@ -13,7 +13,12 @@ import { material_color } from "../shared/color";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import { setColorCard } from "./material-button-mapper";
 import { MaterialMediaOverlay } from "../material-media-overlay/material-media-overlay";
-import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
+import {
+  ControlType,
+  DeviceType,
+  getValidDeviceClass,
+  LabelType,
+} from "../shared/types";
 import { isDeviceOn, isMotionDevice, isOfflineState } from "../shared/states";
 import { _openDialog } from "../dialog/dialog-manager";
 import { evaluateAction, handleAction } from "../shared/actions";
@@ -137,6 +142,15 @@ export class MaterialButtonCard extends LitElement {
           case DeviceType.OCCUPANCY:
             return _openDialog(this, "sensor-dialog", this.hass, this._config);
         }
+
+        const entityObj = this.hass.entities[this._config.entity!];
+        const labels = entityObj.labels;
+        if (
+          !isNullOrEmpty(labels) &&
+          (labels.includes(LabelType.ASCIUGATRICE) ||
+            labels.includes(LabelType.DRYER))
+        )
+          return _openDialog(this, "dryer-dialog", this.hass, this._config);
 
         if (
           domain === "media_player" ||

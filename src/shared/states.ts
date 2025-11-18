@@ -29,6 +29,9 @@ export enum OnStates {
   // Covers (e.g., blinds, curtains)
   OPEN = "open",
   OPENING = "opening",
+
+  // Dryer
+  IDLE_2 = "Idle",
 }
 
 /**

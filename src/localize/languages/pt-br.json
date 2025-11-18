@@ -140,5 +140,25 @@
     "stop_cast": "Parar transmissão",
     "open": "Abrir ",
     "open_google": "Abrir Google Home"
+  },
+  "dryer": {
+    "remote": "Controle Remoto",
+    "cotton": "Algodão",
+    "whites": "Brancos",
+    "jeans": "Jeans",
+    "colored": "Escuros & Coloridos",
+    "synthetics": "Sintéticos",
+    "shirts": "Camisas",
+    "wool": "Lã",
+    "daily": "Diário 59 Min",
+    "everyday": "Cotidiano 45 Min",
+    "eco": "Econômico 30 Min",
+    "refresh": "Refrescar",
+    "relax": "Relax",
+    "sport": "Esporte",
+    "small": "Carga Pequena",
+    "water_tank_full": "Reservatório de Água Cheio",
+    "need_clean_filter": "Filtro Sujo",
+    "door_open": "Porta Aberta"
   }
 }

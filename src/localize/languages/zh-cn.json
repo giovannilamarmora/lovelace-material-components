@@ -146,5 +146,25 @@
     "stop_cast": "停止投放",
     "open": "打开 ",
     "open_google": "打开 Google Home"
+  },
+  "dryer": {
+    "remote": "遥控",
+    "cotton": "棉",
+    "whites": "白色",
+    "jeans": "牛仔",
+    "colored": "深色和彩色",
+    "synthetics": "化纤",
+    "shirts": "衬衫",
+    "wool": "羊毛",
+    "daily": "每日 59 分钟",
+    "everyday": "日常 45 分钟",
+    "eco": "节能 30 分钟",
+    "refresh": "清新",
+    "relax": "放松",
+    "sport": "运动",
+    "small": "小件",
+    "water_tank_full": "水箱已满",
+    "need_clean_filter": "需要清洁滤网",
+    "door_open": "门已打开"
   }
 }
