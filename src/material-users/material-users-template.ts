@@ -1,12 +1,15 @@
 export function materialUsersTemplate() {
   return `type: custom:mod-card
-style: |
-  ha-card {
-    padding-left: 16px;
-    padding-right: 24px;
-    padding-top: 12px;
-    padding-bottom: 12px;
-  }
+card_mod:
+  style: |
+    ha-card {
+      padding-left: 16px;
+      padding-right: 24px;
+      padding-top: 12px;
+      padding-bottom: 12px;
+      background: transparent;
+      box-shadow: none;
+    }
 card:
   type: horizontal-stack
   cards:

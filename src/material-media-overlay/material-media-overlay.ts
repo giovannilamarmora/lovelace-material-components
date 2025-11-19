@@ -703,6 +703,7 @@ export class MaterialMediaOverlay extends LitElement {
   static styles = css`
     :host {
       -webkit-tap-highlight-color: transparent;
+      font-family: var(--font-family);
     }
 
     .overlay {
@@ -742,7 +743,8 @@ export class MaterialMediaOverlay extends LitElement {
     .header-left .friendly-name {
       color: var(--primary-text-color);
       font-size: 20px;
-      font-weight: 450;
+      font-weight: 500;
+      margin-bottom: 5px;
     }
 
     .header-right {
@@ -964,7 +966,7 @@ export class MaterialMediaOverlay extends LitElement {
 
     .volume-text {
       font-size: 16px;
-      font-weight: 500;
+      font-weight: 550;
       color: var(--md-sys-color-on-secondary-container);
     }
 
@@ -1017,8 +1019,9 @@ export class MaterialMediaOverlay extends LitElement {
     }
 
     .menu-text {
-      font-size: 15px;
-      font-weight: 410;
+      /*font-size: 15px;*/
+      font-size: 16px;
+      font-weight: 550;
       letter-spacing: 0.1px;
     }
 
