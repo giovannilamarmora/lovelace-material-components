@@ -141,6 +141,12 @@
     "open": "Open ",
     "open_google": "Open Google Home"
   },
+  "material_users_card": {
+    "user_title": "Show user location on the map",
+    "user_description": "If enabled, non-admin users will be able to see the location of other users on the map by clicking on their cards. If disabled, location information will not be visible to non-admin users.",
+    "add_button_title": "Show add user button",
+    "add_button_description": "If enabled, non-admin users will also be able to see the button to add a new user. However, non-admin users will not be able to complete the addition and will be redirected to their own profile page. If disabled, the button will only be visible to users with administrative privileges."
+  },
   "dryer": {
     "remote": "Remote Control",
     "cotton": "Cotton",

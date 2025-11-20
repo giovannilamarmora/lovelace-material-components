@@ -16,6 +16,7 @@ import { CARD_VERSION } from "./shared/utils";
 import { MaterialUsersCard } from "./material-users/material-users-card";
 import { MaterialMenuCard } from "./material-menu/material-menu-card";
 import { MaterialMenuCardEditor } from "./material-menu/material-menu-card-editor";
+import { MaterialUsersCardEditor } from "./material-users/material-users-card-editor";
 
 /* eslint no-console: 0 */
 console.info(
@@ -99,6 +100,10 @@ if (!customElements.get("material-media-overlay")) {
 /** Material Users */
 if (!customElements.get("material-users-card")) {
   customElements.define("material-users-card", MaterialUsersCard);
+}
+
+if (!customElements.get("material-users-card-editor")) {
+  customElements.define("material-users-card-editor", MaterialUsersCardEditor);
 }
 
 /** Material Menu */

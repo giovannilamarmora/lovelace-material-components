@@ -147,6 +147,12 @@
     "open": "打开 ",
     "open_google": "打开 Google Home"
   },
+  "material_users_card": {
+    "user_title": "在地图上显示用户位置",
+    "user_description": "启用后，非管理员用户可以通过点击用户卡片查看其他用户在地图上的位置。禁用时，非管理员用户将无法看到位置信息。",
+    "add_button_title": "显示添加用户按钮",
+    "add_button_description": "启用后，非管理员用户也可以看到添加新用户的按钮。然而，非管理员用户无法完成添加操作，并将被重定向到自己的个人资料页面。禁用时，按钮仅对具有管理权限的用户可见。"
+  },
   "dryer": {
     "remote": "遥控",
     "cotton": "棉",

@@ -141,6 +141,12 @@
     "open": "Abrir ",
     "open_google": "Abrir Google Home"
   },
+  "material_users_card": {
+    "user_title": "Mostrar localização dos usuários no mapa",
+    "user_description": "Se ativado, usuários que não são administradores poderão ver a localização de outros usuários no mapa clicando em seus cartões. Se desativado, as informações de localização não serão visíveis para usuários que não são administradores.",
+    "add_button_title": "Mostrar botão de adicionar usuário",
+    "add_button_description": "Se ativado, usuários que não são administradores também poderão ver o botão para adicionar um novo usuário. No entanto, usuários não administradores não poderão concluir a adição e serão redirecionados para sua própria página de perfil. Se desativado, o botão será visível apenas para usuários com privilégios administrativos."
+  },
   "dryer": {
     "remote": "Controle Remoto",
     "cotton": "Algodão",

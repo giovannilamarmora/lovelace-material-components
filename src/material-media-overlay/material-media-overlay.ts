@@ -744,7 +744,7 @@ export class MaterialMediaOverlay extends LitElement {
       color: var(--primary-text-color);
       font-size: 20px;
       font-weight: 500;
-      margin-bottom: 5px;
+      margin-bottom: 2px;
     }
 
     .header-right {
@@ -1019,8 +1019,8 @@ export class MaterialMediaOverlay extends LitElement {
     }
 
     .menu-text {
-      /*font-size: 15px;*/
-      font-size: 16px;
+      font-size: 15px;
+      /*font-size: 16px;*/
       font-weight: 550;
       letter-spacing: 0.1px;
     }

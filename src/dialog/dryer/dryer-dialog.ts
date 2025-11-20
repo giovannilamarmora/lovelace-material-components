@@ -443,7 +443,8 @@ export class DryerDialog extends LitElement {
     * Menu Cards
     * ------------------------------------ */
     .menu-section {
-      margin: -20px 0px 20px 0px;
+      /*margin: -20px 0px 20px 0px;*/
+      margin: 0px 0px 20px 0px;
       justify-items: center;
     }
 

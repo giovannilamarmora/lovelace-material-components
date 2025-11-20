@@ -141,6 +141,12 @@
     "open": "Öffnen",
     "open_google": "Google Home öffnen"
   },
+  "material_users_card": {
+    "user_title": "Benutzerstandort auf der Karte anzeigen",
+    "user_description": "Wenn aktiviert, können Nicht-Administratoren den Standort anderer Benutzer auf der Karte sehen, indem sie auf deren Karten klicken. Wenn deaktiviert, sind Standortinformationen für Nicht-Administratoren nicht sichtbar.",
+    "add_button_title": "Schaltfläche zum Hinzufügen von Benutzern anzeigen",
+    "add_button_description": "Wenn aktiviert, können auch Nicht-Administratoren die Schaltfläche zum Hinzufügen eines neuen Benutzers sehen. Nicht-Administratoren können das Hinzufügen jedoch nicht abschließen und werden auf ihre eigene Profilseite weitergeleitet. Wenn deaktiviert, ist die Schaltfläche nur für Benutzer mit Administratorrechten sichtbar."
+  },
   "dryer": {
     "remote": "Fernbedienung",
     "cotton": "Baumwolle",

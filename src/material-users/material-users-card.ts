@@ -2,13 +2,16 @@ import { LitElement, html, TemplateResult, css } from "lit";
 import { customElement, property, state } from "lit/decorators.js";
 import { HomeAssistant } from "custom-card-helpers";
 import jsyaml from "js-yaml";
-import { MaterialUsersCardConfig } from "./material-users-const";
+import {
+  DEFAULT_CONFIG,
+  MaterialUsersCardConfig,
+} from "./material-users-const";
 import { materialUsersTemplate } from "./material-users-template";
 
 @customElement("material-users-card")
 export class MaterialUsersCard extends LitElement {
   @property({ attribute: false }) public hass!: HomeAssistant;
-  @state() private _config?: MaterialUsersCardConfig;
+  @state() private _config: MaterialUsersCardConfig = DEFAULT_CONFIG;
   @state() private _card?: any;
 
   public static getStubConfig(): Partial<MaterialUsersCardConfig> {
@@ -47,12 +50,14 @@ export class MaterialUsersCard extends LitElement {
     return 1;
   }
 
-  //static async getConfigElement() {
-  //  return document.createElement("material-users-card-editor");
-  //}
+  static async getConfigElement() {
+    return document.createElement("material-users-card-editor");
+  }
 
   private mapTemplate() {
-    const text = materialUsersTemplate();
+    const isAdmin = this.hass.user.is_admin;
+    const text = materialUsersTemplate(isAdmin, this._config);
+    console.log(text);
     return text;
   }
 

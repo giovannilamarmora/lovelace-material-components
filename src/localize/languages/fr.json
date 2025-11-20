@@ -141,6 +141,12 @@
     "open": "Ouvrir",
     "open_google": "Ouvrir Google Home"
   },
+  "material_users_card": {
+    "user_title": "Afficher la position des utilisateurs sur la carte",
+    "user_description": "Si activé, les utilisateurs non administrateurs pourront voir la position des autres utilisateurs sur la carte en cliquant sur leurs cartes. Si désactivé, les informations de localisation ne seront pas visibles pour les utilisateurs non administrateurs.",
+    "add_button_title": "Afficher le bouton d'ajout d'utilisateur",
+    "add_button_description": "Si activé, les utilisateurs non administrateurs pourront également voir le bouton pour ajouter un nouvel utilisateur. Cependant, les utilisateurs non administrateurs ne pourront pas compléter l'ajout et seront redirigés vers leur propre page de profil. Si désactivé, le bouton ne sera visible que pour les utilisateurs disposant de privilèges administratifs."
+  },
   "dryer": {
     "remote": "Télécommande",
     "cotton": "Coton",

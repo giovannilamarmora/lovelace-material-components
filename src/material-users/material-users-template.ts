@@ -1,4 +1,9 @@
-export function materialUsersTemplate() {
+import { MaterialUsersCardConfig } from "./material-users-const";
+
+export function materialUsersTemplate(
+  isAdmin: boolean,
+  config: MaterialUsersCardConfig
+) {
   return `type: custom:mod-card
 card_mod:
   style: |
@@ -27,6 +32,8 @@ card:
               entity: this.entity_id
               show_entity_picture: true
               show_name: false
+              tap_action:
+                action: ${isAdmin || config.is_user_map_enabled ? "more-info" : "none"}
               styles:
                 icon:
                   - width: 40px
@@ -42,38 +49,40 @@ card:
                   - padding: 0px
                   - width: max-content
                   - justify-self: center
-          - entity_id: light.led
-            options:
-              type: custom:button-card
-              icon: mdi:plus
-              show_entity_picture: true
-              show_name: false
-              styles:
-                icon:
-                  - width: 24px
-                  - height: 24px
-                  - border-radius: 100%
-                  - color: var(--token-color-text-primary)
-                card:
-                  - border-radius: 100%
-                  - margin-left: 0px
-                  - margin-right: 1px
-                  - padding: 8px
-                  - width: max-content
-                  - justify-self: center
-                  - background-color: var(--token-color-background-card)
-              tap_action:
-                action: navigate
-                navigation_path: |
-                  [[[ 
-                    const isAdmin = hass.user?.is_admin;
-                    if (isAdmin) {
-                      return "/config/person";
-                    } else {
-                      return "/profile";
-                    }
-                  ]]]
-              hold_action:
-                action: none
+          ${isAdmin || config.is_add_button_enabled ? mapAddButton() : ""}
 `;
+}
+
+function mapAddButton() {
+  return `- type: custom:button-card
+            icon: mdi:plus
+            show_entity_picture: true
+            show_name: false
+            styles:
+              icon:
+                - width: 24px
+                - height: 24px
+                - border-radius: 100%
+                - color: var(--token-color-text-primary)
+              card:
+                - border-radius: 100%
+                - margin-left: 0px
+                - margin-right: 1px
+                - padding: 8px
+                - width: max-content
+                - justify-self: center
+                - background-color: var(--token-color-background-card)
+            tap_action:
+              action: navigate
+              navigation_path: |
+                [[[ 
+                  const isAdmin = hass.user?.is_admin;
+                  if (isAdmin) {
+                    return "/config/person";
+                  } else {
+                    return "/profile";
+                  }
+                ]]]
+            hold_action:
+              action: none`;
 }
