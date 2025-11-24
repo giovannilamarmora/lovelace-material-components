@@ -369,6 +369,10 @@ export class DryerDialog extends LitElement {
       opacity: 0.4;
     }
 
+    .circle-progress.light {
+      filter: brightness(0.9);
+    }
+
     /* Parte avanzata */
     .progress-arc {
       fill: none;

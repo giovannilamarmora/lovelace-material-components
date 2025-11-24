@@ -16,6 +16,7 @@ import {
   _openDeviceInformation,
   _openRelated,
 } from "../dialog-location";
+import { LabelType } from "../../shared/types";
 
 @customElement("sensor-dialog")
 export class SensorDialog extends LitElement {
@@ -27,18 +28,28 @@ export class SensorDialog extends LitElement {
     const entityId = this.config.entity;
 
     // Prendi il device_id dell'entità principale
-    const device_id = this.hass.entities[entityId]?.device_id;
+    const mainEntity = this.hass.entities[entityId];
+    const device_id = mainEntity?.device_id;
     const mainState = this.hass.states[entityId];
+    const showAllDeviceEnabled =
+      !mainEntity.labels.includes(LabelType.HELPER) &&
+      !mainEntity.labels.includes(LabelType.TEMPLATE);
 
-    // Trova tutte le entità associate allo stesso device
-    const entityIds = Object.values(this.hass.entities)
-      .filter((e: any) => e.device_id === device_id)
-      .map((e: any) => e.entity_id);
+    let entityIds: any;
+    let relatedStates: any = [mainState];
 
-    // Ottieni la lista completa degli state object
-    const relatedStates = entityIds
-      .map((id: string) => this.hass.states[id])
-      .filter((s) => s !== undefined); // rimuove eventuali undefined
+    if (showAllDeviceEnabled) {
+      // Trova tutte le entità associate allo stesso device
+      entityIds = Object.values(this.hass.entities)
+        .filter((e: any) => e.device_id === device_id)
+        .filter((s: any) => !s.labels?.includes(LabelType.DIALOG_HIDDEN))
+        .map((e: any) => e.entity_id);
+
+      // Ottieni la lista completa degli state object
+      relatedStates = entityIds
+        .map((id: string) => this.hass.states[id])
+        .filter((s: any) => s !== undefined); // rimuove eventuali undefined
+    }
 
     // Ottieni informazioni sull'area
     const area_id = this.hass.devices[device_id]?.area_id;
@@ -169,7 +180,7 @@ export class SensorDialog extends LitElement {
           </div>
 
           <div class="menu-section">
-            ${relatedStates.map((stateObj) => {
+            ${relatedStates.map((stateObj: any) => {
               /* If is a Precence Sensor, we do not put number device */
               if (_excludeSensor(stateObj)) return;
               const icon =

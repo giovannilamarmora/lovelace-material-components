@@ -15,3 +15,21 @@ export enum Program {
   PROGRAM_14 = "sport",
   PROGRAM_15 = "small",
 }
+
+export enum ProgramTime {
+  PROGRAM_1 = 150,
+  PROGRAM_2 = "cotton",
+  PROGRAM_3 = "whites",
+  PROGRAM_4 = "jeans",
+  PROGRAM_5 = "colored",
+  PROGRAM_6 = "synthetics",
+  PROGRAM_7 = "shirts",
+  PROGRAM_8 = "wool",
+  PROGRAM_9 = "daily",
+  PROGRAM_10 = "everyday",
+  PROGRAM_11 = 30,
+  PROGRAM_12 = "refresh",
+  PROGRAM_13 = "relax",
+  PROGRAM_14 = "sport",
+  PROGRAM_15 = "small",
+}

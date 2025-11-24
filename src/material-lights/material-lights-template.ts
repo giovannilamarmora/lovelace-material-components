@@ -5,20 +5,25 @@ export function materialTemplate(config: MaterialLightCardConfig) {
     config.control_area && config.area_id ? config.area_id : undefined;
 
   return `type: custom:mod-card
-style: |
-  ha-card {
-    margin-bottom: 0px;
-  }
+card_mod:
+  style: |
+    ha-card {
+      box-shadow: none !important;
+    }
 card:
   type: vertical-stack
   cards:
     - type: custom:mod-card
-      style:
-        hui-horizontal-stack-card:
-          $: |
-            #root > button-card {
-              margin: 0px;
-            }
+      card_mod:
+        style: |
+          ha-card {
+            box-shadow: none !important;
+          }
+          hui-horizontal-stack-card:
+            $: |
+              #root > button-card {
+                margin: 0px;
+              }
       card:
         type: horizontal-stack
         cards:

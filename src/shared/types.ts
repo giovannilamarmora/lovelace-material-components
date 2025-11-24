@@ -83,6 +83,9 @@ export enum DeviceType {
 export enum LabelType {
   ASCIUGATRICE = "asciugatrice",
   DRYER = "dryer",
+  HELPER = "helper",
+  TEMPLATE = "template",
+  DIALOG_HIDDEN = "dialog_hidden",
 }
 
 /**
