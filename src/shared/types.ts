@@ -53,6 +53,7 @@ export enum DomainType {
   NUMBER = "number",
   FAN = "fan",
   CLIMATE = "climate",
+  AUTOMATION = "automation",
 }
 
 /**

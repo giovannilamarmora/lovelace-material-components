@@ -118,6 +118,11 @@ export class MaterialButtonCard extends LitElement {
 
     const isDefaultToggle = this._config.use_default_toggle ?? true;
 
+    if (domain === "switch" || domain === "input_boolean") {
+      console.log("Switch domain detected, opening button dialog.");
+      return _openDialog(this, "button-dialog", this.hass, this._config);
+    }
+
     if (isDefaultToggle) {
       const isToggleable =
         toggleDomains.includes(domain) &&
@@ -151,6 +156,11 @@ export class MaterialButtonCard extends LitElement {
             labels.includes(LabelType.DRYER))
         )
           return _openDialog(this, "dryer-dialog", this.hass, this._config);
+
+        if (domain === "switch") {
+          console.log("Switch domain detected, opening button dialog.");
+          return _openDialog(this, "button-dialog", this.hass, this._config);
+        }
 
         if (
           domain === "media_player" ||
@@ -191,105 +201,6 @@ export class MaterialButtonCard extends LitElement {
 
     return fireEvent(this, "hass-more-info", { entityId });
   }
-
-  //private _toggle() {
-  //  if (!this._config || !this.hass) return;
-  //
-  //  if (navigator.vibrate) navigator.vibrate(50);
-  //
-  //  const entityId = this._config.entity;
-  //  const domain = entityId?.split(".")[0] ?? "";
-  //  const controlType = this._config.control_type ?? ControlType.GENERIC;
-  //  const isDefaultToggle = this._config.use_default_toggle ?? true;
-  //
-  //  const toggleDomains = [
-  //    "light",
-  //    "switch",
-  //    "fan",
-  //    "climate",
-  //    "input_boolean",
-  //    "cover",
-  //    "script",
-  //  ];
-  //  const stateObj = entityId ? this.hass.states[entityId] : undefined;
-  //
-  //  // Funzione per aprire dialog sensori
-  //  const openSensorDialog = () => {
-  //    _openDialog(this, "sensor-dialog", this.hass, this._config);
-  //  };
-  //
-  //  // Funzione per aprire overlay media
-  //  const openMediaOverlay = () => {
-  //    this._openMediaOverlay();
-  //  };
-  //
-  //  // Funzione per fallback "more-info"
-  //  const openMoreInfo = () => {
-  //    fireEvent(this, "hass-more-info", { entityId });
-  //  };
-  //
-  //  // 1️⃣ Gestione default toggle
-  //  if (isDefaultToggle) {
-  //    const isToggleable =
-  //      toggleDomains.includes(domain) &&
-  //      controlType !== ControlType.THERMOMETER &&
-  //      controlType !== ControlType.MEDIA_PLAYER;
-  //
-  //    if (isToggleable || controlType === ControlType.AUTOMATION) {
-  //      return this.hass.callService("homeassistant", "toggle", {
-  //        entity_id: entityId,
-  //      });
-  //    }
-  //
-  //    // Device class specific
-  //    const deviceClass = stateObj
-  //      ? getValidDeviceClass(stateObj.attributes)
-  //      : undefined;
-  //    if (
-  //      [
-  //        "door",
-  //        "temperature",
-  //        "humidity",
-  //        "motion",
-  //        "presence",
-  //        "occupancy",
-  //      ].includes(deviceClass)
-  //    ) {
-  //      return openSensorDialog();
-  //    }
-  //
-  //    if (
-  //      domain === "media_player" ||
-  //      controlType === ControlType.MEDIA_PLAYER
-  //    ) {
-  //      return openMediaOverlay();
-  //    }
-  //
-  //    return openMoreInfo();
-  //  }
-  //
-  //  // 2️⃣ Gestione tap_action personalizzata
-  //  const tap = this._config.tap_action;
-  //  if (tap && typeof tap === "object") {
-  //    const evaluatedTap = evaluateAction(
-  //      tap,
-  //      stateObj,
-  //      stateObj?.state,
-  //      this.hass
-  //    );
-  //    return handleAction(
-  //      this,
-  //      this.hass as any,
-  //      entityId ? { entity: entityId } : {},
-  //      evaluatedTap
-  //    );
-  //  }
-  //
-  //  // 3️⃣ Fallback generico per media player o more-info
-  //  if (domain === "media_player" || controlType === ControlType.MEDIA_PLAYER)
-  //    return openMediaOverlay();
-  //  return openMoreInfo();
-  //}
 
   private _pressTimer?: number;
   private _startX?: number;
@@ -374,6 +285,15 @@ export class MaterialButtonCard extends LitElement {
     if (useDefaultToggle) {
       // Se il dominio supporta il toggle o non è un media_player, mostra le info
       if (toggleEntity || !isMediaPlayer) {
+        if (
+          domain === "switch" ||
+          domain === "input_boolean" ||
+          domain === "automation"
+        ) {
+          console.log("Switch domain detected, opening button dialog.");
+          return _openDialog(this, "button-dialog", this.hass, this._config);
+        }
+
         if (entityId) fireEvent(this, "hass-more-info", { entityId });
       } else if (entityId) {
         this.hass.callService("homeassistant", "toggle", {

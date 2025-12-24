@@ -1,5 +1,6 @@
 import "./sensor/sensor-dialog";
 import "./dryer/dryer-dialog";
+import "./button/button-dialog";
 
 export function _openDialog(
   _this: any,
