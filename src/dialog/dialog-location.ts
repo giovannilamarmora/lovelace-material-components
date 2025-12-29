@@ -10,6 +10,32 @@ export function _onClose(_this: any) {
   );
   _this.remove();
 }
+
+/**
+ * Prevent Cick outside the dialog to be close
+ * @returns
+ */
+export function _handleDialogClick(_this: any, e: MouseEvent) {
+  // Se il menu è aperto → ignora il click (non chiudere)
+  if (_this._menuOpen) return;
+
+  // Recupera il dialog
+  const dialog = _this.shadowRoot?.querySelector("ha-dialog");
+  if (!dialog) return;
+
+  // Se clicchi dentro il contenuto del dialog → non chiudere
+  const path = e.composedPath();
+  const contentClicked =
+    path.includes(
+      dialog.shadowRoot!.querySelector(".mdc-dialog__container")!
+    ) || path.includes(_this.shadowRoot!.querySelector(".content")!);
+
+  if (contentClicked) return;
+
+  // Se sei arrivato qui, hai cliccato davvero fuori
+  _onClose(_this);
+}
+
 /* ---------------------------------------------------------------------------------
  * Settings, info, related options
  * -------------------------------------------------------------------------------- */

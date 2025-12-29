@@ -15,31 +15,7 @@ import {
 import { localize } from "../localize/localize";
 import { getIcon } from "../shared/mapper";
 import { DomainType } from "../shared/types";
-
-/**
- * Prevent Cick outside the dialog to be close
- * @returns
- */
-export function _handleDialogClick(_this: any, e: MouseEvent) {
-  // Se il menu è aperto → ignora il click (non chiudere)
-  if (_this._menuOpen) return;
-
-  // Recupera il dialog
-  const dialog = _this.shadowRoot?.querySelector("ha-dialog");
-  if (!dialog) return;
-
-  // Se clicchi dentro il contenuto del dialog → non chiudere
-  const path = e.composedPath();
-  const contentClicked =
-    path.includes(
-      dialog.shadowRoot!.querySelector(".mdc-dialog__container")!
-    ) || path.includes(_this.shadowRoot!.querySelector(".content")!);
-
-  if (contentClicked) return;
-
-  // Se sei arrivato qui, hai cliccato davvero fuori
-  _onClose(_this);
-}
+import { getActionState, runAutomation } from "./dialog-automation";
 
 /**
  * Render header comune per i dialog
@@ -172,9 +148,23 @@ export const renderDialogRelatedStates = (
             ? html`<span class="menu-text flex-end"
                 >${mapStateValue(stateObj)}</span
               >`
-            : html`<span class="flex-end icon-circle">
-                <ha-icon icon="m3r:play-arrow"></ha-icon>
-              </span> `}
+            : (() => {
+                const actionState = getActionState(_this, entity_id);
+
+                return html`
+                  <span
+                    class="flex-end icon-circle ${theme} ${actionState}"
+                    @click=${(e: Event) =>
+                      runAutomation(_this, hass, entity_id, e)}
+                  >
+                    ${actionState === "loading"
+                      ? html`<div class="spinner"></div>`
+                      : actionState === "done"
+                        ? html`<ha-icon icon="mdi:check"></ha-icon>`
+                        : html`<ha-icon icon="m3r:play-arrow"></ha-icon>`}
+                  </span>
+                `;
+              })()}
         </div>
       `;
     })}
@@ -234,6 +224,9 @@ export const dialogStatesStyles = css`
     flex: auto;
     padding-right: 5px;
   }
+  /* ------------------------------------
+   * END Menu Cards
+   * ------------------------------------ */
 
   .icon-circle {
     width: 42px;
@@ -242,20 +235,78 @@ export const dialogStatesStyles = css`
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background-color: white;
     position: absolute;
-    right: 15px;
     padding-right: 0px;
+  }
+
+  .icon-circle.light {
+    background-color: var(--md-sys-color-surface-container-lowest);
+    right: 15px;
+  }
+
+  .icon-circle.dark {
+    background-color: var(--md-sys-color-surface-container-highest);
+    right: 36px;
   }
 
   .icon-circle ha-icon {
     --mdc-icon-size: 20px;
     color: var(--primary-text-color);
   }
+  /** ------------------------------------------
+   * Automation icon circle
+   * ------------------------------------------ */
+  .icon-circle {
+    cursor: pointer;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+  }
 
-  /* ------------------------------------
-      * END Menu Cards
-      * ------------------------------------ */
+  /* disabilita click durante loading */
+  .icon-circle.loading {
+    pointer-events: none;
+  }
+
+  /* Spinner */
+  .spinner {
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    border: 2px solid rgba(0, 0, 0, 0.15);
+    border-top-color: var(--primary-text-color);
+    animation: spin 0.7s linear infinite;
+  }
+
+  @keyframes spin {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  /* Check animation */
+  .icon-circle ha-icon,
+  .icon-circle.loading ha-icon {
+    animation: pop 0.25s ease-out;
+  }
+
+  .icon-circle.done ha-icon {
+    color: var(--md-sys-color-primary);
+    animation: pop 0.25s ease-out;
+  }
+
+  @keyframes pop {
+    0% {
+      transform: scale(0.7);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+  /** ------------------------------------------
+   * END Automation icon circle
+   * ------------------------------------------ */
 `;
 
 /**

@@ -3,7 +3,6 @@ import { customElement, property } from "lit/decorators.js";
 import { isDeviceStateOn, mapStateValue } from "../dialog-mapper";
 import { DomainType, LabelType } from "../../shared/types";
 import {
-  _handleDialogClick,
   dialogBaseStyles,
   dialogHeaderStyles,
   dialogStatesStyles,
@@ -11,9 +10,10 @@ import {
   renderDialogRelatedStates,
 } from "../dialog-shared";
 import { isOfflineState } from "../../shared/states";
+import { _handleDialogClick } from "../dialog-location";
 
-@customElement("button-dialog")
-export class ButtonDialog extends LitElement {
+@customElement("light-dialog")
+export class LightDialog extends LitElement {
   @property({ type: Object }) hass: any;
   @property({ type: Object }) config: any;
   @property({ type: Boolean }) open = false;
@@ -85,11 +85,7 @@ export class ButtonDialog extends LitElement {
         .map((id: string) => this.hass.states[id])
         .filter((s: any) => s !== undefined); // rimuove eventuali undefined
     }
-
-    //const friendlyName =
-    //  this.config.name ??
-    //  mainState?.attributes?.friendly_name ??
-    //  mainState?.entity_id;
+    
     const friendlyName =
       this.config.name?.trim() ||
       mainEntity?.name?.trim() ||
@@ -97,15 +93,11 @@ export class ButtonDialog extends LitElement {
 
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
 
-    //const isDeviceTurnOn = isDeviceOn(mainState.state);
     const isDeviceTurnOn =
       this.optimisticState !== null
         ? this.optimisticState
         : isDeviceStateOn(mainState);
 
-    //const stateLabel = idDeviceTurnOn
-    //  ? localize("common.open")
-    //  : localize("common.closed");
     const stateLabel = mapStateValue(mainState);
 
     const isOnlyMainEntity =
@@ -282,13 +274,13 @@ export class ButtonDialog extends LitElement {
       }
 
       .google-toggle.on.light::before {
-        background-color: var(--md-sys-color-secondary-container, #d2e3fc);
-        opacity: 0.7;
+        background-color: #feefc8;
+        opacity: 1;
       }
 
       .google-toggle.on.dark::before {
-        background-color: var(--md-sys-color-secondary-container, #d2e3fc);
-        opacity: 0.7;
+        background-color: #333029;
+        opacity: 1;
       }
 
       /* Track */
@@ -347,17 +339,23 @@ export class ButtonDialog extends LitElement {
       }
 
       .google-toggle.on.light .slider-thumb {
-        background-color: var(--md-sys-color-secondary-fixed-dim, #a8c7fa);
+        background-color: #ffe083;
       }
 
       .google-toggle.on.dark .slider-thumb {
-        background-color: var(--md-sys-color-on-secondary, #a8c7fa);
-        filter: brightness(1.2);
+        background-color: #50472a;
       }
 
       .slider-thumb ha-icon {
         --mdc-icon-size: 45px;
-        color: var(--secondary-text-color);
+      }
+
+      .google-toggle.on.light .slider-thumb ha-icon {
+        color: #745b00;
+      }
+
+      .google-toggle.on.dark .slider-thumb ha-icon {
+        color: #ffe083;
       }
 
       .toggle-info {

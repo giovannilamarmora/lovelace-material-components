@@ -118,11 +118,6 @@ export class MaterialButtonCard extends LitElement {
 
     const isDefaultToggle = this._config.use_default_toggle ?? true;
 
-    if (domain === "switch" || domain === "input_boolean") {
-      console.log("Switch domain detected, opening button dialog.");
-      return _openDialog(this, "button-dialog", this.hass, this._config);
-    }
-
     if (isDefaultToggle) {
       const isToggleable =
         toggleDomains.includes(domain) &&
@@ -156,11 +151,6 @@ export class MaterialButtonCard extends LitElement {
             labels.includes(LabelType.DRYER))
         )
           return _openDialog(this, "dryer-dialog", this.hass, this._config);
-
-        if (domain === "switch") {
-          console.log("Switch domain detected, opening button dialog.");
-          return _openDialog(this, "button-dialog", this.hass, this._config);
-        }
 
         if (
           domain === "media_player" ||
@@ -267,41 +257,69 @@ export class MaterialButtonCard extends LitElement {
     const controlType = this._config.control_type ?? "generic";
     const useDefaultToggle = this._config.use_default_toggle ?? true;
 
-    const toggleDomains = [
-      "light",
-      "switch",
-      "fan",
-      "climate",
-      "input_boolean",
-      "cover",
-      "script",
-    ];
+    //const toggleDomains = [
+    //  "light",
+    //  "switch",
+    //  "fan",
+    //  "climate",
+    //  "input_boolean",
+    //  "cover",
+    //  "script",
+    //];
 
     const domain = entityId?.split(".")[0];
-    const toggleEntity = domain ? toggleDomains.includes(domain) : false;
+    //const toggleEntity = domain ? toggleDomains.includes(domain) : false;
 
     const isMediaPlayer = controlType === ControlType.MEDIA_PLAYER;
 
     if (useDefaultToggle) {
-      // Se il dominio supporta il toggle o non è un media_player, mostra le info
-      if (toggleEntity || !isMediaPlayer) {
-        if (
-          domain === "switch" ||
-          domain === "input_boolean" ||
-          domain === "automation"
-        ) {
-          console.log("Switch domain detected, opening button dialog.");
-          return _openDialog(this, "button-dialog", this.hass, this._config);
-        }
+      // Apri i dialog predefiniti in base al dominio
+      if (
+        domain === "switch" ||
+        domain === "input_boolean" ||
+        domain === "automation"
+      ) {
+        return _openDialog(this, "switch-dialog", this.hass, this._config);
+      }
 
-        if (entityId) fireEvent(this, "hass-more-info", { entityId });
-      } else if (entityId) {
+      if (domain === "light") {
+        return _openDialog(this, "light-dialog", this.hass, this._config);
+      }
+
+      // Media player → toggle solo se niente di meglio
+      if (isMediaPlayer && entityId) {
         this.hass.callService("homeassistant", "toggle", {
           entity_id: entityId,
         });
+        return;
+      }
+
+      // More-info generico fallback
+      if (entityId) {
+        fireEvent(this, "hass-more-info", { entityId });
       }
       return;
     }
+
+    //if (useDefaultToggle) {
+    //  // Se il dominio supporta il toggle o non è un media_player, mostra le info
+    //  if (toggleEntity || !isMediaPlayer) {
+    //    if (
+    //      domain === "switch" ||
+    //      domain === "input_boolean" ||
+    //      domain === "automation"
+    //    ) {
+    //      return _openDialog(this, "switch-dialog", this.hass, this._config);
+    //    }
+    //
+    //    if (entityId) fireEvent(this, "hass-more-info", { entityId });
+    //  } else if (entityId) {
+    //    this.hass.callService("homeassistant", "toggle", {
+    //      entity_id: entityId,
+    //    });
+    //  }
+    //  return;
+    //}
 
     // Esegui hold_action se definita
     const holdAction = this._config.hold_action;

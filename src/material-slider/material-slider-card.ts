@@ -8,7 +8,7 @@ import {
   TAP_THRESHOLD,
 } from "./material-slider-const";
 import { localize } from "../localize/localize";
-import { state } from "lit/decorators.js";
+import { property, state } from "lit/decorators.js";
 import { ifDefined } from "lit/directives/if-defined.js";
 import { LitElement, html, CSSResult, TemplateResult, css } from "lit";
 import { applyRippleEffect } from "../animations";
@@ -22,6 +22,7 @@ import {
 } from "../shared/states";
 import { getIcon } from "../shared/mapper";
 import { ControlType, DomainType } from "../shared/types";
+import { _openDialog } from "../dialog/dialog-manager";
 
 export class MaterialSliderCard extends LitElement {
   // @property({ attribute: false }) public hass!: HomeAssistant;
@@ -116,6 +117,11 @@ export class MaterialSliderCard extends LitElement {
     this._entity = this._config.entity;
     this._config.original_min = this._config.min;
     this._config.original_max = this._config.max;
+  }
+
+  @property({ attribute: false })
+  get hass(): HomeAssistant {
+    return this._hass!;
   }
 
   set hass(hass: HomeAssistant) {
@@ -233,69 +239,6 @@ export class MaterialSliderCard extends LitElement {
     }
   };
 
-  //_handlePointer = (evt, extra): void => {
-  //  this.mousePos = { x: evt.pageX, y: evt.pageY };
-  //  const minSlideTime = this._config.min_slide_time;
-  //
-  //  if (evt.type === "pointerdown") {
-  //    this._press();
-  //    this.isTap = true;
-  //    this.isHold = false;
-  //    this.holdTimer = window.setTimeout(this._setHold, this._config.hold_time);
-  //    this.trackingStartTime = Date.now();
-  //    this._resetTrack();
-  //  }
-  //
-  //  if (["pointerdown", "pointermove", "pointerup"].includes(evt.type)) {
-  //    this._updateValue();
-  //  }
-  //
-  //  if (evt.type === "pointermove") {
-  //    if (
-  //      this.isTap &&
-  //      Math.abs(extra.relativeX) < TAP_THRESHOLD &&
-  //      Math.abs(extra.relativeY) < TAP_THRESHOLD
-  //    )
-  //      return;
-  //    this.isTap = false;
-  //    clearTimeout(this.holdTimer);
-  //    this._stopUpdates();
-  //  }
-  //
-  //  if (evt.type === "pointercancel") {
-  //    clearTimeout(this.holdTimer);
-  //    this._unpress();
-  //    this._startUpdates();
-  //  }
-  //
-  //  if (evt.type === "pointerup") {
-  //    clearTimeout(this.holdTimer);
-  //    this._unpress();
-  //    this._startUpdates();
-  //
-  //    if (this.isTap) {
-  //      this._handleTap();
-  //      return;
-  //    }
-  //
-  //    if (Date.now() - this.trackingStartTime > minSlideTime) {
-  //      this._setValue();
-  //      this._startUpdates(true);
-  //    }
-  //  }
-  //};
-
-  //_updateValue(): void {
-  //  const width = this.containerWidth;
-  //  const dx = this.mousePos.x - this.mouseStartPos.x;
-  //
-  //  const percentage = Math.round((100 * dx) / width);
-  //
-  //  this.currentValue = this.oldValue + percentage;
-  //  this._checklimits();
-  //  this._updateSlider();
-  //}
-
   _updateValue(): void {
     const container = this.shadowRoot?.getElementById("container");
     if (!container) return;
@@ -341,6 +284,12 @@ export class MaterialSliderCard extends LitElement {
   _setHold = (): void => {
     this.isTap = false;
     this.isHold = true;
+    if (!this._state || !this._state.attributes.brightness) {
+      const domain = this._config.entity?.split(".")[0];
+      if (domain === "light") {
+        return _openDialog(this, "light-dialog", this.hass, this._config);
+      }
+    }
     this._handleAction("hold");
   };
 
@@ -372,19 +321,6 @@ export class MaterialSliderCard extends LitElement {
     this.removeAttribute("pressed");
     this.removeAttribute("half-pressed");
   }
-
-  //_checklimits(): void {
-  //  const min = this._config.min ?? 0;
-  //  const max = this._config.max ?? 100;
-  //  if (this.currentValue < min) {
-  //    this.currentValue = min;
-  //    this._resetTrack();
-  //  }
-  //  if (this.currentValue > max) {
-  //    this.currentValue = max;
-  //    this._resetTrack();
-  //  }
-  //}
 
   _checklimits(): void {
     const min = this._config.min ?? 0;
