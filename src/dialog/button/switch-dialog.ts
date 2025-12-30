@@ -220,8 +220,8 @@ export class SwitchDialog extends LitElement {
 
       .google-toggle {
         position: relative;
-        width: 150px;
-        height: 300px;
+        width: 160px;
+        height: 320px;
         cursor: pointer;
         display: flex;
         align-items: center;

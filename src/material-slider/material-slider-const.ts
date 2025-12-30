@@ -16,6 +16,7 @@ export const MAX = 100;
 export const DEFAULT_CONFIG: MaterialSliderCardConfig = {
   type: "custom:material-slider-card",
   control_type: ControlType.LIGHT,
+  use_default_toggle: true,
   tap_action: {
     action: "toggle",
     haptic: "light",
@@ -65,6 +66,7 @@ export interface MaterialSliderCardConfig extends LovelaceCardConfig {
   min_slide_time: number;
   hold_time: number;
   settle_time: number;
+  use_default_toggle?: boolean;
   tap_action: ActionConfig;
   hold_action?: ActionConfig;
 }

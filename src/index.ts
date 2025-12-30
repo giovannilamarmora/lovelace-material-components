@@ -20,7 +20,7 @@ import { MaterialUsersCardEditor } from "./material-users/material-users-card-ed
 
 /* eslint no-console: 0 */
 console.info(
-  `%c Material Home Components %c ${localize("common.version")} ${CARD_VERSION}`,
+  `%c Material Home Components Ultimate %c ${localize("common.version")} ${CARD_VERSION}`,
   "color: orange; font-weight: bold; background: black",
   "color: white; font-weight: bold; background: dimgray"
 );

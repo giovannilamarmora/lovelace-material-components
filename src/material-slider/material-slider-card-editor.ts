@@ -46,6 +46,8 @@ export class MaterialSliderCardEditor
       return html``;
     }
 
+    this._config.use_default_toggle = this._config.use_default_toggle ?? true;
+
     return html`
       <div class="form">
         <ha-select
@@ -111,6 +113,21 @@ export class MaterialSliderCardEditor
             @change=${(ev: Event) => _valueChanged(ev, this)}
           />
         </div>
+
+        <div class="switch-row">
+          <span class="switch-label"
+            >${localize("actions.automatic_action")}</span
+          >
+          <ha-switch
+            .checked=${this._config.use_default_toggle ?? true}
+            configValue="use_default_toggle"
+            @change=${(ev: Event) => _valueChanged(ev, this)}
+          />
+        </div>
+
+        ${this._config.use_default_toggle
+          ? html``
+          : html`<div class="warning">${localize("actions.warning")}</div>`}
       </div>
     `;
   }
@@ -141,6 +158,12 @@ export class MaterialSliderCardEditor
     .switch-label {
       font-size: 16px;
       font-weight: 500;
+    }
+
+    .warning {
+      margin-top: 16px;
+      color: var(--error-color, #d32f2f);
+      font-size: 0.9rem;
     }
   `;
 }

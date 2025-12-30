@@ -284,11 +284,15 @@ export class MaterialSliderCard extends LitElement {
   _setHold = (): void => {
     this.isTap = false;
     this.isHold = true;
-    if (!this._state || !this._state.attributes.brightness) {
-      const domain = this._config.entity?.split(".")[0];
-      if (domain === "light") {
-        return _openDialog(this, "light-dialog", this.hass, this._config);
-      }
+
+    const domain = this._config.entity?.split(".")[0];
+    if (
+      this._config.use_default_toggle &&
+      domain === "light" &&
+      this._state &&
+      this._state.attributes.supported_color_modes == "onoff"
+    ) {
+      return _openDialog(this, "light-dialog", this.hass, this._config);
     }
     this._handleAction("hold");
   };

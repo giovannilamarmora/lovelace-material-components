@@ -246,7 +246,18 @@ export const dialogStatesStyles = css`
 
   .icon-circle.dark {
     background-color: var(--md-sys-color-surface-container-highest);
-    right: 36px;
+  }
+
+  @media (max-width: 450px) {
+    .icon-circle.dark {
+      right: 15px;
+    }
+  }
+
+  @media (min-width: 450px) {
+    .icon-circle.dark {
+      right: 36px;
+    }
   }
 
   .icon-circle ha-icon {
