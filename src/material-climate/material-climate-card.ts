@@ -9,7 +9,7 @@ import {
 import { fireEvent } from "custom-card-helpers";
 import { applyRippleEffect } from "../animations";
 import { material_color } from "../shared/color";
-import { isNullOrEmpty } from "../shared/utils";
+import { isNullOrEmpty, vibrate } from "../shared/utils";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import {
   adjustNewTempAuto,
@@ -61,9 +61,7 @@ export class MaterialClimateCard extends LitElement {
 
   public _onClick(event: MouseEvent) {
     applyRippleEffect(event.currentTarget as HTMLElement, event);
-    if (navigator.vibrate) {
-      navigator.vibrate(60);
-    }
+    vibrate();
 
     if (!this._config || !this.hass) return;
 
@@ -73,9 +71,7 @@ export class MaterialClimateCard extends LitElement {
   }
 
   private async _adjustTemp(delta: number): Promise<void> {
-    if (navigator.vibrate) {
-      navigator.vibrate(60);
-    }
+    vibrate();
     if (!this.hass || !this._config?.entity) return;
 
     const stateObj = this.hass.states[this._config.entity];

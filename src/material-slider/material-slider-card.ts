@@ -601,7 +601,7 @@ export class MaterialSliderCard extends LitElement {
         tabindex="0"
         style="position: relative; ${isOffline
           ? "padding: 12px 35px 12px 12px;"
-          : "padding: 12px 12px;"}"
+          : "padding: 12px 13px 12px 12px;"}"
         @mousedown=${this._onClick}
       >
         <div id="slider" class="animate ${colorize ? "colorize" : ""}"></div>
@@ -616,7 +616,7 @@ export class MaterialSliderCard extends LitElement {
             data-state=${ifDefined(this._status)}
           ></ha-state-icon>
           <p id="label">
-            <span id="name" class="${boldText ? "bold" : ""}"
+            <span id="name" class="${boldText ? "bold" : ""} ellipsis"
               >${this._name}</span
             >
             <span
@@ -765,11 +765,22 @@ export class MaterialSliderCard extends LitElement {
         font-size: 15px;
         font-weight: 550;
         line-height: 1.35;
+        max-width: 100%;
+        white-space: normal;
+        overflow: hidden;
       }
 
       #name.bold,
       #percentage.bold {
         font-weight: bold !important;
+      }
+
+      .ellipsis {
+        display: -webkit-box;
+        -webkit-box-orient: vertical;
+        -webkit-line-clamp: 2;
+        overflow: hidden;
+        /*text-overflow: ellipsis;*/
       }
 
       #percentage {

@@ -6,7 +6,7 @@ import { localize } from "../localize/localize";
  * Used for displaying version information or debugging purposes.
  * Example usage: displayed when `control_type: app_version` is set.
  */
-export const CARD_VERSION = "2.2.1";
+export const CARD_VERSION = "2.2.2";
 
 /**
  * Returns the provided value if it is not `undefined` or `null`,
@@ -165,4 +165,10 @@ export function isNullOrEmpty(value: any): boolean {
   }
 
   return false;
+}
+
+export function vibrate() {
+  if (navigator.vibrate) {
+    navigator.vibrate(40);
+  }
 }

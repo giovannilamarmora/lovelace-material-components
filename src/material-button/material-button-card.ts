@@ -8,7 +8,7 @@ import {
   DEFAULT_CONFIG,
   MaterialButtonCardConfig,
 } from "./material-button-const";
-import { isNullOrEmpty } from "../shared/utils";
+import { isNullOrEmpty, vibrate } from "../shared/utils";
 import { material_color } from "../shared/color";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import { setColorCard } from "./material-button-mapper";
@@ -94,9 +94,7 @@ export class MaterialButtonCard extends LitElement {
   }
 
   private _toggle() {
-    if (navigator.vibrate) {
-      navigator.vibrate(50);
-    }
+    vibrate();
 
     if (!this._config || !this.hass) return;
 
@@ -249,7 +247,7 @@ export class MaterialButtonCard extends LitElement {
 
   private _handleHold() {
     // Feedback tattile (se supportato)
-    navigator.vibrate?.(50);
+    vibrate();
 
     if (!this._config || !this.hass) return;
 
@@ -487,9 +485,11 @@ export class MaterialButtonCard extends LitElement {
         @touchmove=${this._handleMove}
         style="${isOffline ||
         this._config.control_type == ControlType.THERMOMETER ||
-        this._config.control_type == ControlType.MEDIA_PLAYER
+        this._config.control_type == ControlType.MEDIA_PLAYER ||
+        this._config.control_type == ControlType.ACTION ||
+        this._config.control_type == ControlType.STATE
           ? "padding: 12px 35px 12px 12px"
-          : "padding: 12px 12px"}"
+          : "padding: 12px 13px 12px 12px"}"
       >
         <div class="content">
           <ha-icon .icon=${icon} class="icon"></ha-icon>
@@ -585,11 +585,17 @@ export class MaterialButtonCard extends LitElement {
       font-size: 15px;
       font-weight: 550;
       line-height: 1.35;
+      max-width: 100%;
+      white-space: normal;
+      overflow: hidden;
     }
 
     .ellipsis {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 2;
       overflow: hidden;
-      text-overflow: ellipsis;
+      /*text-overflow: ellipsis;*/
     }
 
     .state {
