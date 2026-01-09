@@ -17,6 +17,8 @@ import { MaterialUsersCard } from "./material-users/material-users-card";
 import { MaterialMenuCard } from "./material-menu/material-menu-card";
 import { MaterialMenuCardEditor } from "./material-menu/material-menu-card-editor";
 import { MaterialUsersCardEditor } from "./material-users/material-users-card-editor";
+import { MaterialOptionsCard } from "./material-options/material-options-card";
+import { MaterialOptionsCardEditor } from "./material-options/material-options-card-editor";
 
 /* eslint no-console: 0 */
 console.info(
@@ -115,6 +117,20 @@ if (!customElements.get("material-menu-card")) {
   customElements.define("material-menu-card", MaterialMenuCard);
 }
 
+/**
+ * Material Options: Card and Editor
+ */
+if (!customElements.get("material-options-card")) {
+  customElements.define("material-options-card", MaterialOptionsCard);
+}
+
+if (!customElements.get("material-options-card-editor")) {
+  customElements.define(
+    "material-options-card-editor",
+    MaterialOptionsCardEditor
+  );
+}
+
 (window as any).customCards = (window as any).customCards ?? [];
 (window as any).customCards.push({
   type: "material-slider-card",
@@ -178,4 +194,12 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "The menu to manage your home's settings, allowing you to view and adjust key options clearly and easily.",
+});
+
+(window as any).customCards.push({
+  type: "material-options-card",
+  name: "Material Options",
+  preview: true,
+  description:
+    "A versatile options card inspired by Google's Material Design, allowing users to view and manage various settings and configurations within Home Assistant through an intuitive interface.",
 });

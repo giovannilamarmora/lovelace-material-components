@@ -147,6 +147,15 @@
     "add_button_title": "Mostra bottone aggiungi utente",
     "add_button_description": "Se abilitata, anche gli utenti non amministratori potranno visualizzare il bottone per aggiungere un nuovo utente. Tuttavia, gli utenti non admin non potranno completare l'aggiunta e saranno reindirizzati alla propria pagina profilo. Se disabilitata, il bottone sarà visibile solo agli utenti con privilegi amministrativi."
   },
+  "material_options_card": {
+    "name": "Nome della Card",
+    "entity": "Entità",
+    "options_type": "Tipo di bottone",
+    "type": {
+      "options": "Opzioni (Usato per selezionare opzioni da un elenco)",
+      "generic": "Generico"
+    }
+  },
   "dryer": {
     "remote": "Controllo Remoto",
     "cotton": "Cotone",

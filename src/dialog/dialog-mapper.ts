@@ -7,6 +7,7 @@ import {
   isOfflineState,
 } from "../shared/states";
 import { DeviceType, getValidDeviceClass } from "../shared/types";
+import { isNullOrEmpty } from "../shared/utils";
 
 /**
  * Map the title of the card information
@@ -15,8 +16,11 @@ import { DeviceType, getValidDeviceClass } from "../shared/types";
  * @returns
  */
 export function mapStateTitle(stateObj: any, entity: any) {
-  const entityName = entity.name;
+  if (isNullOrEmpty(entity) && isNullOrEmpty(stateObj)) return "";
+  const entityName = entity?.name;
   if (entityName) return entityName;
+  if (stateObj.attributes && stateObj.attributes.friendly_name)
+    return stateObj.attributes.friendly_name;
   const device_class = getValidDeviceClass(stateObj.attributes);
   if (device_class) return device_class;
   return stateObj.attributes.device_class;
@@ -28,6 +32,7 @@ export function mapStateTitle(stateObj: any, entity: any) {
  * @returns
  */
 export function mapStateValue(stateObj: any) {
+  if (isNullOrEmpty(stateObj)) return "";
   const device_class = getValidDeviceClass(stateObj.attributes);
   const isDeviceTurnOn = isDeviceOn(stateObj.state);
 

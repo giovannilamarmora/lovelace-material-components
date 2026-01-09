@@ -268,7 +268,8 @@ export class SensorDialog extends LitElement {
 
       .menu-card.link,
       .circle.absent {
-        filter: brightness(1) !important;
+        /*filter: brightness(1) !important;*/
+        filter: brightness(1.2) !important;
       }
     }
 

@@ -21,8 +21,8 @@ import {
 } from "./states";
 
 export function getIcon(stateObj: any, config: any, hass: any): string {
-  const domain = stateObj.entity_id.split(".")[0];
-  let state = stateObj.state;
+  const domain = stateObj?.entity_id.split(".")[0];
+  let state = stateObj?.state;
   const controlType: string = config.control_type ?? "generic";
 
   const useDefault = config.use_default_icon ?? true;

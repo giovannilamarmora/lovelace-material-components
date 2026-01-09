@@ -32,6 +32,19 @@
     "related": "Related Integration",
     "hidden": "Hide"
   },
+  "shared_options": {
+    "name": "Card Name (Used as default title)",
+    "subtitle": "Card Subtitle (Displayed below the title)",
+    "entity_card": "Use card as entity (if enabled, the card will use the entity to be displayed and controlled)",
+    "entity": "Select Entity to control",
+    "dual_icon": {
+      "default": "Use default icon (based on entity)",
+      "icon": "Select custom icon",
+      "options": "Use dual icon (Element On and Element Off).",
+      "icon_on": "Select icon when On",
+      "icon_off": "Select icon when Off"
+    }
+  },
   "actions": {
     "automatic_action": "Enable automatic actions",
     "tap_action_title": "Action on tap",
@@ -146,6 +159,15 @@
     "user_description": "If enabled, non-admin users will be able to see the location of other users on the map by clicking on their cards. If disabled, location information will not be visible to non-admin users.",
     "add_button_title": "Show add user button",
     "add_button_description": "If enabled, non-admin users will also be able to see the button to add a new user. However, non-admin users will not be able to complete the addition and will be redirected to their own profile page. If disabled, the button will only be visible to users with administrative privileges."
+  },
+  "material_options_card": {
+    "options_type": "Button Type (select how to display options)",
+    "type": {
+      "options": "Options (Used to select options from a list)",
+      "generic": "Generic"
+    },
+    "large_buttons": "Use large buttons style",
+    "show_entity_options": "Show entity options (e.g. On/Off or Run)"
   },
   "dryer": {
     "remote": "Remote Control",
