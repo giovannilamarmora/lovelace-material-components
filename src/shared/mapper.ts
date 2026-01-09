@@ -227,7 +227,8 @@ export function mapStateDisplay(
   isOffline: boolean,
   fix_temperature: "true" | "false" | "auto" = "false",
   is_presence_sensor: boolean = false,
-  is_climate_card: boolean = false
+  is_climate_card: boolean = false,
+  hass?: any
 ) {
   const domain = isNullOrEmpty(stateObj)
     ? ""
@@ -288,16 +289,27 @@ export function mapStateDisplay(
     const device_class = getValidDeviceClass(stateObj.attributes);
     if (
       device_class == DeviceType.BATTERY ||
-      device_class == DeviceType.HUMIDITY
-    )
+      device_class == DeviceType.HUMIDITY ||
+      device_class == DeviceType.MEASUREMENT
+    ) {
+      // Use formatEntityState if available to respect display_precision
+      if (hass && hass.formatEntityState) {
+        return hass.formatEntityState(stateObj);
+      }
       return (
         Number.parseInt(stateObj.state) +
         (stateObj.attributes.unit_of_measurement ?? "%")
       );
-    if (device_class == DeviceType.TEMPERATURE)
+    }
+    if (device_class == DeviceType.TEMPERATURE) {
+      // Use formatEntityState if available to respect display_precision
+      if (hass && hass.formatEntityState) {
+        return hass.formatEntityState(stateObj);
+      }
       return (
         stateObj.state + " " + (stateObj.attributes.unit_of_measurement ?? "°")
       );
+    }
     if (device_class == DeviceType.TIMESTAMP)
       return formatSmartDate(stateObj.state);
 
@@ -309,6 +321,13 @@ export function mapStateDisplay(
       (control_type === ControlType.STATE && !isOffline) ||
       (!isDeviceOnline(stateObj.state) && !isOffline)
     ) {
+      // Use formatEntityState for numeric sensors to respect display_precision
+      if (hass && hass.formatEntityState && domain === "sensor") {
+        const isNumeric = !isNaN(parseFloat(stateObj.state));
+        if (isNumeric) {
+          return hass.formatEntityState(stateObj);
+        }
+      }
       return stateObj.state;
     }
   }

@@ -121,7 +121,8 @@ export class MaterialClimateCard extends LitElement {
       isOffline,
       this._config.fix_temperature,
       false,
-      true
+      true,
+      this.hass
     );
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
     const isOn = isDeviceOn(stateObj.state);

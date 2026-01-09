@@ -436,7 +436,9 @@ export class MaterialButtonCard extends LitElement {
               this._config.control_type!,
               isOffline,
               this._config.fix_temperature,
-              isMotionDevice(device_class)
+              isMotionDevice(device_class),
+              false,
+              this.hass
             )
           : "";
     } else {
@@ -495,8 +497,7 @@ export class MaterialButtonCard extends LitElement {
           <ha-icon .icon=${icon} class="icon"></ha-icon>
           <div class="text">
             <div class="name ellipsis">${name}</div>
-            ${device_class == DeviceType.MEASUREMENT ||
-            (this._config.control_type == ControlType.SCENE && default_text) ||
+            ${(this._config.control_type == ControlType.SCENE && default_text) ||
             (this._config.control_type == ControlType.MEDIA_PLAYER && !isOn) ||
             this._config.control_type == ControlType.ACTION ||
             isButtonControl
