@@ -61,6 +61,24 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
     }
   }
 
+  // Icon priority (when use_default_icon is true):
+  // 1. Card config icon (already handled above if !useDefault)
+  // 2. Entity registry icon (hass.entities[entity_id].icon)
+  // 3. State attributes icon (stateObj.attributes.icon)
+  // 4. Device class/domain defaults (handled below)
+
+  // Check entity registry icon
+  const entityRegistryIcon = hass?.entities?.[stateObj.entity_id]?.icon;
+  if (entityRegistryIcon) {
+    return entityRegistryIcon;
+  }
+
+  // Check state attributes icon
+  const stateAttributesIcon = stateObj?.attributes?.icon;
+  if (stateAttributesIcon) {
+    return stateAttributesIcon;
+  }
+
   // Se use_default_icon è true, prosegui con la logica predefinita
   const deviceOnline = !isOfflineState(state, controlType);
 
