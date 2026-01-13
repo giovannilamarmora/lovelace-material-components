@@ -251,6 +251,7 @@ export function mapStateDisplay(
   const domain = isNullOrEmpty(stateObj)
     ? ""
     : stateObj.entity_id!.split(".")[0];
+  const device_class = getValidDeviceClass(stateObj.attributes);
 
   if (control_type === ControlType.APP_VERSION) {
     return "V".concat(CARD_VERSION);
@@ -265,7 +266,7 @@ export function mapStateDisplay(
         stateObj.attributes.percentage && isOn
           ? " • " + stateObj.attributes.percentage + "%"
           : "";
-      return getStateDisplay(stateObj.state, text, is_presence_sensor);
+      return getStateDisplay(stateObj.state, text, is_presence_sensor, hass, domain, device_class);
     }
   }
   if (control_type === ControlType.THERMOMETER && !isOffline) {
@@ -304,7 +305,6 @@ export function mapStateDisplay(
     (control_type === ControlType.GENERIC && !isOffline) ||
     (control_type === ControlType.STATE && !isOffline)
   ) {
-    const device_class = getValidDeviceClass(stateObj.attributes);
     if (
       device_class == DeviceType.BATTERY ||
       device_class == DeviceType.HUMIDITY ||
@@ -346,6 +346,11 @@ export function mapStateDisplay(
           return hass.formatEntityState(stateObj);
         }
       }
+      // For non-numeric sensors or other domains with STATE control_type,
+      // use getStateDisplay for proper translation
+      if (control_type === ControlType.STATE) {
+        return getStateDisplay(stateObj.state, text, is_presence_sensor, hass, domain, device_class);
+      }
       return stateObj.state;
     }
   }
@@ -354,18 +359,51 @@ export function mapStateDisplay(
     if (isDeviceOn(stateObj.state)) return localize("common.active");
     else return localize("common.inactive");
   }
-  return getStateDisplay(stateObj.state, text, is_presence_sensor);
+  return getStateDisplay(stateObj.state, text, is_presence_sensor, hass, domain, device_class);
 }
 
 export function getStateDisplay(
   state: string,
   text: string = "",
-  is_presence_sensor: boolean = false
+  is_presence_sensor: boolean = false,
+  hass?: any,
+  domain?: string,
+  device_class?: string
 ): string {
   if (!isDeviceOnline(state)) {
     return localize("common.offline");
   }
 
+  // Try to use Home Assistant's native localization first
+  if (hass?.localize && domain) {
+    let translatedState: string | undefined;
+
+    // For binary_sensor, try device_class specific translation first
+    if (domain === "binary_sensor" && device_class) {
+      const deviceClassKey = `component.binary_sensor.entity_component.${device_class}.state.${state}`;
+      translatedState = hass.localize(deviceClassKey);
+      if (translatedState === deviceClassKey) {
+        translatedState = undefined;
+      }
+    }
+
+    // If no device_class translation, try standard domain translation
+    if (!translatedState) {
+      const translationKey = `component.${domain}.entity_component._.state.${state}`;
+      translatedState = hass.localize(translationKey);
+
+      if (translatedState === translationKey) {
+        translatedState = undefined;
+      }
+    }
+
+    // If we got a translation, return it
+    if (translatedState) {
+      return text !== "" ? translatedState + text : translatedState;
+    }
+  }
+
+  // Fallback to custom translations
   const stateMap: Record<string, string> = {
     [OnlineStates.ON]: is_presence_sensor
       ? localize("common.presence")

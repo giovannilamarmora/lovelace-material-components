@@ -98,7 +98,7 @@ export class LightDialog extends LitElement {
         ? this.optimisticState
         : isDeviceStateOn(mainState);
 
-    const stateLabel = mapStateValue(mainState);
+    const stateLabel = mapStateValue(mainState, this.hass);
 
     const isOnlyMainEntity =
       relatedStates.length === 1 &&

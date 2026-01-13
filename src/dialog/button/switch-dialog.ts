@@ -106,7 +106,7 @@ export class SwitchDialog extends LitElement {
     //const stateLabel = idDeviceTurnOn
     //  ? localize("common.open")
     //  : localize("common.closed");
-    const stateLabel = mapStateValue(mainState);
+    const stateLabel = mapStateValue(mainState, this.hass);
 
     const isOnlyMainEntity =
       relatedStates.length === 1 &&

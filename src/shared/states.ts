@@ -30,6 +30,10 @@ export enum OnStates {
   OPEN = "open",
   OPENING = "opening",
 
+  // Locks
+  UNLOCKED = "unlocked",
+  UNLOCKING = "unlocking",
+
   // Dryer
   IDLE_2 = "Idle",
 }
@@ -43,6 +47,8 @@ export enum OffStates {
   OFF = "off",
   CLOSED = "closed",
   CLOSING = "closing",
+  LOCKED = "locked",
+  LOCKING = "locking",
 }
 
 /**

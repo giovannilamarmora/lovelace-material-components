@@ -412,6 +412,10 @@ export class MaterialButtonCard extends LitElement {
     let device_class: DeviceType = DeviceType.NONE;
     let stateDisplay: string;
     const default_text = this._config.use_default_text ?? true;
+    const domain = !isNullOrEmpty(stateObj)
+      ? stateObj.entity_id.split(".")[0]
+      : null;
+
     if (
       this._config.control_type != ControlType.APP_VERSION &&
       this._config.control_type != ControlType.ACTION
@@ -449,10 +453,6 @@ export class MaterialButtonCard extends LitElement {
         stateDisplay = localize("common.offline");
       }
     }
-
-    const domain = !isNullOrEmpty(stateObj)
-      ? stateObj.entity_id.split(".")[0]
-      : null;
 
     const isButtonControl =
       this._config.control_type == ControlType.GENERIC &&

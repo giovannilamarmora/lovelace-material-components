@@ -71,7 +71,7 @@ export class SensorDialog extends LitElement {
     //const stateLabel = idDeviceTurnOn
     //  ? localize("common.open")
     //  : localize("common.closed");
-    const stateLabel = mapStateValue(mainState);
+    const stateLabel = mapStateValue(mainState, this.hass);
 
     return html`
       <ha-dialog
@@ -198,7 +198,7 @@ export class SensorDialog extends LitElement {
                     >${mapStateTitle(stateObj, entity)}</span
                   >
                   <span class="menu-text flex-end"
-                    >${mapStateValue(stateObj)}</span
+                    >${mapStateValue(stateObj, this.hass)}</span
                   >
                 </div>
               `;

@@ -146,7 +146,7 @@ export const renderDialogRelatedStates = (
           <span class="menu-text">${mapStateTitle(stateObj, entity)}</span>
           ${!isAutomation
             ? html`<span class="menu-text flex-end"
-                >${mapStateValue(stateObj)}</span
+                >${mapStateValue(stateObj, hass)}</span
               >`
             : (() => {
                 const actionState = getActionState(_this, entity_id);

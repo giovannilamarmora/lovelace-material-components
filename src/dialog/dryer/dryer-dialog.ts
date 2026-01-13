@@ -65,7 +65,7 @@ export class DryerDialog extends LitElement {
     //const stateLabel = idDeviceTurnOn
     //  ? localize("common.open")
     //  : localize("common.closed");
-    const stateLabel = mapStateValue(mainState);
+    const stateLabel = mapStateValue(mainState, this.hass);
     const progress = isDeviceTurnOn ? 100 : 0;
     const program = getProgram(mainState.attributes);
 
@@ -208,7 +208,7 @@ export class DryerDialog extends LitElement {
                     >${mapStateTitle(stateObj, entity)}</span
                   >
                   <span class="menu-text flex-end"
-                    >${mapStateValue(stateObj)}</span
+                    >${mapStateValue(stateObj, this.hass)}</span
                   >
                 </div>
               `;
