@@ -110,6 +110,8 @@
       "default": "Use default icon",
       "options": "Use dual icon (Element On and Element Off)."
     },
+    "icon_on": "Icon ON",
+    "icon_off": "Icon OFF",
     "dual_text": {
       "default": "Use Default Text",
       "text_on": "Text On",
@@ -123,7 +125,9 @@
     "dual_icon": {
       "default": "Use Default Icon",
       "options": "Use Dual Icon (On and Off states)."
-    }
+    },
+    "icon_on": "Icon ON",
+    "icon_off": "Icon OFF"
   },
   "material_slider_card": {
     "name": "Card Name",

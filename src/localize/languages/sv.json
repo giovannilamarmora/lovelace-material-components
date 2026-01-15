@@ -1,0 +1,191 @@
+{
+  "common": {
+    "version": "Version",
+    "invalid_configuration": "Ogiltig konfiguration",
+    "show_warning": "Visa varning",
+    "no_entity_set": "Entitet inte angiven",
+    "no_entity": "Entitet inte tillgänglig",
+    "indoor": "Inomhus",
+    "on": "På",
+    "off": "Av",
+    "offline": "Offline",
+    "auto": "Auto",
+    "eco": "Eko",
+    "heat": "Värm",
+    "cool": "Kyl",
+    "dry": "Torka",
+    "fan": "Fläkt",
+    "playing": "Spelar",
+    "paused": "Paus",
+    "idle": "Vilar",
+    "presence": "Rörelse",
+    "off_presence": "Ingen rörelse",
+    "today_at": "Idag kl.",
+    "yesterday_at": "Igår kl.",
+    "open": "Öppen",
+    "closed": "Stängd",
+    "opening": "Öppnar",
+    "closing": "Stänger",
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "info_device": "Enhetsinformation",
+    "related": "Relaterad integration",
+    "hidden": "Dölj"
+  },
+  "actions": {
+    "automatic_action": "Aktivera automatiska åtgärder",
+    "tap_action_title": "Åtgärd vid tryck",
+    "hold_action_title": "Åtgärd vid långt tryck",
+    "double_tap_action_title": "Åtgärd vid dubbeltryck",
+    "toggle": "Växla (På/Av)",
+    "more_info": "Visa entitetsinformation",
+    "navigate": "Navigera till en sida",
+    "call_service": "Anropa tjänst",
+    "fire_dom": "Skicka DOM-händelse",
+    "assist": "Aktivera röstassistent",
+    "url": "Öppna länk eller webbplats",
+    "none": "Ingen åtgärd",
+    "google_home": "Öppna Google Home",
+    "settings": "Öppna inställningar",
+    "select_option": "Välj alternativ",
+    "warning": "⚠️ Avancerade åtgärder (JS, [[[]]], komplexa call-services) måste konfigureras via YAML."
+  },
+  "material_dashboard_card": {
+    "description": "Konfigurera navigeringssökvägen när ett kort trycks på.",
+    "cameras": "Sökväg för kameror",
+    "cameras_name": "Kameror",
+    "lighting": "Sökväg för belysning",
+    "lighting_name": "Belysning",
+    "lighting_label": "Lampor",
+    "wifi": "Sökväg för Wi-Fi",
+    "wifi_name": "Wi-Fi",
+    "climate": "Sökväg för klimat",
+    "climate_name": "Klimat",
+    "device": "Enhet",
+    "devices": "Enheter",
+    "placeholder": "./sökväg-eller-url"
+  },
+  "material_climate_card": {
+    "name": "Entitetsnamn",
+    "entity": "Entitet",
+    "theme": "Använd Material Expressive",
+    "increase_temp": "Öka temperatur (t.ex. 0.5)",
+    "decrease_temp": "Minska temperatur (t.ex. 0.5)",
+    "dual_icon": {
+      "default": "Använd standardikon",
+      "options": "Använd dubbel ikon (På- och Av-läge)."
+    },
+    "fix_temperature": "Aktivera om temperaturen inte stämmer",
+    "false": "Inte aktiv",
+    "true": "Aktiv",
+    "auto": "Auto"
+  },
+  "material_button_card": {
+    "name": "Entitetsnamn",
+    "control_type": "Kontrolltyp",
+    "type": {
+      "generic": "Generisk (Strömbrytare, Knapp...)",
+      "thermometer": "Termometer, Ventilation...",
+      "automation": "Automation",
+      "scene": "Scen",
+      "media": "Multimedia (Google, Alexa...)",
+      "state": "Tillstånd",
+      "action": "Åtgärd",
+      "app_version": "Version för Material Components"
+    },
+    "dual_icon": {
+      "default": "Använd standardikon",
+      "options": "Använd dubbel ikon (Element På och Element Av)."
+    },
+    "icon_on": "Ikon På",
+    "icon_off": "Ikon Av",
+    "dual_text": {
+      "default": "Använd standardtext",
+      "text_on": "Text På",
+      "text_off": "Text Av"
+    }
+  },
+  "shared_options": {
+    "name": "Kortnamn (standardtitel)",
+    "subtitle": "Undertext (visas under titeln)",
+    "entity_card": "Använd kort som entitet (kortet styrs då direkt av entiteten)",
+    "entity": "Välj entitet att styra",
+    "dual_icon": {
+      "default": "Använd standardikon baserat på entitet",
+      "icon": "Välj anpassad ikon",
+      "options": "Använd dubbla ikoner (för På- och Av-läge)",
+      "icon_on": "Välj ikon för På",
+      "icon_off": "Välj ikon för Av"
+    }
+  },
+  "material_control_card": {
+    "name": "Kortnamn",
+    "entity_card": "Använd kort som entitet",
+    "entity": "Entitet",
+    "dual_icon": {
+      "default": "Använd standardikon",
+      "options": "Använd dubbel ikon (På- och Av-läge)."
+    },
+    "icon_on": "Ikon På",
+    "icon_off": "Ikon Av"
+  },
+  "material_slider_card": {
+    "name": "Kortnamn",
+    "control_type": "Kontrolltyp",
+    "type": {
+      "light": "Lampa",
+      "cover": "Rullgardin/Port",
+      "number": "Nummer (input_number, number)",
+      "media_player_volume": "Mediaspelare Volym"
+    },
+    "entity": "Entitet att styra",
+    "icon": "Anpassad ikon (om tom ändras den automatiskt baserat på På/Av-läge)",
+    "icon_on": "Ikon På",
+    "icon_off": "Ikon Av",
+    "percentage": "Visa värde som procent",
+    "bold_text": "Fetstil för texten"
+  },
+  "material_lights_card": {
+    "on_text": "Text för tända lampor",
+    "off_text": "Text för släckta lampor",
+    "control_area": "Styr ett specifikt område",
+    "area_id": "Område att styra"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "Inget spelas",
+      "playing": "Spelar nu"
+    },
+    "remote": "Öppna fjärrkontroll",
+    "cast": "Casta skärm",
+    "stop_cast": "Stoppa casting",
+    "open": "Öppna ",
+    "open_google": "Öppna Google Home"
+  },
+  "material_users_card": {
+    "user_title": "Visa användarens plats på kartan",
+    "user_description": "Om aktiverad kommer icke-adminanvändare att kunna se andra användares plats på kartan genom att klicka på deras kort. Om inaktiverad kommer platsinformation inte vara synlig för icke-adminanvändare.",
+    "add_button_title": "Visa knapp för att lägga till användare",
+    "add_button_description": "Om aktiverad kommer även icke-adminanvändare kunna se knappen för att lägga till en ny användare. Dock kommer icke-adminanvändare inte kunna slutföra tilläggandet och omdirigeras till sin egen profilsida. Om inaktiverad visas knappen endast för administratörer."
+  },
+  "dryer": {
+    "remote": "Fjärrstyrning",
+    "cotton": "Bomull",
+    "whites": "Vitvätt",
+    "jeans": "Jeans",
+    "colored": "Mörkt & Kulört",
+    "synthetics": "Syntet",
+    "shirts": "Skjortor",
+    "wool": "Ull",
+    "daily": "Daglig 59 min",
+    "everyday": "Varje dag 45 min",
+    "eco": "Eco 30 min",
+    "refresh": "Uppfräschning",
+    "relax": "Skrynkelfri",
+    "sport": "Sport",
+    "small": "Liten tvätt",
+    "water_tank_full": "Vattentank full",
+    "need_clean_filter": "Rengör filter",
+    "door_open": "Dörr öppen"
+  }
+}

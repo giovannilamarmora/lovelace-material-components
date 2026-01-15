@@ -231,13 +231,13 @@ export class MaterialControlCardEditor
                 ? html`
                     <div class="dual-icons">
                       <ha-icon-picker
-                        label="Icon ON"
+                        label="${localize("material_control_card.icon_on")}"
                         .value=${this._config.icon_on || ""}
                         configValue="icon_on"
                         @value-changed=${(ev: Event) => _valueChanged(ev, this)}
                       ></ha-icon-picker>
                       <ha-icon-picker
-                        label="Icon OFF"
+                        label="${localize("material_control_card.icon_off")}"
                         .value=${this._config.icon_off || ""}
                         configValue="icon_off"
                         @value-changed=${(ev: Event) => _valueChanged(ev, this)}

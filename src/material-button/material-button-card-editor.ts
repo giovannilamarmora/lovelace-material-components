@@ -247,14 +247,14 @@ export class MaterialButtonCardEditor
               ? html`
                   <div class="dual-icons">
                     <ha-icon-picker
-                      label="Icon ON"
+                      label="${localize("material_button_card.icon_on")}"
                       .value=${this._config.icon_on || ""}
                       configValue="icon_on"
                       @value-changed=${this._valueChanged}
                       placeholder="mdi:lightbulb-on"
                     ></ha-icon-picker>
                     <ha-icon-picker
-                      label="Icon OFF"
+                      label="${localize("material_button_card.icon_off")}"
                       .value=${this._config.icon_off || ""}
                       configValue="icon_off"
                       @value-changed=${this._valueChanged}
