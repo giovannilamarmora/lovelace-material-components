@@ -279,21 +279,37 @@ export function mapStateDisplay(
       text = stateObj.attributes.current_temperature
         ? " • " +
           preset +
-          adjustTempAuto(
-            fix_temperature,
-            stateObj.attributes.current_temperature
-          ) +
-          "°"
+          (hass
+            ? hass.formatEntityAttributeValue(
+                stateObj,
+                "current_temperature",
+                adjustTempAuto(
+                  fix_temperature,
+                  stateObj.attributes.current_temperature
+                )
+              )
+            : adjustTempAuto(
+                fix_temperature,
+                stateObj.attributes.current_temperature
+              ) + "°")
         : "";
     } else
       return (
         localize("common.indoor") +
         " • " +
-        adjustTempAuto(
-          fix_temperature,
-          stateObj.attributes.current_temperature
-        ) +
-        "°"
+        (hass
+          ? hass.formatEntityAttributeValue(
+              stateObj,
+              "current_temperature",
+              adjustTempAuto(
+                fix_temperature,
+                stateObj.attributes.current_temperature
+              )
+            )
+          : adjustTempAuto(
+              fix_temperature,
+              stateObj.attributes.current_temperature
+            ) + "°")
       );
   }
   if (control_type === ControlType.MEDIA_PLAYER && !isOffline) {
