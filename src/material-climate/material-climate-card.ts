@@ -32,7 +32,7 @@ export class MaterialClimateCard extends LitElement {
   }
 
   public static getStubConfig(
-    _hass: HomeAssistant
+    _hass: HomeAssistant,
   ): Partial<MaterialClimateCardConfig> {
     const allEntities = Object.keys(_hass.states);
     const climates = allEntities
@@ -83,14 +83,14 @@ export class MaterialClimateCard extends LitElement {
     const current = Number(
       adjustTempAuto(
         this._config.fix_temperature!,
-        stateObj.attributes.temperature
-      )
+        stateObj.attributes.temperature,
+      ),
     );
     if (isNaN(current)) return;
 
     const newTemp = adjustNewTempAuto(
       this._config.fix_temperature!,
-      current + delta
+      current + delta,
     );
 
     this.hass.states[this._config.entity]!.attributes!.temperature! = newTemp;
@@ -125,7 +125,7 @@ export class MaterialClimateCard extends LitElement {
       isOffline,
       this._config.fix_temperature,
       false,
-      true
+      true,
     );
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
     const isOn = isDeviceOn(stateObj.state);
@@ -148,7 +148,7 @@ export class MaterialClimateCard extends LitElement {
       isOn,
       theme,
       state,
-      this._config.use_material_color
+      this._config.use_material_color,
     );
 
     const config = {
@@ -217,8 +217,10 @@ export class MaterialClimateCard extends LitElement {
                       class="control-btn minus-btn"
                       @click=${() =>
                         this._adjustTemp(
-                          -this._config.decrease_temp |
-                            -DEFAULT_CONFIG.decrease_temp
+                          -(
+                            this._config.decrease_temp ||
+                            DEFAULT_CONFIG.decrease_temp
+                          ),
                         )}
                     >
                       −
@@ -235,7 +237,7 @@ export class MaterialClimateCard extends LitElement {
                   ${isOn || isOffAndHasTemperature
                     ? adjustTempAuto(
                         this._config.fix_temperature!,
-                        stateObj.attributes.temperature
+                        stateObj.attributes.temperature,
                       ) //this._config.fix_temperature
                     : //? stateObj.attributes.temperature * 5
                       //: stateObj.attributes.temperature
@@ -246,8 +248,10 @@ export class MaterialClimateCard extends LitElement {
                       class="control-btn plus-btn"
                       @click=${() =>
                         this._adjustTemp(
-                          this._config.decrease_temp |
+                          +(
+                            this._config.increase_temp ||
                             DEFAULT_CONFIG.increase_temp
+                          ),
                         )}
                     >
                       +

@@ -6,7 +6,7 @@ import { localize } from "../localize/localize";
  * Used for displaying version information or debugging purposes.
  * Example usage: displayed when `control_type: app_version` is set.
  */
-export const CARD_VERSION = "2.1.7";
+export const CARD_VERSION = "2.1.8";
 
 /**
  * Returns the provided value if it is not `undefined` or `null`,
@@ -63,7 +63,7 @@ export function formatSmartDate(dateString: string): string {
   const targetDate = new Date(
     date.getFullYear(),
     date.getMonth(),
-    date.getDate()
+    date.getDate(),
   );
 
   if (targetDate.getTime() === today.getTime()) {
@@ -79,7 +79,7 @@ export function formatSmartDate(dateString: string): string {
       {
         hour: "2-digit",
         minute: "2-digit",
-      }
+      },
     )}`;
   }
 
@@ -117,7 +117,7 @@ export function formatDate(dateString: string): string {
 
   return formatted.replace(
     /([a-zàèéìòù]+)/,
-    (m) => m.charAt(0).toUpperCase() + m.slice(1)
+    (m) => m.charAt(0).toUpperCase() + m.slice(1),
   );
 }
 

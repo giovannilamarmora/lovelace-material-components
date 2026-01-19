@@ -50,7 +50,7 @@ export class MaterialSliderCard extends LitElement {
   private clickOffset: number = 0; // ← AGGIUNGI QUESTA
 
   public static getStubConfig(
-    _hass: HomeAssistant
+    _hass: HomeAssistant,
   ): Partial<MaterialSliderCardConfig> {
     const allEntities = Object.keys(_hass.states);
     const lights = allEntities
@@ -94,7 +94,7 @@ export class MaterialSliderCard extends LitElement {
       (config.control_type === ControlType.COVER && domain !== DomainType.COVER)
     ) {
       throw new Error(
-        `Entity must match the selected control type (${config.control_type})`
+        `Entity must match the selected control type (${config.control_type})`,
       );
     }
 
@@ -362,7 +362,7 @@ export class MaterialSliderCard extends LitElement {
     if (this.pressTimeout) clearTimeout(this.pressTimeout);
     this.pressTimeout = window.setTimeout(
       () => this.setAttribute("pressed", ""),
-      this._config.min_slide_time
+      this._config.min_slide_time,
     );
     this.setAttribute("half-pressed", "");
   }
@@ -512,7 +512,7 @@ export class MaterialSliderCard extends LitElement {
       switch (attr) {
         case "brightness":
           _value = Math.round(
-            (100 * (this._state.attributes.brightness ?? 255)) / 255
+            (100 * (this._state.attributes.brightness ?? 255)) / 255,
           );
           break;
         case "red":
@@ -610,7 +610,7 @@ export class MaterialSliderCard extends LitElement {
         this.shadowRoot?.getElementById("slider")?.classList?.add("animate");
         this.requestUpdate();
       },
-      settle ? this._config.settle_time : 0
+      settle ? this._config.settle_time : 0,
     );
   }
 
@@ -628,7 +628,7 @@ export class MaterialSliderCard extends LitElement {
   protected render(): TemplateResult | void {
     if (!(this._entity && this._entity in (this._hass?.states ?? {}))) {
       return this._showError(
-        `${localize("common.no_entity")}: ${this._entity}`
+        `${localize("common.no_entity")}: ${this._entity}`,
       );
     }
 
@@ -729,7 +729,7 @@ export class MaterialSliderCard extends LitElement {
         --bsc-primary-text-color: var(--primary-text-color);
         --bsc-secondary-text-color: var(--secondary-text-color);
         --bsc-border-color: var(--ha-card-border-color);
-        --bsc-border-radius: var(--ha-card-border-radius);
+        --bsc-border-radius: var(--ha-card-border-radius, 28px);
         --bsc-border-style: var(--ha-card-border-style);
         --bsc-border-width: var(--ha-card-border-width);
         --bsc-height: var(--ha-card-height, 97px);
@@ -756,7 +756,7 @@ export class MaterialSliderCard extends LitElement {
         /* opacity: var(--bsc-opacity);*/
         background: var(--bsc-background);
         border-color: var(--bsc-border-color, rgba(0 0 0 / 14%));
-        border-radius: var(--bsc-border-radius, 4px);
+        border-radius: var(--bsc-border-radius, 28px);
         border-style: var(--bsc-border-style, solid);
         border-width: var(--bsc-border-width, 1px);
         z-index: 1; //fix safari bug with filter transition https://stackoverflow.com/a/27935035
