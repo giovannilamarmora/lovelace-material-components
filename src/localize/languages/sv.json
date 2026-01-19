@@ -1,0 +1,150 @@
+{
+  "common": {
+    "version": "Version",
+    "invalid_configuration": "Ogiltig konfiguration",
+    "show_warning": "Visa varning",
+    "no_entity_set": "Ingen entitet inställd",
+    "no_entity": "Entitet inte tillgänglig",
+    "indoor": "Inomhus",
+    "on": "På",
+    "off": "Av",
+    "offline": "Offline",
+    "auto": "Auto",
+    "eco": "Eco",
+    "heat": "Värme",
+    "dry": "Torka",
+    "cool": "Kyla",
+    "fan": "Fläkt",
+    "playing": "Spelar",
+    "paused": "Pausad",
+    "idle": "Inaktiv",
+    "presence": "Närvaro",
+    "off_presence": "Ingen närvaro",
+    "today_at": "Idag kl",
+    "yesterday_at": "Igår kl",
+    "open": "Öppen",
+    "closed": "Stängd",
+    "opening": "Öppnar",
+    "closing": "Stänger",
+    "active": "Aktiv",
+    "inactive": "Inaktiv",
+    "info_device": "Enhetsinformation",
+    "related": "Relaterad integration",
+    "hidden": "Dold"
+  },
+  "actions": {
+    "automatic_action": "Aktivera automatiska åtgärder",
+    "tap_action_title": "Åtgärd vid klick",
+    "hold_action_title": "Åtgärd vid långtryck",
+    "double_tap_action_title": "Åtgärd vid dubbelklick",
+    "toggle": "Enkelt klick (På/Av)",
+    "more_info": "Visa mer info om entitet",
+    "navigate": "Navigera till en sida",
+    "call_service": "Anropa en tjänst",
+    "fire_dom": "Skapa DOM-händelse",
+    "assist": "Aktivera röstassistent",
+    "url": "Öppna länk eller webbplats",
+    "none": "Ingen åtgärd",
+    "google_home": "Öppna Google Home",
+    "settings": "Öppna inställningar",
+    "select_option": "Välj alternativ",
+    "warning": "⚠️ Avancerade åtgärder (JS, [[[]]], komplexa call-service) måste konfigureras via YAML."
+  },
+  "material_dashboard_card": {
+    "description": "Konfigurera navigationssökväg när ett kort klickas.",
+    "cameras": "Kamerasökväg",
+    "cameras_name": "Kameror",
+    "lighting": "Belysningssökväg",
+    "lighting_name": "Belysning",
+    "lighting_label": "Ljus",
+    "wifi": "Wi-Fi-sökväg",
+    "wifi_name": "Wi-Fi",
+    "climate": "Klimatsökväg",
+    "climate_name": "Klimat",
+    "device": "Enhet",
+    "devices": "Enheter",
+    "placeholder": "./sökväg-eller-url"
+  },
+  "material_climate_card": {
+    "name": "Entitetsnamn",
+    "entity": "Entitet",
+    "theme": "Använd Material Expressive",
+    "increase_temp": "Temperaturökning (t.ex. 0.5)",
+    "decrease_temp": "Temperatursänkning (t.ex. 0.5)",
+    "dual_icon": {
+      "default": "Använd standardikon",
+      "options": "Använd dubbel ikon (På och av element)."
+    },
+    "fix_temperature": "Aktivera om temperaturen inte är korrekt",
+    "false": "Inte aktiv",
+    "true": "Aktiv",
+    "auto": "Automatisk"
+  },
+  "material_button_card": {
+    "name": "Entitetsnamn",
+    "control_type": "Kontrolltyp",
+    "type": {
+      "generic": "Generisk (Brytare, Knapp...)",
+      "thermometer": "Klimat, Ventilation...",
+      "automation": "Automatiseringar",
+      "scene": "Scener",
+      "media": "Multimedia (Google, Alexa...)",
+      "state": "Tillstånd",
+      "action": "Åtgärder",
+      "app_version": "Version av Material Home Components"
+    },
+    "dual_icon": {
+      "default": "Använd standardikon",
+      "options": "Använd dubbel ikon (På och av element)."
+    },
+    "dual_text": {
+      "default": "Använd standardtext",
+      "text_on": "På-text",
+      "text_off": "Av-text"
+    }
+  },
+  "material_control_card": {
+    "name": "Kortnamn",
+    "entity_card": "Använd kortet som entitet",
+    "entity": "Entitet",
+    "dual_icon": {
+      "default": "Använd standardikon",
+      "options": "Använd dubbel ikon (Aktiv och inaktiv status)."
+    }
+  },
+  "material_slider_card": {
+    "name": "Kortnamn",
+    "control_type": "Kontrolltyp",
+    "type": {
+      "light": "Ljus",
+      "cover": "Persienner"
+    },
+    "entity": "Entitet att kontrollera",
+    "icon": "Anpassad ikon (om tom, ändras automatiskt baserat på På/Av-status)",
+    "percentage": "Visa procentvärde",
+    "bold_text": "Fetstilad text"
+  },
+  "material_lights_card": {
+    "on_text": "Text för tända ljus",
+    "off_text": "Text för släckta ljus",
+    "control_area": "Kontrollera ett specifikt område",
+    "area_id": "Område att kontrollera"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "Inget innehåll spelas",
+      "playing": "Spelas nu"
+    },
+    "remote": "Öppna fjärrkontroll",
+    "cast": "Casta skärm",
+    "stop_cast": "Stoppa casting",
+    "open": "Öppna",
+    "open_google": "Öppna Google Home"
+  },
+  "material_users_card": {
+    "user_title": "Visa användares position på kartan",
+    "user_description": "Om aktiverad kan icke-admin-användare se andra användares position på kartan genom att klicka på deras kort. Om inaktiverad kommer lokaliseringsinformation inte att vara synlig för icke-admin-användare.",
+    "add_button_title": "Visa knapp för att lägga till användare",
+    "add_button_description": "Om aktiverad kan även icke-admin-användare se knappen för att lägga till en ny användare. Dock kan icke-admin-användare inte slutföra tillägget och kommer att omdirigeras till sin egen profilsida. Om inaktiverad kommer knappen endast att vara synlig för användare med administrativa privilegier."
+  }
+}

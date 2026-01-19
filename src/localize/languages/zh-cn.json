@@ -152,25 +152,5 @@
     "user_description": "启用后，非管理员用户可以通过点击用户卡片查看其他用户在地图上的位置。禁用时，非管理员用户将无法看到位置信息。",
     "add_button_title": "显示添加用户按钮",
     "add_button_description": "启用后，非管理员用户也可以看到添加新用户的按钮。然而，非管理员用户无法完成添加操作，并将被重定向到自己的个人资料页面。禁用时，按钮仅对具有管理权限的用户可见。"
-  },
-  "dryer": {
-    "remote": "遥控",
-    "cotton": "棉",
-    "whites": "白色",
-    "jeans": "牛仔",
-    "colored": "深色和彩色",
-    "synthetics": "化纤",
-    "shirts": "衬衫",
-    "wool": "羊毛",
-    "daily": "每日 59 分钟",
-    "everyday": "日常 45 分钟",
-    "eco": "节能 30 分钟",
-    "refresh": "清新",
-    "relax": "放松",
-    "sport": "运动",
-    "small": "小件",
-    "water_tank_full": "水箱已满",
-    "need_clean_filter": "需要清洁滤网",
-    "door_open": "门已打开"
   }
 }

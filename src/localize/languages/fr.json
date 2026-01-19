@@ -146,25 +146,5 @@
     "user_description": "Si activé, les utilisateurs non administrateurs pourront voir la position des autres utilisateurs sur la carte en cliquant sur leurs cartes. Si désactivé, les informations de localisation ne seront pas visibles pour les utilisateurs non administrateurs.",
     "add_button_title": "Afficher le bouton d'ajout d'utilisateur",
     "add_button_description": "Si activé, les utilisateurs non administrateurs pourront également voir le bouton pour ajouter un nouvel utilisateur. Cependant, les utilisateurs non administrateurs ne pourront pas compléter l'ajout et seront redirigés vers leur propre page de profil. Si désactivé, le bouton ne sera visible que pour les utilisateurs disposant de privilèges administratifs."
-  },
-  "dryer": {
-    "remote": "Télécommande",
-    "cotton": "Coton",
-    "whites": "Blancs",
-    "jeans": "Jeans",
-    "colored": "Sombres & Colorés",
-    "synthetics": "Synthétiques",
-    "shirts": "Chemises",
-    "wool": "Laine",
-    "daily": "Quotidien 59 Min",
-    "everyday": "Chaque Jour 45 Min",
-    "eco": "Économie 30 Min",
-    "refresh": "Rafraîchir",
-    "relax": "Relax",
-    "sport": "Sport",
-    "small": "Petite Charge",
-    "water_tank_full": "Réservoir d'Eau Plein",
-    "need_clean_filter": "Filtre Sale",
-    "door_open": "Porte Ouverte"
   }
 }

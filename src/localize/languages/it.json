@@ -146,25 +146,5 @@
     "user_description": "Se abilitata, gli utenti non amministratori potranno visualizzare la posizione degli altri utenti sulla mappa cliccando sulle loro card. Se disabilitata, le informazioni di localizzazione non saranno visibili agli utenti non admin.",
     "add_button_title": "Mostra bottone aggiungi utente",
     "add_button_description": "Se abilitata, anche gli utenti non amministratori potranno visualizzare il bottone per aggiungere un nuovo utente. Tuttavia, gli utenti non admin non potranno completare l'aggiunta e saranno reindirizzati alla propria pagina profilo. Se disabilitata, il bottone sarà visibile solo agli utenti con privilegi amministrativi."
-  },
-  "dryer": {
-    "remote": "Controllo Remoto",
-    "cotton": "Cotone",
-    "whites": "Bianchi",
-    "jeans": "Jeans",
-    "colored": "Scuri e Colorati",
-    "synthetics": "Sintetici",
-    "shirts": "Camicie",
-    "wool": "Lana",
-    "daily": "Giornaliero 59 Min",
-    "everyday": "Quotidiano 45 Min",
-    "eco": "Risparmio 30 Min",
-    "refresh": "Refresh",
-    "relax": "Relax",
-    "sport": "Sportivi",
-    "small": "Piccolo Carico",
-    "water_tank_full": "Serbatoio Acqua Pieno",
-    "need_clean_filter": "Filtro Sporco",
-    "door_open": "Porta Aperta"
   }
 }
