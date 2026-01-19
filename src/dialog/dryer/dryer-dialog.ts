@@ -17,7 +17,6 @@ import {
   _openRelated,
 } from "../dialog-location";
 import { isOfflineState } from "../../shared/states";
-import { checkDryerHtml, getProgram } from "./candy/candy.mapper";
 
 @customElement("dryer-dialog")
 export class DryerDialog extends LitElement {
@@ -67,7 +66,6 @@ export class DryerDialog extends LitElement {
     //  : localize("common.closed");
     const stateLabel = mapStateValue(mainState);
     const progress = isDeviceTurnOn ? 100 : 0;
-    const program = getProgram(mainState.attributes);
 
     return html`
       <ha-dialog
@@ -176,7 +174,6 @@ export class DryerDialog extends LitElement {
               </svg>
 
               <div class="inner">
-                <div class="label">${program}</div>
                 <ha-icon
                   icon=${icon}
                   style="color: var(--bsc-icon-color); --mdc-icon-size: 40px"
@@ -189,7 +186,6 @@ export class DryerDialog extends LitElement {
           </div>
 
           <div class="menu-section">
-            ${checkDryerHtml(mainState.attributes, theme)}
             ${relatedStates.map((stateObj) => {
               /* If is a Precence Sensor, we do not put number device */
               if (_excludeSensor(stateObj)) return;

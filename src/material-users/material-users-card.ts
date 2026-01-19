@@ -57,7 +57,6 @@ export class MaterialUsersCard extends LitElement {
   private mapTemplate() {
     const isAdmin = this.hass.user.is_admin;
     const text = materialUsersTemplate(isAdmin, this._config);
-    console.log(text);
     return text;
   }
 
