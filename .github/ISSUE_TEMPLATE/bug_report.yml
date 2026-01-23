@@ -1,0 +1,90 @@
+name: "🐛 Bug Report"
+description: "Found a bug? Help us fix it!"
+title: "[BUG]: "
+labels: ["bug"]
+assignees:
+  - "giovannilamarmora"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for taking the time to fill out this report! 🙏
+        Providing detailed information will help us resolve the issue faster.
+
+  - type: textarea
+    id: description
+    attributes:
+      label: "📝 Bug Description"
+      description: "Clearly and concisely describe the problem, what happened, and what you expected to happen. Specify which **component** you are using (e.g., `material-button`)."
+      placeholder: "I noticed that component X shows an incorrect state when..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: "🚶‍♂️ Steps to Reproduce"
+      description: "Describe the exact steps to reproduce the anomalous behavior."
+      value: |
+        1. Go to '...'
+        2. Click on '...'
+        3. Scroll to '...'
+        4. The error '...' is displayed
+    validations:
+      required: true
+
+  - type: textarea
+    id: entity-details
+    attributes:
+      label: "📋 Entity Details (Required)"
+      description: |
+        To help us diagnose the problem, please provide the **full entity data** (state and attributes) from Home Assistant.
+        1. Go to **Developer Tools** > **States**.
+        2. Find the entity used in the card.
+        3. Copy the state and attributes.
+        4. Paste them into the code block below.
+      render: "yaml"
+      placeholder: "Paste your entity data here"
+    validations:
+      required: true
+
+  - type: input
+    id: ha_version
+    attributes:
+      label: "🏠 Home Assistant Version"
+      placeholder: "e.g., 2024.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: component_version
+    attributes:
+      label: "🐙 Component Version"
+      placeholder: "e.g., v2.1.0"
+    validations:
+      required: true
+
+  - type: input
+    id: browser
+    attributes:
+      label: "🌐 Browser and Operating System"
+      placeholder: "e.g., Chrome 119 on Windows 11"
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: "📜 Logs and Errors"
+      description: "Paste any relevant error logs here. You can find them in `Settings` -> `System` -> `Logs`."
+      render: "shell"
+
+  - type: textarea
+    id: screenshots
+    attributes:
+      label: "📸 Screenshots"
+      description: "If useful, add screenshots to better illustrate the problem."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "ℹ️ Additional Context"
+      description: "Add any other useful details. Does the bug only occur on a specific device/browser?"

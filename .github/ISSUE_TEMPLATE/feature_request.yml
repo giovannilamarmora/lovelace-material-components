@@ -1,0 +1,42 @@
+name: "🚀 Feature Request"
+description: "Have an idea to improve the project? Suggest it!"
+title: "[FEATURE]: "
+labels: ["enhancement"]
+assignees:
+  - "giovannilamarmora"
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for your contribution! We appreciate new ideas to improve the project. 🙌
+
+  - type: textarea
+    id: related-problem
+    attributes:
+      label: "🤔 Is your feature request related to a problem?"
+      description: "Describe the limitation or what you find frustrating in the current use."
+      placeholder: "I would like to be able to customize the layout more because..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: solution
+    attributes:
+      label: "✨ Describe the solution you'd like"
+      description: "Clearly explain the new feature or improvement you would like to see. What should it do?"
+      placeholder: "Add an option to change the card's background color."
+    validations:
+      required: true
+
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: "💡 Describe alternatives you've considered"
+      description: "Have you tried alternative solutions or workarounds? Why weren't they ideal?"
+      placeholder: "I tried using another card, but it lacked other necessary features."
+
+  - type: textarea
+    id: context
+    attributes:
+      label: "🖼️ Additional Context"
+      description: "Add any other context, mockups, or screenshots that might help illustrate your idea."
