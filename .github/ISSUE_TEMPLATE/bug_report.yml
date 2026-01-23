@@ -1,7 +1,7 @@
 name: "🐛 Bug Report"
 description: "Found a bug? Help us fix it!"
 title: "[BUG]: "
-labels: ["bug"]
+labels: ["🐛 bug"]
 assignees:
   - "giovannilamarmora"
 body:
