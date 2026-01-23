@@ -119,14 +119,24 @@ export class MaterialClimateCard extends LitElement {
     const name = getName(this._config, this.hass);
     const isOffline = isOfflineState(stateObj.state);
 
+    //const stateDisplay = mapStateDisplay(
+    //  stateObj,
+    //  "thermometer",
+    //  isOffline,
+    //  this._config.fix_temperature,
+    //  false,
+    //  true,
+    //);
+
     const stateDisplay = mapStateDisplay(
       stateObj,
       "thermometer",
       isOffline,
       this._config.fix_temperature,
-      false,
       true,
+      this.hass,
     );
+
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
     const isOn = isDeviceOn(stateObj.state);
     //const isConditioner = isAirConditioning(stateObj.attributes.hvac_modes);

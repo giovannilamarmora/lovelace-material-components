@@ -6,6 +6,7 @@ import * as de from "./languages/de.json";
 import * as pt_BR from "./languages/pt-br.json"; // Brazilian portuguese
 import * as zh_CN from "./languages/zh-cn.json"; // Chinese
 import * as sv from "./languages/sv.json"; // Swedish
+import * as nl from "./languages/nl.json"; // Dutch
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const languages: any = {
@@ -17,6 +18,7 @@ const languages: any = {
   pt_BR: pt_BR,
   zh_CN: zh_CN,
   sv: sv,
+  nl: nl,
 };
 
 export function localize(string: string, search = "", replace = ""): string {

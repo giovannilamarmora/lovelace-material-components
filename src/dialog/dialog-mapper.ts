@@ -1,11 +1,5 @@
 import { localize } from "../localize/localize";
-import { getStateDisplay } from "../shared/mapper";
-import {
-  isDeviceOn,
-  isDeviceOnline,
-  isMotionDevice,
-  isOfflineState,
-} from "../shared/states";
+import { isDeviceOn, isOfflineState } from "../shared/states";
 import { DeviceType, getValidDeviceClass } from "../shared/types";
 
 /**
@@ -27,50 +21,65 @@ export function mapStateTitle(stateObj: any, entity: any) {
  * @param stateObj param to get the inormation of the entity
  * @returns
  */
-export function mapStateValue(stateObj: any) {
-  const device_class = getValidDeviceClass(stateObj.attributes);
-  const isDeviceTurnOn = isDeviceOn(stateObj.state);
-
+export function mapStateValue(stateObj: any, hass?: any) {
+  // Handle offline state
   if (isOfflineState(stateObj.state)) {
     return localize("common.offline");
   }
 
-  switch (device_class) {
-    case DeviceType.BATTERY:
-    case DeviceType.HUMIDITY:
-      return (
-        Number.parseInt(stateObj.state) +
-        (stateObj.attributes.unit_of_measurement ?? "%")
-      );
-    case DeviceType.ILLUMINANCE:
-      return (
-        Number.parseInt(stateObj.state) +
-        " " +
-        (stateObj.attributes.unit_of_measurement ?? "lx")
-      );
-    case DeviceType.DOOR:
-      if (isDeviceTurnOn) return localize("common.open");
-      else return localize("common.closed");
-    case DeviceType.TEMPERATURE:
-      return (
-        stateObj.state + " " + (stateObj.attributes.unit_of_measurement ?? "°")
-      );
-    default:
-      if (isDeviceOnline(stateObj.state))
-        return getStateDisplay(
-          stateObj.state,
-          "",
-          isMotionDevice(device_class)
-        );
-      else {
-        const state = stateObj.state;
-        if (typeof state === "string" && /^[a-zA-Z]/.test(state)) {
-          return state.charAt(0).toUpperCase() + state.slice(1);
-        }
-        return state;
-      }
+  // Use Home Assistant's formatEntityState for all entity formatting and localization
+  // This ensures proper display precision, locale-aware formatting, and native translations
+  if (hass?.formatEntityState) {
+    return hass.formatEntityState(stateObj);
   }
+
+  // Fallback: return raw state if formatEntityState is not available
+  return stateObj.state;
 }
+//export function mapStateValue(stateObj: any) {
+//  const device_class = getValidDeviceClass(stateObj.attributes);
+//  const isDeviceTurnOn = isDeviceOn(stateObj.state);
+//
+//  if (isOfflineState(stateObj.state)) {
+//    return localize("common.offline");
+//  }
+//
+//  switch (device_class) {
+//    case DeviceType.BATTERY:
+//    case DeviceType.HUMIDITY:
+//      return (
+//        Number.parseInt(stateObj.state) +
+//        (stateObj.attributes.unit_of_measurement ?? "%")
+//      );
+//    case DeviceType.ILLUMINANCE:
+//      return (
+//        Number.parseInt(stateObj.state) +
+//        " " +
+//        (stateObj.attributes.unit_of_measurement ?? "lx")
+//      );
+//    case DeviceType.DOOR:
+//      if (isDeviceTurnOn) return localize("common.open");
+//      else return localize("common.closed");
+//    case DeviceType.TEMPERATURE:
+//      return (
+//        stateObj.state + " " + (stateObj.attributes.unit_of_measurement ?? "°")
+//      );
+//    default:
+//      if (isDeviceOnline(stateObj.state))
+//        return getStateDisplay(
+//          stateObj.state,
+//          "",
+//          isMotionDevice(device_class)
+//        );
+//      else {
+//        const state = stateObj.state;
+//        if (typeof state === "string" && /^[a-zA-Z]/.test(state)) {
+//          return state.charAt(0).toUpperCase() + state.slice(1);
+//        }
+//        return state;
+//      }
+//  }
+//}
 
 export function isDeviceStateOn(stateObj: any) {
   const device_class = getValidDeviceClass(stateObj.attributes);

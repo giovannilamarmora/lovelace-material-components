@@ -89,13 +89,6 @@ export enum LabelType {
 }
 
 /**
- * Enum representing supported brand label classes (as defined by the user).
- */
-export enum BrandLabelType {
-  CANDY = "candy",
-}
-
-/**
  * Type guard that checks if a given string corresponds
  * to a valid DeviceType enum value.
  *
@@ -129,7 +122,7 @@ function isDeviceType(value: string): value is DeviceType {
  * ```
  */
 export function getValidDeviceClass(
-  attributes: Record<string, any>
+  attributes: Record<string, any>,
 ): DeviceType | undefined {
   const deviceClass = attributes.device_class;
   const stateClass = attributes.state_class;

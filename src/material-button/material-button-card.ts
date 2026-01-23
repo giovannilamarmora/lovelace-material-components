@@ -13,13 +13,8 @@ import { material_color } from "../shared/color";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import { setColorCard } from "./material-button-mapper";
 import { MaterialMediaOverlay } from "../material-media-overlay/material-media-overlay";
-import {
-  ControlType,
-  DeviceType,
-  getValidDeviceClass,
-  LabelType,
-} from "../shared/types";
-import { isDeviceOn, isMotionDevice, isOfflineState } from "../shared/states";
+import { ControlType, DeviceType, getValidDeviceClass } from "../shared/types";
+import { isDeviceOn, isOfflineState } from "../shared/states";
 import { _openDialog } from "../dialog/dialog-manager";
 import { evaluateAction, handleAction } from "../shared/actions";
 
@@ -50,7 +45,7 @@ export class MaterialButtonCard extends LitElement {
 
   public static getStubConfig(
     _hass: HomeAssistant,
-    entities: string[]
+    entities: string[],
   ): Partial<MaterialButtonCardConfig> {
     const switcher = entities
       .filter((entity) => entity.split(".")[0] === "switch")
@@ -143,15 +138,6 @@ export class MaterialButtonCard extends LitElement {
             return _openDialog(this, "sensor-dialog", this.hass, this._config);
         }
 
-        const entityObj = this.hass.entities[this._config.entity!];
-        const labels = entityObj.labels;
-        if (
-          !isNullOrEmpty(labels) &&
-          (labels.includes(LabelType.ASCIUGATRICE) ||
-            labels.includes(LabelType.DRYER))
-        )
-          return _openDialog(this, "dryer-dialog", this.hass, this._config);
-
         if (
           domain === "media_player" ||
           controlType == ControlType.MEDIA_PLAYER
@@ -173,13 +159,13 @@ export class MaterialButtonCard extends LitElement {
         this._config.tap_action,
         this.hass.states[entityId!],
         this.hass.states[entityId!]?.state,
-        this.hass
+        this.hass,
       );
       handleAction(
         this,
         this.hass as any,
         isNullOrEmpty(entityId) ? {} : { entity: entityId },
-        evaluatedTap
+        evaluatedTap,
       );
       return;
     }
@@ -395,7 +381,7 @@ export class MaterialButtonCard extends LitElement {
         entityId ? { entity: entityId } : {},
         {
           action: holdAction,
-        }
+        },
       );
       return;
     }
@@ -405,20 +391,20 @@ export class MaterialButtonCard extends LitElement {
       holdAction,
       entityId ? this.hass.states[entityId] : undefined,
       entityId ? this.hass.states[entityId]?.state : undefined,
-      this.hass
+      this.hass,
     );
 
     handleAction(
       this,
       this.hass as any,
       entityId ? { entity: entityId } : {},
-      evaluatedHold
+      evaluatedHold,
     );
   }
 
   _openMediaOverlay() {
     const overlay = document.createElement(
-      "material-media-overlay"
+      "material-media-overlay",
     ) as MaterialMediaOverlay;
 
     overlay.hass = this.hass;
@@ -500,7 +486,8 @@ export class MaterialButtonCard extends LitElement {
               this._config.control_type!,
               isOffline,
               this._config.fix_temperature,
-              isMotionDevice(device_class)
+              false,
+              this.hass,
             )
           : "";
     } else {

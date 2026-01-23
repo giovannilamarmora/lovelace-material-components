@@ -1,0 +1,150 @@
+{
+  "common": {
+    "version": "Versie",
+    "invalid_configuration": "Ongeldige configuratie",
+    "show_warning": "Waarschuwing tonen",
+    "no_entity_set": "Geen entiteit ingesteld",
+    "no_entity": "Entiteit niet beschikbaar",
+    "indoor": "Binnen",
+    "on": "Aan",
+    "off": "Uit",
+    "offline": "Offline",
+    "auto": "Auto",
+    "eco": "Eco",
+    "heat": "Verwarmen",
+    "cool": "Koelen",
+    "dry": "Ontvochtigen",
+    "fan": "Ventilator",
+    "playing": "Wordt afgespeeld",
+    "paused": "Gepauzeerd",
+    "idle": "Casten",
+    "presence": "Beweging",
+    "off_presence": "Geen beweging",
+    "today_at": "Vandaag om",
+    "yesterday_at": "Gisteren om",
+    "open": "Open",
+    "closed": "Gesloten",
+    "opening": "Wordt geopend",
+    "closing": "Wordt gesloten",
+    "active": "Actief",
+    "inactive": "Inactief",
+    "info_device": "Apparaatinformatie",
+    "related": "Gerelateerde integratie",
+    "hidden": "Verbergen"
+  },
+  "actions": {
+    "automatic_action": "Automatische acties inschakelen",
+    "tap_action_title": "Actie bij tikken",
+    "hold_action_title": "Actie bij vasthouden",
+    "double_tap_action_title": "Actie bij dubbel tikken",
+    "toggle": "Enkele klik (Aan/Uit)",
+    "more_info": "Entiteitsinformatie tonen",
+    "navigate": "Naar een pagina navigeren",
+    "call_service": "Service uitvoeren",
+    "fire_dom": "DOM-event activeren",
+    "assist": "Spraakassistent activeren",
+    "url": "Link of website openen",
+    "none": "Geen actie",
+    "google_home": "Google Home openen",
+    "settings": "Instellingen openen",
+    "select_option": "Optie selecteren",
+    "warning": "⚠️ Geavanceerde acties (JS, [[[]]], complexe service-calls) moeten via YAML worden geconfigureerd."
+  },
+  "material_dashboard_card": {
+    "description": "Configureer het navigatiepad wanneer op een kaart wordt getikt.",
+    "cameras": "Camera-pad",
+    "cameras_name": "Camera’s",
+    "lighting": "Verlichtingspad",
+    "lighting_name": "Verlichting",
+    "lighting_label": "Lampen",
+    "wifi": "Wi-Fi-pad",
+    "wifi_name": "Wi-Fi",
+    "climate": "Klimaatpad",
+    "climate_name": "Klimaat",
+    "device": "Apparaat",
+    "devices": "Apparaten",
+    "placeholder": "./pad-of-url"
+  },
+  "material_climate_card": {
+    "name": "Entiteitsnaam",
+    "entity": "Entiteit",
+    "theme": "Material Expressive gebruiken",
+    "increase_temp": "Temperatuur verhogen (bijv. 0.5)",
+    "decrease_temp": "Temperatuur verlagen (bijv. 0.5)",
+    "dual_icon": {
+      "default": "Standaardpictogram gebruiken",
+      "options": "Dubbel pictogram gebruiken (Aan- en Uit-status)."
+    },
+    "fix_temperature": "Inschakelen als de temperatuur niet correct is",
+    "false": "Niet actief",
+    "true": "Actief",
+    "auto": "Auto"
+  },
+  "material_button_card": {
+    "name": "Entiteitsnaam",
+    "control_type": "Type bediening",
+    "type": {
+      "generic": "Algemeen (Schakelaar, Knop...)",
+      "thermometer": "Thermometer, Ventilatie...",
+      "automation": "Automatisering",
+      "scene": "Scène",
+      "media": "Multimedia (Google, Alexa...)",
+      "state": "Status",
+      "action": "Actie",
+      "app_version": "Versie van Material Components"
+    },
+    "dual_icon": {
+      "default": "Standaardpictogram gebruiken",
+      "options": "Dubbel pictogram gebruiken (Element Aan en Element Uit)."
+    },
+    "dual_text": {
+      "default": "Standaardtekst gebruiken",
+      "text_on": "Tekst Aan",
+      "text_off": "Tekst Uit"
+    }
+  },
+  "material_control_card": {
+    "name": "Kaartnaam",
+    "entity_card": "Kaart als entiteit gebruiken",
+    "entity": "Entiteit",
+    "dual_icon": {
+      "default": "Standaardpictogram gebruiken",
+      "options": "Dubbel pictogram gebruiken (Aan- en Uit-status)."
+    }
+  },
+  "material_slider_card": {
+    "name": "Kaartnaam",
+    "control_type": "Type bediening",
+    "type": {
+      "light": "Licht",
+      "cover": "Afdekking"
+    },
+    "entity": "Te bedienen entiteit",
+    "icon": "Aangepast pictogram (indien leeg, verandert automatisch op basis van Aan/Uit-status)",
+    "percentage": "Waarde als percentage weergeven",
+    "bold_text": "Vette tekststijl"
+  },
+  "material_lights_card": {
+    "on_text": "Tekst voor Lampen AAN",
+    "off_text": "Tekst voor Lampen UIT",
+    "control_area": "Een specifiek gebied bedienen",
+    "area_id": "Te bedienen gebied"
+  },
+  "material_media_overlay": {
+    "media_card": {
+      "no_content": "Er wordt niets afgespeeld",
+      "playing": "Nu aan het afspelen"
+    },
+    "remote": "Afstandsbediening openen",
+    "cast": "Scherm casten",
+    "stop_cast": "Casten stoppen",
+    "open": "Openen ",
+    "open_google": "Google Home openen"
+  },
+  "material_users_card": {
+    "user_title": "Gebruikerslocatie op de kaart tonen",
+    "user_description": "Indien ingeschakeld kunnen niet-beheerdergebruikers de locatie van andere gebruikers op de kaart zien door op hun kaarten te klikken. Indien uitgeschakeld is locatie-informatie niet zichtbaar voor niet-beheerders.",
+    "add_button_title": "Knop ‘gebruiker toevoegen’ tonen",
+    "add_button_description": "Indien ingeschakeld kunnen niet-beheerdergebruikers ook de knop zien om een nieuwe gebruiker toe te voegen. Zij kunnen de toevoeging echter niet voltooien en worden doorgestuurd naar hun eigen profielpagina. Indien uitgeschakeld is de knop alleen zichtbaar voor gebruikers met beheerdersrechten."
+  }
+}

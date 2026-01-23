@@ -1,4 +1,4 @@
-import { ControlType, DeviceType } from "./types";
+import { ControlType } from "./types";
 
 /**
  * Enum defining all possible **"on" states** for supported device domains.
@@ -129,7 +129,7 @@ export function isDeviceOnline(state: string): boolean {
  */
 export function isOfflineState(
   state: string,
-  control_type: string = ""
+  control_type: string = "",
 ): boolean {
   const stateNum = Number.parseInt(state);
 
@@ -154,14 +154,5 @@ export function isOfflineState(
   // Case 4: explicitly offline/unavailable
   return (
     state.toLowerCase() === "offline" || state.toLowerCase() === "unavailable"
-  );
-}
-
-export function isMotionDevice(device_class: DeviceType | undefined) {
-  if (device_class == undefined) return false;
-  return (
-    device_class == DeviceType.MOTION ||
-    device_class == DeviceType.PRESENCE ||
-    device_class == DeviceType.OCCUPANCY
   );
 }
