@@ -1,4 +1,8 @@
-# 🏠 Material Home Component for Home Assistant
+<div align="center">
+  <img src="./src/shared/assets/img/Logo/Logo.png" width="250px" alt="Material Home Assistant Logo">
+  <h1>🏠 Material Home Assistant</h1>
+  <h3 style="margin-top: -20px">✨Components for Home Assistant</h3>
+</div>
 
 [![Buy me a coffee](https://img.buymeacoffee.com/button-api/?text=Buy%20me%20a%20coffee&emoji=%E2%98%95&slug=giovannilamarmora&button_colour=5F7FFF&font_colour=ffffff&font_family=Poppins&outline_colour=000000&coffee_colour=FFDD00)](https://www.buymeacoffee.com/giovannilamarmora)
 
