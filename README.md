@@ -1,5 +1,5 @@
 <div align="center">
-  <img src="./src/shared/assets/img/Logo/Logo.png" width="250px" alt="Material Home Assistant Logo">
+  <img src="https://raw.githubusercontent.com/giovannilamarmora/lovelace-material-components/refs/heads/master/src/shared/assets/img/Logo/Logo.png" width="250px" alt="Material Home Assistant Logo">
   <h1>🏠 Material Home Assistant</h1>
   <h3 style="margin-top: -20px">✨Components for Home Assistant</h3>
 </div>
