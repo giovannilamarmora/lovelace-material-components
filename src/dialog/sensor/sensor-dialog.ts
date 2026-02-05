@@ -115,9 +115,9 @@ export class SensorDialog extends LitElement {
               ></ha-icon>
             </ha-icon-button>-->
             <!-- Menu dropdown -->
-            <ha-button-menu
-              corner="BOTTOM_END"
-              menu-corner="END"
+            <ha-dropdown
+              placement="bottom-end"
+              size="medium"
               fixed
               @click=${(e: Event) => e.stopPropagation()}
               @opened=${() => (this._menuOpen = true)}
@@ -131,8 +131,7 @@ export class SensorDialog extends LitElement {
                 ></ha-icon
               ></ha-icon-button>
 
-              <ha-list-item
-                mwc-list-item
+              <ha-dropdown-item
                 @click=${() =>
                   _openDeviceInformation(this, this.config, this.hass)}
               >
@@ -141,16 +140,15 @@ export class SensorDialog extends LitElement {
                   style="padding-right: 10px;"
                 ></ha-icon>
                 ${localize("common.info_device")}
-              </ha-list-item>
+              </ha-dropdown-item>
 
-              <ha-list-item
-                mwc-list-item
+              <ha-dropdown-item
                 @click=${() => _openRelated(this, this.config, this.hass)}
               >
                 <ha-icon icon="m3r:info" style="padding-right: 10px;"></ha-icon>
                 ${localize("common.related")}
-              </ha-list-item>
-            </ha-button-menu>
+              </ha-dropdown-item>
+            </ha-dropdown>
           </div>
         </div>
 
@@ -227,7 +225,7 @@ export class SensorDialog extends LitElement {
     const path = e.composedPath();
     const contentClicked =
       path.includes(
-        dialog.shadowRoot!.querySelector(".mdc-dialog__container")!
+        dialog.shadowRoot!.querySelector(".mdc-dialog__container")!,
       ) || path.includes(this.shadowRoot!.querySelector(".content")!);
 
     if (contentClicked) return;
