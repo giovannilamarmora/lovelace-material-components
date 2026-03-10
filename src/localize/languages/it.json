@@ -86,7 +86,7 @@
     "type": {
       "generic": "Generico (Interruttore, Pulsante...)",
       "thermometer": "Climatizzazione, Ventilazione...",
-      "automation": "Autonomazioni",
+      "automation": "Automazioni",
       "scene": "Scene",
       "media": "Multimedia (Google, Alexa...)",
       "state": "Stato",

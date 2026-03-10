@@ -74,82 +74,90 @@ export class SensorDialog extends LitElement {
     const stateLabel = mapStateValue(mainState);
 
     return html`
-      <ha-dialog
+      <ha-adaptive-dialog
         .open=${this.open}
-        scrimClickAction=""
-        escapeKeyAction="close"
-        hideActions
-        @click=${this._handleDialogClick}
+        .hass=${this.hass}
+        flexcontent
+        @closed=${() => _onClose(this)}
       >
-        <div class="header" @click=${() => _handleMaxWidth(this)}>
-          <div class="header-left">
-            <ha-icon-button @click=${() => _onClose(this)} class="close-btn">
-              <ha-icon
-                icon="m3rf:close"
-                style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
-                title="Close"
-              ></ha-icon>
-            </ha-icon-button>
+        <!-- Navigation Icon (Close Button) -->
+        <ha-icon-button
+          slot="headerNavigationIcon"
+          data-dialog="close"
+          class="close-btn"
+        >
+          <ha-icon
+            icon="m3rf:close"
+            style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
+            title="Close"
+          ></ha-icon>
+        </ha-icon-button>
 
-            <div class="header-title">
-              ${area ? html`<p class="breadcrumb">${area}</p>` : html``}
-              <p class="main-title">${friendlyName}</p>
-            </div>
-          </div>
-          <div class="header-right">
-            <ha-icon-button
-              @click=${() => _moreInfo(this, this.config, this.hass)}
-              class="settings-btn"
-            >
-              <ha-icon
-                icon="m3r:insert-chart"
-                style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
-                title="History"
-              ></ha-icon>
-            </ha-icon-button>
-            <!--<ha-icon-button @click="" class="settings-btn">
+        <!-- Header Title -->
+        <div
+          slot="headerTitle"
+          class="header-title"
+          style="${area
+            ? "height: 40px;"
+            : "height: 100%; justify-content: center;"} flex: 1;"
+          @click=${() => _handleMaxWidth(this)}
+        >
+          ${area ? html`<p class="breadcrumb">${area}</p>` : html``}
+          <p class="main-title ellipsis">${friendlyName}</p>
+        </div>
+        <div slot="headerActionItems" class="header-right">
+          <ha-icon-button
+            @click=${() => _moreInfo(this, this.config, this.hass)}
+            class="settings-btn"
+          >
+            <ha-icon
+              icon="m3r:insert-chart"
+              style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
+              title="History"
+            ></ha-icon>
+          </ha-icon-button>
+          <!--<ha-icon-button @click="" class="settings-btn">
               <ha-icon
                 icon="m3r:settings"
                 style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
                 title="Settings"
               ></ha-icon>
             </ha-icon-button>-->
-            <!-- Menu dropdown -->
-            <ha-dropdown
-              placement="bottom-end"
-              size="medium"
-              fixed
-              @click=${(e: Event) => e.stopPropagation()}
-              @opened=${() => (this._menuOpen = true)}
-              @closed=${() => (this._menuOpen = false)}
+          <!-- Menu dropdown -->
+          <ha-dropdown
+            placement="bottom-end"
+            size="medium"
+            fixed
+            @click=${(e: Event) => e.stopPropagation()}
+            @opened=${() => (this._menuOpen = true)}
+            @closed=${() => (this._menuOpen = false)}
+          >
+            <ha-icon-button slot="trigger"
+              ><ha-icon
+                icon="mdi:dots-vertical"
+                style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
+                title="Menu"
+              ></ha-icon
+            ></ha-icon-button>
+
+            <ha-dropdown-item
+              @click=${() =>
+                _openDeviceInformation(this, this.config, this.hass)}
             >
-              <ha-icon-button slot="trigger"
-                ><ha-icon
-                  icon="mdi:dots-vertical"
-                  style="color: var(--bsc-icon-color); justify-content: center; align-items: center; display: flex;"
-                  title="Menu"
-                ></ha-icon
-              ></ha-icon-button>
+              <ha-icon
+                icon="mdi:devices"
+                style="padding-right: 10px;"
+              ></ha-icon>
+              ${localize("common.info_device")}
+            </ha-dropdown-item>
 
-              <ha-dropdown-item
-                @click=${() =>
-                  _openDeviceInformation(this, this.config, this.hass)}
-              >
-                <ha-icon
-                  icon="mdi:devices"
-                  style="padding-right: 10px;"
-                ></ha-icon>
-                ${localize("common.info_device")}
-              </ha-dropdown-item>
-
-              <ha-dropdown-item
-                @click=${() => _openRelated(this, this.config, this.hass)}
-              >
-                <ha-icon icon="m3r:info" style="padding-right: 10px;"></ha-icon>
-                ${localize("common.related")}
-              </ha-dropdown-item>
-            </ha-dropdown>
-          </div>
+            <ha-dropdown-item
+              @click=${() => _openRelated(this, this.config, this.hass)}
+            >
+              <ha-icon icon="m3r:info" style="padding-right: 10px;"></ha-icon>
+              ${localize("common.related")}
+            </ha-dropdown-item>
+          </ha-dropdown>
         </div>
 
         <!-- Contenuto -->
@@ -203,38 +211,16 @@ export class SensorDialog extends LitElement {
             })}
           </div>
         </div>
-      </ha-dialog>
+      </ha-adaptive-dialog>
     `;
   }
 
   private _menuOpen = false;
 
-  /**
-   * Prevent Cick outside the dialog to be close
-   * @returns
-   */
-  private _handleDialogClick(e: MouseEvent) {
-    // Se il menu è aperto → ignora il click (non chiudere)
-    if (this._menuOpen) return;
-
-    // Recupera il dialog
-    const dialog = this.shadowRoot?.querySelector("ha-dialog");
-    if (!dialog) return;
-
-    // Se clicchi dentro il contenuto del dialog → non chiudere
-    const path = e.composedPath();
-    const contentClicked =
-      path.includes(
-        dialog.shadowRoot!.querySelector(".mdc-dialog__container")!,
-      ) || path.includes(this.shadowRoot!.querySelector(".content")!);
-
-    if (contentClicked) return;
-
-    // Se sei arrivato qui, hai cliccato davvero fuori
-    _onClose(this);
-  }
-
   static styles = css`
+    :host {
+      font-family: var(--primary-font-family);
+    }
     ha-dialog {
       --mdc-dialog-min-width: 580px;
       --mdc-dialog-max-width: 580px;
@@ -295,7 +281,11 @@ export class SensorDialog extends LitElement {
     }
 
     .header-title {
-      margin-top: 2px;
+      /*margin-top: 1px;*/
+      display: flex;
+      flex-direction: column;
+      /*justify-content: center;
+    height: 100%;*/
     }
 
     .ellipsis {
@@ -308,12 +298,14 @@ export class SensorDialog extends LitElement {
       font-size: 12px;
       color: var(--secondary-text-color, #888);
       margin: 0;
+      line-height: 1.2;
     }
 
     .main-title {
       font-weight: 500;
       font-size: 18px;
       margin: 0;
+      line-height: 1.2;
     }
 
     .content {

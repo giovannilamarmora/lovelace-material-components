@@ -86,7 +86,7 @@
     "type": {
       "generic": "Generic (Switch, Button...)",
       "thermometer": "Thermometer, Ventilation...",
-      "automation": "Autonomation",
+      "automation": "Automation",
       "scene": "Scene",
       "media": "Multimedia (Google, Alexa...)",
       "state": "State",
