@@ -29,7 +29,7 @@ export class MaterialMenuCardEditor
     this.dispatchEvent(
       new CustomEvent("config-changed", {
         detail: { config: this._config },
-      })
+      }),
     );
   }
 
@@ -74,7 +74,7 @@ export class MaterialMenuCardEditor
         </h4>
         ${this._renderActionSection(
           "double_tap_action",
-          this._config.double_tap_action
+          this._config.double_tap_action,
         )}
       </div>
     `;
@@ -82,17 +82,17 @@ export class MaterialMenuCardEditor
 
   private _renderActionSection(
     type: "tap_action" | "hold_action" | "double_tap_action",
-    action: ActionConfig | undefined
+    action: ActionConfig | undefined,
   ) {
     return this._renderActionEditor(action, (key, value) =>
-      this._actionChanged(type, key, value)
+      this._actionChanged(type, key, value),
     );
   }
 
   private _actionChanged(
     type: "tap_action" | "hold_action" | "double_tap_action",
     key: string,
-    value: any
+    value: any,
   ) {
     if (!this._configLoaded) return;
     const action: Record<string, any> = { ...(this._config[type] || {}) };
@@ -104,47 +104,59 @@ export class MaterialMenuCardEditor
 
   private _renderActionEditor(
     action: ActionConfig | undefined,
-    onChange: (key: string, value: any) => void
+    onChange: (key: string, value: any) => void,
   ) {
     const currentAction = (action as any)?.action ?? "none";
 
+    const actions = [
+      {
+        value: "toggle",
+        label: localize("actions.toggle"),
+      },
+      {
+        value: "more-info",
+        label: localize("actions.more_info"),
+      },
+      {
+        value: "navigate",
+        label: localize("actions.navigate"),
+      },
+      {
+        value: "url",
+        label: localize("actions.url"),
+      },
+      {
+        value: "none",
+        label: localize("actions.none"),
+      },
+      {
+        value: "google-home",
+        label: localize("actions.google_home"),
+      },
+      {
+        value: "settings",
+        label: localize("actions.settings"),
+      },
+    ];
+
     return html`
-      <ha-select
+      <ha-selector
+        .hass=${this.hass}
         label=${localize("actions.select_option")}
+        .selector=${{
+          select: {
+            options: actions,
+            mode: "dropdown",
+          },
+        }}
         .value=${currentAction}
-        @selected=${(e: CustomEvent) =>
-          onChange("action", (e.target as HTMLInputElement).value)}
-        @closed=${(ev: Event) => ev.stopPropagation()}
+        @value-changed=${(e: CustomEvent) => {
+          // CORRETTO: usa e.detail.value
+          const newAction = e.detail.value;
+          onChange("action", newAction);
+        }}
       >
-        <mwc-list-item value="toggle">
-          ${localize("actions.toggle")}
-        </mwc-list-item>
-        <mwc-list-item value="more-info">
-          ${localize("actions.more_info")}
-        </mwc-list-item>
-        <mwc-list-item value="none">
-          ${localize("actions.none")}
-        </mwc-list-item>
-        <mwc-list-item value="navigate">
-          ${localize("actions.navigate")}
-        </mwc-list-item>
-        <mwc-list-item value="url"> ${localize("actions.url")} </mwc-list-item>
-        <!--<mwc-list-item value="call-service">
-          ${localize("actions.call_service")}
-        </mwc-list-item>
-        <mwc-list-item value="assist">
-          ${localize("actions.assist")}
-        </mwc-list-item>
-        <mwc-list-item value="fire-dom-event">
-          ${localize("actions.fire_dom")}
-        </mwc-list-item>-->
-        <mwc-list-item value="google-home">
-          ${localize("actions.google_home")}
-        </mwc-list-item>
-        <mwc-list-item value="settings">
-          ${localize("actions.settings")}
-        </mwc-list-item>
-      </ha-select>
+      </ha-selector>
 
       ${this._renderActionFields(currentAction, action, onChange)}
     `;
@@ -153,7 +165,7 @@ export class MaterialMenuCardEditor
   private _renderActionFields(
     actionType: string,
     action: ActionConfig | undefined,
-    onChange: (key: string, value: any) => void
+    onChange: (key: string, value: any) => void,
   ) {
     //const act = action as Record<string, any>;
 

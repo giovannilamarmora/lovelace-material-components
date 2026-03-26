@@ -37,6 +37,21 @@ export class MaterialClimateCardEditor
     this._config.use_default_icon = this._config.use_default_icon ?? true;
     this._config.use_material_color = this._config.use_material_color ?? true;
 
+    const fixTemperatureOptions = [
+      {
+        value: "false",
+        label: localize("material_climate_card.false"),
+      },
+      {
+        value: "true",
+        label: localize("material_climate_card.true"),
+      },
+      {
+        value: "auto",
+        label: localize("material_climate_card.auto"),
+      },
+    ];
+
     return html`
       <div class="form">
         <ha-textfield
@@ -119,23 +134,20 @@ export class MaterialClimateCardEditor
           />
         </div>-->
 
-        <ha-select
+        <ha-selector
+          .hass=${this.hass}
           label="${localize("material_climate_card.fix_temperature")}"
+          .selector=${{
+            select: {
+              options: fixTemperatureOptions,
+              mode: "dropdown", // o "list" se preferisci i bottoni
+            },
+          }}
           .value=${this._config.fix_temperature ?? "false"}
           configValue="fix_temperature"
-          @selected=${(ev: Event) => _valueChanged(ev, this)}
-          @closed=${(ev: Event) => ev.stopPropagation()}
+          @value-changed=${(ev: CustomEvent) => _valueChanged(ev, this)}
         >
-          <mwc-list-item value="false">
-            ${localize("material_climate_card.false")}
-          </mwc-list-item>
-          <mwc-list-item value="true">
-            ${localize("material_climate_card.true")}
-          </mwc-list-item>
-          <mwc-list-item value="auto">
-            ${localize("material_climate_card.auto")}
-          </mwc-list-item>
-        </ha-select>
+        </ha-selector>
       </div>
     `;
   }

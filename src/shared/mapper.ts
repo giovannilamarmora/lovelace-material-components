@@ -23,6 +23,7 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
   const useDefault = config.use_default_icon ?? true;
   const idDeviceTurnOn = isDeviceOn(state);
 
+  // --- 1. PRIORITÀ: CARD CONFIG (Template o Icone manuali) ---
   //TODO: Modifica con mapJSFunction
   // 🟢 Supporto template stile [[[ ... ]]]
   if (
@@ -55,6 +56,16 @@ export function getIcon(stateObj: any, config: any, hass: any): string {
       return config.icon || `mdi:${domain}`;
     }
   }
+
+  // --- 2. PRIORITÀ: ENTITY REGISTRY ICON ---
+  // (L'icona impostata dall'utente nelle impostazioni di HA)
+  const entityRegistryIcon = hass?.entities?.[stateObj?.entity_id]?.icon;
+  if (entityRegistryIcon) return entityRegistryIcon;
+
+  // --- 3. PRIORITÀ: STATE ATTRIBUTES ICON ---
+  // (L'icona fornita dall'integrazione stessa)
+  const stateAttributesIcon = stateObj?.attributes?.icon;
+  if (stateAttributesIcon) return stateAttributesIcon;
 
   // Se use_default_icon è true, prosegui con la logica predefinita
   const deviceOnline = !isOfflineState(state, controlType);

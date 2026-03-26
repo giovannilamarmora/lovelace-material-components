@@ -46,22 +46,33 @@ export class MaterialSliderCardEditor
       return html``;
     }
 
+    const control_type = [
+      {
+        value: "light",
+        label: localize("material_slider_card.type.light"),
+      },
+      {
+        value: "cover",
+        label: localize("material_slider_card.type.cover"),
+      },
+    ];
+
     return html`
       <div class="form">
-        <ha-select
+        <ha-selector
+          .hass=${this.hass}
           label="${localize("material_slider_card.control_type")}"
-          .value=${this._config.control_type ?? "light"}
+          .selector=${{
+            select: {
+              options: control_type,
+              mode: "dropdown",
+            },
+          }}
           configValue="control_type"
-          @selected=${(ev: Event) => _valueChanged(ev, this)}
-          @closed=${(ev: Event) => ev.stopPropagation()}
+          .value=${this._config.control_type ?? "light"}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
         >
-          <mwc-list-item value="light">
-            ${localize("material_slider_card.type.light")}
-          </mwc-list-item>
-          <mwc-list-item value="cover">
-            ${localize("material_slider_card.type.cover")}
-          </mwc-list-item>
-        </ha-select>
+        </ha-selector>
 
         <ha-textfield
           label="${localize("material_slider_card.name")}"

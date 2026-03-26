@@ -13,7 +13,7 @@ import {
   MaterialButtonCardConfig,
 } from "./material-button-const";
 import { ControlType } from "../shared/types";
-import { _entityChanged } from "../shared/ha-editor";
+import { _entityChanged, _valueChanged } from "../shared/ha-editor";
 
 @customElement("material-button-card-editor")
 export class MaterialButtonCardEditor
@@ -57,7 +57,7 @@ export class MaterialButtonCardEditor
     }
 
     this.dispatchEvent(
-      new CustomEvent("config-changed", { detail: { config: newConfig } })
+      new CustomEvent("config-changed", { detail: { config: newConfig } }),
     );
   }
 
@@ -67,9 +67,20 @@ export class MaterialButtonCardEditor
     return typeof a === "string" ? a : (a.action ?? "toggle");
   }
 
-  private _setAction(which: "tap_action" | "hold_action", action: string) {
-    if (!this._configLoaded) return;
+  private _onTapSelected(ev: CustomEvent): void {
+    if (!this._config || !this.hass) return;
 
+    // CORREZIONE: Estrai il valore da ev.detail.value
+    const value = ev.detail.value;
+
+    // Evita aggiornamenti se il valore è identico
+    const currentValue = this._getActionValue(this._config.tap_action);
+    if (value === currentValue) return;
+
+    this._setAction("tap_action", value);
+  }
+
+  private _setAction(which: "tap_action" | "hold_action", action: string) {
     const defaults: Record<string, any> = {
       toggle: { action: "toggle" },
       "more-info": { action: "more-info" },
@@ -77,30 +88,47 @@ export class MaterialButtonCardEditor
       url: { action: "url", url_path: "" },
       none: { action: "none" },
     };
-    const next = defaults[action] || { action };
 
-    this._config = { ...this._config, [which]: next };
+    const actionConfig = defaults[action] || { action };
+
+    // Crea una nuova copia dell'oggetto config
+    const newConfig = {
+      ...this._config,
+      [which]: actionConfig,
+    };
+
+    // Dispatch dell'evento per notificare l'editor di HA
     this.dispatchEvent(
-      new CustomEvent("config-changed", { detail: { config: this._config } })
+      new CustomEvent("config-changed", {
+        detail: { config: newConfig },
+      }),
     );
+
+    // Importante: aggiorna anche il riferimento locale se Lit non lo fa automaticamente
+    this._config = newConfig;
   }
 
-  private _onTapSelected = (ev: CustomEvent) => {
-    const value = (ev.target as any).value as string;
-    if (value == this._config.tap_action?.action) return;
-    this._setAction("tap_action", value);
-  };
+  private _onHoldSelected = (ev: CustomEvent): void => {
+    if (!this._config) return;
 
-  private _onHoldSelected = (ev: CustomEvent) => {
-    const value = (ev.target as any).value as string;
-    if (value == this._config.hold_action?.action) return;
+    // 1. Estrai il valore da ev.detail.value (standard per ha-selector)
+    const value = ev.detail.value;
+
+    // 2. Recupera il valore attuale pulito (stringa) per il confronto
+    // Usiamo lo stesso helper _getActionValue per coerenza
+    const currentValue = this._getActionValue(this._config.hold_action);
+
+    // 3. Se il valore non è cambiato, interrompi per evitare loop o render inutili
+    if (value === currentValue) return;
+
+    // 4. Applica la modifica
     this._setAction("hold_action", value);
   };
 
   private _setActionValue(
     which: "tap_action" | "hold_action",
     key: string,
-    value: any
+    value: any,
   ) {
     let action = this._config[which];
 
@@ -112,7 +140,7 @@ export class MaterialButtonCardEditor
 
     this._config = { ...this._config, [which]: updated };
     this.dispatchEvent(
-      new CustomEvent("config-changed", { detail: { config: this._config } })
+      new CustomEvent("config-changed", { detail: { config: this._config } }),
     );
   }
 
@@ -156,40 +184,96 @@ export class MaterialButtonCardEditor
     this._config.use_default_toggle = this._config.use_default_toggle ?? true;
     this._config.use_default_text = this._config.use_default_text ?? true;
 
+    const controlTypeOptions = [
+      {
+        value: "generic",
+        label: localize("material_button_card.type.generic"),
+      },
+      {
+        value: "thermometer",
+        label: localize("material_button_card.type.thermometer"),
+      },
+      {
+        value: "automation",
+        label: localize("material_button_card.type.automation"),
+      },
+      {
+        value: "scene",
+        label: localize("material_button_card.type.scene"),
+      },
+      {
+        value: "media_player",
+        label: localize("material_button_card.type.media"),
+      },
+      {
+        value: "state",
+        label: localize("material_button_card.type.state"),
+      },
+      {
+        value: "action",
+        label: localize("material_button_card.type.action"),
+      },
+      {
+        value: "app_version",
+        label: localize("material_button_card.type.app_version"),
+      },
+    ];
+
+    const fixTemperatureOptions = [
+      {
+        value: "false",
+        label: localize("material_climate_card.false"),
+      },
+      {
+        value: "true",
+        label: localize("material_climate_card.true"),
+      },
+      {
+        value: "auto",
+        label: localize("material_climate_card.auto"),
+      },
+    ];
+
+    const actions = [
+      {
+        value: "toggle",
+        label: localize("actions.toggle"),
+      },
+      {
+        value: "more-info",
+        label: localize("actions.more_info"),
+      },
+      {
+        value: "navigate",
+        label: localize("actions.navigate"),
+      },
+      {
+        value: "url",
+        label: localize("actions.url"),
+      },
+      {
+        value: "none",
+        label: localize("actions.none"),
+      },
+    ];
+
     return html`
       <div class="form">
-        <ha-select
+        <ha-selector
+          .hass=${this.hass}
           label="${localize("material_button_card.control_type")}"
+          .selector=${{
+            select: {
+              options: controlTypeOptions,
+              mode: "dropdown", // o "list" se preferisci i bottoni
+            },
+          }}
           .value=${this._config.control_type ?? "generic"}
+          .required=${true}
           configValue="control_type"
-          @selected=${this._valueChanged}
-          @closed=${(ev: Event) => ev.stopPropagation()}
+          @value-changed=${(ev: CustomEvent) => _valueChanged(ev, this)}
         >
-          <mwc-list-item value="generic">
-            ${localize("material_button_card.type.generic")}
-          </mwc-list-item>
-          <mwc-list-item value="thermometer">
-            ${localize("material_button_card.type.thermometer")}
-          </mwc-list-item>
-          <mwc-list-item value="automation">
-            ${localize("material_button_card.type.automation")}
-          </mwc-list-item>
-          <mwc-list-item value="scene">
-            ${localize("material_button_card.type.scene")}
-          </mwc-list-item>
-          <mwc-list-item value="media_player">
-            ${localize("material_button_card.type.media")}
-          </mwc-list-item>
-          <mwc-list-item value="state">
-            ${localize("material_button_card.type.state")}
-          </mwc-list-item>
-          <mwc-list-item value="action">
-            ${localize("material_button_card.type.action")}
-          </mwc-list-item>
-          <mwc-list-item value="app_version">
-            ${localize("material_button_card.type.app_version")}
-          </mwc-list-item>
-        </ha-select>
+        </ha-selector>
 
         <ha-textfield
           label="${localize("material_button_card.name")}"
@@ -330,23 +414,20 @@ export class MaterialButtonCardEditor
                   @change=${this._valueChanged}
                 />
               </div>-->
-              <ha-select
+              <ha-selector
+                .hass=${this.hass}
                 label="${localize("material_climate_card.fix_temperature")}"
-                .value=${this._config.fix_temperature ?? false}
+                .selector=${{
+                  select: {
+                    options: fixTemperatureOptions,
+                    mode: "dropdown", // o "list" se preferisci i bottoni
+                  },
+                }}
+                .value=${this._config.fix_temperature ?? "false"}
                 configValue="fix_temperature"
-                @selected=${this._valueChanged}
-                @closed=${(ev: Event) => ev.stopPropagation()}
+                @value-changed=${(ev: CustomEvent) => _valueChanged(ev, this)}
               >
-                <mwc-list-item value="false">
-                  ${localize("material_climate_card.false")}
-                </mwc-list-item>
-                <mwc-list-item value="true">
-                  ${localize("material_climate_card.true")}
-                </mwc-list-item>
-                <mwc-list-item value="auto">
-                  ${localize("material_climate_card.auto")}
-                </mwc-list-item>
-              </ha-select>`}
+              </ha-selector>`}
         ${this._config.control_type == ControlType.ACTION
           ? html``
           : html`<div class="switch-row">
@@ -362,58 +443,40 @@ export class MaterialButtonCardEditor
         ${this._config.use_default_toggle
           ? html``
           : html`<div class="warning">${localize("actions.warning")}</div>
-              <ha-select
+              <ha-selector
+                .hass=${this.hass}
                 label="${localize("actions.tap_action_title")}"
+                .selector=${{
+                  select: {
+                    options: actions,
+                    mode: "dropdown", // o "list" se preferisci i bottoni
+                  },
+                }}
                 .value=${this._getActionValue(this._config.tap_action)}
-                @selected=${this._onTapSelected}
-                @closed=${(ev: Event) => ev.stopPropagation()}
+                @value-changed=${this._onTapSelected}
               >
-                <mwc-list-item value="toggle">
-                  ${localize("actions.toggle")}
-                </mwc-list-item>
-                <mwc-list-item value="more-info">
-                  ${localize("actions.more_info")}
-                </mwc-list-item>
-                <mwc-list-item value="navigate">
-                  ${localize("actions.navigate")}
-                </mwc-list-item>
-                <mwc-list-item value="url">
-                  ${localize("actions.url")}
-                </mwc-list-item>
-                <mwc-list-item value="none">
-                  ${localize("actions.none")}
-                </mwc-list-item>
-              </ha-select>
+              </ha-selector>
 
               ${this._renderExtraField(this._config.tap_action, (key, value) =>
-                this._setActionValue("tap_action", key, value)
+                this._setActionValue("tap_action", key, value),
               )}
 
-              <ha-select
+              <ha-selector
+                .hass=${this.hass}
                 label="${localize("actions.hold_action_title")}"
+                .selector=${{
+                  select: {
+                    options: actions,
+                    mode: "dropdown", // o "list" se preferisci i bottoni
+                  },
+                }}
                 .value=${this._getActionValue(this._config.hold_action)}
-                @selected=${this._onHoldSelected}
-                @closed=${(ev: Event) => ev.stopPropagation()}
+                @value-changed=${this._onHoldSelected}
               >
-                <mwc-list-item value="toggle">
-                  ${localize("actions.toggle")}
-                </mwc-list-item>
-                <mwc-list-item value="more-info">
-                  ${localize("actions.more_info")}
-                </mwc-list-item>
-                <mwc-list-item value="navigate">
-                  ${localize("actions.navigate")}
-                </mwc-list-item>
-                <mwc-list-item value="url">
-                  ${localize("actions.url")}
-                </mwc-list-item>
-                <mwc-list-item value="none">
-                  ${localize("actions.none")}
-                </mwc-list-item>
-              </ha-select>
+              </ha-selector>
 
               ${this._renderExtraField(this._config.hold_action, (key, value) =>
-                this._setActionValue("hold_action", key, value)
+                this._setActionValue("hold_action", key, value),
               )}`}
       </div>
     `;
@@ -421,7 +484,7 @@ export class MaterialButtonCardEditor
 
   private _renderExtraField(
     action: any,
-    onChange: (key: string, value: any) => void
+    onChange: (key: string, value: any) => void,
   ) {
     const currentAction = action?.action ?? action; // stringa o oggetto
 

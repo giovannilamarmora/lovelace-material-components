@@ -40,52 +40,51 @@ export class MaterialControlCardEditor
 
   private _tapActionChanged() {
     return (key: string, value: any) => {
-      if (!this._configLoaded) return;
+      if (!this._configLoaded || !this._config) return;
 
-      if (key === "action" && this._config.tap_action.action != value) {
+      let newTapAction = { ...this._config.tap_action };
+
+      if (key === "action") {
+        if (newTapAction.action === value) return;
+        // Carica il default per la nuova azione (es. toggle, navigate, etc)
         const defaultConfigs: Record<string, any> = toggleConfigs;
-        const action = defaultConfigs[value];
-        this._config.tap_action = action;
+        newTapAction = defaultConfigs[value] || { action: value };
       } else {
-        if (key == "navigation_path") {
-          this._config.tap_action.navigation_path = value;
-        }
-        if (key == "url_path") {
-          this._config.tap_action.url_path = value;
-        }
+        // Aggiorna navigation_path o url_path
+        newTapAction = { ...newTapAction, [key]: value };
       }
 
-      this.dispatchEvent(
-        new CustomEvent("config-changed", {
-          detail: { config: this._config },
-        })
-      );
+      this._config = { ...this._config, tap_action: newTapAction };
+      this._saveConfig();
     };
   }
 
   private _holdActionChanged() {
     return (key: string, value: any) => {
-      if (!this._configLoaded) return;
+      if (!this._configLoaded || !this._config) return;
 
-      if (key === "action" && this._config.hold_action.action != value) {
+      let newHoldAction = { ...this._config.hold_action };
+
+      if (key === "action") {
+        if (newHoldAction.action === value) return;
         const defaultConfigs: Record<string, any> = toggleConfigs;
-        const action = defaultConfigs[value];
-        this._config.hold_action = action;
+        newHoldAction = defaultConfigs[value] || { action: value };
       } else {
-        if (key == "navigation_path") {
-          this._config.hold_action.navigation_path = value;
-        }
-        if (key == "url_path") {
-          this._config.hold_action.url_path = value;
-        }
+        newHoldAction = { ...newHoldAction, [key]: value };
       }
 
-      this.dispatchEvent(
-        new CustomEvent("config-changed", {
-          detail: { config: this._config },
-        })
-      );
+      this._config = { ...this._config, hold_action: newHoldAction };
+      this._saveConfig();
     };
+  }
+
+  // Funzione helper per salvare e sparare l'evento
+  private _saveConfig() {
+    this.dispatchEvent(
+      new CustomEvent("config-changed", {
+        detail: { config: this._config },
+      }),
+    );
   }
 
   render(): TemplateResult {
@@ -97,44 +96,59 @@ export class MaterialControlCardEditor
     const renderActionEditor = (
       actionType: string,
       action: ActionConfig | undefined,
-      onChange: (key: string, value: any) => void
+      onChange: (key: string, value: any) => void,
     ) => {
       const currentAction = action?.action ?? "more-info";
 
+      const actions = [
+        {
+          value: "toggle",
+          label: localize("actions.toggle"),
+        },
+        {
+          value: "more-info",
+          label: localize("actions.more_info"),
+        },
+        {
+          value: "navigate",
+          label: localize("actions.navigate"),
+        },
+        {
+          value: "url",
+          label: localize("actions.url"),
+        },
+        {
+          value: "none",
+          label: localize("actions.none"),
+        },
+        {
+          value: "google-home",
+          label: localize("actions.google_home"),
+        },
+        {
+          value: "settings",
+          label: localize("actions.settings"),
+        },
+      ];
+
       return html`
-        <ha-select
-          style="display: block;"
+        <ha-selector
+          .hass=${this.hass}
           label="${localize("actions." + actionType + "_title")}"
+          .selector=${{
+            select: {
+              options: actions,
+              mode: "dropdown",
+            },
+          }}
           .value=${currentAction}
-          @selected=${(e: CustomEvent) => {
-            const target = e.target as HTMLInputElement;
-            const newAction = target.value;
+          @value-changed=${(e: CustomEvent) => {
+            // CORRETTO: usa e.detail.value
+            const newAction = e.detail.value;
             onChange("action", newAction);
           }}
-          @closed=${(ev: Event) => ev.stopPropagation()}
         >
-          <mwc-list-item value="more-info">
-            ${localize("actions.more_info")}
-          </mwc-list-item>
-          <mwc-list-item value="toggle">
-            ${localize("actions.toggle")}
-          </mwc-list-item>
-          <mwc-list-item value="navigate">
-            ${localize("actions.navigate")}
-          </mwc-list-item>
-          <mwc-list-item value="url">
-            ${localize("actions.url")}
-          </mwc-list-item>
-          <mwc-list-item value="none">
-            ${localize("actions.none")}
-          </mwc-list-item>
-          <mwc-list-item value="google-home">
-            ${localize("actions.google_home")}
-          </mwc-list-item>
-          <mwc-list-item value="settings">
-            ${localize("actions.settings")}
-          </mwc-list-item>
-        </ha-select>
+        </ha-selector>
 
         ${currentAction === "navigate"
           ? html`
@@ -263,7 +277,7 @@ export class MaterialControlCardEditor
           ${renderActionEditor(
             "tap_action",
             this._config.tap_action,
-            this._tapActionChanged()
+            this._tapActionChanged(),
           )}
         </div>
 
@@ -274,7 +288,7 @@ export class MaterialControlCardEditor
           ${renderActionEditor(
             "hold_action",
             this._config.hold_action,
-            this._holdActionChanged()
+            this._holdActionChanged(),
           )}
         </div>
       </div>
