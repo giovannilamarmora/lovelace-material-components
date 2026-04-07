@@ -11,7 +11,7 @@ jobs:
 
     steps:
       - name: 📝 Parse description and update issues
-        uses: actions/github-script@v7
+        uses: actions/github-script@v8
         env:
           # Puoi usare il secret personalizzato o quello standard GITHUB_TOKEN
           GITHUB_TOKEN: ${{ secrets.GIT_TOKEN }}
