@@ -1,4 +1,8 @@
 {
+  "upgrade": {
+    "message": "Atualize para o Material Home Assistant (Pro ou Ultimate) para mais recursos e opções de personalização!",
+    "button": "ATUALIZAR"
+  },
   "common": {
     "version": "Versão",
     "invalid_configuration": "Configuração inválida",

@@ -12,7 +12,7 @@ import { MaterialSliderCardEditor } from "./material-slider/material-slider-card
 import { MaterialLightsCard } from "./material-lights/material-lights-card";
 import { MaterialLightsCardEditor } from "./material-lights/material-lights-card-editor";
 import { MaterialMediaOverlay } from "./material-media-overlay/material-media-overlay";
-import { CARD_VERSION } from "./shared/utils";
+import { CARD_VERSION, UPGRADE_URL } from "./shared/utils/utils";
 import { MaterialUsersCard } from "./material-users/material-users-card";
 import { MaterialMenuCard } from "./material-menu/material-menu-card";
 import { MaterialMenuCardEditor } from "./material-menu/material-menu-card-editor";
@@ -22,7 +22,7 @@ import { MaterialUsersCardEditor } from "./material-users/material-users-card-ed
 console.info(
   `%c Material Home Components %c ${localize("common.version")} ${CARD_VERSION}`,
   "color: orange; font-weight: bold; background: black",
-  "color: white; font-weight: bold; background: dimgray"
+  "color: white; font-weight: bold; background: dimgray",
 );
 
 /** Material Slider */
@@ -31,7 +31,7 @@ customElements.define("material-slider-card", MaterialSliderCard);
 if (!customElements.get("material-slider-card-editor")) {
   customElements.define(
     "material-slider-card-editor",
-    MaterialSliderCardEditor
+    MaterialSliderCardEditor,
   );
 }
 
@@ -43,7 +43,7 @@ if (!customElements.get("material-button-card")) {
 if (!customElements.get("material-button-card-editor")) {
   customElements.define(
     "material-button-card-editor",
-    MaterialButtonCardEditor
+    MaterialButtonCardEditor,
   );
 }
 
@@ -55,7 +55,7 @@ if (!customElements.get("material-dashboard-card")) {
 if (!customElements.get("material-dashboard-card-editor")) {
   customElements.define(
     "material-dashboard-card-editor",
-    MaterialDashboardCardEditor
+    MaterialDashboardCardEditor,
   );
 }
 
@@ -67,7 +67,7 @@ if (!customElements.get("material-climate-card")) {
 if (!customElements.get("material-climate-card-editor")) {
   customElements.define(
     "material-climate-card-editor",
-    MaterialClimateCardEditor
+    MaterialClimateCardEditor,
   );
 }
 
@@ -79,7 +79,7 @@ if (!customElements.get("material-control-card")) {
 if (!customElements.get("material-control-card-editor")) {
   customElements.define(
     "material-control-cardeditor",
-    MaterialControlCardEditor
+    MaterialControlCardEditor,
   );
 }
 
@@ -122,6 +122,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A custom slider card inspired by Google Home UI, offering smooth control and visual feedback for dimmers, lights, and other numeric entities. Designed with a clean and modern interface to blend into any dashboard.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -130,6 +131,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A modern, theme-aware button card inspired by Google’s design. Now stable and production-ready.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -138,6 +140,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A customizable dashboard card inspired by Google's Material Design. Perfect for building modern, responsive Home Assistant interfaces.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -146,6 +149,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A climate card inspired by Google's design, providing intuitive control and status display for HVAC devices.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -154,6 +158,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A control card inspired by Google's design, offering a sleek interface to interact with entities like switches, lights, and scenes in Home Assistant.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -162,6 +167,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A control card inspired by Google's design, offering a sleek interface to interact with lights in Home Assistant.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -170,6 +176,7 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "A card to view and manage users in your Home, providing a clear interface to see active users and control permissions.",
+  documentationURL: UPGRADE_URL,
 });
 
 (window as any).customCards.push({
@@ -178,4 +185,5 @@ if (!customElements.get("material-menu-card")) {
   preview: true,
   description:
     "The menu to manage your home's settings, allowing you to view and adjust key options clearly and easily.",
+  documentationURL: UPGRADE_URL,
 });

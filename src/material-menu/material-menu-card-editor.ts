@@ -10,6 +10,7 @@ import {
 import { DEFAULT_CONFIG, MaterialMenuCardConfig } from "./material-menu-const";
 import { localize } from "../localize/localize";
 import { _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-menu-card-editor")
 export class MaterialMenuCardEditor
@@ -77,6 +78,7 @@ export class MaterialMenuCardEditor
           this._config.double_tap_action,
         )}
       </div>
+      ${getCardVersion()}
     `;
   }
 

@@ -7,6 +7,7 @@ import {
   MaterialClimateCardConfig,
 } from "./material-climate-const";
 import { _entityChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-climate-card-editor")
 export class MaterialClimateCardEditor
@@ -149,6 +150,7 @@ export class MaterialClimateCardEditor
         >
         </ha-selector>
       </div>
+      ${getCardVersion()}
     `;
   }
 

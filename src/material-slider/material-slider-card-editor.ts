@@ -8,6 +8,7 @@ import {
 import { localize } from "../localize/localize";
 import { ControlType } from "../shared/types";
 import { _entityChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-slider-card-editor")
 export class MaterialSliderCardEditor
@@ -123,6 +124,7 @@ export class MaterialSliderCardEditor
           />
         </div>
       </div>
+      ${getCardVersion()}
     `;
   }
 

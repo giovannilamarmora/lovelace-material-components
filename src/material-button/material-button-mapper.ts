@@ -1,7 +1,7 @@
 import { getPropertyColor } from "../material-climate/material-climate-mapper";
 import { _setStyleProperty, material_color } from "../shared/color";
 import { ControlType } from "../shared/types";
-import { isNullOrEmpty } from "../shared/utils";
+import { isNullOrEmpty } from "../shared/utils/utils";
 import { MaterialButtonCardConfig } from "./material-button-const";
 
 export function setColorCard(
@@ -10,7 +10,7 @@ export function setColorCard(
   isOffline: boolean,
   isOn: boolean,
   theme: string,
-  state: string
+  state: string,
 ) {
   const offlineOnOffState = isOffline ? "offline" : isOn ? "on" : "off";
   const colorDomain =
@@ -38,14 +38,14 @@ export function setColorCard(
     _setStyleProperty(
       "--bsc-percentage-color",
       colorDomain == "climate" ? color.title : color.percentage,
-      style
+      style,
     );
     _setStyleProperty("--bsc-background", color.background, style);
     _setStyleProperty(
       "--bsc-height",
       config.height || 97,
       style,
-      (h: any) => `${h}px`
+      (h: any) => `${h}px`,
     );
     _setStyleProperty("--bsc-border-radius", config.border_radius, style);
   }

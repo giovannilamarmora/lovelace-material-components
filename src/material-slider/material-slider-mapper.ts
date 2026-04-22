@@ -1,6 +1,6 @@
 import { material_color } from "../shared/color";
 import { ControlType, DomainType } from "../shared/types";
-import { isNullOrEmpty } from "../shared/utils";
+import { isNullOrEmpty } from "../shared/utils/utils";
 import { MaterialSliderCardConfig } from "./material-slider-const";
 
 export function setSliderColorCard(
@@ -8,7 +8,7 @@ export function setSliderColorCard(
   config: MaterialSliderCardConfig,
   isOffline: boolean,
   isOn: boolean,
-  theme: string
+  theme: string,
 ) {
   const offlineOnOffState = isOffline ? "offline" : isOn ? "on" : "off";
   const domain =
@@ -59,7 +59,7 @@ export function setSliderColor(
   theme: string,
   isOn: boolean,
   color: any,
-  style: any
+  style: any,
 ) {
   //  // Stili dinamici basati su stato entità e tema
   let nameColor = "";
@@ -160,7 +160,7 @@ export function _setStyleProperty(
   name: string,
   value: any,
   style: any,
-  transform = (value: any): string => value
+  transform = (value: any): string => value,
 ): void {
   if (value !== undefined && value !== null && value !== "") {
     style.setProperty(name, transform(value));

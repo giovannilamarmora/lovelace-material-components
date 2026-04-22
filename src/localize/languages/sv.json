@@ -1,4 +1,8 @@
 {
+  "upgrade": {
+    "message": "Uppgradera till Material Home Assistant (Pro eller Ultimate) för fler funktioner och anpassningsalternativi!",
+    "button": "UPPGRADERA"
+  },
   "common": {
     "version": "Version",
     "invalid_configuration": "Ogiltig konfiguration",
