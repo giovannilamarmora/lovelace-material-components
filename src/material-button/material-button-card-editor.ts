@@ -14,6 +14,7 @@ import {
 } from "./material-button-const";
 import { ControlType } from "../shared/types";
 import { _entityChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-button-card-editor")
 export class MaterialButtonCardEditor
@@ -479,6 +480,7 @@ export class MaterialButtonCardEditor
                 this._setActionValue("hold_action", key, value),
               )}`}
       </div>
+      ${getCardVersion()}
     `;
   }
 

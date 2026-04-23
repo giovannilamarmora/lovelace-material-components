@@ -1,5 +1,5 @@
 import { handleActionConfig } from "custom-card-helpers";
-import { isNullOrEmpty } from "./utils";
+import { isNullOrEmpty } from "./utils/utils";
 
 /**
  * Serializes an action object into a **YAML-formatted string** compatible with Home Assistant's Lovelace configuration.
@@ -118,7 +118,7 @@ export function evaluateAction(
   action: any,
   stateObj: any,
   state: any,
-  hass: any
+  hass: any,
 ) {
   if (!action || typeof action !== "object") return action;
 
@@ -136,7 +136,7 @@ export function mapJSFunction(
   value: any,
   stateObj: any,
   state: any,
-  hass: any
+  hass: any,
 ) {
   if (
     typeof value === "string" &&
@@ -163,7 +163,7 @@ export function handleAction(
   element: HTMLElement,
   hass: any,
   config: any,
-  actionConfig: any
+  actionConfig: any,
 ) {
   if (!actionConfig || !hass) return;
 
@@ -195,7 +195,7 @@ export function handleAction(
         element,
         hass as any,
         isNullOrEmpty(config.entity) ? {} : { entity: config.entity },
-        actionConfig
+        actionConfig,
       );
       break;
   }

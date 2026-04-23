@@ -6,7 +6,7 @@ import {
   getSpotifyURL,
   getTwitchURL,
   getYouTubeURL,
-} from "../shared/url.utils";
+} from "../shared/utils/url.utils";
 
 export function isOpenLinkCompatible(appName: string) {
   return (

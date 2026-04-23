@@ -7,6 +7,7 @@ import {
   DEFAULT_CONFIG,
   MaterialUsersCardConfig,
 } from "./material-users-const";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-users-card-editor")
 export class MaterialUsersCardEditor
@@ -54,6 +55,7 @@ export class MaterialUsersCardEditor
           />
         </div>
       </div>
+      ${getCardVersion()}
     `;
   }
 

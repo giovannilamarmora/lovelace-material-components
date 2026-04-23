@@ -7,6 +7,7 @@ import {
   MaterialLightCardConfig,
 } from "./material-lights-const";
 import { _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-lights-card-editor")
 export class MaterialLightsCardEditor
@@ -86,6 +87,7 @@ export class MaterialLightsCardEditor
             `
           : ""}
       </div>
+      ${getCardVersion()}
     `;
   }
 
@@ -96,7 +98,7 @@ export class MaterialLightsCardEditor
       this.dispatchEvent(
         new CustomEvent("config-changed", {
           detail: { config: this._config },
-        })
+        }),
       );
     }
   }
