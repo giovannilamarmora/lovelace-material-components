@@ -75,13 +75,18 @@ export class MaterialSliderCardEditor
         >
         </ha-selector>
 
-        <ha-textfield
-          label="${localize("material_slider_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_slider_card.name")}
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <ha-entity-picker
           label="${localize("material_slider_card.entity")}"

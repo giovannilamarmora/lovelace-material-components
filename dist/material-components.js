@@ -560,7 +560,7 @@ function nn(e){return null==e}tn.styles=r`
       position: relative;
       overflow: hidden;
     }
-  `,e([ue({attribute:!1})],ro.prototype,"hass",void 0),e([he()],ro.prototype,"_config",void 0),e([he()],ro.prototype,"_card",void 0),ro=e([le("material-dashboard-card")],ro);const so={type:"custom:material-dashboard-card"};function lo(e,t){const i=e.target.getAttribute("configValue"),n=e.detail.value;i&&t._config[i]!==n&&(t._config=Object.assign(Object.assign({},t._config),{[i]:n}),t.dispatchEvent(new CustomEvent("config-changed",{detail:{config:t._config}})))}function co(e,t){var i;const n=e.detail.value;(null===(i=t._config)||void 0===i?void 0:i.entity)!==n&&(t._config=Object.assign(Object.assign({},t._config),{entity:n}),t.dispatchEvent(new CustomEvent("config-changed",{detail:{config:t._config}})))}function uo(e,t){var i,n,a;const o=e.target,r=o.getAttribute("configValue"),s=null!==(a=null!==(n=null===(i=e.detail)||void 0===i?void 0:i.value)&&void 0!==n?n:o.value)&&void 0!==a?a:o.checked;r&&t._config[r]!==s&&(t._config=Object.assign(Object.assign({},t._config),{[r]:s}),t.dispatchEvent(new CustomEvent("config-changed",{detail:{config:t._config}})))}function ho(){return F`<style>
+  `,e([ue({attribute:!1})],ro.prototype,"hass",void 0),e([he()],ro.prototype,"_config",void 0),e([he()],ro.prototype,"_card",void 0),ro=e([le("material-dashboard-card")],ro);const so={type:"custom:material-dashboard-card"};function lo(e,t){const i=e.target.getAttribute("configValue"),n=e.detail.value;i&&t._config[i]!==n&&(t._config=Object.assign(Object.assign({},t._config),{[i]:n}),t.dispatchEvent(new CustomEvent("config-changed",{detail:{config:t._config}})))}function co(e,t){var i;const n=e.detail.value;(null===(i=t._config)||void 0===i?void 0:i.entity)!==n&&(t._config=Object.assign(Object.assign({},t._config),{entity:n}),t.dispatchEvent(new CustomEvent("config-changed",{detail:{config:t._config}})))}function uo(e,t){const i=e.target,n=i.getAttribute("configValue");let a;a=e.detail&&void 0!==e.detail.value?e.detail.value:"checked"in i?i.checked:i.value,n&&t._config[n]!==a&&(t._config=Object.assign(Object.assign({},t._config),{[n]:a}),t.dispatchEvent(new CustomEvent("config-changed",{detail:{config:t._config}})))}function ho(){return F`<style>
       ${".version {\n      font-size: 12px !important;\n      color: var(--primary-text-color) !important;\n      background: rgba(0, 0, 0, 0.1);\n      padding: 8px 16px;\n      border-radius: 32px;\n      display: flex;\n      align-items: center;\n    }\n\n    .version-number {\n      font-size: 10px;\n      background: rgb(0, 103, 155);\n      padding: 0px 8px;\n      border-radius: 12px;\n      margin-right: -6px;\n      float: right;\n      color: white;\n      height: 20px;\n      align-content: center;\n    }"}
     </style>
     <h4 class="version">
@@ -1147,13 +1147,16 @@ function nn(e){return null==e}tn.styles=r`
     }
   `,e([ue({attribute:!1})],bo.prototype,"hass",void 0),e([he()],bo.prototype,"_config",void 0),bo=e([le("material-climate-card")],bo);let yo=class extends re{constructor(){super(...arguments),this._config=vo}setConfig(e){this._config=Object.assign({},e)}async firstUpdated(){const e=await window.loadCardHelpers(),t=await e.createCardElement({type:"entities",entities:[]});await t.constructor.getConfigElement()}render(){var e,t,i,n,a,o;if(!this._config||!this.hass)return F``;this._config.use_default_icon=null===(e=this._config.use_default_icon)||void 0===e||e,this._config.use_material_color=null===(t=this._config.use_material_color)||void 0===t||t;const r=[{value:"false",label:mi("material_climate_card.false")},{value:"true",label:mi("material_climate_card.true")},{value:"auto",label:mi("material_climate_card.auto")}];return F`
       <div class="form">
-        <ha-textfield
-          label="${mi("material_climate_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label=${mi("material_climate_card.name")}
           .value=${this._config.name||""}
           configValue="name"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <ha-entity-picker
           label="${mi("material_climate_card.entity")}"
@@ -1198,21 +1201,27 @@ function nn(e){return null==e}tn.styles=r`
               />
             `}
 
-        <ha-textfield
-          label="${mi("material_climate_card.increase_temp")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{number:{}}}
+          .label=${mi("material_climate_card.increase_temp")}
           .value=${this._config.increase_temp||1}
           configValue="increase_temp"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. 0.5"
-        ></ha-textfield>
+        ></ha-selector>
 
-        <ha-textfield
-          label="${mi("material_climate_card.decrease_temp")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{number:{}}}
+          .label=${mi("material_climate_card.decrease_temp")}
           .value=${this._config.decrease_temp||1}
           configValue="decrease_temp"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. 0.5"
-        ></ha-textfield>
+        ></ha-selector>
 
         <!--<div class="switch-row">
           <span class="switch-label"
@@ -1303,13 +1312,16 @@ function nn(e){return null==e}tn.styles=r`
         <!-- Aggiungi altri campi dinamici se servono per call-service ecc. -->
       `};return F`
       <div class="form">
-        <ha-textfield
-          label="${mi("material_control_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label=${mi("material_control_card.name")}
           .value=${this._config.name||""}
           configValue="name"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <div class="switch-row">
           <span class="switch-label"
@@ -1435,7 +1447,7 @@ function nn(e){return null==e}tn.styles=r`
       color: var(--error-color, #d32f2f);
       font-size: 0.9rem;
     }
-  `,e([ue({attribute:!1})],$o.prototype,"hass",void 0),e([he()],$o.prototype,"_config",void 0),e([he()],$o.prototype,"_configLoaded",void 0),$o=e([le("material-control-card-editor")],$o);let ko=class extends re{constructor(){super(...arguments),this._config=Ai,this._configLoaded=!1,this._onHoldSelected=e=>{if(!this._config)return;const t=e.detail.value;t!==this._getActionValue(this._config.hold_action)&&this._setAction("hold_action",t)}}setConfig(e){this._config=Object.assign(Object.assign(Object.assign({},Ai),e),{tap_action:e.tap_action,hold_action:e.hold_action}),this._configLoaded=!0}_valueChanged(e){var t;if(!this._config)return;const i=e.target,n=i.getAttribute("configValue"),a=Object.assign(Object.assign({},this._config),{[n]:null!==(t=i.checked)&&void 0!==t?t:i.value});a.control_type!==Ei.APP_VERSION&&a.control_type!==Ei.ACTION||delete a.entity,a.use_default_toggle&&(delete a.tap_action,delete a.hold_action),this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:a}}))}_getActionValue(e){var t;return e?"string"==typeof e?e:null!==(t=e.action)&&void 0!==t?t:"toggle":"toggle"}_onTapSelected(e){if(!this._config||!this.hass)return;const t=e.detail.value;t!==this._getActionValue(this._config.tap_action)&&this._setAction("tap_action",t)}_setAction(e,t){const i={toggle:{action:"toggle"},"more-info":{action:"more-info"},navigate:{action:"navigate",navigation_path:"/"},url:{action:"url",url_path:""},none:{action:"none"}}[t]||{action:t},n=Object.assign(Object.assign({},this._config),{[e]:i});this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:n}})),this._config=n}_setActionValue(e,t,i){let n=this._config[e];"string"==typeof n&&(n={action:n});const a=Object.assign(Object.assign({},n),{[t]:i});this._config=Object.assign(Object.assign({},this._config),{[e]:a}),this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:this._config}}))}async firstUpdated(){const e=await window.loadCardHelpers(),t=await e.createCardElement({type:"entities",entities:[]});await t.constructor.getConfigElement()}setEntityFilter(){switch(this._config.control_type){case Ei.THERMOMETER:return["climate"];case Ei.AUTOMATION:return["automation"];case Ei.SCENE:return["scene"];case Ei.MEDIA_PLAYER:return["media_player"];default:return}}render(){var e,t,i,n,a,o,r,s,l,c,d;if(!this._config||!this.hass)return F``;this._config.use_default_icon=null===(e=this._config.use_default_icon)||void 0===e||e,this._config.control_type!=Ei.APP_VERSION&&this._config.control_type!=Ei.ACTION||(this._config.use_default_icon=!1),this._config.control_type==Ei.ACTION&&(this._config.use_default_toggle=!1),this._config.use_default_toggle=null===(t=this._config.use_default_toggle)||void 0===t||t,this._config.use_default_text=null===(i=this._config.use_default_text)||void 0===i||i;const u=[{value:"generic",label:mi("material_button_card.type.generic")},{value:"thermometer",label:mi("material_button_card.type.thermometer")},{value:"automation",label:mi("material_button_card.type.automation")},{value:"scene",label:mi("material_button_card.type.scene")},{value:"media_player",label:mi("material_button_card.type.media")},{value:"state",label:mi("material_button_card.type.state")},{value:"action",label:mi("material_button_card.type.action")},{value:"app_version",label:mi("material_button_card.type.app_version")}],h=[{value:"false",label:mi("material_climate_card.false")},{value:"true",label:mi("material_climate_card.true")},{value:"auto",label:mi("material_climate_card.auto")}],p=[{value:"toggle",label:mi("actions.toggle")},{value:"more-info",label:mi("actions.more_info")},{value:"navigate",label:mi("actions.navigate")},{value:"url",label:mi("actions.url")},{value:"none",label:mi("actions.none")}];return F`
+  `,e([ue({attribute:!1})],$o.prototype,"hass",void 0),e([he()],$o.prototype,"_config",void 0),e([he()],$o.prototype,"_configLoaded",void 0),$o=e([le("material-control-card-editor")],$o);let ko=class extends re{constructor(){super(...arguments),this._config=Ai,this._configLoaded=!1,this._onHoldSelected=e=>{if(!this._config)return;const t=e.detail.value;t!==this._getActionValue(this._config.hold_action)&&this._setAction("hold_action",t)}}setConfig(e){this._config=Object.assign(Object.assign(Object.assign({},Ai),e),{tap_action:e.tap_action,hold_action:e.hold_action}),this._configLoaded=!0}_valueChanged(e){var t,i;if(!this._config)return;const n=e.target,a=n.getAttribute("configValue");if(!a)return;const o=void 0!==(null===(t=e.detail)||void 0===t?void 0:t.value)?e.detail.value:void 0!==n.checked?n.checked:null!==(i=n.value)&&void 0!==i?i:"",r=Object.assign(Object.assign({},this._config),{[a]:o});r.control_type!==Ei.APP_VERSION&&r.control_type!==Ei.ACTION||delete r.entity,r.use_default_toggle&&(delete r.tap_action,delete r.hold_action),this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:r},bubbles:!0,composed:!0}))}_getActionValue(e){var t;return e?"string"==typeof e?e:null!==(t=e.action)&&void 0!==t?t:"toggle":"toggle"}_onTapSelected(e){if(!this._config||!this.hass)return;const t=e.detail.value;t!==this._getActionValue(this._config.tap_action)&&this._setAction("tap_action",t)}_setAction(e,t){const i={toggle:{action:"toggle"},"more-info":{action:"more-info"},navigate:{action:"navigate",navigation_path:"/"},url:{action:"url",url_path:""},none:{action:"none"}}[t]||{action:t},n=Object.assign(Object.assign({},this._config),{[e]:i});this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:n}})),this._config=n}_setActionValue(e,t,i){let n=this._config[e];"string"==typeof n&&(n={action:n});const a=Object.assign(Object.assign({},n),{[t]:i});this._config=Object.assign(Object.assign({},this._config),{[e]:a}),this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:this._config}}))}async firstUpdated(){const e=await window.loadCardHelpers(),t=await e.createCardElement({type:"entities",entities:[]});await t.constructor.getConfigElement()}setEntityFilter(){switch(this._config.control_type){case Ei.THERMOMETER:return["climate"];case Ei.AUTOMATION:return["automation"];case Ei.SCENE:return["scene"];case Ei.MEDIA_PLAYER:return["media_player"];default:return}}render(){var e,t,i,n,a,o,r,s,l,c,d;if(!this._config||!this.hass)return F``;this._config.use_default_icon=null===(e=this._config.use_default_icon)||void 0===e||e,this._config.control_type!=Ei.APP_VERSION&&this._config.control_type!=Ei.ACTION||(this._config.use_default_icon=!1),this._config.control_type==Ei.ACTION&&(this._config.use_default_toggle=!1),this._config.use_default_toggle=null===(t=this._config.use_default_toggle)||void 0===t||t,this._config.use_default_text=null===(i=this._config.use_default_text)||void 0===i||i;const u=[{value:"generic",label:mi("material_button_card.type.generic")},{value:"thermometer",label:mi("material_button_card.type.thermometer")},{value:"automation",label:mi("material_button_card.type.automation")},{value:"scene",label:mi("material_button_card.type.scene")},{value:"media_player",label:mi("material_button_card.type.media")},{value:"state",label:mi("material_button_card.type.state")},{value:"action",label:mi("material_button_card.type.action")},{value:"app_version",label:mi("material_button_card.type.app_version")}],h=[{value:"false",label:mi("material_climate_card.false")},{value:"true",label:mi("material_climate_card.true")},{value:"auto",label:mi("material_climate_card.auto")}],p=[{value:"toggle",label:mi("actions.toggle")},{value:"more-info",label:mi("actions.more_info")},{value:"navigate",label:mi("actions.navigate")},{value:"url",label:mi("actions.url")},{value:"none",label:mi("actions.none")}];return F`
       <div class="form">
         <ha-selector
           .hass=${this.hass}
@@ -1448,13 +1460,16 @@ function nn(e){return null==e}tn.styles=r`
         >
         </ha-selector>
 
-        <ha-textfield
-          label="${mi("material_button_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label=${mi("material_button_card.name")}
           .value=${this._config.name||""}
           configValue="name"
-          @input=${this._valueChanged}
+          @value-changed=${this._valueChanged}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         ${this._config.control_type==Ei.APP_VERSION||this._config.control_type==Ei.ACTION?F``:F`<ha-entity-picker
               label="Entity"
@@ -1524,20 +1539,26 @@ function nn(e){return null==e}tn.styles=r`
             </div>`}
         ${this._config.use_default_text?F``:F`
               <div class="dual-icons">
-                <ha-textfield
-                  label="${mi("material_button_card.dual_text.text_on")}"
+                <ha-selector
+                  style="max-height: 56px"
+                  .hass=${this.hass}
+                  .selector=${{text:{}}}
+                  .label=${mi("material_button_card.dual_text.text_on")}
                   .value=${this._config.text_on||""}
                   configValue="text_on"
-                  @input=${this._valueChanged}
+                  @value-changed=${this._valueChanged}
                   placeholder="On"
-                ></ha-textfield>
-                <ha-textfield
-                  label="${mi("material_button_card.dual_text.text_off")}"
+                ></ha-selector
+                ><ha-selector
+                  style="max-height: 56px"
+                  .hass=${this.hass}
+                  .selector=${{text:{}}}
+                  .label=${mi("material_button_card.dual_text.text_off")}
                   .value=${this._config.text_off||""}
                   configValue="text_off"
-                  @input=${this._valueChanged}
+                  @value-changed=${this._valueChanged}
                   placeholder="Off"
-                ></ha-textfield>
+                ></ha-selector>
               </div>
             `}
         ${this._config.control_type!=Ei.THERMOMETER?F``:F` <div class="switch-row">
@@ -1671,13 +1692,16 @@ function nn(e){return null==e}tn.styles=r`
         >
         </ha-selector>
 
-        <ha-textfield
-          label="${mi("material_slider_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label=${mi("material_slider_card.name")}
           .value=${this._config.name||""}
           configValue="name"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <ha-entity-picker
           label="${mi("material_slider_card.entity")}"
@@ -1762,24 +1786,31 @@ function nn(e){return null==e}tn.styles=r`
         <span class="text-label"
           >${mi("material_lights_card.on_text")}</span
         >
-        <ha-textfield
-          label="${mi("material_lights_card.on_text")}"
+
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label=${mi("material_lights_card.on_text")}
           .value=${this._config.on_text||""}
           configValue="on_text"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. Lights On"
-        ></ha-textfield>
+        ></ha-selector>
 
         <span class="text-label"
           >${mi("material_lights_card.off_text")}</span
         >
-        <ha-textfield
-          label="${mi("material_lights_card.off_text")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label=${mi("material_lights_card.off_text")}
           .value=${this._config.off_text||""}
           configValue="off_text"
-          @input=${e=>uo(e,this)}
+          @value-changed=${e=>uo(e,this)}
           placeholder="e.g. Lights Off"
-        ></ha-textfield>
+        ></ha-selector>
 
         <div class="switch-row">
           <span class="switch-label"
@@ -2377,19 +2408,26 @@ function nn(e){return null==e}tn.styles=r`
     }
   `,e([ue({attribute:!1})],Do.prototype,"hass",void 0),e([he()],Do.prototype,"_config",void 0),e([he()],Do.prototype,"_card",void 0),Do=e([le("material-menu-card")],Do);let Vo=class extends re{constructor(){super(...arguments),this._config=Uo,this._configLoaded=!1}setConfig(e){this._config=Object.assign(Object.assign({},Uo),e),this._configLoaded=!0}_fireConfigChanged(){this.dispatchEvent(new CustomEvent("config-changed",{detail:{config:this._config}}))}render(){return this._config&&this.hass?F`
       <div class="form">
-        <ha-textfield
-          label="Name"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label="Name"
           .value=${this._config.name||""}
           configValue="name"
-          @input=${e=>uo(e,this)}
-        ></ha-textfield>
+          @value-changed=${e=>uo(e,this)}
+          placeholder="e.g. Cooler"
+        ></ha-selector>
 
-        <ha-textfield
-          label="Label"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{text:{}}}
+          .label="Label"
           .value=${this._config.label||""}
           configValue="label"
-          @input=${e=>uo(e,this)}
-        ></ha-textfield>
+          @value-changed=${e=>uo(e,this)}
+        ></ha-selector>
 
         <ha-icon-picker
           label="Icon"
@@ -2453,7 +2491,7 @@ function nn(e){return null==e}tn.styles=r`
       padding: 16px;
     }
     ha-select,
-    ha-textfield,
+    ha-selector,
     ha-textarea {
       width: 100%;
     }

@@ -37,14 +37,29 @@ export class MaterialButtonCardEditor
 
   private _valueChanged(ev: CustomEvent): void {
     if (!this._config) return;
+
     const target = ev.target as any;
     const configValue = target.getAttribute("configValue");
+    if (!configValue) return;
+
+    // Recupero del valore:
+    // 1. detail.value (per ha-selector)
+    // 2. target.checked (per ha-switch booleani puri)
+    // 3. target.value (per input standard, con fallback a stringa vuota)
+    const value =
+      ev.detail?.value !== undefined
+        ? ev.detail.value
+        : target.checked !== undefined
+          ? target.checked
+          : (target.value ?? "");
+
+    // Creiamo il nuovo oggetto config (senza gestione dei punti nelle chiavi)
     const newConfig = {
       ...this._config,
-      [configValue]: target.checked ?? target.value,
+      [configValue]: value,
     };
 
-    // 👇 rimuovi entity se non serve più
+    // Logica di pulizia specifica
     if (
       newConfig.control_type === ControlType.APP_VERSION ||
       newConfig.control_type === ControlType.ACTION
@@ -57,8 +72,13 @@ export class MaterialButtonCardEditor
       delete newConfig.hold_action;
     }
 
+    // Invio dell'evento (bubbles e composed sono vitali nell'aggiornamento 2026)
     this.dispatchEvent(
-      new CustomEvent("config-changed", { detail: { config: newConfig } }),
+      new CustomEvent("config-changed", {
+        detail: { config: newConfig },
+        bubbles: true,
+        composed: true,
+      }),
     );
   }
 
@@ -276,13 +296,18 @@ export class MaterialButtonCardEditor
         >
         </ha-selector>
 
-        <ha-textfield
-          label="${localize("material_button_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_button_card.name")}
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${this._valueChanged}
+          @value-changed=${this._valueChanged}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         ${this._config.control_type == ControlType.APP_VERSION ||
         this._config.control_type == ControlType.ACTION
@@ -377,20 +402,30 @@ export class MaterialButtonCardEditor
           ? html``
           : html`
               <div class="dual-icons">
-                <ha-textfield
-                  label="${localize("material_button_card.dual_text.text_on")}"
+                <ha-selector
+                  style="max-height: 56px"
+                  .hass=${this.hass}
+                  .selector=${{
+                    text: {},
+                  }}
+                  .label=${localize("material_button_card.dual_text.text_on")}
                   .value=${this._config.text_on || ""}
                   configValue="text_on"
-                  @input=${this._valueChanged}
+                  @value-changed=${this._valueChanged}
                   placeholder="On"
-                ></ha-textfield>
-                <ha-textfield
-                  label="${localize("material_button_card.dual_text.text_off")}"
+                ></ha-selector
+                ><ha-selector
+                  style="max-height: 56px"
+                  .hass=${this.hass}
+                  .selector=${{
+                    text: {},
+                  }}
+                  .label=${localize("material_button_card.dual_text.text_off")}
                   .value=${this._config.text_off || ""}
                   configValue="text_off"
-                  @input=${this._valueChanged}
+                  @value-changed=${this._valueChanged}
                   placeholder="Off"
-                ></ha-textfield>
+                ></ha-selector>
               </div>
             `}
         ${this._config.control_type != ControlType.THERMOMETER
