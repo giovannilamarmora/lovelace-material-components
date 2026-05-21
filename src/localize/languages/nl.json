@@ -1,4 +1,8 @@
 {
+  "upgrade": {
+    "message": "Upgrade naar Material Home Assistant (Pro of Ultimate) voor meer functies en aanpassingsmogelijkheden!",
+    "button": "UPGRADEN"
+  },
   "common": {
     "version": "Versie",
     "invalid_configuration": "Ongeldige configuratie",

@@ -7,6 +7,7 @@ import {
   MaterialClimateCardConfig,
 } from "./material-climate-const";
 import { _entityChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-climate-card-editor")
 export class MaterialClimateCardEditor
@@ -54,13 +55,18 @@ export class MaterialClimateCardEditor
 
     return html`
       <div class="form">
-        <ha-textfield
-          label="${localize("material_climate_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_climate_card.name")}
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <ha-entity-picker
           label="${localize("material_climate_card.entity")}"
@@ -107,21 +113,31 @@ export class MaterialClimateCardEditor
               />
             `}
 
-        <ha-textfield
-          label="${localize("material_climate_card.increase_temp")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            number: {},
+          }}
+          .label=${localize("material_climate_card.increase_temp")}
           .value=${this._config.increase_temp || 1}
           configValue="increase_temp"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. 0.5"
-        ></ha-textfield>
+        ></ha-selector>
 
-        <ha-textfield
-          label="${localize("material_climate_card.decrease_temp")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            number: {},
+          }}
+          .label=${localize("material_climate_card.decrease_temp")}
           .value=${this._config.decrease_temp || 1}
           configValue="decrease_temp"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. 0.5"
-        ></ha-textfield>
+        ></ha-selector>
 
         <!--<div class="switch-row">
           <span class="switch-label"
@@ -149,6 +165,7 @@ export class MaterialClimateCardEditor
         >
         </ha-selector>
       </div>
+      ${getCardVersion()}
     `;
   }
 

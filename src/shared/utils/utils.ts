@@ -1,4 +1,4 @@
-import { localize } from "../localize/localize";
+import { localize } from "../../localize/localize";
 
 /**
  * The current version of the custom card.
@@ -6,7 +6,9 @@ import { localize } from "../localize/localize";
  * Used for displaying version information or debugging purposes.
  * Example usage: displayed when `control_type: app_version` is set.
  */
-export const CARD_VERSION = "2.1.15";
+export const CARD_VERSION = "2.2.0";
+
+export const UPGRADE_URL = "https://materialhomeassistant.com/#pricing";
 
 /**
  * Returns the provided value if it is not `undefined` or `null`,

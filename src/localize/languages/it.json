@@ -1,4 +1,8 @@
 {
+  "upgrade": {
+    "message": "Passa a Material Home Assistant (Pro o Ultimate) per avere più funzioni e opzioni di personalizzazione!",
+    "button": "AGGIORNA"
+  },
   "common": {
     "version": "Versione",
     "invalid_configuration": "Configurazione non valida",

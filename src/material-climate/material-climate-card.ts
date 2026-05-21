@@ -9,7 +9,6 @@ import {
 import { fireEvent } from "custom-card-helpers";
 import { applyRippleEffect } from "../animations";
 import { material_color } from "../shared/color";
-import { isNullOrEmpty } from "../shared/utils";
 import { getIcon, getName, mapStateDisplay } from "../shared/mapper";
 import {
   adjustNewTempAuto,
@@ -17,6 +16,7 @@ import {
   setColorCard,
 } from "./material-climate-mapper";
 import { isDeviceOn, isOfflineState } from "../shared/states";
+import { isNullOrEmpty } from "../shared/utils/utils";
 
 @customElement("material-climate-card")
 export class MaterialClimateCard extends LitElement {
@@ -119,15 +119,6 @@ export class MaterialClimateCard extends LitElement {
     const name = getName(this._config, this.hass);
     const isOffline = isOfflineState(stateObj.state);
 
-    //const stateDisplay = mapStateDisplay(
-    //  stateObj,
-    //  "thermometer",
-    //  isOffline,
-    //  this._config.fix_temperature,
-    //  false,
-    //  true,
-    //);
-
     const stateDisplay = mapStateDisplay(
       stateObj,
       "thermometer",
@@ -139,7 +130,6 @@ export class MaterialClimateCard extends LitElement {
 
     const theme = this.hass?.themes?.darkMode ? "dark" : "light";
     const isOn = isDeviceOn(stateObj.state);
-    //const isConditioner = isAirConditioning(stateObj.attributes.hvac_modes);
     const isOffAndHasTemperature =
       !isOn && !isNullOrEmpty(stateObj.attributes.temperature);
 
@@ -218,20 +208,23 @@ export class MaterialClimateCard extends LitElement {
           : html`
               <div
                 class="temperature-control"
+                @click=${this._onClick}
                 style="${isOn || isOffAndHasTemperature
                   ? "justify-content: space-between;"
-                  : "justify-content: center;"}"
+                  : "justify-content: center;"} cursor: pointer;"
               >
                 ${isOn || isOffAndHasTemperature
                   ? html`<button
                       class="control-btn minus-btn"
-                      @click=${() =>
+                      @click=${(e: Event) => {
+                        e.stopPropagation();
                         this._adjustTemp(
                           -(
                             this._config.decrease_temp ||
                             DEFAULT_CONFIG.decrease_temp
                           ),
-                        )}
+                        );
+                      }}
                     >
                       −
                     </button>`
@@ -248,21 +241,21 @@ export class MaterialClimateCard extends LitElement {
                     ? adjustTempAuto(
                         this._config.fix_temperature!,
                         stateObj.attributes.temperature,
-                      ) //this._config.fix_temperature
-                    : //? stateObj.attributes.temperature * 5
-                      //: stateObj.attributes.temperature
-                      localize("common.off")}
+                      )
+                    : localize("common.off")}
                 </div>
                 ${isOn || isOffAndHasTemperature
                   ? html`<button
                       class="control-btn plus-btn"
-                      @click=${() =>
+                      @click=${(e: Event) => {
+                        e.stopPropagation();
                         this._adjustTemp(
                           +(
                             this._config.increase_temp ||
                             DEFAULT_CONFIG.increase_temp
                           ),
-                        )}
+                        );
+                      }}
                     >
                       +
                     </button>`

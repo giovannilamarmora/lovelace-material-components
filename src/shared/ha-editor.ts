@@ -23,7 +23,7 @@ export function _navigationChanged(ev: CustomEvent, _this: any): void {
   _this.dispatchEvent(
     new CustomEvent("config-changed", {
       detail: { config: _this._config },
-    })
+    }),
   );
 }
 
@@ -46,7 +46,7 @@ export function _entityChanged(ev: CustomEvent, _this: any): void {
   _this.dispatchEvent(
     new CustomEvent("config-changed", {
       detail: { config: _this._config },
-    })
+    }),
   );
 }
 
@@ -65,16 +65,26 @@ export function _valueChanged(ev: Event, _this: any): void {
     getAttribute(name: string): string | null;
   };
   const configValue = target.getAttribute("configValue");
-  const value =
-    (ev as CustomEvent).detail?.value ??
-    (target as any).value ??
-    (target as any).checked;
+  // Correzione della logica di recupero valore
+  let value: any;
+
+  if (
+    (ev as CustomEvent).detail &&
+    (ev as CustomEvent).detail.value !== undefined
+  ) {
+    value = (ev as CustomEvent).detail.value;
+  } else if ("checked" in target) {
+    // Se l'elemento ha la proprietà 'checked' (come ha-switch), usiamo quella
+    value = (target as any).checked;
+  } else {
+    value = (target as any).value;
+  }
 
   if (!configValue || _this._config[configValue] === value) return;
 
   _this._config = { ..._this._config, [configValue]: value };
 
   _this.dispatchEvent(
-    new CustomEvent("config-changed", { detail: { config: _this._config } })
+    new CustomEvent("config-changed", { detail: { config: _this._config } }),
   );
 }

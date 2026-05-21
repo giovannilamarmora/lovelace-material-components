@@ -7,6 +7,7 @@ import {
   MaterialDashboardCardConfig,
 } from "./material-dashboard-const";
 import { _navigationChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-dashboard-card-editor")
 export class MaterialDashboardCardEditor
@@ -132,6 +133,7 @@ export class MaterialDashboardCardEditor
           @value-changed=${(ev: CustomEvent) => _navigationChanged(ev, this)}
         ></ha-selector>
       </div>
+      ${getCardVersion()}
     `;
   }
 

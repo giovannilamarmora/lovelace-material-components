@@ -10,6 +10,7 @@ import {
 import { DEFAULT_CONFIG, MaterialMenuCardConfig } from "./material-menu-const";
 import { localize } from "../localize/localize";
 import { _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-menu-card-editor")
 export class MaterialMenuCardEditor
@@ -38,19 +39,30 @@ export class MaterialMenuCardEditor
 
     return html`
       <div class="form">
-        <ha-textfield
-          label="Name"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label="Name"
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
-        ></ha-textfield>
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
+          placeholder="e.g. Cooler"
+        ></ha-selector>
 
-        <ha-textfield
-          label="Label"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label="Label"
           .value=${this._config.label || ""}
           configValue="label"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
-        ></ha-textfield>
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
+        ></ha-selector>
 
         <ha-icon-picker
           label="Icon"
@@ -77,6 +89,7 @@ export class MaterialMenuCardEditor
           this._config.double_tap_action,
         )}
       </div>
+      ${getCardVersion()}
     `;
   }
 
@@ -209,7 +222,7 @@ export class MaterialMenuCardEditor
       padding: 16px;
     }
     ha-select,
-    ha-textfield,
+    ha-selector,
     ha-textarea {
       width: 100%;
     }

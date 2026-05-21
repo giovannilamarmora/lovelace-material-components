@@ -1,11 +1,11 @@
 import { _setStyleProperty, material_color } from "../shared/color";
 import { OnStates } from "../shared/states";
 import { DomainType } from "../shared/types";
-import { isNullOrEmpty } from "../shared/utils";
+import { isNullOrEmpty } from "../shared/utils/utils";
 
 export function adjustTempAuto(
   fix_temperature: "true" | "false" | "auto",
-  temperature: number
+  temperature: number,
 ) {
   if (isNullOrEmpty(temperature)) return temperature;
   if (fix_temperature == "true") {
@@ -20,7 +20,7 @@ export function adjustTempAuto(
 
 export function adjustNewTempAuto(
   fix_temperature: "true" | "false" | "auto",
-  temperature: number
+  temperature: number,
 ) {
   if (isNullOrEmpty(temperature)) return temperature;
   if (fix_temperature == "true") {
@@ -71,7 +71,7 @@ export function setColorCard(
   isOn: boolean,
   theme: string,
   state: string,
-  is_material_color: boolean
+  is_material_color: boolean,
 ) {
   const offlineOnOffState = isOffline ? "offline" : isOn ? "on" : "off";
   const domain = "climate";
@@ -108,7 +108,7 @@ export function setColorCard(
  */
 export function getPropertyColor(
   state: string,
-  domain: string = DomainType.CLIMATE
+  domain: string = DomainType.CLIMATE,
 ) {
   switch (state) {
     case OnStates.AUTO:

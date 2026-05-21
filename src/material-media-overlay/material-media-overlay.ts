@@ -4,7 +4,6 @@ import { HomeAssistant } from "../ha-types";
 import { applyRippleEffect } from "../animations";
 import { localize } from "../localize/localize";
 import { navigate } from "custom-card-helpers";
-import { getOrDefault } from "../shared/utils";
 import {
   _renderAppIcon,
   isOpenLinkCompatible,
@@ -15,6 +14,7 @@ import {
   openYouTube,
 } from "./material-media-mapper";
 import { _setStyleProperty } from "../shared/color";
+import { getOrDefault } from "../shared/utils/utils";
 
 @customElement("material-media-overlay")
 export class MaterialMediaOverlay extends LitElement {
@@ -44,7 +44,7 @@ export class MaterialMediaOverlay extends LitElement {
         new CustomEvent("close-overlay", {
           bubbles: true,
           composed: true,
-        })
+        }),
       );
     }, 200);
   }
@@ -114,7 +114,7 @@ export class MaterialMediaOverlay extends LitElement {
 
       // Aggiorna stati connessione
       this._isConnected = ["playing", "paused", "idle"].includes(
-        stateObj.state
+        stateObj.state,
       );
       this._isOff = stateObj.state === "off";
 
@@ -161,7 +161,7 @@ export class MaterialMediaOverlay extends LitElement {
 
       this._lastPosition = Math.min(
         this._lastPosition + delta,
-        this._lastDuration
+        this._lastDuration,
       );
       this._progress =
         (this._lastPosition / Math.max(1, this._lastDuration)) * 100;
@@ -468,7 +468,7 @@ export class MaterialMediaOverlay extends LitElement {
     const { attributes } = stateObj;
     const isPlaying = getOrDefault(
       this._isPlaying,
-      stateObj.state == "playing"
+      stateObj.state == "playing",
     );
     const isPaused = getOrDefault(this._isPaused, stateObj.state == "paused");
     const hasControlButton: boolean =
@@ -496,7 +496,7 @@ export class MaterialMediaOverlay extends LitElement {
     _setStyleProperty(
       "--volume-brightness",
       theme == "dark" ? "brightness(0.7)" : "brightness(1.05)",
-      this.style
+      this.style,
     );
 
     return html`

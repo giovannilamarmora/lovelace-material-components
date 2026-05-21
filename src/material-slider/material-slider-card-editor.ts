@@ -8,6 +8,7 @@ import {
 import { localize } from "../localize/localize";
 import { ControlType } from "../shared/types";
 import { _entityChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-slider-card-editor")
 export class MaterialSliderCardEditor
@@ -74,13 +75,18 @@ export class MaterialSliderCardEditor
         >
         </ha-selector>
 
-        <ha-textfield
-          label="${localize("material_slider_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_slider_card.name")}
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <ha-entity-picker
           label="${localize("material_slider_card.entity")}"
@@ -123,6 +129,7 @@ export class MaterialSliderCardEditor
           />
         </div>
       </div>
+      ${getCardVersion()}
     `;
   }
 

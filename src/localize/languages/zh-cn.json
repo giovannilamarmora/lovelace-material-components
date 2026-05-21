@@ -1,4 +1,8 @@
 {
+  "upgrade": {
+    "message": "升级到 Material Home Assistant (Pro 或 Ultimate) 以获取更多功能和自定义选项！",
+    "button": "立即升级"
+  },
   "common": {
     "version": "版本",
     "invalid_configuration": "无效配置",

@@ -7,6 +7,7 @@ import {
   MaterialLightCardConfig,
 } from "./material-lights-const";
 import { _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-lights-card-editor")
 export class MaterialLightsCardEditor
@@ -39,24 +40,35 @@ export class MaterialLightsCardEditor
         <span class="text-label"
           >${localize("material_lights_card.on_text")}</span
         >
-        <ha-textfield
-          label="${localize("material_lights_card.on_text")}"
+
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_lights_card.on_text")}
           .value=${this._config.on_text || ""}
           configValue="on_text"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Lights On"
-        ></ha-textfield>
+        ></ha-selector>
 
         <span class="text-label"
           >${localize("material_lights_card.off_text")}</span
         >
-        <ha-textfield
-          label="${localize("material_lights_card.off_text")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_lights_card.off_text")}
           .value=${this._config.off_text || ""}
           configValue="off_text"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Lights Off"
-        ></ha-textfield>
+        ></ha-selector>
 
         <div class="switch-row">
           <span class="switch-label"
@@ -86,6 +98,7 @@ export class MaterialLightsCardEditor
             `
           : ""}
       </div>
+      ${getCardVersion()}
     `;
   }
 
@@ -96,7 +109,7 @@ export class MaterialLightsCardEditor
       this.dispatchEvent(
         new CustomEvent("config-changed", {
           detail: { config: this._config },
-        })
+        }),
       );
     }
   }

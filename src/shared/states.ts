@@ -32,6 +32,11 @@ export enum OnStates {
 
   // Dryer
   IDLE_2 = "Idle",
+  LOCKED = "locked",
+
+  // Vacuum
+  CLEANING = "cleaning",
+  RETURNING = "returning",
 }
 
 /**
@@ -43,6 +48,7 @@ export enum OffStates {
   OFF = "off",
   CLOSED = "closed",
   CLOSING = "closing",
+  UNLOCKED = "unlocked",
 }
 
 /**

@@ -14,6 +14,7 @@ import {
 } from "./material-control-const";
 import { toggleConfigs } from "./material-control-const";
 import { _entityChanged, _valueChanged } from "../shared/ha-editor";
+import { getCardVersion } from "../shared/utils/log";
 
 @customElement("material-control-card-editor")
 export class MaterialControlCardEditor
@@ -185,13 +186,18 @@ export class MaterialControlCardEditor
 
     return html`
       <div class="form">
-        <ha-textfield
-          label="${localize("material_control_card.name")}"
+        <ha-selector
+          style="max-height: 56px"
+          .hass=${this.hass}
+          .selector=${{
+            text: {},
+          }}
+          .label=${localize("material_control_card.name")}
           .value=${this._config.name || ""}
           configValue="name"
-          @input=${(ev: Event) => _valueChanged(ev, this)}
+          @value-changed=${(ev: Event) => _valueChanged(ev, this)}
           placeholder="e.g. Cooler"
-        ></ha-textfield>
+        ></ha-selector>
 
         <div class="switch-row">
           <span class="switch-label"
@@ -292,6 +298,7 @@ export class MaterialControlCardEditor
           )}
         </div>
       </div>
+      ${getCardVersion()}
     `;
   }
 
