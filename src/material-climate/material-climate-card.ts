@@ -162,7 +162,7 @@ export class MaterialClimateCard extends LitElement {
 
     return html`
       <div class="temperature-card">
-        <div class="header" @click=${this._onClick}>
+        <div class="header clickable" @click=${this._onClick}>
           <div class="valve-info">
             <ha-icon
               id="icon_offline"
@@ -207,7 +207,7 @@ export class MaterialClimateCard extends LitElement {
             `
           : html`
               <div
-                class="temperature-control"
+                class="temperature-control clickable"
                 @click=${this._onClick}
                 style="${isOn || isOffAndHasTemperature
                   ? "justify-content: space-between;"
@@ -306,6 +306,16 @@ export class MaterialClimateCard extends LitElement {
       -moz-user-select: none; /* Firefox */
       -ms-user-select: none; /* IE10+/Edge */
       user-select: none; /* Standard */
+    }
+
+    .clickable {
+      pointer-events: visible;
+      cursor: pointer;
+      -webkit-user-select: none; /* Safari */
+      -moz-user-select: none; /* Firefox */
+      -ms-user-select: none; /* IE10+/Edge */
+      user-select: none; /* Standard */
+      -webkit-tap-highlight-color: transparent;
     }
 
     .valve-info {
